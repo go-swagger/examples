@@ -1,33 +1,69 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
 *.so
-*.dylib
 
-# Test binary, built with `go test -c`
-*.test
+# Folders
+_obj
+_test
 
-# Code coverage profiles and other test artifacts
+# Architecture specific extensions/prefixes
+*.[568vq]
+[568vq].out
 *.out
-coverage.*
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+
+_testmain.go
+
+*.exe
+*.test
+*.prof
+application.linux
+_workspace
+playground
 *.coverprofile
+
+# Sublime files
+*.sublime-*
+
+# Vscode files
+.vscode/*
+cmd/swagger/swagger.json.bak
+tags
+
+### Vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
 profile.cov
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Drone
+secrets.yml
+dist
 
-# Go workspace file
-go.work
-go.work.sum
+# Idea
+.idea
+go-swagger.iml
 
-# env file
-.env
+node_modules
+_book
 
-# Editor/IDE
-# .idea/
-# .vscode/
+tmp/
+cover/
+bin/
+enter-deploy-env.sh
+
+coverage.txt
+
+hack/deploy.env
+
+dist/
+.circleci/*.sh
 .mcp.json

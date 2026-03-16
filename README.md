@@ -1,2 +1,3 @@
 # examples
-Collection of examples for go-swagger
+
+A collection of examples for [`go-swagger`](https://github.com/go-swagger/go-swagger).
