@@ -1,0 +1,74 @@
+version: "2"
+linters:
+  # Adopt default: all posture, matching go-swagger/go-swagger.
+  #
+  # This repo is dominated by generated code, so the config is lenient on
+  # complexity and style linters while still catching real bugs.
+  default: all
+  disable:
+    - cyclop           # generated code has high cyclomatic complexity
+    - dupl             # generated code has a lot of duplication
+    - err113           # generated code does not wrap errors
+    - exhaustruct      # generated code does not initialize all fields
+    - funlen           # generated code produces long functions
+    - gochecknoglobals # generated code uses globals
+    - gochecknoinits   # generated code uses init()
+    - gocognit         # generated code has high cognitive complexity
+    - gocyclo          # generated code has high cyclomatic complexity
+    - godox            # allow TODOs
+    - ireturn          # generated code returns interfaces
+    - lll              # generated code has long lines
+    - maintidx         # generated code has low maintainability index
+    - nestif           # generated code has deeply nested ifs
+    - nonamedreturns   # unclear added value
+    - nlreturn         # unclear added value
+    - noinlineerr      # unclear added value
+    - paralleltest     # no test files
+    - recvcheck        # disagree
+    - tagliatelle      # false positives on generated tags
+    - testpackage      # no test files
+    - thelper           # no test files
+    - tparallel         # no test files
+    - varnamelen       # generated code uses short names
+    - whitespace
+    - wrapcheck        # generated code does not wrap errors
+    - wsl
+    - wsl_v5
+  settings:
+    depguard:
+      rules:
+        main:
+          list-mode: lax
+          deny:
+            - pkg: github.com/pkg/errors
+              desc: Use errors or fmt instead of github.com/pkg/errors
+    goconst:
+      min-len: 2
+      min-occurrences: 3
+  exclusions:
+    warn-unused: false
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - path: _test.go
+        linters:
+          - unparam
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/go-openapi
+        - github.com/go-swagger/examples
+  exclusions:
+    generated: lax
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  new: false
