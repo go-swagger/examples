@@ -11,8 +11,8 @@ import (
 
 	"github.com/go-openapi/loads"
 
-	"github.com/go-swagger/go-swagger/examples/stream-server/restapi"
-	"github.com/go-swagger/go-swagger/examples/stream-server/restapi/operations"
+	"github.com/go-swagger/examples/stream-server/restapi"
+	"github.com/go-swagger/examples/stream-server/restapi/operations"
 )
 
 func main() {

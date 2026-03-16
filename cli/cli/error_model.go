@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-swagger/go-swagger/examples/cli/models"
+	"github.com/go-swagger/examples/cli/models"
 )
 
 // Schema cli for Error

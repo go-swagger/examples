@@ -11,8 +11,8 @@ import (
 
 	"github.com/go-openapi/loads"
 
-	"github.com/go-swagger/go-swagger/examples/todo-list-strict/restapi"
-	"github.com/go-swagger/go-swagger/examples/todo-list-strict/restapi/operations"
+	"github.com/go-swagger/examples/todo-list-strict/restapi"
+	"github.com/go-swagger/examples/todo-list-strict/restapi/operations"
 )
 
 func main() {

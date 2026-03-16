@@ -14,9 +14,9 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/runtime/security"
 
-	"github.com/go-swagger/go-swagger/examples/contributed-templates/stratoscale/restapi/operations"
-	"github.com/go-swagger/go-swagger/examples/contributed-templates/stratoscale/restapi/operations/pet"
-	"github.com/go-swagger/go-swagger/examples/contributed-templates/stratoscale/restapi/operations/store"
+	"github.com/go-swagger/examples/contributed-templates/stratoscale/restapi/operations"
+	"github.com/go-swagger/examples/contributed-templates/stratoscale/restapi/operations/pet"
+	"github.com/go-swagger/examples/contributed-templates/stratoscale/restapi/operations/store"
 )
 
 type contextKey string

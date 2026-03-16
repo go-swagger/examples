@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/go-swagger/go-swagger/examples/contributed-templates/stratoscale/models"
+	"github.com/go-swagger/examples/contributed-templates/stratoscale/models"
 )
 
 // PetUpdateReader is a Reader for the PetUpdate structure.

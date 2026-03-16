@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/go-swagger/go-swagger/examples/cli/cli"
+	"github.com/go-swagger/examples/cli/cli"
 )
 
 func main() {

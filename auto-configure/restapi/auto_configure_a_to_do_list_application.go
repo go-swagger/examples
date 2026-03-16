@@ -11,12 +11,12 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"github.com/go-swagger/go-swagger/examples/auto-configure/implementation"
-	"github.com/go-swagger/go-swagger/examples/auto-configure/restapi/operations"
-	"github.com/go-swagger/go-swagger/examples/auto-configure/restapi/operations/todos"
+	"github.com/go-swagger/examples/auto-configure/implementation"
+	"github.com/go-swagger/examples/auto-configure/restapi/operations"
+	"github.com/go-swagger/examples/auto-configure/restapi/operations/todos"
 )
 
-//go:generate swagger generate server --target ../../auto-configure --name AToDoListApplication --spec ../swagger.yml --implementation-package github.com/go-swagger/go-swagger/examples/auto-configure/implementation --principal any
+//go:generate swagger generate server --target ../../auto-configure --name AToDoListApplication --spec ../swagger.yml --implementation-package github.com/go-swagger/examples/auto-configure/implementation --principal any
 
 // This file auto configures the api backend implementation.
 // implementation package must already exist.

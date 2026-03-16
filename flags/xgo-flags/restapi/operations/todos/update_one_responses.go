@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"github.com/go-swagger/go-swagger/examples/flags/xgo-flags/models"
+	"github.com/go-swagger/examples/flags/xgo-flags/models"
 )
 
 // UpdateOneOKCode is the HTTP code returned for type UpdateOneOK

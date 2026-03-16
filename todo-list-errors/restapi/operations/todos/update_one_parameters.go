@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 
-	"github.com/go-swagger/go-swagger/examples/todo-list-errors/models"
+	"github.com/go-swagger/examples/todo-list-errors/models"
 )
 
 // NewUpdateOneParams creates a new UpdateOneParams object

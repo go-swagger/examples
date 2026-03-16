@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/go-swagger/go-swagger/examples/auto-configure/models"
+	"github.com/go-swagger/examples/auto-configure/models"
 )
 
 // NewUpdateOneParams creates a new UpdateOneParams object

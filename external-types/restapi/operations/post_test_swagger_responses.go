@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	custom "github.com/go-swagger/go-swagger/examples/external-types/fred"
+	custom "github.com/go-swagger/examples/external-types/fred"
 )
 
 /*

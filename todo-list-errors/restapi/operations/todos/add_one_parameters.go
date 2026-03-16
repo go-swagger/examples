@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
 
-	"github.com/go-swagger/go-swagger/examples/todo-list-errors/models"
+	"github.com/go-swagger/examples/todo-list-errors/models"
 )
 
 // NewAddOneParams creates a new AddOneParams object

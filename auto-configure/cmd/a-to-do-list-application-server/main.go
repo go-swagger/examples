@@ -11,8 +11,8 @@ import (
 
 	"github.com/go-openapi/loads"
 
-	"github.com/go-swagger/go-swagger/examples/auto-configure/restapi"
-	"github.com/go-swagger/go-swagger/examples/auto-configure/restapi/operations"
+	"github.com/go-swagger/examples/auto-configure/restapi"
+	"github.com/go-swagger/examples/auto-configure/restapi/operations"
 )
 
 func main() {

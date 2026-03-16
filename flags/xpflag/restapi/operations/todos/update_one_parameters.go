@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 
-	"github.com/go-swagger/go-swagger/examples/flags/xpflag/models"
+	"github.com/go-swagger/examples/flags/xpflag/models"
 )
 
 // NewUpdateOneParams creates a new UpdateOneParams object

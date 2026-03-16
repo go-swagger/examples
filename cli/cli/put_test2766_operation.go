@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/go-swagger/go-swagger/examples/cli/client/operations"
-	"github.com/go-swagger/go-swagger/examples/cli/models"
+	"github.com/go-swagger/examples/cli/client/operations"
+	"github.com/go-swagger/examples/cli/models"
 
 	"github.com/spf13/cobra"
 

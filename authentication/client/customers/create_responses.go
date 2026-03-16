@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/go-swagger/go-swagger/examples/authentication/models"
+	"github.com/go-swagger/examples/authentication/models"
 )
 
 // CreateReader is a Reader for the Create structure.

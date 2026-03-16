@@ -11,8 +11,8 @@ import (
 
 	"github.com/go-openapi/loads"
 
-	"github.com/go-swagger/go-swagger/examples/authentication/restapi"
-	"github.com/go-swagger/go-swagger/examples/authentication/restapi/operations"
+	"github.com/go-swagger/examples/authentication/restapi"
+	"github.com/go-swagger/examples/authentication/restapi/operations"
 )
 
 func main() {
