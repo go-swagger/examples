@@ -34,11 +34,6 @@ func init() {
   "paths": {
     "/account": {
       "get": {
-        "security": [
-          {
-            "isRegistered": []
-          }
-        ],
         "description": "Every registered user should be able to access this operation\n",
         "summary": "registered user account",
         "operationId": "GetAccount",
@@ -56,12 +51,16 @@ func init() {
           "default": {
             "$ref": "#/responses/otherError"
           }
-        }
+        },
+        "security": [
+          {
+            "isRegistered": []
+          }
+        ]
       }
     },
     "/items": {
       "get": {
-        "security": [],
         "description": "Everybody should be able to access this operation\n",
         "summary": "items on sale",
         "operationId": "GetItems",
@@ -72,31 +71,12 @@ func init() {
           "default": {
             "$ref": "#/responses/otherError"
           }
-        }
+        },
+        "security": []
       }
     },
     "/order/add": {
       "post": {
-        "security": [
-          {
-            "hasRole": [
-              "customer"
-            ],
-            "isRegistered": []
-          },
-          {
-            "hasRole": [
-              "inventoryManager"
-            ],
-            "isReseller": []
-          },
-          {
-            "hasRole": [
-              "inventoryManager"
-            ],
-            "isResellerQuery": []
-          }
-        ],
         "description": "Registered customers should be able to add purchase orders.\nRegistered inventory managers should be able to add replenishment orders.\n",
         "summary": "post a new order",
         "operationId": "AddOrder",
@@ -123,19 +103,31 @@ func init() {
           "default": {
             "$ref": "#/responses/otherError"
           }
-        }
-      }
-    },
-    "/order/{orderID}": {
-      "get": {
+        },
         "security": [
           {
             "hasRole": [
               "customer"
             ],
             "isRegistered": []
+          },
+          {
+            "hasRole": [
+              "inventoryManager"
+            ],
+            "isReseller": []
+          },
+          {
+            "hasRole": [
+              "inventoryManager"
+            ],
+            "isResellerQuery": []
           }
-        ],
+        ]
+      }
+    },
+    "/order/{orderID}": {
+      "get": {
         "description": "Only registered customers should be able to retrieve orders\n",
         "summary": "retrieves an order",
         "operationId": "GetOrder",
@@ -160,19 +152,19 @@ func init() {
           "default": {
             "$ref": "#/responses/otherError"
           }
-        }
+        },
+        "security": [
+          {
+            "hasRole": [
+              "customer"
+            ],
+            "isRegistered": []
+          }
+        ]
       }
     },
     "/orders/{itemID}": {
       "get": {
-        "security": [
-          {
-            "isReseller": []
-          },
-          {
-            "isResellerQuery": []
-          }
-        ],
         "description": "Only registered resellers should be able to search orders for an item\n",
         "summary": "retrieves all orders for an item",
         "operationId": "GetOrdersForItem",
@@ -197,7 +189,15 @@ func init() {
           "default": {
             "$ref": "#/responses/otherError"
           }
-        }
+        },
+        "security": [
+          {
+            "isReseller": []
+          },
+          {
+            "isResellerQuery": []
+          }
+        ]
       }
     }
   },
@@ -362,11 +362,6 @@ func init() {
   "paths": {
     "/account": {
       "get": {
-        "security": [
-          {
-            "isRegistered": []
-          }
-        ],
         "description": "Every registered user should be able to access this operation\n",
         "summary": "registered user account",
         "operationId": "GetAccount",
@@ -387,12 +382,16 @@ func init() {
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "isRegistered": []
+          }
+        ]
       }
     },
     "/items": {
       "get": {
-        "security": [],
         "description": "Everybody should be able to access this operation\n",
         "summary": "items on sale",
         "operationId": "GetItems",
@@ -412,31 +411,12 @@ func init() {
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/order/add": {
       "post": {
-        "security": [
-          {
-            "hasRole": [
-              "customer"
-            ],
-            "isRegistered": []
-          },
-          {
-            "hasRole": [
-              "inventoryManager"
-            ],
-            "isReseller": []
-          },
-          {
-            "hasRole": [
-              "inventoryManager"
-            ],
-            "isResellerQuery": []
-          }
-        ],
         "description": "Registered customers should be able to add purchase orders.\nRegistered inventory managers should be able to add replenishment orders.\n",
         "summary": "post a new order",
         "operationId": "AddOrder",
@@ -466,19 +446,31 @@ func init() {
               "$ref": "#/definitions/Error"
             }
           }
-        }
-      }
-    },
-    "/order/{orderID}": {
-      "get": {
+        },
         "security": [
           {
             "hasRole": [
               "customer"
             ],
             "isRegistered": []
+          },
+          {
+            "hasRole": [
+              "inventoryManager"
+            ],
+            "isReseller": []
+          },
+          {
+            "hasRole": [
+              "inventoryManager"
+            ],
+            "isResellerQuery": []
           }
-        ],
+        ]
+      }
+    },
+    "/order/{orderID}": {
+      "get": {
         "description": "Only registered customers should be able to retrieve orders\n",
         "summary": "retrieves an order",
         "operationId": "GetOrder",
@@ -509,19 +501,19 @@ func init() {
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "hasRole": [
+              "customer"
+            ],
+            "isRegistered": []
+          }
+        ]
       }
     },
     "/orders/{itemID}": {
       "get": {
-        "security": [
-          {
-            "isReseller": []
-          },
-          {
-            "isResellerQuery": []
-          }
-        ],
         "description": "Only registered resellers should be able to search orders for an item\n",
         "summary": "retrieves all orders for an item",
         "operationId": "GetOrdersForItem",
@@ -555,7 +547,15 @@ func init() {
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "isReseller": []
+          },
+          {
+            "isResellerQuery": []
+          }
+        ]
       }
     }
   },

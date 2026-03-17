@@ -61,9 +61,6 @@ PutTest2766Params contains all the parameters to send to the API endpoint
 */
 type PutTest2766Params struct {
 
-	// Plus1.
-	Plus1 *int64
-
 	// Minus1.
 	Minus1 *int64
 
@@ -123,17 +120,6 @@ func (o *PutTest2766Params) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithPlus1 adds the plus1 to the put test2766 params
-func (o *PutTest2766Params) WithPlus1(plus1 *int64) *PutTest2766Params {
-	o.SetPlus1(plus1)
-	return o
-}
-
-// SetPlus1 adds the 1 to the put test2766 params
-func (o *PutTest2766Params) SetPlus1(plus1 *int64) {
-	o.Plus1 = plus1
-}
-
 // WithMinus1 adds the minus1 to the put test2766 params
 func (o *PutTest2766Params) WithMinus1(minus1 *int64) *PutTest2766Params {
 	o.SetMinus1(minus1)
@@ -163,23 +149,6 @@ func (o *PutTest2766Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
-
-	if o.Plus1 != nil {
-
-		// query param +1
-		var qrPlus1 int64
-
-		if o.Plus1 != nil {
-			qrPlus1 = *o.Plus1
-		}
-		qPlus1 := swag.FormatInt64(qrPlus1)
-		if qPlus1 != "" {
-
-			if err := r.SetQueryParam("+1", qPlus1); err != nil {
-				return err
-			}
-		}
-	}
 
 	if o.Minus1 != nil {
 

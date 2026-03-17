@@ -37,9 +37,6 @@ func runOperationOperationsPutTest2766(cmd *cobra.Command, args []string) error 
 	}
 	// retrieve flag values from cmd and fill params
 	params := operations.NewPutTest2766Params()
-	if err, _ = retrieveOperationOperationsPutTest2766Plus1Flag(params, "", cmd); err != nil {
-		return err
-	}
 	if err, _ = retrieveOperationOperationsPutTest2766Minus1Flag(params, "", cmd); err != nil {
 		return err
 	}
@@ -65,33 +62,12 @@ func runOperationOperationsPutTest2766(cmd *cobra.Command, args []string) error 
 
 // registerOperationOperationsPutTest2766ParamFlags registers all flags needed to fill params
 func registerOperationOperationsPutTest2766ParamFlags(cmd *cobra.Command) error {
-	if err := registerOperationOperationsPutTest2766Plus1ParamFlags("", cmd); err != nil {
-		return err
-	}
 	if err := registerOperationOperationsPutTest2766Minus1ParamFlags("", cmd); err != nil {
 		return err
 	}
 	if err := registerOperationOperationsPutTest2766BodyParamFlags("", cmd); err != nil {
 		return err
 	}
-	return nil
-}
-
-func registerOperationOperationsPutTest2766Plus1ParamFlags(cmdPrefix string, cmd *cobra.Command) error {
-
-	flagPlus1Description := ``
-
-	var flagPlus1Name string
-	if cmdPrefix == "" {
-		flagPlus1Name = "+1"
-	} else {
-		flagPlus1Name = fmt.Sprintf("%v.+1", cmdPrefix)
-	}
-
-	var flagPlus1Default int64
-
-	_ = cmd.PersistentFlags().Int64(flagPlus1Name, flagPlus1Default, flagPlus1Description)
-
 	return nil
 }
 
@@ -130,28 +106,6 @@ func registerOperationOperationsPutTest2766BodyParamFlags(cmdPrefix string, cmd 
 	}
 
 	return nil
-}
-
-func retrieveOperationOperationsPutTest2766Plus1Flag(m *operations.PutTest2766Params, cmdPrefix string, cmd *cobra.Command) (error, bool) {
-	retAdded := false
-	if cmd.Flags().Changed("+1") {
-
-		var flagPlus1Name string
-		if cmdPrefix == "" {
-			flagPlus1Name = "+1"
-		} else {
-			flagPlus1Name = fmt.Sprintf("%v.+1", cmdPrefix)
-		}
-
-		flagPlus1Value, err := cmd.Flags().GetInt64(flagPlus1Name)
-		if err != nil {
-			return err, false
-		}
-		m.Plus1 = &flagPlus1Value
-
-	}
-
-	return nil, retAdded
 }
 
 func retrieveOperationOperationsPutTest2766Minus1Flag(m *operations.PutTest2766Params, cmdPrefix string, cmd *cobra.Command) (error, bool) {

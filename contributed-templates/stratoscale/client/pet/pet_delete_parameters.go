@@ -123,15 +123,15 @@ func (o *PetDeleteParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAPIKey adds the aPIKey to the pet delete params
-func (o *PetDeleteParams) WithAPIKey(aPIKey *string) *PetDeleteParams {
-	o.SetAPIKey(aPIKey)
+// WithAPIKey adds the apiKey to the pet delete params
+func (o *PetDeleteParams) WithAPIKey(apiKey *string) *PetDeleteParams {
+	o.SetAPIKey(apiKey)
 	return o
 }
 
 // SetAPIKey adds the apiKey to the pet delete params
-func (o *PetDeleteParams) SetAPIKey(aPIKey *string) {
-	o.APIKey = aPIKey
+func (o *PetDeleteParams) SetAPIKey(apiKey *string) {
+	o.APIKey = apiKey
 }
 
 // WithPetID adds the petID to the pet delete params

@@ -121,14 +121,6 @@ func init() {
         }
       },
       "post": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "Allows for creating a task.\nThis operation requires authentication so that we know which user\ncreated the task.\n",
         "tags": [
           "tasks"
@@ -160,7 +152,15 @@ func init() {
           "default": {
             "$ref": "#/responses/ErrorResponse"
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       }
     },
     "/tasks/{id}": {
@@ -190,14 +190,6 @@ func init() {
         }
       },
       "put": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "Allows for updating a task.\nThis operation requires authentication so that we know which user\nlast updated the task.\n",
         "tags": [
           "tasks"
@@ -231,9 +223,7 @@ func init() {
           "default": {
             "$ref": "#/responses/ErrorResponse"
           }
-        }
-      },
-      "delete": {
+        },
         "security": [
           {
             "api_key": []
@@ -241,7 +231,9 @@ func init() {
           {
             "token_header": []
           }
-        ],
+        ]
+      },
+      "delete": {
         "description": "This is a soft delete and changes the task status to ignored.\n",
         "tags": [
           "tasks"
@@ -255,7 +247,15 @@ func init() {
           "default": {
             "$ref": "#/responses/ErrorResponse"
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -299,14 +299,6 @@ func init() {
         }
       },
       "post": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "The comment can contain ___github markdown___ syntax.\nFenced codeblocks etc are supported through pygments.\n",
         "tags": [
           "tasks"
@@ -348,7 +340,15 @@ func init() {
           "default": {
             "$ref": "#/responses/ErrorResponse"
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -358,14 +358,6 @@ func init() {
     },
     "/tasks/{id}/files": {
       "post": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "The file can't be larger than **5MB**",
         "consumes": [
           "multipart/form-data"
@@ -396,7 +388,15 @@ func init() {
           "default": {
             "$ref": "#/responses/ErrorResponse"
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -919,14 +919,6 @@ func init() {
         }
       },
       "post": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "Allows for creating a task.\nThis operation requires authentication so that we know which user\ncreated the task.\n",
         "tags": [
           "tasks"
@@ -966,7 +958,15 @@ func init() {
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       }
     },
     "/tasks/{id}": {
@@ -1004,14 +1004,6 @@ func init() {
         }
       },
       "put": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "Allows for updating a task.\nThis operation requires authentication so that we know which user\nlast updated the task.\n",
         "tags": [
           "tasks"
@@ -1053,9 +1045,7 @@ func init() {
               }
             }
           }
-        }
-      },
-      "delete": {
+        },
         "security": [
           {
             "api_key": []
@@ -1063,7 +1053,9 @@ func init() {
           {
             "token_header": []
           }
-        ],
+        ]
+      },
+      "delete": {
         "description": "This is a soft delete and changes the task status to ignored.\n",
         "tags": [
           "tasks"
@@ -1085,7 +1077,15 @@ func init() {
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -1147,14 +1147,6 @@ func init() {
         }
       },
       "post": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "The comment can contain ___github markdown___ syntax.\nFenced codeblocks etc are supported through pygments.\n",
         "tags": [
           "tasks"
@@ -1209,7 +1201,15 @@ func init() {
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -1224,14 +1224,6 @@ func init() {
     },
     "/tasks/{id}/files": {
       "post": {
-        "security": [
-          {
-            "api_key": []
-          },
-          {
-            "token_header": []
-          }
-        ],
         "description": "The file can't be larger than **5MB**",
         "consumes": [
           "multipart/form-data"
@@ -1270,7 +1262,15 @@ func init() {
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "token_header": []
+          }
+        ]
       },
       "parameters": [
         {

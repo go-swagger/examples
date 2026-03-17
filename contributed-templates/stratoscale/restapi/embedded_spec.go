@@ -35,14 +35,6 @@ func init() {
   "paths": {
     "/pet": {
       "get": {
-        "security": [
-          {
-            "roles": [
-              "admin",
-              "member"
-            ]
-          }
-        ],
         "tags": [
           "pet"
         ],
@@ -80,7 +72,15 @@ func init() {
           "400": {
             "description": "Invalid status value"
           }
-        }
+        },
+        "security": [
+          {
+            "roles": [
+              "admin",
+              "member"
+            ]
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -149,14 +149,6 @@ func init() {
     },
     "/pet/{petId}": {
       "get": {
-        "security": [
-          {
-            "roles": [
-              "admin",
-              "member"
-            ]
-          }
-        ],
         "tags": [
           "pet"
         ],
@@ -185,7 +177,15 @@ func init() {
           "404": {
             "description": "Pet not found"
           }
-        }
+        },
+        "security": [
+          {
+            "roles": [
+              "admin",
+              "member"
+            ]
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -575,14 +575,6 @@ func init() {
   "paths": {
     "/pet": {
       "get": {
-        "security": [
-          {
-            "roles": [
-              "admin",
-              "member"
-            ]
-          }
-        ],
         "tags": [
           "pet"
         ],
@@ -620,7 +612,15 @@ func init() {
           "400": {
             "description": "Invalid status value"
           }
-        }
+        },
+        "security": [
+          {
+            "roles": [
+              "admin",
+              "member"
+            ]
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -689,14 +689,6 @@ func init() {
     },
     "/pet/{petId}": {
       "get": {
-        "security": [
-          {
-            "roles": [
-              "admin",
-              "member"
-            ]
-          }
-        ],
         "tags": [
           "pet"
         ],
@@ -725,7 +717,15 @@ func init() {
           "404": {
             "description": "Pet not found"
           }
-        }
+        },
+        "security": [
+          {
+            "roles": [
+              "admin",
+              "member"
+            ]
+          }
+        ]
       },
       "delete": {
         "tags": [

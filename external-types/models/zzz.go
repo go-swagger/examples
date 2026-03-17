@@ -482,10 +482,6 @@ func (m *Zzz) validateReqDelta(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Required("reqDelta", "body", m.ReqDelta); err != nil {
-		return err
-	}
-
 	if m.ReqDelta != nil {
 		if err := m.ReqDelta.Validate(formats); err != nil {
 			ve := new(errors.Validation)

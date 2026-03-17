@@ -183,10 +183,6 @@ func (m *OrderLine) validatePurchasedItem(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Required("purchasedItem", "body", m.PurchasedItem); err != nil {
-		return err
-	}
-
 	if m.PurchasedItem != nil {
 		if err := m.PurchasedItem.Validate(formats); err != nil {
 			ve := new(errors.Validation)

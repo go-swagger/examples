@@ -37,14 +37,6 @@ func init() {
   "paths": {
     "/pets": {
       "put": {
-        "security": [
-          {
-            "petstore_auth": [
-              "write_pets",
-              "read_pets"
-            ]
-          }
-        ],
         "consumes": [
           "application/json",
           "application/xml"
@@ -78,9 +70,7 @@ func init() {
           "405": {
             "description": "Validation exception"
           }
-        }
-      },
-      "post": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -88,7 +78,9 @@ func init() {
               "read_pets"
             ]
           }
-        ],
+        ]
+      },
+      "post": {
         "consumes": [
           "application/json",
           "application/xml"
@@ -116,11 +108,7 @@ func init() {
           "405": {
             "description": "Invalid input"
           }
-        }
-      }
-    },
-    "/pets/findByStatus": {
-      "get": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -128,7 +116,11 @@ func init() {
               "read_pets"
             ]
           }
-        ],
+        ]
+      }
+    },
+    "/pets/findByStatus": {
+      "get": {
         "description": "Multiple status values can be provided with comma separated strings",
         "produces": [
           "application/json",
@@ -164,11 +156,7 @@ func init() {
           "400": {
             "description": "Invalid status value"
           }
-        }
-      }
-    },
-    "/pets/findByTags": {
-      "get": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -176,7 +164,11 @@ func init() {
               "read_pets"
             ]
           }
-        ],
+        ]
+      }
+    },
+    "/pets/findByTags": {
+      "get": {
         "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
         "produces": [
           "application/json",
@@ -212,22 +204,19 @@ func init() {
           "400": {
             "description": "Invalid tag value"
           }
-        }
-      }
-    },
-    "/pets/{petId}": {
-      "get": {
+        },
         "security": [
-          {
-            "api_key": []
-          },
           {
             "petstore_auth": [
               "write_pets",
               "read_pets"
             ]
           }
-        ],
+        ]
+      }
+    },
+    "/pets/{petId}": {
+      "get": {
         "description": "Returns a pet when ID \u003c 10.  ID \u003e 10 or nonintegers will simulate API error conditions",
         "produces": [
           "application/json",
@@ -261,17 +250,20 @@ func init() {
           "404": {
             "description": "Pet not found"
           }
-        }
-      },
-      "post": {
+        },
         "security": [
+          {
+            "api_key": []
+          },
           {
             "petstore_auth": [
               "write_pets",
               "read_pets"
             ]
           }
-        ],
+        ]
+      },
+      "post": {
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -311,9 +303,7 @@ func init() {
           "405": {
             "description": "Invalid input"
           }
-        }
-      },
-      "delete": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -321,7 +311,9 @@ func init() {
               "read_pets"
             ]
           }
-        ],
+        ]
+      },
+      "delete": {
         "produces": [
           "application/json",
           "application/xml"
@@ -351,7 +343,15 @@ func init() {
           "400": {
             "description": "Invalid pet value"
           }
-        }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write_pets",
+              "read_pets"
+            ]
+          }
+        ]
       }
     },
     "/stores/order": {
@@ -861,14 +861,6 @@ func init() {
   "paths": {
     "/pets": {
       "put": {
-        "security": [
-          {
-            "petstore_auth": [
-              "read_pets",
-              "write_pets"
-            ]
-          }
-        ],
         "consumes": [
           "application/json",
           "application/xml"
@@ -902,9 +894,7 @@ func init() {
           "405": {
             "description": "Validation exception"
           }
-        }
-      },
-      "post": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -912,7 +902,9 @@ func init() {
               "write_pets"
             ]
           }
-        ],
+        ]
+      },
+      "post": {
         "consumes": [
           "application/json",
           "application/xml"
@@ -940,11 +932,7 @@ func init() {
           "405": {
             "description": "Invalid input"
           }
-        }
-      }
-    },
-    "/pets/findByStatus": {
-      "get": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -952,7 +940,11 @@ func init() {
               "write_pets"
             ]
           }
-        ],
+        ]
+      }
+    },
+    "/pets/findByStatus": {
+      "get": {
         "description": "Multiple status values can be provided with comma separated strings",
         "produces": [
           "application/json",
@@ -988,11 +980,7 @@ func init() {
           "400": {
             "description": "Invalid status value"
           }
-        }
-      }
-    },
-    "/pets/findByTags": {
-      "get": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -1000,7 +988,11 @@ func init() {
               "write_pets"
             ]
           }
-        ],
+        ]
+      }
+    },
+    "/pets/findByTags": {
+      "get": {
         "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
         "produces": [
           "application/json",
@@ -1036,22 +1028,19 @@ func init() {
           "400": {
             "description": "Invalid tag value"
           }
-        }
-      }
-    },
-    "/pets/{petId}": {
-      "get": {
+        },
         "security": [
-          {
-            "api_key": []
-          },
           {
             "petstore_auth": [
               "read_pets",
               "write_pets"
             ]
           }
-        ],
+        ]
+      }
+    },
+    "/pets/{petId}": {
+      "get": {
         "description": "Returns a pet when ID \u003c 10.  ID \u003e 10 or nonintegers will simulate API error conditions",
         "produces": [
           "application/json",
@@ -1085,17 +1074,20 @@ func init() {
           "404": {
             "description": "Pet not found"
           }
-        }
-      },
-      "post": {
+        },
         "security": [
+          {
+            "api_key": []
+          },
           {
             "petstore_auth": [
               "read_pets",
               "write_pets"
             ]
           }
-        ],
+        ]
+      },
+      "post": {
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -1135,9 +1127,7 @@ func init() {
           "405": {
             "description": "Invalid input"
           }
-        }
-      },
-      "delete": {
+        },
         "security": [
           {
             "petstore_auth": [
@@ -1145,7 +1135,9 @@ func init() {
               "write_pets"
             ]
           }
-        ],
+        ]
+      },
+      "delete": {
         "produces": [
           "application/json",
           "application/xml"
@@ -1175,7 +1167,15 @@ func init() {
           "400": {
             "description": "Invalid pet value"
           }
-        }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "read_pets",
+              "write_pets"
+            ]
+          }
+        ]
       }
     },
     "/stores/order": {
