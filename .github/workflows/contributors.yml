@@ -18,4 +18,9 @@ jobs:
       pull-requests: write
       contents: write
     uses: go-openapi/ci-workflows/.github/workflows/contributors.yml@e8e6599fe480362cb0d5cbdac5b245cc833742f5 # v0.2.15
-    secrets: inherit
+    secrets:
+      github-app-id: ${{ secrets.CI_BOT_APP_ID }}
+      github-app-private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+      gpg-private-key: ${{ secrets.CI_BOT_GPG_PRIVATE_KEY }}
+      gpg-passphrase: ${{ secrets.CI_BOT_GPG_PASSPHRASE }}
+      gpg-fingerprint: ${{ secrets.CI_BOT_SIGNING_KEY }}
