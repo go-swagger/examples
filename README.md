@@ -2,6 +2,7 @@
 
 <!-- Badges: status  -->
 [![Tests][test-badge]][test-url] [![Coverage][cov-badge]][cov-url] [![CI vuln scan][vuln-scan-badge]][vuln-scan-url] [![CodeQL][codeql-badge]][codeql-url]
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-swagger%2Fexamples.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-swagger%2Fexamples?ref=badge_shield)
 <!-- Badges: release & docker images  -->
 <!-- Badges: code quality  -->
 <!-- Badges: license & compliance -->
@@ -39,6 +40,9 @@ git clone https://github.com/go-swagger/examples
 ## Licensing
 
 This software ships under the [SPDX-License-Identifier: Apache-2.0](./LICENSE).
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-swagger%2Fexamples.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-swagger%2Fexamples?ref=badge_large)
 
 ## Other documentation
 
