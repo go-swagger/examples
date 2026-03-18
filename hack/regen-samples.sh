@@ -1,6 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+if ! which swagger &>/dev/null ; then
+  echo "go-swagger is not present: installing the latest release"
+  go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+else
+  echo "go-swagger is already present. Using the installed version"
+  swagger version
+fi
 
 examples=$(git rev-parse --show-toplevel)
 

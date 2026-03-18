@@ -4,8 +4,7 @@
 name: Regenerate examples
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 on:
   schedule:
@@ -15,10 +14,30 @@ on:
 jobs:
   regen:
     name: regenerate examples
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       -
+        name: Configure bot credentials
+        uses: go-openapi/gh-actions/ci-jobs/bot-credentials@22f6d5e0e1d13b8e835ea0ffe69ed5589f7cc354 # v1.4.11
+        id: bot-credentials
+        with:
+          enable-github-app: "true"
+          github-app-id: ${{ secrets.CI_BOT_APP_ID }}
+          github-app-private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+          enable-gpg-signing: "true"
+          gpg-private-key: ${{ secrets.CI_BOT_GPG_PRIVATE_KEY }}
+          gpg-passphrase: ${{ secrets.CI_BOT_GPG_PASSPHRASE }}
+          gpg-fingerprint: ${{ secrets.CI_BOT_SIGNING_KEY }}
+          enable-commit-signing: "true"
+          enable-tag-signing: "false"
+      -
+        name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          token: ${{ steps.bot-credentials.outputs.app-token }}
       -
         uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
         with:
@@ -27,23 +46,33 @@ jobs:
           cache: true
       -
         name: Install swagger CLI
-        run: go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+        run: go install github.com/go-swagger/go-swagger/cmd/swagger@master
       -
         name: Regenerate examples
         run: hack/regen-samples.sh
       -
         name: Build check
-        run: go build ./...
+        run: |
+          go build ./...
+          # empty tests for now, yet stronger check than just go build
+          go test ./...
       -
         name: Create or update PR
+        id: create-pull-request
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
         with:
-          commit-message: "chore: regenerate examples from latest go-swagger"
+          token: ${{ steps.bot-credentials.outputs.app-token }}
+          commit-message: "chore: regenerate examples from go-swagger@master"
           branch: regen/scheduled
           delete-branch: true
           title: "chore: regenerate examples from latest go-swagger"
           body: |
-            Scheduled regeneration using `swagger@latest`.
+            Scheduled regeneration using `swagger@master`.
+
             Review the diff to confirm generated changes are expected.
           labels: "bot"
+          draft: false
+          assignees: fredbi
+          reviewers: fredbi
+          sign-commits: true
           signoff: true

@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: Copyright 2015-2026 go-swagger maintainers
+# SPDX-License-Identifier: Apache-2.0
+#
+# Auto-merge for dependabot and scheduled regen PRs.
+#
+# The organization bot (bot-go-openapi) creates two kinds of PRs:
+#   - regen/scheduled  — from the weekly regen workflow → auto-merge
+#   - regen/pr-*       — from go-swagger PR cross-repo regen → needs review
+#
+# We disable the reusable workflow's built-in org-bot job and add a local
+# one with a branch filter to distinguish the two.
+
+name: Auto-merge
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+
+jobs:
+  dependabot:
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: go-openapi/ci-workflows/.github/workflows/auto-merge.yml@e8e6599fe480362cb0d5cbdac5b245cc833742f5 # v0.2.15
+    with:
+      enable-organization-bot: "false"
+    secrets: inherit
+
+  scheduled-regen:
+    # description: |
+    #   Auto-merge scheduled regen PRs created by bot-go-openapi[bot].
+    #   Only matches the regen/scheduled branch — cross-repo regen PRs
+    #   (regen/pr-*) are excluded and require manual review.
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    if: >-
+      ${{
+        github.event.pull_request.user.login == 'bot-go-openapi[bot]' &&
+        github.event.pull_request.head.ref == 'regen/scheduled' &&
+        github.event.pull_request.html_url != ''
+      }}
+    env:
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      -
+        name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      -
+        name: Auto-approve PR
+        run: gh pr review --approve "$PR_URL"
+      -
+        name: Wait for all workflow runs to complete
+        uses: go-openapi/gh-actions/ci-jobs/wait-pending-jobs@22f6d5e0e1d13b8e835ea0ffe69ed5589f7cc354 # v1.4.11
+        with:
+          pr-url: ${{ env.PR_URL }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Enable auto-merge
+        run: |
+          set +e
+          OUTPUT=$(gh pr merge --auto --rebase "$PR_URL" 2>&1)
+          EXIT_CODE=$?
+          set -e
+
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "::notice title=auto-merge::Auto-merge enabled successfully"
+            exit 0
+          fi
+
+          if echo "$OUTPUT" | grep -q "Merge already in progress"; then
+            echo "::warning title=auto-merge::Auto-merge already handled by another workflow (race condition)"
+            exit 0
+          fi
+          if echo "$OUTPUT" | grep -q "Pull request is already merged"; then
+            echo "::warning title=auto-merge::Auto-merge already handled by another workflow (race condition)"
+            exit 0
+          fi
+
+          echo "::error title=auto-merge::Failed to enable auto-merge"
+          echo "$OUTPUT"
+          exit $EXIT_CODE
