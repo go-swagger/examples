@@ -60,3 +60,16 @@ jobs:
           go build ./...
           # empty tests for now, yet stronger check than just go build
           go test ./...
+
+  test-complete:
+    # description: |
+    #   Rendez-vous job: single required status check for branch protection,
+    #   instead of requiring every matrix combination individually.
+    name: tests completed
+    needs: [lint, build]
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Tests completed
+        run: |
+          echo "::notice title=Success::All tests passed"
