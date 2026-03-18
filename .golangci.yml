@@ -19,6 +19,7 @@ linters:
     - ireturn          # generated code returns interfaces
     - lll              # generated code has long lines
     - maintidx         # generated code has low maintainability index
+    - mnd              # generated code has a lot of validations with numbers
     - nestif           # generated code has deeply nested ifs
     - nonamedreturns   # unclear added value
     - nlreturn         # unclear added value
@@ -57,6 +58,8 @@ linters:
       - path: _test.go
         linters:
           - unparam
+    paths:
+      - hack/
 formatters:
   enable:
     - gofmt

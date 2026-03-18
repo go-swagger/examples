@@ -67,3 +67,13 @@ hack/deploy.env
 dist/
 .circleci/*.sh
 .mcp.json
+
+# Generated security material (use: go run ./hack/tools gen-certs / gen-tokens)
+todo-list-errors/*.key
+todo-list-errors/*.crt
+todo-list-errors/*.csr
+todo-list-errors/*.req
+todo-list-errors/*.p12
+composed-auth/keys/*.pem
+composed-auth/keys/*.prv
+composed-auth/tokens/*.jwt

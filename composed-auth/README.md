@@ -196,12 +196,23 @@ Files `restapi/configure_multi_auth_example.go` and `auth/authorizers.go` are no
 
 ### Testing configuration
 
-#### Test tokens and keys
-In `./tokens`, we provided with some ready made tokens. If you have installed the `jwt` CLI, 
-you can play around an build some different claims as JWT (see the `make-tokens.sh` script for usage).
+#### Generate test tokens and keys
 
-> **NOTE:** tokens need a pair of public / private keys (for the signer and the verifier). We generated these keys 
-> for testing purpose in the `keys` directory (RSA256 keys).
+From the repository root, generate the RSA keypair and JWT tokens:
+
+```shellsession
+cd hack/tools
+go run . gen-tokens
+```
+
+This creates:
+- `composed-auth/keys/apiKey.prv` / `apiKey.pem` — RSA 4096-bit private/public key pair
+- `composed-auth/tokens/token-bearer-inventory-manager.jwt` — JWT with role `inventoryManager`
+- `composed-auth/tokens/token-apikey-reseller.jwt` — JWT with role `reseller`
+- `composed-auth/tokens/token-apikey-customer.jwt` — JWT with role `customer`
+
+All tokens are RS256-signed. If you have installed the `jwt` CLI (`go install github.com/golang-jwt/jwt/v5/cmd/jwt@latest`),
+you can verify tokens with `jwt -key keys/apiKey.pem -alg RS256 -verify tokens/<token>.jwt`.
 
 Our JWT defines "roles" as custom claim (in `auth/authorizers.go`): this means the signer of the token acknowledges the 
 holder of the token to be enabled for these.
@@ -365,4 +376,4 @@ Content-Length: 51
 "operation .AddOrder has not yet been implemented"
 ```
 
-[example_code]: https://github.com/go-swagger/go-swagger/blob/master/examples/composed-auth/
+[example_code]: https://github.com/go-swagger/examples/blob/master/composed-auth/
