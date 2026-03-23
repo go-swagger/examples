@@ -103,8 +103,9 @@ var steps = []regenStep{
 		},
 	},
 	{
-		dir:   "tutorials/custom-server",
-		clean: []string{"gen"},
+		dir:    "tutorials/custom-server",
+		clean:  []string{"gen"},
+		mkdirs: []string{"gen"},
 		commands: [][]string{
 			{"swagger", "generate", "server", "--exclude-main", "-A", "greeter", "-t", "gen", "-f", "./swagger/swagger.yml"},
 		},
