@@ -15,7 +15,6 @@ import (
 )
 
 func makeMarkdownDocumentationCmd() *cobra.Command {
-
 	var markdownCmd = &cobra.Command{
 		Use:                   "markdown",
 		Short:                 "Generate markdown documentation (that you might be reading right now!!)",
@@ -38,5 +37,6 @@ func makeMarkdownDocumentationCmd() *cobra.Command {
 			logDebugf("Generated markdown successfully!")
 		},
 	}
+
 	return markdownCmd
 }
