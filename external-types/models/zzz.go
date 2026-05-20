@@ -9,7 +9,8 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-openapi/validate"
 	"github.com/go-swagger/examples/external-types/fred"
 	custom "github.com/go-swagger/examples/external-types/fred"
@@ -199,7 +200,7 @@ func (m *Zzz) Validate(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateBeta(formats strfmt.Registry) error {
-	if swag.IsZero(m.Beta) { // not required
+	if typeutils.IsZero(m.Beta) { // not required
 		return nil
 	}
 
@@ -230,7 +231,7 @@ func (m *Zzz) validateBeta(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateDelta(formats strfmt.Registry) error {
-	if swag.IsZero(m.Delta) { // not required
+	if typeutils.IsZero(m.Delta) { // not required
 		return nil
 	}
 
@@ -251,7 +252,7 @@ func (m *Zzz) validateDelta(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateEpsilon(formats strfmt.Registry) error {
-	if swag.IsZero(m.Epsilon) { // not required
+	if typeutils.IsZero(m.Epsilon) { // not required
 		return nil
 	}
 
@@ -276,7 +277,7 @@ func (m *Zzz) validateEpsilon(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateGamma(formats strfmt.Registry) error {
-	if swag.IsZero(m.Gamma) { // not required
+	if typeutils.IsZero(m.Gamma) { // not required
 		return nil
 	}
 
@@ -297,7 +298,7 @@ func (m *Zzz) validateGamma(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateMeta(formats strfmt.Registry) error {
-	if swag.IsZero(m.Meta) { // not required
+	if typeutils.IsZero(m.Meta) { // not required
 		return nil
 	}
 
@@ -318,7 +319,7 @@ func (m *Zzz) validateMeta(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateNullableBeta(formats strfmt.Registry) error {
-	if swag.IsZero(m.NullableBeta) { // not required
+	if typeutils.IsZero(m.NullableBeta) { // not required
 		return nil
 	}
 
@@ -329,7 +330,7 @@ func (m *Zzz) validateNullableBeta(formats strfmt.Registry) error {
 	}
 
 	for i := 0; i < len(m.NullableBeta); i++ {
-		if swag.IsZero(m.NullableBeta[i]) { // not required
+		if typeutils.IsZero(m.NullableBeta[i]) { // not required
 			continue
 		}
 
@@ -354,7 +355,7 @@ func (m *Zzz) validateNullableBeta(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateNullableDelta(formats strfmt.Registry) error {
-	if swag.IsZero(m.NullableDelta) { // not required
+	if typeutils.IsZero(m.NullableDelta) { // not required
 		return nil
 	}
 
@@ -377,12 +378,12 @@ func (m *Zzz) validateNullableDelta(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateNullableEpsilon(formats strfmt.Registry) error {
-	if swag.IsZero(m.NullableEpsilon) { // not required
+	if typeutils.IsZero(m.NullableEpsilon) { // not required
 		return nil
 	}
 
 	for i := 0; i < len(m.NullableEpsilon); i++ {
-		if swag.IsZero(m.NullableEpsilon[i]) { // not required
+		if typeutils.IsZero(m.NullableEpsilon[i]) { // not required
 			continue
 		}
 
@@ -407,7 +408,7 @@ func (m *Zzz) validateNullableEpsilon(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateNullableGamma(formats strfmt.Registry) error {
-	if swag.IsZero(m.NullableGamma) { // not required
+	if typeutils.IsZero(m.NullableGamma) { // not required
 		return nil
 	}
 
@@ -430,7 +431,7 @@ func (m *Zzz) validateNullableGamma(formats strfmt.Registry) error {
 }
 
 func (m *Zzz) validateNullableMeta(formats strfmt.Registry) error {
-	if swag.IsZero(m.NullableMeta) { // not required
+	if typeutils.IsZero(m.NullableMeta) { // not required
 		return nil
 	}
 
@@ -598,7 +599,7 @@ func (m *Zzz) ContextValidate(ctx context.Context, formats strfmt.Registry) erro
 
 func (m *Zzz) contextValidateMeta(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Meta) { // not required
+	if typeutils.IsZero(m.Meta) { // not required
 		return nil
 	}
 
@@ -620,7 +621,7 @@ func (m *Zzz) contextValidateMeta(ctx context.Context, formats strfmt.Registry) 
 
 func (m *Zzz) contextValidateNullableMeta(ctx context.Context, formats strfmt.Registry) error {
 
-	if swag.IsZero(m.NullableMeta) { // not required
+	if typeutils.IsZero(m.NullableMeta) { // not required
 		return nil
 	}
 
@@ -666,13 +667,13 @@ func (m *Zzz) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *Zzz) UnmarshalBinary(b []byte) error {
 	var res Zzz
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res

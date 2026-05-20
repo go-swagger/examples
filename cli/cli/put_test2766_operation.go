@@ -6,12 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-swagger/examples/cli/client/operations"
 	"github.com/go-swagger/examples/cli/models"
 
 	"github.com/spf13/cobra"
-
-	"github.com/go-openapi/swag"
 )
 
 // makeOperationOperationsPutTest2766Cmd returns a command to handle operation putTest2766
@@ -146,7 +145,7 @@ func retrieveOperationOperationsPutTest2766BodyFlag(m *operations.PutTest2766Par
 		m.Body = &flagBodyValue
 	}
 	flagBodyModel := m.Body
-	if swag.IsZero(flagBodyModel) {
+	if typeutils.IsZero(flagBodyModel) {
 		flagBodyModel = &models.GithubReactions{}
 	}
 	err, added := retrieveModelGithubReactionsFlags(0, flagBodyModel, "githubReactions", cmd)
@@ -179,7 +178,7 @@ func parseOperationOperationsPutTest2766Result(resp0 *operations.PutTest2766OK, 
 		eresp0, ok := iResp0.(*operations.PutTest2766OK)
 		if ok {
 			// the error response has a payload
-			if !swag.IsZero(eresp0) && !swag.IsZero(eresp0.Payload) {
+			if !typeutils.IsZero(eresp0) && !typeutils.IsZero(eresp0.Payload) {
 				msgStr, err := json.Marshal(eresp0.Payload)
 				if err != nil {
 					return "", err
@@ -191,7 +190,7 @@ func parseOperationOperationsPutTest2766Result(resp0 *operations.PutTest2766OK, 
 	}
 
 	// success responses
-	if !swag.IsZero(resp0) && !swag.IsZero(resp0.Payload) {
+	if !typeutils.IsZero(resp0) && !typeutils.IsZero(resp0.Payload) {
 		msgStr, err := json.Marshal(resp0.Payload)
 		if err != nil {
 			return "", err

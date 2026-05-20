@@ -8,7 +8,7 @@ import (
 	golangswaggerpaths "path"
 	"strings"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // DeletePetURL generates an URL for the delete pet operation
@@ -41,7 +41,7 @@ func (o *DeletePetURL) Build() (*url.URL, error) {
 
 	var _path = "/pets/{petId}"
 
-	petID := swag.FormatInt64(o.PetID)
+	petID := conv.FormatInteger(o.PetID)
 	if petID != "" {
 		_path = strings.ReplaceAll(_path, "{petId}", petID)
 	} else {

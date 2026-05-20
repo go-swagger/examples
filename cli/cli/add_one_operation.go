@@ -6,12 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-swagger/examples/cli/client/todos"
 	"github.com/go-swagger/examples/cli/models"
 
 	"github.com/spf13/cobra"
-
-	"github.com/go-openapi/swag"
 )
 
 // makeOperationTodosAddOneCmd returns a command to handle operation addOne
@@ -100,7 +99,7 @@ func retrieveOperationTodosAddOneBodyFlag(m *todos.AddOneParams, cmdPrefix strin
 		m.Body = &flagBodyValue
 	}
 	flagBodyModel := m.Body
-	if swag.IsZero(flagBodyModel) {
+	if typeutils.IsZero(flagBodyModel) {
 		flagBodyModel = &models.Item{}
 	}
 	err, added := retrieveModelItemFlags(0, flagBodyModel, "item", cmd)
@@ -131,7 +130,7 @@ func parseOperationTodosAddOneResult(resp0 *todos.AddOneCreated, respErr error) 
 		var iRespD any = respErr
 		respD, ok := iRespD.(*todos.AddOneDefault)
 		if ok {
-			if !swag.IsZero(respD) && !swag.IsZero(respD.Payload) {
+			if !typeutils.IsZero(respD) && !typeutils.IsZero(respD.Payload) {
 				msgStr, err := json.Marshal(respD.Payload)
 				if err != nil {
 					return "", err
@@ -145,7 +144,7 @@ func parseOperationTodosAddOneResult(resp0 *todos.AddOneCreated, respErr error) 
 		eresp0, ok := iResp0.(*todos.AddOneCreated)
 		if ok {
 			// the error response has a payload
-			if !swag.IsZero(eresp0) && !swag.IsZero(eresp0.Payload) {
+			if !typeutils.IsZero(eresp0) && !typeutils.IsZero(eresp0.Payload) {
 				msgStr, err := json.Marshal(eresp0.Payload)
 				if err != nil {
 					return "", err
@@ -157,7 +156,7 @@ func parseOperationTodosAddOneResult(resp0 *todos.AddOneCreated, respErr error) 
 	}
 
 	// success responses
-	if !swag.IsZero(resp0) && !swag.IsZero(resp0.Payload) {
+	if !typeutils.IsZero(resp0) && !typeutils.IsZero(resp0.Payload) {
 		msgStr, err := json.Marshal(resp0.Payload)
 		if err != nil {
 			return "", err

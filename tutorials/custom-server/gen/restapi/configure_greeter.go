@@ -16,7 +16,7 @@ import (
 //go:generate swagger generate server --target ../../gen --name Greeter --spec ../../swagger/swagger.yml --principal any --exclude-main
 
 func configureFlags(api *operations.GreeterAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 

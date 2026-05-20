@@ -8,7 +8,7 @@ import (
 	golangswaggerpaths "path"
 	"strings"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // UpdateTaskURL generates an URL for the update task operation
@@ -41,7 +41,7 @@ func (o *UpdateTaskURL) Build() (*url.URL, error) {
 
 	var _path = "/tasks/{id}"
 
-	id := swag.FormatInt64(o.ID)
+	id := conv.FormatInteger(o.ID)
 	if id != "" {
 		_path = strings.ReplaceAll(_path, "{id}", id)
 	} else {

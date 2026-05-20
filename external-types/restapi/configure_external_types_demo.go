@@ -16,7 +16,7 @@ import (
 //go:generate swagger generate server --target ../../external-types --name ExternalTypesDemo --spec ../example-external-types.yaml --principal any
 
 func configureFlags(api *operations.ExternalTypesDemoAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 

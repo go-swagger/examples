@@ -15,7 +15,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 	"github.com/go-swagger/examples/stream-server/client"
 	"github.com/go-swagger/examples/stream-server/client/operations"
 	"github.com/go-swagger/examples/stream-server/models"
@@ -25,7 +25,7 @@ func main() {
 	n := int64(5)
 	if len(os.Args) > 1 {
 		var err error
-		n, err = swag.ConvertInt64(os.Args[1])
+		n, err = conv.ConvertInt64(os.Args[1])
 		if err != nil {
 			log.Fatalln("pass an integer as argument")
 			return
@@ -72,7 +72,7 @@ func ask(n int64) error {
 				return
 			}
 
-			log.Printf("received countdown mark - remaining: %d", swag.Int64Value(mark.Remains))
+			log.Printf("received countdown mark - remaining: %d", conv.Value(mark.Remains))
 		}
 
 		if err := scanner.Err(); err != nil {

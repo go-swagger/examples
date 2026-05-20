@@ -19,17 +19,17 @@ import (
 
 var (
 	// state carries an internal token during the oauth2 workflow
-	// we just need a non empty initial value
+	// we just need a non empty initial value.
 	state = "foobar" // Don't make this a global in production.
 
-	// the credentials for this API (adapt values when registering API)
+	// the credentials for this API (adapt values when registering API).
 	clientID     = "" // <= enter registered API client ID here
 	clientSecret = "" // <= enter registered API client secret here
 
 	//  unused in this example: the signer of the delivered token
 	// issuer = "https://accounts.google.com"
 
-	// the Google login URL
+	// the Google login URL.
 	authURL = "https://accounts.google.com/o/oauth2/v2/auth"
 
 	// the Google OAuth2 resource provider which delivers access tokens
@@ -37,10 +37,10 @@ var (
 	tokenURL    = "https://www.googleapis.com/oauth2/v4/token"
 	userInfoURL = "https://www.googleapis.com/oauth2/v3/userinfo"
 
-	// our endpoint to be called back by the redirected client
+	// our endpoint to be called back by the redirected client.
 	callbackURL = "http://127.0.0.1:12345/api/auth/callback"
 
-	// the description of the OAuth2 flow
+	// the description of the OAuth2 flow.
 	endpoint = oauth2.Endpoint{
 		AuthURL:  authURL,
 		TokenURL: tokenURL,
@@ -98,8 +98,9 @@ func callback(r *http.Request) (string, error) {
 
 func authenticated(token string) (bool, error) {
 	// validates the token by sending a request at userInfoURL
+	ctx := context.Background()
 	bearToken := "Bearer " + token
-	req, err := http.NewRequest("GET", userInfoURL, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, userInfoURL, nil)
 	if err != nil {
 		return false, fmt.Errorf("http request: %w", err)
 	}
@@ -117,7 +118,7 @@ func authenticated(token string) (bool, error) {
 	if err != nil {
 		return false, fmt.Errorf("fail to get response: %w", err)
 	}
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		return false, nil
 	}
 	return true, nil

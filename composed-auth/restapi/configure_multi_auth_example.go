@@ -7,22 +7,20 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/davecgh/go-spew/spew"
-
 	errors "github.com/go-openapi/errors"
 	runtime "github.com/go-openapi/runtime"
 	middleware "github.com/go-openapi/runtime/middleware"
-
-	"github.com/go-swagger/examples/composed-auth/restapi/operations"
+	"github.com/go-openapi/testify/v2/tools/spew"
 
 	auth "github.com/go-swagger/examples/composed-auth/auth"
 	models "github.com/go-swagger/examples/composed-auth/models"
+	"github.com/go-swagger/examples/composed-auth/restapi/operations"
 )
 
 //go:generate swagger generate server --target .. --name multi-auth-example --spec ../swagger.yml --principal models.Principal
 
 func configureFlags(api *operations.MultiAuthExampleAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 

@@ -6,8 +6,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
-	"github.com/go-openapi/swag"
-
+	"github.com/go-openapi/swag/conv"
 	"github.com/go-swagger/examples/task-tracker/models"
 )
 
@@ -64,7 +63,7 @@ func (o *ListTasksOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 
 	// response header X-Last-Task-Id
 
-	xLastTaskID := swag.FormatInt64(o.XLastTaskID)
+	xLastTaskID := conv.FormatInteger(o.XLastTaskID)
 	if xLastTaskID != "" {
 		rw.Header().Set("X-Last-Task-Id", xLastTaskID)
 	}

@@ -22,7 +22,7 @@ import (
 	"golang.org/x/net/netutil"
 
 	"github.com/go-openapi/runtime/flagext"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/netutils"
 
 	"github.com/go-swagger/examples/task-tracker/restapi/operations"
 )
@@ -369,7 +369,7 @@ func (s *Server) Listen() error {
 			return err
 		}
 
-		h, p, err := swag.SplitHostPort(listener.Addr().String())
+		h, p, err := netutils.SplitHostPort(listener.Addr().String())
 		if err != nil {
 			return err
 		}
@@ -384,7 +384,7 @@ func (s *Server) Listen() error {
 			return err
 		}
 
-		sh, sp, err := swag.SplitHostPort(tlsListener.Addr().String())
+		sh, sp, err := netutils.SplitHostPort(tlsListener.Addr().String())
 		if err != nil {
 			return err
 		}

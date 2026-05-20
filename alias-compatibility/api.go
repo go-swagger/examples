@@ -33,13 +33,13 @@
 // swagger:meta
 package demo
 
-// Identifier represents a unique identifier
+// Identifier represents a unique identifier.
 type Identifier string
 
-// UserID is an alias to Identifier for user-specific IDs
+// UserID is an alias to Identifier for user-specific IDs.
 type UserID = Identifier
 
-// User represents a user in the system
+// User represents a user in the system.
 type User struct {
 	ID   UserID `json:"id"`
 	Name string `json:"name"`
@@ -60,4 +60,4 @@ type UserResponse struct {
 // Responses:
 //
 //	200: UserResponse
-func getUser() {}
+func getUser() {} //nolint:unused // left here to demonstrate what we get from an unexported symbol

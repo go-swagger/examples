@@ -10,12 +10,15 @@ linters:
     - dupl             # generated code has a lot of duplication
     - err113           # generated code does not wrap errors
     - exhaustruct      # generated code does not initialize all fields
+    - forbidigo        # in examples, we have a lot of printing and logging on purpose
     - funlen           # generated code produces long functions
     - gochecknoglobals # generated code uses globals
     - gochecknoinits   # generated code uses init()
     - gocognit         # generated code has high cognitive complexity
     - gocyclo          # generated code has high cyclomatic complexity
     - godox            # allow TODOs
+    - gomodguard       # deprecated
+    - gomodguard_v2    # we don't use this
     - ireturn          # generated code returns interfaces
     - lll              # generated code has long lines
     - maintidx         # generated code has low maintainability index
@@ -26,6 +29,7 @@ linters:
     - noinlineerr      # unclear added value
     - paralleltest     # no test files
     - recvcheck        # disagree
+    - tagalign         # generated tags for jesssevdk CLI trigger this. To be investigated further (non-blocking)
     - tagliatelle      # false positives on generated tags
     - testpackage      # no test files
     - thelper           # no test files
@@ -46,6 +50,9 @@ linters:
     goconst:
       min-len: 2
       min-occurrences: 3
+    gosec:
+      excludes:
+        - G706 # logs in examples are deliberately verbose and revealing of the internals
   exclusions:
     warn-unused: false
     generated: lax

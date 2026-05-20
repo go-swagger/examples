@@ -9,7 +9,6 @@ import (
 	"github.com/go-openapi/runtime"
 	rtclient "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
 	"github.com/go-swagger/examples/contributed-templates/stratoscale/client/pet"
 	"github.com/go-swagger/examples/contributed-templates/stratoscale/client/store"
 )

@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // GetTaskCommentsURL generates an URL for the get task comments operation
@@ -45,7 +45,7 @@ func (o *GetTaskCommentsURL) Build() (*url.URL, error) {
 
 	var _path = "/tasks/{id}/comments"
 
-	id := swag.FormatInt64(o.ID)
+	id := conv.FormatInteger(o.ID)
 	if id != "" {
 		_path = strings.ReplaceAll(_path, "{id}", id)
 	} else {
@@ -62,7 +62,7 @@ func (o *GetTaskCommentsURL) Build() (*url.URL, error) {
 
 	var pageSizeQ string
 	if o.PageSize != nil {
-		pageSizeQ = swag.FormatInt32(*o.PageSize)
+		pageSizeQ = conv.FormatInteger(*o.PageSize)
 	}
 	if pageSizeQ != "" {
 		qs.Set("pageSize", pageSizeQ)

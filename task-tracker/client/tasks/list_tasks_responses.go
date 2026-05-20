@@ -11,8 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
-
+	"github.com/go-openapi/swag/conv"
 	"github.com/go-swagger/examples/task-tracker/models"
 )
 
@@ -119,7 +118,7 @@ func (o *ListTasksOK) readResponse(response runtime.ClientResponse, consumer run
 	hdrXLastTaskID := response.GetHeader("X-Last-Task-Id")
 
 	if hdrXLastTaskID != "" {
-		valxLastTaskId, err := swag.ConvertInt64(hdrXLastTaskID)
+		valxLastTaskId, err := conv.ConvertInt64(hdrXLastTaskID)
 		if err != nil {
 			return errors.InvalidType("X-Last-Task-Id", "header", "int64", hdrXLastTaskID)
 		}

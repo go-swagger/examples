@@ -9,7 +9,8 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-openapi/validate"
 )
 
@@ -54,12 +55,12 @@ func (m *Order) validateOrderID(formats strfmt.Registry) error {
 }
 
 func (m *Order) validateOrderLines(formats strfmt.Registry) error {
-	if swag.IsZero(m.OrderLines) { // not required
+	if typeutils.IsZero(m.OrderLines) { // not required
 		return nil
 	}
 
 	for i := 0; i < len(m.OrderLines); i++ {
-		if swag.IsZero(m.OrderLines[i]) { // not required
+		if typeutils.IsZero(m.OrderLines[i]) { // not required
 			continue
 		}
 
@@ -103,7 +104,7 @@ func (m *Order) contextValidateOrderLines(ctx context.Context, formats strfmt.Re
 
 		if m.OrderLines[i] != nil {
 
-			if swag.IsZero(m.OrderLines[i]) { // not required
+			if typeutils.IsZero(m.OrderLines[i]) { // not required
 				return nil
 			}
 
@@ -131,13 +132,13 @@ func (m *Order) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *Order) UnmarshalBinary(b []byte) error {
 	var res Order
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
@@ -254,13 +255,13 @@ func (m *OrderLine) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *OrderLine) UnmarshalBinary(b []byte) error {
 	var res OrderLine
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res

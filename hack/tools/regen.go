@@ -103,6 +103,14 @@ var steps = []regenStep{
 		},
 	},
 	{
+		dir:      "todo-list-errors",
+		preserve: []string{"restapi/configure_todo_list.go"},
+		clean:    []string{"cmd", "models", "restapi"},
+		commands: [][]string{
+			{"swagger", "generate", "server", "-A", "TodoList", "-f", "./swagger.yml", "-e"},
+		},
+	},
+	{
 		dir:    "tutorials/custom-server",
 		clean:  []string{"gen"},
 		mkdirs: []string{"gen"},

@@ -6,11 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-swagger/examples/cli/client/todos"
 
 	"github.com/spf13/cobra"
-
-	"github.com/go-openapi/swag"
 )
 
 // makeOperationTodosDestroyOneCmd returns a command to handle operation destroyOne
@@ -111,7 +110,7 @@ func parseOperationTodosDestroyOneResult(resp0 *todos.DestroyOneNoContent, respE
 		var iRespD any = respErr
 		respD, ok := iRespD.(*todos.DestroyOneDefault)
 		if ok {
-			if !swag.IsZero(respD) && !swag.IsZero(respD.Payload) {
+			if !typeutils.IsZero(respD) && !typeutils.IsZero(respD.Payload) {
 				msgStr, err := json.Marshal(respD.Payload)
 				if err != nil {
 					return "", err

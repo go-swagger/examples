@@ -8,7 +8,7 @@ import (
 	golangswaggerpaths "path"
 	"strings"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // OrderDeleteURL generates an URL for the order delete operation
@@ -41,7 +41,7 @@ func (o *OrderDeleteURL) Build() (*url.URL, error) {
 
 	var _path = "/store/order/{orderId}"
 
-	orderID := swag.FormatInt64(o.OrderID)
+	orderID := conv.FormatInteger(o.OrderID)
 	if orderID != "" {
 		_path = strings.ReplaceAll(_path, "{orderId}", orderID)
 	} else {

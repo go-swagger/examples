@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 
 	"github.com/go-swagger/examples/auto-configure/models"
 	"github.com/go-swagger/examples/auto-configure/restapi/operations/todos"
@@ -63,7 +63,7 @@ func (i *TodosHandlerImpl) FindTodos(params todos.FindTodosParams, principal any
 	i.lock.Lock()
 	defer i.lock.Unlock()
 	mergedParams := todos.NewFindTodosParams()
-	mergedParams.Since = swag.Int64(0)
+	mergedParams.Since = conv.Pointer(int64(0))
 	if params.Since != nil {
 		mergedParams.Since = params.Since
 	}

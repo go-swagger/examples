@@ -8,7 +8,7 @@ import (
 	golangswaggerpaths "path"
 	"strings"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // GetPetByIDURL generates an URL for the get pet by Id operation
@@ -41,7 +41,7 @@ func (o *GetPetByIDURL) Build() (*url.URL, error) {
 
 	var _path = "/pets/{petId}"
 
-	petID := swag.FormatInt64(o.PetID)
+	petID := conv.FormatInteger(o.PetID)
 	if petID != "" {
 		_path = strings.ReplaceAll(_path, "{petId}", petID)
 	} else {

@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // NewPetGetParams creates a new PetGetParams object,
@@ -140,7 +140,7 @@ func (o *PetGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 	var res []error
 
 	// path param petId
-	if err := r.SetPathParam("petId", swag.FormatInt64(o.PetID)); err != nil {
+	if err := r.SetPathParam("petId", conv.FormatInteger(o.PetID)); err != nil {
 		return err
 	}
 

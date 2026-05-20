@@ -17,7 +17,7 @@ import (
 //go:generate swagger generate server --target ../../task-tracker --name TaskTracker --spec ../swagger.yml --principal any
 
 func configureFlags(api *operations.TaskTrackerAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 

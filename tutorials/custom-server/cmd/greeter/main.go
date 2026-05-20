@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 
 	"github.com/go-swagger/examples/tutorials/custom-server/gen/restapi"
 	"github.com/go-swagger/examples/tutorials/custom-server/gen/restapi/operations"
@@ -44,7 +44,7 @@ func serve() error {
 	// in case the name is not given, it will default to World
 	api.GetGreetingHandler = operations.GetGreetingHandlerFunc(
 		func(params operations.GetGreetingParams) middleware.Responder {
-			name := swag.StringValue(params.Name)
+			name := conv.Value(params.Name)
 			if name == "" {
 				name = "World"
 			}

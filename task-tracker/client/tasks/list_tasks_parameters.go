@@ -11,7 +11,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
+	"github.com/go-openapi/swag/stringutils"
 )
 
 // NewListTasksParams creates a new ListTasksParams object,
@@ -212,7 +213,7 @@ func (o *ListTasksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		if o.PageSize != nil {
 			qrPageSize = *o.PageSize
 		}
-		qPageSize := swag.FormatInt32(qrPageSize)
+		qPageSize := conv.FormatInteger(qrPageSize)
 		if qPageSize != "" {
 
 			if err := r.SetQueryParam("pageSize", qPageSize); err != nil {
@@ -229,7 +230,7 @@ func (o *ListTasksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		if o.SinceID != nil {
 			qrSinceID = *o.SinceID
 		}
-		qSinceID := swag.FormatInt64(qrSinceID)
+		qSinceID := conv.FormatInteger(qrSinceID)
 		if qSinceID != "" {
 
 			if err := r.SetQueryParam("sinceId", qSinceID); err != nil {
@@ -278,7 +279,7 @@ func (o *ListTasksParams) bindParamStatus(formats strfmt.Registry) []string {
 	}
 
 	// items.CollectionFormat: "pipes"
-	statusIS := swag.JoinByFormat(statusIC, "pipes")
+	statusIS := stringutils.JoinByFormat(statusIC, "pipes")
 
 	return statusIS
 }
@@ -295,7 +296,7 @@ func (o *ListTasksParams) bindParamTags(formats strfmt.Registry) []string {
 	}
 
 	// items.CollectionFormat: ""
-	tagsIS := swag.JoinByFormat(tagsIC, "")
+	tagsIS := stringutils.JoinByFormat(tagsIC, "")
 
 	return tagsIS
 }

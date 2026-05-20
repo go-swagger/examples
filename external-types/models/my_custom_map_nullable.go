@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/typeutils"
 	alternate "github.com/go-swagger/examples/external-types/fred"
 )
 
@@ -28,7 +28,7 @@ func (m MyCustomMapNullable) Validate(formats strfmt.Registry) error {
 
 		for kk := range m[k] {
 
-			if swag.IsZero(m[k][kk]) { // not required
+			if typeutils.IsZero(m[k][kk]) { // not required
 				continue
 			}
 			if val, ok := m[k][kk]; ok {

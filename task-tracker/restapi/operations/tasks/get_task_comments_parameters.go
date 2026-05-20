@@ -9,7 +9,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 	"github.com/go-openapi/validate"
 )
 
@@ -94,7 +94,7 @@ func (o *GetTaskCommentsParams) bindID(rawData []string, hasKey bool, formats st
 	// Required: true
 	// Parameter is provided by construction from the route
 
-	value, err := swag.ConvertInt64(raw)
+	value, err := conv.ConvertInt64(raw)
 	if err != nil {
 		return errors.InvalidType("id", "path", "int64", raw)
 	}
@@ -118,7 +118,7 @@ func (o *GetTaskCommentsParams) bindPageSize(rawData []string, hasKey bool, form
 		return nil
 	}
 
-	value, err := swag.ConvertInt32(raw)
+	value, err := conv.ConvertInt32(raw)
 	if err != nil {
 		return errors.InvalidType("pageSize", "query", "int32", raw)
 	}

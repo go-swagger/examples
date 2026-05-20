@@ -8,7 +8,7 @@ import (
 	golangswaggerpaths "path"
 	"strings"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // PetUploadImageURL generates an URL for the pet upload image operation
@@ -41,7 +41,7 @@ func (o *PetUploadImageURL) Build() (*url.URL, error) {
 
 	var _path = "/pet/{petId}/image"
 
-	petID := swag.FormatInt64(o.PetID)
+	petID := conv.FormatInteger(o.PetID)
 	if petID != "" {
 		_path = strings.ReplaceAll(_path, "{petId}", petID)
 	} else {

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // UploadTaskFileMaxParseMemory sets the maximum size in bytes for
@@ -136,7 +136,7 @@ func (o *UploadTaskFileParams) bindID(rawData []string, hasKey bool, formats str
 	// Required: true
 	// Parameter is provided by construction from the route
 
-	value, err := swag.ConvertInt64(raw)
+	value, err := conv.ConvertInt64(raw)
 	if err != nil {
 		return errors.InvalidType("id", "path", "int64", raw)
 	}
