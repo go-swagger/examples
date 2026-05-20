@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // NewFindTodosParams creates a new FindTodosParams object,
@@ -172,7 +172,7 @@ func (o *FindTodosParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		if o.Limit != nil {
 			qrLimit = *o.Limit
 		}
-		qLimit := swag.FormatInt32(qrLimit)
+		qLimit := conv.FormatInteger(qrLimit)
 		if qLimit != "" {
 
 			if err := r.SetQueryParam("limit", qLimit); err != nil {
@@ -189,7 +189,7 @@ func (o *FindTodosParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		if o.Since != nil {
 			qrSince = *o.Since
 		}
-		qSince := swag.FormatInt64(qrSince)
+		qSince := conv.FormatInteger(qrSince)
 		if qSince != "" {
 
 			if err := r.SetQueryParam("since", qSince); err != nil {

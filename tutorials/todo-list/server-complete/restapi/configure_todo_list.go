@@ -12,7 +12,8 @@ import (
 	errors "github.com/go-openapi/errors"
 	runtime "github.com/go-openapi/runtime"
 	middleware "github.com/go-openapi/runtime/middleware"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/cmdutils"
+	"github.com/go-openapi/swag/conv"
 
 	"github.com/go-swagger/examples/tutorials/todo-list/server-complete/models"
 	"github.com/go-swagger/examples/tutorials/todo-list/server-complete/restapi/operations"
@@ -27,7 +28,7 @@ var exampleFlags = struct {
 }{}
 
 func configureFlags(api *operations.TodoListAPI) {
-	api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{
+	api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{
 		{
 			ShortDescription: "Example Flags",
 			LongDescription:  "",
@@ -38,13 +39,13 @@ func configureFlags(api *operations.TodoListAPI) {
 
 var (
 	items  = make(map[int64]*models.Item)
-	lastID int64
+	lastID atomic.Int64
 )
 
 var itemsLock = &sync.Mutex{}
 
 func newItemID() int64 {
-	return atomic.AddInt64(&lastID, 1)
+	return lastID.Add(1)
 }
 
 func addItem(item *models.Item) error {
@@ -122,19 +123,19 @@ func configureAPI(api *operations.TodoListAPI) http.Handler {
 
 	api.TodosAddOneHandler = todos.AddOneHandlerFunc(func(params todos.AddOneParams) middleware.Responder {
 		if err := addItem(params.Body); err != nil {
-			return todos.NewAddOneDefault(500).WithPayload(&models.Error{Code: 500, Message: swag.String(err.Error())})
+			return todos.NewAddOneDefault(500).WithPayload(&models.Error{Code: 500, Message: conv.Pointer(err.Error())})
 		}
 		return todos.NewAddOneCreated().WithPayload(params.Body)
 	})
 	api.TodosDestroyOneHandler = todos.DestroyOneHandlerFunc(func(params todos.DestroyOneParams) middleware.Responder {
 		if err := deleteItem(params.ID); err != nil {
-			return todos.NewDestroyOneDefault(500).WithPayload(&models.Error{Code: 500, Message: swag.String(err.Error())})
+			return todos.NewDestroyOneDefault(500).WithPayload(&models.Error{Code: 500, Message: conv.Pointer(err.Error())})
 		}
 		return todos.NewDestroyOneNoContent()
 	})
 	api.TodosFindTodosHandler = todos.FindTodosHandlerFunc(func(params todos.FindTodosParams) middleware.Responder {
 		mergedParams := todos.NewFindTodosParams()
-		mergedParams.Since = swag.Int64(0)
+		mergedParams.Since = conv.Pointer(int64(0))
 		if params.Since != nil {
 			mergedParams.Since = params.Since
 		}
@@ -145,7 +146,7 @@ func configureAPI(api *operations.TodoListAPI) http.Handler {
 	})
 	api.TodosUpdateOneHandler = todos.UpdateOneHandlerFunc(func(params todos.UpdateOneParams) middleware.Responder {
 		if err := updateItem(params.ID, params.Body); err != nil {
-			return todos.NewUpdateOneDefault(500).WithPayload(&models.Error{Code: 500, Message: swag.String(err.Error())})
+			return todos.NewUpdateOneDefault(500).WithPayload(&models.Error{Code: 500, Message: conv.Pointer(err.Error())})
 		}
 		return todos.NewUpdateOneOK().WithPayload(params.Body)
 	})

@@ -11,18 +11,17 @@ import (
 	errors "github.com/go-openapi/errors"
 	runtime "github.com/go-openapi/runtime"
 	middleware "github.com/go-openapi/runtime/middleware"
-	"github.com/go-openapi/swag"
-
-	"github.com/go-swagger/examples/oauth2/restapi/operations"
-	"github.com/go-swagger/examples/oauth2/restapi/operations/customers"
+	"github.com/go-openapi/swag/conv"
 
 	models "github.com/go-swagger/examples/oauth2/models"
+	"github.com/go-swagger/examples/oauth2/restapi/operations"
+	"github.com/go-swagger/examples/oauth2/restapi/operations/customers"
 )
 
 //go:generate swagger generate server --target .. --name oauthSample --spec ../swagger.yml --principal models.Principal
 
 func configureFlags(api *operations.OauthSampleAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 
@@ -66,7 +65,7 @@ func configureAPI(api *operations.OauthSampleAPI) http.Handler {
 			return middleware.NotImplemented("operation .GetAuthCallback error")
 		}
 		log.Println("Token", token)
-		return operations.NewGetAuthCallbackDefault(500).WithPayload(&models.Error{Code: 500, Message: swag.String(token)})
+		return operations.NewGetAuthCallbackDefault(500).WithPayload(&models.Error{Code: 500, Message: conv.Pointer(token)})
 	})
 	api.GetLoginHandler = operations.GetLoginHandlerFunc(func(params operations.GetLoginParams) middleware.Responder {
 		return login(params.HTTPRequest)

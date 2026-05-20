@@ -10,7 +10,8 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
+	"github.com/go-openapi/swag/stringutils"
 	"github.com/go-openapi/validate"
 )
 
@@ -112,7 +113,7 @@ func (o *ListTasksParams) bindPageSize(rawData []string, hasKey bool, formats st
 		return nil
 	}
 
-	value, err := swag.ConvertInt32(raw)
+	value, err := conv.ConvertInt32(raw)
 	if err != nil {
 		return errors.InvalidType("pageSize", "query", "int32", raw)
 	}
@@ -135,7 +136,7 @@ func (o *ListTasksParams) bindSinceID(rawData []string, hasKey bool, formats str
 		return nil
 	}
 
-	value, err := swag.ConvertInt64(raw)
+	value, err := conv.ConvertInt64(raw)
 	if err != nil {
 		return errors.InvalidType("sinceId", "query", "int64", raw)
 	}
@@ -154,7 +155,7 @@ func (o *ListTasksParams) bindStatus(rawData []string, hasKey bool, formats strf
 	}
 
 	// CollectionFormat: pipes
-	statusIC := swag.SplitByFormat(qvStatus, "pipes")
+	statusIC := stringutils.SplitByFormat(qvStatus, "pipes")
 	if len(statusIC) == 0 {
 		return nil
 	}
@@ -198,7 +199,7 @@ func (o *ListTasksParams) bindTags(rawData []string, hasKey bool, formats strfmt
 	}
 
 	// CollectionFormat:
-	tagsIC := swag.SplitByFormat(qvTags, "")
+	tagsIC := stringutils.SplitByFormat(qvTags, "")
 	if len(tagsIC) == 0 {
 		return nil
 	}

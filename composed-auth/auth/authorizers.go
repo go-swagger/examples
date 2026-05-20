@@ -3,6 +3,7 @@ package auth
 import (
 	"crypto/rsa"
 	"os"
+	"slices"
 
 	jwt "github.com/golang-jwt/jwt/v5"
 
@@ -12,7 +13,7 @@ import (
 )
 
 const (
-	// currently unused: privateKeyPath = "keys/apiKey.prv"
+	// currently unused: privateKeyPath = "keys/apiKey.prv".
 	publicKeyPath = "keys/apiKey.pem"
 	issuerName    = "example.com"
 )
@@ -20,15 +21,16 @@ const (
 var (
 	userDb map[string]string
 
-	// Keys used to sign and verify our tokens
+	// Keys used to sign and verify our tokens.
 	verifyKey *rsa.PublicKey
-	// currently unused: signKey   *rsa.PrivateKey
+	// currently unused: signKey   *rsa.PrivateKey.
 )
 
-// roleClaims describes the format of our JWT token's claims
+// roleClaims describes the format of our JWT token's claims.
 type roleClaims struct {
-	Roles []string `json:"roles"`
 	jwt.MapClaims
+
+	Roles []string `json:"roles"`
 }
 
 func init() {
@@ -52,7 +54,7 @@ func init() {
 // Customized authorizer methods for our sample API
 
 // IsRegistered determines if the user is properly registered,
-// i.e if a valid username:password pair has been provided
+// i.e if a valid username:password pair has been provided.
 func IsRegistered(user, pass string) (*models.Principal, error) {
 	password, ok := userDb[user]
 	if !ok || pass != password {
@@ -64,7 +66,7 @@ func IsRegistered(user, pass string) (*models.Principal, error) {
 	}, nil
 }
 
-// IsReseller tells if the API key is a JWT signed by us with a claim to be a reseller
+// IsReseller tells if the API key is a JWT signed by us with a claim to be a reseller.
 func IsReseller(token string) (*models.Principal, error) {
 	claims, err := parseAndCheckToken(token)
 	if err != nil {
@@ -85,13 +87,7 @@ func IsReseller(token string) (*models.Principal, error) {
 		return nil, errors.New(403, "Forbidden: insufficient API key privileges")
 	}
 
-	isReseller := false
-	for _, role := range claims.Roles {
-		if role == "reseller" {
-			isReseller = true
-			break
-		}
-	}
+	isReseller := slices.Contains(claims.Roles, "reseller")
 
 	if !isReseller {
 		return nil, errors.New(403, "Forbidden: insufficient API key privileges")
@@ -104,7 +100,7 @@ func IsReseller(token string) (*models.Principal, error) {
 
 // HasRole tells if the Bearer token is a JWT signed by us with a claim to be
 // member of an authorization scope.
-// We verify that the claimed role is one of the passed scopes
+// We verify that the claimed role is one of the passed scopes.
 func HasRole(token string, scopes []string) (*models.Principal, error) {
 	claims, err := parseAndCheckToken(token)
 	if err != nil {

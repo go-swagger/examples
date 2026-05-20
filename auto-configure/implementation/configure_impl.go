@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/cmdutils"
 
 	"github.com/go-swagger/examples/auto-configure/restapi/operations"
 )
@@ -20,7 +20,7 @@ type Flags struct {
 }
 
 func (i *ConfigureImpl) ConfigureFlags(api *operations.AToDoListApplicationAPI) {
-	api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{
+	api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{
 		{
 			ShortDescription: "Example Flags",
 			LongDescription:  "",

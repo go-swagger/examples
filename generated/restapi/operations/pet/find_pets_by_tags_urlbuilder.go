@@ -7,7 +7,7 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/stringutils"
 )
 
 // FindPetsByTagsURL generates an URL for the find pets by tags operation
@@ -56,7 +56,7 @@ func (o *FindPetsByTagsURL) Build() (*url.URL, error) {
 		}
 	}
 
-	tags := swag.JoinByFormat(tagsIR, "multi")
+	tags := stringutils.JoinByFormat(tagsIR, "multi")
 
 	for _, qsv := range tags {
 		qs.Add("tags", qsv)

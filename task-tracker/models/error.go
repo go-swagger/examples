@@ -7,7 +7,8 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-openapi/validate"
 )
 
@@ -64,7 +65,7 @@ func (m *Error) validateCode(formats strfmt.Registry) error {
 }
 
 func (m *Error) validateHelpURL(formats strfmt.Registry) error {
-	if swag.IsZero(m.HelpURL) { // not required
+	if typeutils.IsZero(m.HelpURL) { // not required
 		return nil
 	}
 
@@ -94,13 +95,13 @@ func (m *Error) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *Error) UnmarshalBinary(b []byte) error {
 	var res Error
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res

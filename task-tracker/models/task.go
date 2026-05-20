@@ -10,7 +10,8 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-openapi/validate"
 )
 
@@ -55,7 +56,7 @@ type Task struct {
 func (m *Task) UnmarshalJSON(raw []byte) error {
 	// AO0
 	var aO0 TaskCard
-	if err := swag.ReadJSON(raw, &aO0); err != nil {
+	if err := jsonutils.ReadJSON(raw, &aO0); err != nil {
 		return err
 	}
 	m.TaskCard = aO0
@@ -72,7 +73,7 @@ func (m *Task) UnmarshalJSON(raw []byte) error {
 
 		ReportedBy *UserCard `json:"reportedBy,omitempty"`
 	}
-	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
+	if err := jsonutils.ReadJSON(raw, &dataAO1); err != nil {
 		return err
 	}
 
@@ -93,7 +94,7 @@ func (m *Task) UnmarshalJSON(raw []byte) error {
 func (m Task) MarshalJSON() ([]byte, error) {
 	_parts := make([][]byte, 0, 2)
 
-	aO0, err := swag.WriteJSON(m.TaskCard)
+	aO0, err := jsonutils.WriteJSON(m.TaskCard)
 	if err != nil {
 		return nil, err
 	}
@@ -120,12 +121,12 @@ func (m Task) MarshalJSON() ([]byte, error) {
 
 	dataAO1.ReportedBy = m.ReportedBy
 
-	jsonDataAO1, errAO1 := swag.WriteJSON(dataAO1)
+	jsonDataAO1, errAO1 := jsonutils.WriteJSON(dataAO1)
 	if errAO1 != nil {
 		return nil, errAO1
 	}
 	_parts = append(_parts, jsonDataAO1)
-	return swag.ConcatJSON(_parts...), nil
+	return jsonutils.ConcatJSON(_parts...), nil
 }
 
 // Validate validates this task
@@ -165,13 +166,13 @@ func (m *Task) Validate(formats strfmt.Registry) error {
 
 func (m *Task) validateAttachments(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Attachments) { // not required
+	if typeutils.IsZero(m.Attachments) { // not required
 		return nil
 	}
 
 	for k := range m.Attachments {
 
-		if swag.IsZero(m.Attachments[k]) { // not required
+		if typeutils.IsZero(m.Attachments[k]) { // not required
 			continue
 		}
 		if val, ok := m.Attachments[k]; ok {
@@ -196,12 +197,12 @@ func (m *Task) validateAttachments(formats strfmt.Registry) error {
 
 func (m *Task) validateComments(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.Comments) { // not required
+	if typeutils.IsZero(m.Comments) { // not required
 		return nil
 	}
 
 	for i := 0; i < len(m.Comments); i++ {
-		if swag.IsZero(m.Comments[i]) { // not required
+		if typeutils.IsZero(m.Comments[i]) { // not required
 			continue
 		}
 
@@ -227,7 +228,7 @@ func (m *Task) validateComments(formats strfmt.Registry) error {
 
 func (m *Task) validateLastUpdated(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.LastUpdated) { // not required
+	if typeutils.IsZero(m.LastUpdated) { // not required
 		return nil
 	}
 
@@ -240,7 +241,7 @@ func (m *Task) validateLastUpdated(formats strfmt.Registry) error {
 
 func (m *Task) validateLastUpdatedBy(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.LastUpdatedBy) { // not required
+	if typeutils.IsZero(m.LastUpdatedBy) { // not required
 		return nil
 	}
 
@@ -264,7 +265,7 @@ func (m *Task) validateLastUpdatedBy(formats strfmt.Registry) error {
 
 func (m *Task) validateReportedBy(formats strfmt.Registry) error {
 
-	if swag.IsZero(m.ReportedBy) { // not required
+	if typeutils.IsZero(m.ReportedBy) { // not required
 		return nil
 	}
 
@@ -346,7 +347,7 @@ func (m *Task) contextValidateComments(ctx context.Context, formats strfmt.Regis
 
 		if m.Comments[i] != nil {
 
-			if swag.IsZero(m.Comments[i]) { // not required
+			if typeutils.IsZero(m.Comments[i]) { // not required
 				return nil
 			}
 
@@ -382,7 +383,7 @@ func (m *Task) contextValidateLastUpdatedBy(ctx context.Context, formats strfmt.
 
 	if m.LastUpdatedBy != nil {
 
-		if swag.IsZero(m.LastUpdatedBy) { // not required
+		if typeutils.IsZero(m.LastUpdatedBy) { // not required
 			return nil
 		}
 
@@ -407,7 +408,7 @@ func (m *Task) contextValidateReportedBy(ctx context.Context, formats strfmt.Reg
 
 	if m.ReportedBy != nil {
 
-		if swag.IsZero(m.ReportedBy) { // not required
+		if typeutils.IsZero(m.ReportedBy) { // not required
 			return nil
 		}
 
@@ -433,13 +434,13 @@ func (m *Task) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *Task) UnmarshalBinary(b []byte) error {
 	var res Task
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
@@ -638,7 +639,7 @@ func (m TaskAttachmentsAnon) MarshalJSON() ([]byte, error) {
 	}
 
 	// concatenate the 2 objects
-	return swag.ConcatJSON(props, additional), nil
+	return jsonutils.ConcatJSON(props, additional), nil
 }
 
 // Validate validates this task attachments anon
@@ -646,12 +647,12 @@ func (m *TaskAttachmentsAnon) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	props := make(map[string]json.RawMessage, 5+10)
-	j, err := swag.WriteJSON(m)
+	j, err := jsonutils.WriteJSON(m)
 	if err != nil {
 		return err
 	}
 
-	if err = swag.ReadJSON(j, &props); err != nil {
+	if err = jsonutils.ReadJSON(j, &props); err != nil {
 		return err
 	}
 
@@ -677,7 +678,7 @@ func (m *TaskAttachmentsAnon) Validate(formats strfmt.Registry) error {
 }
 
 func (m *TaskAttachmentsAnon) validateDescription(formats strfmt.Registry) error {
-	if swag.IsZero(m.Description) { // not required
+	if typeutils.IsZero(m.Description) { // not required
 		return nil
 	}
 
@@ -689,7 +690,7 @@ func (m *TaskAttachmentsAnon) validateDescription(formats strfmt.Registry) error
 }
 
 func (m *TaskAttachmentsAnon) validateURL(formats strfmt.Registry) error {
-	if swag.IsZero(m.URL) { // not required
+	if typeutils.IsZero(m.URL) { // not required
 		return nil
 	}
 
@@ -767,13 +768,13 @@ func (m *TaskAttachmentsAnon) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *TaskAttachmentsAnon) UnmarshalBinary(b []byte) error {
 	var res TaskAttachmentsAnon
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res

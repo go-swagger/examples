@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/stringutils"
 )
 
 // NewPetListParams creates a new PetListParams object,
@@ -166,7 +166,7 @@ func (o *PetListParams) bindParamStatus(formats strfmt.Registry) []string {
 	}
 
 	// items.CollectionFormat: "multi"
-	statusIS := swag.JoinByFormat(statusIC, "multi")
+	statusIS := stringutils.JoinByFormat(statusIC, "multi")
 
 	return statusIS
 }

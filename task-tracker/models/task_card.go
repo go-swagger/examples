@@ -10,7 +10,8 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-openapi/validate"
 )
 
@@ -141,7 +142,7 @@ func (m *TaskCard) Validate(formats strfmt.Registry) error {
 }
 
 func (m *TaskCard) validateAssignedTo(formats strfmt.Registry) error {
-	if swag.IsZero(m.AssignedTo) { // not required
+	if typeutils.IsZero(m.AssignedTo) { // not required
 		return nil
 	}
 
@@ -164,7 +165,7 @@ func (m *TaskCard) validateAssignedTo(formats strfmt.Registry) error {
 }
 
 func (m *TaskCard) validateEffort(formats strfmt.Registry) error {
-	if swag.IsZero(m.Effort) { // not required
+	if typeutils.IsZero(m.Effort) { // not required
 		return nil
 	}
 
@@ -180,7 +181,7 @@ func (m *TaskCard) validateEffort(formats strfmt.Registry) error {
 }
 
 func (m *TaskCard) validateKarma(formats strfmt.Registry) error {
-	if swag.IsZero(m.Karma) { // not required
+	if typeutils.IsZero(m.Karma) { // not required
 		return nil
 	}
 
@@ -196,7 +197,7 @@ func (m *TaskCard) validateKarma(formats strfmt.Registry) error {
 }
 
 func (m *TaskCard) validateMilestone(formats strfmt.Registry) error {
-	if swag.IsZero(m.Milestone) { // not required
+	if typeutils.IsZero(m.Milestone) { // not required
 		return nil
 	}
 
@@ -219,7 +220,7 @@ func (m *TaskCard) validateMilestone(formats strfmt.Registry) error {
 }
 
 func (m *TaskCard) validateReportedAt(formats strfmt.Registry) error {
-	if swag.IsZero(m.ReportedAt) { // not required
+	if typeutils.IsZero(m.ReportedAt) { // not required
 		return nil
 	}
 
@@ -231,7 +232,7 @@ func (m *TaskCard) validateReportedAt(formats strfmt.Registry) error {
 }
 
 func (m *TaskCard) validateSeverity(formats strfmt.Registry) error {
-	if swag.IsZero(m.Severity) { // not required
+	if typeutils.IsZero(m.Severity) { // not required
 		return nil
 	}
 
@@ -296,7 +297,7 @@ func (m *TaskCard) validateStatus(formats strfmt.Registry) error {
 }
 
 func (m *TaskCard) validateTags(formats strfmt.Registry) error {
-	if swag.IsZero(m.Tags) { // not required
+	if typeutils.IsZero(m.Tags) { // not required
 		return nil
 	}
 
@@ -372,7 +373,7 @@ func (m *TaskCard) contextValidateAssignedTo(ctx context.Context, formats strfmt
 
 	if m.AssignedTo != nil {
 
-		if swag.IsZero(m.AssignedTo) { // not required
+		if typeutils.IsZero(m.AssignedTo) { // not required
 			return nil
 		}
 
@@ -406,7 +407,7 @@ func (m *TaskCard) contextValidateMilestone(ctx context.Context, formats strfmt.
 
 	if m.Milestone != nil {
 
-		if swag.IsZero(m.Milestone) { // not required
+		if typeutils.IsZero(m.Milestone) { // not required
 			return nil
 		}
 
@@ -441,13 +442,13 @@ func (m *TaskCard) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *TaskCard) UnmarshalBinary(b []byte) error {
 	var res TaskCard
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res

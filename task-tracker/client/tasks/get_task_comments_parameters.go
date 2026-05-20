@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // NewGetTaskCommentsParams creates a new GetTaskCommentsParams object,
@@ -190,7 +190,7 @@ func (o *GetTaskCommentsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", conv.FormatInteger(o.ID)); err != nil {
 		return err
 	}
 
@@ -202,7 +202,7 @@ func (o *GetTaskCommentsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		if o.PageSize != nil {
 			qrPageSize = *o.PageSize
 		}
-		qPageSize := swag.FormatInt32(qrPageSize)
+		qPageSize := conv.FormatInteger(qrPageSize)
 		if qPageSize != "" {
 
 			if err := r.SetQueryParam("pageSize", qPageSize); err != nil {

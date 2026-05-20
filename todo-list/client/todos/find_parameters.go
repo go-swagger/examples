@@ -11,7 +11,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
+	"github.com/go-openapi/swag/stringutils"
 )
 
 // NewFindParams creates a new FindParams object,
@@ -167,13 +168,13 @@ func (o *FindParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry
 	var res []error
 
 	// header param X-Rate-Limit
-	if err := r.SetHeaderParam("X-Rate-Limit", swag.FormatInt32(o.XRateLimit)); err != nil {
+	if err := r.SetHeaderParam("X-Rate-Limit", conv.FormatInteger(o.XRateLimit)); err != nil {
 		return err
 	}
 
 	// form param limit
 	frLimit := o.Limit
-	fLimit := swag.FormatInt32(frLimit)
+	fLimit := conv.FormatInteger(frLimit)
 	if err := r.SetFormParam("limit", fLimit); err != nil {
 		return err
 	}
@@ -202,12 +203,12 @@ func (o *FindParams) bindParamTags(formats strfmt.Registry) []string {
 	var tagsIC []string
 	for _, tagsIIR := range tagsIR { // explode []int32
 
-		tagsIIV := swag.FormatInt32(tagsIIR) // int32 as string
+		tagsIIV := conv.FormatInteger(tagsIIR) // int32 as string
 		tagsIC = append(tagsIC, tagsIIV)
 	}
 
 	// items.CollectionFormat: "multi"
-	tagsIS := swag.JoinByFormat(tagsIC, "multi")
+	tagsIS := stringutils.JoinByFormat(tagsIC, "multi")
 
 	return tagsIS
 }

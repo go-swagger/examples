@@ -7,7 +7,8 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
+	"github.com/go-openapi/swag/stringutils"
 )
 
 // ListTasksURL generates an URL for the list tasks operation
@@ -53,7 +54,7 @@ func (o *ListTasksURL) Build() (*url.URL, error) {
 
 	var pageSizeQ string
 	if o.PageSize != nil {
-		pageSizeQ = swag.FormatInt32(*o.PageSize)
+		pageSizeQ = conv.FormatInteger(*o.PageSize)
 	}
 	if pageSizeQ != "" {
 		qs.Set("pageSize", pageSizeQ)
@@ -61,7 +62,7 @@ func (o *ListTasksURL) Build() (*url.URL, error) {
 
 	var sinceIDQ string
 	if o.SinceID != nil {
-		sinceIDQ = swag.FormatInt64(*o.SinceID)
+		sinceIDQ = conv.FormatInteger(*o.SinceID)
 	}
 	if sinceIDQ != "" {
 		qs.Set("sinceId", sinceIDQ)
@@ -75,7 +76,7 @@ func (o *ListTasksURL) Build() (*url.URL, error) {
 		}
 	}
 
-	status := swag.JoinByFormat(statusIR, "pipes")
+	status := stringutils.JoinByFormat(statusIR, "pipes")
 
 	if len(status) > 0 {
 		qsv := status[0]
@@ -92,7 +93,7 @@ func (o *ListTasksURL) Build() (*url.URL, error) {
 		}
 	}
 
-	tags := swag.JoinByFormat(tagsIR, "")
+	tags := stringutils.JoinByFormat(tagsIR, "")
 
 	if len(tags) > 0 {
 		qsv := tags[0]

@@ -19,7 +19,7 @@ import (
 //go:generate swagger generate server --target ../../todo-list-errors --name TodoList --spec ../swagger.yml --principal any --return-errors
 
 func configureFlags(api *operations.TodoListAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 
@@ -56,6 +56,8 @@ func configureAPI(api *operations.TodoListAPI) http.Handler {
 
 	api.TodosAddOneHandler = todos.AddOneHandlerFunc(
 		func(params todos.AddOneParams) (middleware.Responder, error) {
+			_ = params
+
 			return nil, errAlreadyExists
 		})
 

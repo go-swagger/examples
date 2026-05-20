@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 	"github.com/go-openapi/validate"
 )
 
@@ -111,7 +111,7 @@ func (o *FindParams) bindXRateLimit(rawData []string, hasKey bool, formats strfm
 		return err
 	}
 
-	value, err := swag.ConvertInt32(raw)
+	value, err := conv.ConvertInt32(raw)
 	if err != nil {
 		return errors.InvalidType("X-Rate-Limit", "header", "int32", raw)
 	}
@@ -136,7 +136,7 @@ func (o *FindParams) bindLimit(rawData []string, hasKey bool, formats strfmt.Reg
 		return nil
 	}
 
-	value, err := swag.ConvertInt32(raw)
+	value, err := conv.ConvertInt32(raw)
 	if err != nil {
 		return errors.InvalidType("limit", "formData", "int32", raw)
 	}
@@ -161,7 +161,7 @@ func (o *FindParams) bindTags(rawData []string, hasKey bool, formats strfmt.Regi
 	var tagsIR []int32
 	for i, tagsIV := range tagsIC {
 		// items.Format: "int32"
-		tagsI, err := swag.ConvertInt32(tagsIV)
+		tagsI, err := conv.ConvertInt32(tagsIV)
 		if err != nil {
 			return errors.InvalidType(fmt.Sprintf("%s.%v", "tags", i), "formData", "int32", tagsI)
 		}

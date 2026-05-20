@@ -7,7 +7,7 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/stringutils"
 )
 
 // PetListURL generates an URL for the pet list operation
@@ -56,7 +56,7 @@ func (o *PetListURL) Build() (*url.URL, error) {
 		}
 	}
 
-	status := swag.JoinByFormat(statusIR, "multi")
+	status := stringutils.JoinByFormat(statusIR, "multi")
 
 	for _, qsv := range status {
 		qs.Add("status", qsv)

@@ -17,7 +17,7 @@ import (
 //go:generate swagger generate server --target ../../server-1 --name TodoList --spec ../swagger.yml --principal any
 
 func configureFlags(api *operations.TodoListAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 

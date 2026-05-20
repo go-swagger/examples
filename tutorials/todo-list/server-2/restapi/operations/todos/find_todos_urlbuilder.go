@@ -7,7 +7,7 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // FindTodosURL generates an URL for the find todos operation
@@ -48,7 +48,7 @@ func (o *FindTodosURL) Build() (*url.URL, error) {
 
 	var limitQ string
 	if o.Limit != nil {
-		limitQ = swag.FormatInt32(*o.Limit)
+		limitQ = conv.FormatInteger(*o.Limit)
 	}
 	if limitQ != "" {
 		qs.Set("limit", limitQ)
@@ -56,7 +56,7 @@ func (o *FindTodosURL) Build() (*url.URL, error) {
 
 	var sinceQ string
 	if o.Since != nil {
-		sinceQ = swag.FormatInt64(*o.Since)
+		sinceQ = conv.FormatInteger(*o.Since)
 	}
 	if sinceQ != "" {
 		qs.Set("since", sinceQ)

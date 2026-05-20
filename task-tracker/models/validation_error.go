@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
 )
 
 // ValidationError validation error
@@ -24,7 +24,7 @@ type ValidationError struct {
 func (m *ValidationError) UnmarshalJSON(raw []byte) error {
 	// AO0
 	var aO0 Error
-	if err := swag.ReadJSON(raw, &aO0); err != nil {
+	if err := jsonutils.ReadJSON(raw, &aO0); err != nil {
 		return err
 	}
 	m.Error = aO0
@@ -33,7 +33,7 @@ func (m *ValidationError) UnmarshalJSON(raw []byte) error {
 	var dataAO1 struct {
 		Field string `json:"field,omitempty"`
 	}
-	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
+	if err := jsonutils.ReadJSON(raw, &dataAO1); err != nil {
 		return err
 	}
 
@@ -46,7 +46,7 @@ func (m *ValidationError) UnmarshalJSON(raw []byte) error {
 func (m ValidationError) MarshalJSON() ([]byte, error) {
 	_parts := make([][]byte, 0, 2)
 
-	aO0, err := swag.WriteJSON(m.Error)
+	aO0, err := jsonutils.WriteJSON(m.Error)
 	if err != nil {
 		return nil, err
 	}
@@ -57,12 +57,12 @@ func (m ValidationError) MarshalJSON() ([]byte, error) {
 
 	dataAO1.Field = m.Field
 
-	jsonDataAO1, errAO1 := swag.WriteJSON(dataAO1)
+	jsonDataAO1, errAO1 := jsonutils.WriteJSON(dataAO1)
 	if errAO1 != nil {
 		return nil, errAO1
 	}
 	_parts = append(_parts, jsonDataAO1)
-	return swag.ConcatJSON(_parts...), nil
+	return jsonutils.ConcatJSON(_parts...), nil
 }
 
 // Validate validates this validation error
@@ -100,13 +100,13 @@ func (m *ValidationError) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *ValidationError) UnmarshalBinary(b []byte) error {
 	var res ValidationError
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res

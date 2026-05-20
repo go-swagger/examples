@@ -8,7 +8,7 @@ import (
 	golangswaggerpaths "path"
 	"strings"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // ElapseURL generates an URL for the elapse operation
@@ -41,7 +41,7 @@ func (o *ElapseURL) Build() (*url.URL, error) {
 
 	var _path = "/elapse/{length}"
 
-	length := swag.FormatInt64(o.Length)
+	length := conv.FormatInteger(o.Length)
 	if length != "" {
 		_path = strings.ReplaceAll(_path, "{length}", length)
 	} else {

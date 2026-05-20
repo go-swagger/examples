@@ -1,7 +1,9 @@
+//nolint:forcetypeassert // type assertions left unchecked for brevity
 package main
 
 import (
 	"log"
+	"maps"
 	"net/http"
 	"os"
 	"sync"
@@ -95,7 +97,7 @@ var destroyOne = runtime.OperationHandlerFunc(func(params any) (any, error) {
 	log.Printf("%#v\n", params)
 
 	removeItem(params.(map[string]any)["id"].(int64))
-	return nil, nil
+	return nil, nil //nolint:nilnil // for demo purpose we don't return any response
 })
 
 var items = []map[string]any{
@@ -128,9 +130,8 @@ func updateItem(id int64, body map[string]any) (map[string]any, error) {
 		return nil, err
 	}
 	delete(body, "id")
-	for k, v := range body {
-		item[k] = v
-	}
+	maps.Copy(item, body)
+
 	return item, nil
 }
 

@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // NewElapseParams creates a new ElapseParams object,
@@ -138,7 +138,7 @@ func (o *ElapseParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 	var res []error
 
 	// path param length
-	if err := r.SetPathParam("length", swag.FormatInt64(o.Length)); err != nil {
+	if err := r.SetPathParam("length", conv.FormatInteger(o.Length)); err != nil {
 		return err
 	}
 

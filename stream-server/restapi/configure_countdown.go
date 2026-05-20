@@ -19,7 +19,7 @@ import (
 //go:generate swagger generate server --target .. --name Countdown --spec ../swagger.yml
 
 func configureFlags(api *operations.CountdownAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 
@@ -45,7 +45,7 @@ func configureAPI(api *operations.CountdownAPI) http.Handler {
 
 		return middleware.ResponderFunc(func(rw http.ResponseWriter, _ runtime.Producer) {
 			f, _ := rw.(http.Flusher)
-			rw.WriteHeader(200)
+			rw.WriteHeader(http.StatusOK)
 			_ = myCounter.Down(params.Length, &flushWriter{f: f, w: rw})
 		})
 	})

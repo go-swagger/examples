@@ -8,7 +8,7 @@ import (
 	golangswaggerpaths "path"
 	"strings"
 
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // UploadTaskFileURL generates an URL for the upload task file operation
@@ -41,7 +41,7 @@ func (o *UploadTaskFileURL) Build() (*url.URL, error) {
 
 	var _path = "/tasks/{id}/files"
 
-	id := swag.FormatInt64(o.ID)
+	id := conv.FormatInteger(o.ID)
 	if id != "" {
 		_path = strings.ReplaceAll(_path, "{id}", id)
 	} else {

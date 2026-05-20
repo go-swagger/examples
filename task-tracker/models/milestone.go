@@ -8,7 +8,8 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
+	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-openapi/validate"
 )
 
@@ -70,7 +71,7 @@ func (m *Milestone) Validate(formats strfmt.Registry) error {
 }
 
 func (m *Milestone) validateDueDate(formats strfmt.Registry) error {
-	if swag.IsZero(m.DueDate) { // not required
+	if typeutils.IsZero(m.DueDate) { // not required
 		return nil
 	}
 
@@ -103,7 +104,7 @@ func (m *Milestone) validateName(formats strfmt.Registry) error {
 }
 
 func (m *Milestone) validateStats(formats strfmt.Registry) error {
-	if swag.IsZero(m.Stats) { // not required
+	if typeutils.IsZero(m.Stats) { // not required
 		return nil
 	}
 
@@ -143,7 +144,7 @@ func (m *Milestone) contextValidateStats(ctx context.Context, formats strfmt.Reg
 
 	if m.Stats != nil {
 
-		if swag.IsZero(m.Stats) { // not required
+		if typeutils.IsZero(m.Stats) { // not required
 			return nil
 		}
 
@@ -169,13 +170,13 @@ func (m *Milestone) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *Milestone) UnmarshalBinary(b []byte) error {
 	var res Milestone
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res
@@ -214,13 +215,13 @@ func (m *MilestoneStats) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
-	return swag.WriteJSON(m)
+	return jsonutils.WriteJSON(m)
 }
 
 // UnmarshalBinary interface implementation
 func (m *MilestoneStats) UnmarshalBinary(b []byte) error {
 	var res MilestoneStats
-	if err := swag.ReadJSON(b, &res); err != nil {
+	if err := jsonutils.ReadJSON(b, &res); err != nil {
 		return err
 	}
 	*m = res

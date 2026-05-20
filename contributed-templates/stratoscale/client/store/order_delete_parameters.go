@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/conv"
 )
 
 // NewOrderDeleteParams creates a new OrderDeleteParams object,
@@ -140,7 +140,7 @@ func (o *OrderDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	var res []error
 
 	// path param orderId
-	if err := r.SetPathParam("orderId", swag.FormatInt64(o.OrderID)); err != nil {
+	if err := r.SetPathParam("orderId", conv.FormatInteger(o.OrderID)); err != nil {
 		return err
 	}
 

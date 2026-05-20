@@ -11,8 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
-
+	"github.com/go-openapi/swag/conv"
 	"github.com/go-swagger/examples/cli/models"
 )
 
@@ -158,7 +157,7 @@ func (o *PutTest2766Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		if o.Minus1 != nil {
 			qrMinus1 = *o.Minus1
 		}
-		qMinus1 := swag.FormatInt64(qrMinus1)
+		qMinus1 := conv.FormatInteger(qrMinus1)
 		if qMinus1 != "" {
 
 			if err := r.SetQueryParam("-1", qMinus1); err != nil {

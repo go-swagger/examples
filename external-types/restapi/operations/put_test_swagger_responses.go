@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
-
 	custom "github.com/go-swagger/examples/external-types/fred"
 )
 

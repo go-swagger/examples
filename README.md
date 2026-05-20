@@ -46,6 +46,22 @@ This software ships under the [SPDX-License-Identifier: Apache-2.0](./LICENSE).
 * [Contributing guidelines](.github/CONTRIBUTING.md)
 * [Code style](docs/STYLE.md)
 
+## Regenerating all examples
+
+```
+go run ./hack/tools regen
+```
+
+To run examples, some of these require some auth material (not committed to this repo):
+```
+go run ./hack/tools gencerts
+go run ./hack/tools gentokens
+```
+
+## Cutting a new release
+
+This repository is deliberately left unreleased: examples follow the code generation on go-swagger/go-swagger@master.
+
 <!-- Badges: status  -->
 [test-badge]: https://github.com/go-swagger/examples/actions/workflows/go-test.yml/badge.svg
 [test-url]: https://github.com/go-swagger/examples/actions/workflows/go-test.yml

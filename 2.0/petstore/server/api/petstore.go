@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//nolint:forcetypeassert // type assertions left unchecked for brevity
 package api
 
 import (
@@ -26,10 +27,10 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/runtime/middleware/untyped"
-	"github.com/go-openapi/swag"
+	"github.com/go-openapi/swag/jsonutils"
 )
 
-// NewPetstore creates a new petstore api handler
+// NewPetstore creates a new petstore api handler.
 func NewPetstore() (http.Handler, error) {
 	spec, err := loads.Analyzed(json.RawMessage([]byte(swaggerJSON)), "")
 	if err != nil {
@@ -56,7 +57,7 @@ var createPet = runtime.OperationHandlerFunc(func(data any) (any, error) {
 	fmt.Printf("%#v\n", data)
 	body := data.(map[string]any)["pet"]
 	var pet Pet
-	if err := swag.FromDynamicJSON(body, &pet); err != nil {
+	if err := jsonutils.FromDynamicJSON(body, &pet); err != nil {
 		return nil, err
 	}
 	addPet(pet)
@@ -68,7 +69,8 @@ var deletePet = runtime.OperationHandlerFunc(func(data any) (any, error) {
 	fmt.Printf("%#v\n", data)
 	id := data.(map[string]any)["id"].(int64)
 	removePet(id)
-	return nil, nil
+
+	return nil, nil //nolint:nilnil // for demo purpose we don't return any response
 })
 
 var getPetByID = runtime.OperationHandlerFunc(func(data any) (any, error) {
@@ -78,13 +80,13 @@ var getPetByID = runtime.OperationHandlerFunc(func(data any) (any, error) {
 	return petByID(id)
 })
 
-// Tag the tag model
+// Tag the tag model.
 type Tag struct {
 	ID   int64
 	Name string
 }
 
-// Pet the pet model
+// Pet the pet model.
 type Pet struct {
 	ID        int64    `json:"id"`
 	Name      string   `json:"name"`

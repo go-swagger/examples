@@ -4,6 +4,7 @@ package restapi
 
 import (
 	"crypto/tls"
+	stderrors "errors"
 	"fmt"
 	"io"
 	"log"
@@ -22,7 +23,7 @@ import (
 //go:generate swagger generate server --target ../../file-server --name FileUpload --spec ../swagger.yml --principal any
 
 func configureFlags(api *operations.FileUploadAPI) {
-	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
+	// api.CommandLineOptionsGroups = []cmdutils.CommandLineOptionsGroup{ ... }
 	_ = api
 }
 
@@ -56,7 +57,7 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 
 	api.UploadsUploadFileHandler = uploads.UploadFileHandlerFunc(func(params uploads.UploadFileParams) middleware.Responder {
 		if params.File == nil {
-			return middleware.Error(404, fmt.Errorf("no file provided"))
+			return middleware.Error(http.StatusNotFound, stderrors.New("no file provided"))
 		}
 		defer func() {
 			_ = params.File.Close()
@@ -72,12 +73,12 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 		uploadCounter++
 		f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0o600)
 		if err != nil {
-			return middleware.Error(500, fmt.Errorf("could not create file on server"))
+			return middleware.Error(http.StatusInternalServerError, stderrors.New("could not create file on server"))
 		}
 
 		n, err := io.Copy(f, params.File)
 		if err != nil {
-			return middleware.Error(500, fmt.Errorf("could not upload file on server"))
+			return middleware.Error(http.StatusInternalServerError, stderrors.New("could not upload file on server"))
 		}
 
 		log.Printf("copied bytes %d", n)
