@@ -77,3 +77,5 @@ todo-list-errors/*.p12
 composed-auth/keys/*.pem
 composed-auth/keys/*.prv
 composed-auth/tokens/*.jwt
+
+go.work.sum
