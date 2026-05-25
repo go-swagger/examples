@@ -199,6 +199,14 @@ var steps = []regenStep{
 		},
 	},
 	{
+		dir:      "middleware",
+		preserve: []string{"restapi/configure_greeter.go"},
+		clean:    []string{"cmd", "models", "restapi"},
+		commands: [][]string{
+			{"swagger", "generate", "server", "-A", "Greeter", "-f", "./swagger.yml"},
+		},
+	},
+	{
 		dir:   "tutorials/client",
 		clean: []string{"client", "models", "stratoscale-client"},
 		commands: [][]string{
