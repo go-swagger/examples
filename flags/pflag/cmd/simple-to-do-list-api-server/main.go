@@ -10,7 +10,6 @@ import (
 	flag "github.com/spf13/pflag"
 
 	"github.com/go-openapi/loads"
-
 	"github.com/go-swagger/examples/flags/pflag/restapi"
 	"github.com/go-swagger/examples/flags/pflag/restapi/operations"
 )

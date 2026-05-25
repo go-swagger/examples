@@ -3,7 +3,6 @@
 package pet
 
 import (
-	stderrors "errors"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -19,6 +18,11 @@ import (
 // The default value is 32 MB.
 // The multipart parser stores up to this + 10MB.
 var UpdatePetWithFormMaxParseMemory int64 = 32 << 20
+
+// UpdatePetWithFormMaxBodySize caps the size of the form body.
+//
+// The default value is 32 MB. Larger bodies will error with http status 413.
+var UpdatePetWithFormMaxBodySize int64 = 32 << 20
 
 // NewUpdatePetWithFormParams creates a new UpdatePetWithFormParams object
 //
@@ -63,13 +67,16 @@ func (o *UpdatePetWithFormParams) BindRequest(r *http.Request, route *middleware
 	var res []error
 
 	o.HTTPRequest = r
-
-	if err := r.ParseMultipartForm(UpdatePetWithFormMaxParseMemory); err != nil {
-		if !stderrors.Is(err, http.ErrNotMultipart) {
-			return errors.New(400, "%v", err)
-		} else if errParse := r.ParseForm(); errParse != nil {
-			return errors.New(400, "%v", errParse)
+	isBlocking, err := runtime.BindForm(r,
+		runtime.BindFormMaxParseMemory(UpdatePetWithFormMaxParseMemory),
+		runtime.BindFormMaxBody(UpdatePetWithFormMaxBodySize),
+	)
+	if err != nil {
+		if isBlocking {
+			return err
 		}
+
+		res = append(res, err)
 	}
 	fds := runtime.Values(r.Form)
 
@@ -82,7 +89,6 @@ func (o *UpdatePetWithFormParams) BindRequest(r *http.Request, route *middleware
 	if err := o.bindPetID(rPetID, rhkPetID, route.Formats); err != nil {
 		res = append(res, err)
 	}
-
 	fdStatus, fdhkStatus, _ := fds.GetOK("status")
 	if err := o.bindStatus(fdStatus, fdhkStatus, route.Formats); err != nil {
 		res = append(res, err)

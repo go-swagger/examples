@@ -23,7 +23,6 @@ import (
 
 	"github.com/go-openapi/runtime/flagext"
 	"github.com/go-openapi/swag/netutils"
-
 	"github.com/go-swagger/examples/oauth2/restapi/operations"
 )
 

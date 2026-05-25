@@ -15,7 +15,6 @@ import (
 	"github.com/go-openapi/spec"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag/cmdutils"
-
 	"github.com/go-swagger/examples/flags/xgo-flags/restapi/operations/todos"
 )
 

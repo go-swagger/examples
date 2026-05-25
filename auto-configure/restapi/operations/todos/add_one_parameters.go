@@ -9,7 +9,6 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
-
 	"github.com/go-swagger/examples/auto-configure/models"
 )
 

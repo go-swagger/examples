@@ -3,7 +3,6 @@
 package todos
 
 import (
-	stderrors "errors"
 	"fmt"
 	"net/http"
 
@@ -21,6 +20,11 @@ import (
 // The default value is 32 MB.
 // The multipart parser stores up to this + 10MB.
 var FindMaxParseMemory int64 = 32 << 20
+
+// FindMaxBodySize caps the size of the form body.
+//
+// The default value is 32 MB. Larger bodies will error with http status 413.
+var FindMaxBodySize int64 = 32 << 20
 
 // NewFindParams creates a new FindParams object
 //
@@ -66,20 +70,22 @@ func (o *FindParams) BindRequest(r *http.Request, route *middleware.MatchedRoute
 	var res []error
 
 	o.HTTPRequest = r
-
-	if err := r.ParseMultipartForm(FindMaxParseMemory); err != nil {
-		if !stderrors.Is(err, http.ErrNotMultipart) {
-			return errors.New(400, "%v", err)
-		} else if errParse := r.ParseForm(); errParse != nil {
-			return errors.New(400, "%v", errParse)
+	isBlocking, err := runtime.BindForm(r,
+		runtime.BindFormMaxParseMemory(FindMaxParseMemory),
+		runtime.BindFormMaxBody(FindMaxBodySize),
+	)
+	if err != nil {
+		if isBlocking {
+			return err
 		}
+
+		res = append(res, err)
 	}
 	fds := runtime.Values(r.Form)
 
 	if err := o.bindXRateLimit(r.Header[http.CanonicalHeaderKey("X-Rate-Limit")], true, route.Formats); err != nil {
 		res = append(res, err)
 	}
-
 	fdLimit, fdhkLimit, _ := fds.GetOK("limit")
 	if err := o.bindLimit(fdLimit, fdhkLimit, route.Formats); err != nil {
 		res = append(res, err)

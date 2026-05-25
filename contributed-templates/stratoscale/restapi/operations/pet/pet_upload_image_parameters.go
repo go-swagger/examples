@@ -3,7 +3,6 @@
 package pet
 
 import (
-	stderrors "errors"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -21,6 +20,11 @@ import (
 // The default value is 32 MB.
 // The multipart parser stores up to this + 10MB.
 var PetUploadImageMaxParseMemory int64 = 32 << 20
+
+// PetUploadImageMaxBodySize caps the size of the form body.
+//
+// The default value is 32 MB. Larger bodies will error with http status 413.
+var PetUploadImageMaxBodySize int64 = 32 << 20
 
 // NewPetUploadImageParams creates a new PetUploadImageParams object
 //
@@ -63,33 +67,23 @@ func (o *PetUploadImageParams) BindRequest(r *http.Request, route *middleware.Ma
 	var res []error
 
 	o.HTTPRequest = r
-
-	if err := r.ParseMultipartForm(PetUploadImageMaxParseMemory); err != nil {
-		if !stderrors.Is(err, http.ErrNotMultipart) {
-			return errors.New(400, "%v", err)
-		} else if errParse := r.ParseForm(); errParse != nil {
-			return errors.New(400, "%v", errParse)
+	isBlocking, err := runtime.BindForm(r,
+		runtime.BindFormMaxParseMemory(PetUploadImageMaxParseMemory),
+		runtime.BindFormMaxBody(PetUploadImageMaxBodySize),
+		runtime.BindFormFile("file", false, o.bindFile),
+	)
+	if err != nil {
+		if isBlocking {
+			return err
 		}
+
+		res = append(res, err)
 	}
 	fds := runtime.Values(r.Form)
 
 	fdAdditionalMetadata, fdhkAdditionalMetadata, _ := fds.GetOK("additionalMetadata")
 	if err := o.bindAdditionalMetadata(fdAdditionalMetadata, fdhkAdditionalMetadata, route.Formats); err != nil {
 		res = append(res, err)
-	}
-
-	file, fileHeader, err := r.FormFile("file")
-	if err != nil {
-		if !stderrors.Is(err, http.ErrMissingFile) {
-			res = append(res, errors.New(400, "reading file %q failed: %v", "file", err))
-		}
-		// no-op for missing but optional file parameter
-	} else {
-		if errBind := o.bindFile(file, fileHeader); errBind != nil {
-			res = append(res, errBind)
-		} else {
-			o.File = &runtime.File{Data: file, Header: fileHeader}
-		}
 	}
 
 	rPetID, rhkPetID, _ := route.Params.GetOK("petId")
@@ -119,10 +113,12 @@ func (o *PetUploadImageParams) bindAdditionalMetadata(rawData []string, hasKey b
 	return nil
 }
 
-// bindFile binds file parameter File.
+// bindFile validates file parameter File1 and assigns it as a *runtime.File on success.
 //
 // The only supported validations on files are MinLength and MaxLength
 func (o *PetUploadImageParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
+
+	o.File = &runtime.File{Data: file, Header: header}
 	return nil
 }
 

@@ -10,7 +10,6 @@ import (
 	flags "github.com/jessevdk/go-flags"
 
 	"github.com/go-openapi/loads"
-
 	"github.com/go-swagger/examples/composed-auth/restapi"
 	"github.com/go-swagger/examples/composed-auth/restapi/operations"
 )
