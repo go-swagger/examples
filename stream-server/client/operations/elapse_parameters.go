@@ -36,6 +36,8 @@ func NewElapseParamsWithTimeout(timeout time.Duration) *ElapseParams {
 
 // NewElapseParamsWithContext creates a new ElapseParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
 func NewElapseParamsWithContext(ctx context.Context) *ElapseParams {
 	return &ElapseParams{
 		Context: ctx,
@@ -65,7 +67,9 @@ type ElapseParams struct {
 	*/
 	Length int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -97,12 +101,16 @@ func (o *ElapseParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the elapse params
+//
+// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
 func (o *ElapseParams) WithContext(ctx context.Context) *ElapseParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the elapse params
+//
+// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
 func (o *ElapseParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

@@ -36,6 +36,8 @@ func NewDestroyOneParamsWithTimeout(timeout time.Duration) *DestroyOneParams {
 
 // NewDestroyOneParamsWithContext creates a new DestroyOneParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
 func NewDestroyOneParamsWithContext(ctx context.Context) *DestroyOneParams {
 	return &DestroyOneParams{
 		Context: ctx,
@@ -64,7 +66,9 @@ type DestroyOneParams struct {
 	// Format: int64
 	ID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -96,12 +100,16 @@ func (o *DestroyOneParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the destroy one params
+//
+// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
 func (o *DestroyOneParams) WithContext(ctx context.Context) *DestroyOneParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the destroy one params
+//
+// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
 func (o *DestroyOneParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

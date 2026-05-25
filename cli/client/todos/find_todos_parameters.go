@@ -36,6 +36,8 @@ func NewFindTodosParamsWithTimeout(timeout time.Duration) *FindTodosParams {
 
 // NewFindTodosParamsWithContext creates a new FindTodosParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
 func NewFindTodosParamsWithContext(ctx context.Context) *FindTodosParams {
 	return &FindTodosParams{
 		Context: ctx,
@@ -70,7 +72,9 @@ type FindTodosParams struct {
 	// Format: int64
 	Since *int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -113,12 +117,16 @@ func (o *FindTodosParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the find todos params
+//
+// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
 func (o *FindTodosParams) WithContext(ctx context.Context) *FindTodosParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the find todos params
+//
+// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
 func (o *FindTodosParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

@@ -37,6 +37,8 @@ func NewPutTest2766ParamsWithTimeout(timeout time.Duration) *PutTest2766Params {
 
 // NewPutTest2766ParamsWithContext creates a new PutTest2766Params object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
 func NewPutTest2766ParamsWithContext(ctx context.Context) *PutTest2766Params {
 	return &PutTest2766Params{
 		Context: ctx,
@@ -66,7 +68,9 @@ type PutTest2766Params struct {
 	// Body.
 	Body *models.GithubReactions
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -98,12 +102,16 @@ func (o *PutTest2766Params) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the put test2766 params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
 func (o *PutTest2766Params) WithContext(ctx context.Context) *PutTest2766Params {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the put test2766 params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
 func (o *PutTest2766Params) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

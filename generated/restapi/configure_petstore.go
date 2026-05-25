@@ -38,7 +38,7 @@ func configureAPI(api *operations.PetstoreAPI) http.Handler {
 	// api.UseRedoc()
 
 	api.JSONConsumer = runtime.JSONConsumer()
-	api.UrlformConsumer = runtime.DiscardConsumer
+	api.UrlformConsumer = runtime.ByteStreamConsumer()
 	api.XMLConsumer = runtime.XMLConsumer()
 
 	api.JSONProducer = runtime.JSONProducer()

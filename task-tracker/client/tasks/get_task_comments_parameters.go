@@ -36,6 +36,8 @@ func NewGetTaskCommentsParamsWithTimeout(timeout time.Duration) *GetTaskComments
 
 // NewGetTaskCommentsParamsWithContext creates a new GetTaskCommentsParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
 func NewGetTaskCommentsParamsWithContext(ctx context.Context) *GetTaskCommentsParams {
 	return &GetTaskCommentsParams{
 		Context: ctx,
@@ -84,7 +86,9 @@ type GetTaskCommentsParams struct {
 	*/
 	Since *strfmt.DateTime
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -127,12 +131,16 @@ func (o *GetTaskCommentsParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the get task comments params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
 func (o *GetTaskCommentsParams) WithContext(ctx context.Context) *GetTaskCommentsParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the get task comments params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
 func (o *GetTaskCommentsParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

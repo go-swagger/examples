@@ -3,17 +3,20 @@
 package todos
 
 import (
+	"context"
+
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new todos API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
 // New creates a new todos API client with basic auth credentials.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -27,6 +30,7 @@ func NewClientWithBasicAuth(host, basePath, scheme, user, password string) Clien
 }
 
 // New creates a new todos API client with a bearer token for authentication.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -39,10 +43,10 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 }
 
 /*
-Client for todos API
+Client for todos API.
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 }
 
@@ -93,7 +97,7 @@ func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
 	r.ProducesMediaTypes = []string{"application/json"}
 }
 
-// ClientService is the interface for Client methods
+// ClientService is the interface for Client methods.
 type ClientService interface {
 	AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error)
 
@@ -103,17 +107,39 @@ type ClientService interface {
 
 	UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error)
 
-	SetTransport(transport runtime.ClientTransport)
+	SetTransport(transport runtime.ContextualTransport)
 }
 
 /*
-AddOne add one API
+AddOneadd one API.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.AddOneContext] instead.
 */
 func (a *Client) AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.AddOneContext(ctx, params, authInfo, opts...)
+}
+
+/*
+AddOneContextadd one API.
+
+Do not use the deprecated [AddOneParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) AddOneContext(ctx context.Context, params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewAddOneParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "addOne",
 		Method:             "POST",
@@ -124,13 +150,14 @@ func (a *Client) AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWri
 		Params:             params,
 		Reader:             &AddOneReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -150,13 +177,35 @@ func (a *Client) AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-DestroyOne destroy one API
+DestroyOnedestroy one API.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.DestroyOneContext] instead.
 */
 func (a *Client) DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.DestroyOneContext(ctx, params, authInfo, opts...)
+}
+
+/*
+DestroyOneContextdestroy one API.
+
+Do not use the deprecated [DestroyOneParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) DestroyOneContext(ctx context.Context, params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDestroyOneParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "destroyOne",
 		Method:             "DELETE",
@@ -167,13 +216,14 @@ func (a *Client) DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &DestroyOneReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -193,13 +243,35 @@ func (a *Client) DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAut
 }
 
 /*
-Find find API
+Findfind API.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.FindContext] instead.
 */
 func (a *Client) Find(params *FindParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.FindContext(ctx, params, authInfo, opts...)
+}
+
+/*
+FindContextfind API.
+
+Do not use the deprecated [FindParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) FindContext(ctx context.Context, params *FindParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewFindParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "find",
 		Method:             "GET",
@@ -210,13 +282,14 @@ func (a *Client) Find(params *FindParams, authInfo runtime.ClientAuthInfoWriter,
 		Params:             params,
 		Reader:             &FindReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -236,13 +309,35 @@ func (a *Client) Find(params *FindParams, authInfo runtime.ClientAuthInfoWriter,
 }
 
 /*
-UpdateOne update one API
+UpdateOneupdate one API.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.UpdateOneContext] instead.
 */
 func (a *Client) UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.UpdateOneContext(ctx, params, authInfo, opts...)
+}
+
+/*
+UpdateOneContextupdate one API.
+
+Do not use the deprecated [UpdateOneParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) UpdateOneContext(ctx context.Context, params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateOneParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "updateOne",
 		Method:             "PUT",
@@ -253,13 +348,14 @@ func (a *Client) UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &UpdateOneReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -279,6 +375,6 @@ func (a *Client) UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthI
 }
 
 // SetTransport changes the transport on the client
-func (a *Client) SetTransport(transport runtime.ClientTransport) {
+func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
 }

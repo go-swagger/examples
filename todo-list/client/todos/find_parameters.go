@@ -37,6 +37,8 @@ func NewFindParamsWithTimeout(timeout time.Duration) *FindParams {
 
 // NewFindParamsWithContext creates a new FindParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [FindParams]
 func NewFindParamsWithContext(ctx context.Context) *FindParams {
 	return &FindParams{
 		Context: ctx,
@@ -73,7 +75,9 @@ type FindParams struct {
 	// Tags.
 	Tags []int32
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [FindParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -105,12 +109,16 @@ func (o *FindParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the find params
+//
+// Deprecated: use the operation call with context to pass the context instead of [FindParams]
 func (o *FindParams) WithContext(ctx context.Context) *FindParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the find params
+//
+// Deprecated: use the operation call with context to pass the context instead of [FindParams]
 func (o *FindParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

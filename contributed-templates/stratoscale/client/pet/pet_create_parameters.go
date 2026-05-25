@@ -36,6 +36,8 @@ func NewPetCreateParamsWithTimeout(timeout time.Duration) *PetCreateParams {
 
 // NewPetCreateParamsWithContext creates a new PetCreateParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
 func NewPetCreateParamsWithContext(ctx context.Context) *PetCreateParams {
 	return &PetCreateParams{
 		Context: ctx,
@@ -65,7 +67,9 @@ type PetCreateParams struct {
 	*/
 	Body *models.Pet
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -97,12 +101,16 @@ func (o *PetCreateParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the pet create params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
 func (o *PetCreateParams) WithContext(ctx context.Context) *PetCreateParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the pet create params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
 func (o *PetCreateParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

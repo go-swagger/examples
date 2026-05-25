@@ -36,6 +36,8 @@ func NewGetIDParamsWithTimeout(timeout time.Duration) *GetIDParams {
 
 // NewGetIDParamsWithContext creates a new GetIDParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetIDParams]
 func NewGetIDParamsWithContext(ctx context.Context) *GetIDParams {
 	return &GetIDParams{
 		Context: ctx,
@@ -62,7 +64,9 @@ type GetIDParams struct {
 	// Info.
 	Info *models.SocialID
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [GetIDParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -94,12 +98,16 @@ func (o *GetIDParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the get Id params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetIDParams]
 func (o *GetIDParams) WithContext(ctx context.Context) *GetIDParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the get Id params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetIDParams]
 func (o *GetIDParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

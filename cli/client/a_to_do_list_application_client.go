@@ -14,15 +14,13 @@ import (
 var Default = NewHTTPClient(nil)
 
 const (
-	// DefaultHost is the default Host
-	// found in Meta (info) section of spec file
+	// DefaultHost is the default Host found in Meta (info) section of spec file.
 	DefaultHost string = "localhost"
-	// DefaultBasePath is the default BasePath
-	// found in Meta (info) section of spec file
+	// DefaultBasePath is the default BasePath found in Meta (info) section of spec file.
 	DefaultBasePath string = "/"
 )
 
-// DefaultSchemes are the default schemes found in Meta (info) section of spec file
+// DefaultSchemes are the default schemes found in Meta (info) section of spec file.
 var DefaultSchemes = []string{"http"}
 
 // NewHTTPClient creates a new a to do list application HTTP client.
@@ -38,13 +36,14 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *ATo
 		cfg = DefaultTransportConfig()
 	}
 
-	// create transport and client
+	// create transport and client.
 	transport := httptransport.New(cfg.Host, cfg.BasePath, cfg.Schemes)
+
 	return New(transport, formats)
 }
 
-// New creates a new a to do list application client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *AToDoListApplication {
+// New creates a new a to do list application client.
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) *AToDoListApplication {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
@@ -54,6 +53,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *AToDoListA
 	cli.Transport = transport
 	cli.Operations = operations.New(transport, formats)
 	cli.Todos = todos.New(transport, formats)
+
 	return cli
 }
 
@@ -96,17 +96,17 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// AToDoListApplication is a client for a to do list application
+// AToDoListApplication is a client for a to do list application.
 type AToDoListApplication struct {
 	Operations operations.ClientService
 
 	Todos todos.ClientService
 
-	Transport runtime.ClientTransport
+	Transport runtime.ContextualTransport
 }
 
-// SetTransport changes the transport on the client and all its subresources
-func (c *AToDoListApplication) SetTransport(transport runtime.ClientTransport) {
+// SetTransport changes the transport on the client and all its subresources.
+func (c *AToDoListApplication) SetTransport(transport runtime.ContextualTransport) {
 	c.Transport = transport
 	c.Operations.SetTransport(transport)
 	c.Todos.SetTransport(transport)

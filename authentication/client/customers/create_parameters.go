@@ -36,6 +36,8 @@ func NewCreateParamsWithTimeout(timeout time.Duration) *CreateParams {
 
 // NewCreateParamsWithContext creates a new CreateParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
 func NewCreateParamsWithContext(ctx context.Context) *CreateParams {
 	return &CreateParams{
 		Context: ctx,
@@ -62,7 +64,9 @@ type CreateParams struct {
 	// Info.
 	Info *models.Customer
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -94,12 +98,16 @@ func (o *CreateParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the create params
+//
+// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
 func (o *CreateParams) WithContext(ctx context.Context) *CreateParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the create params
+//
+// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
 func (o *CreateParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

@@ -35,6 +35,8 @@ func NewUploadFileParamsWithTimeout(timeout time.Duration) *UploadFileParams {
 
 // NewUploadFileParamsWithContext creates a new UploadFileParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
 func NewUploadFileParamsWithContext(ctx context.Context) *UploadFileParams {
 	return &UploadFileParams{
 		Context: ctx,
@@ -61,7 +63,9 @@ type UploadFileParams struct {
 	// File.
 	File runtime.NamedReadCloser
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -93,12 +97,16 @@ func (o *UploadFileParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the upload file params
+//
+// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
 func (o *UploadFileParams) WithContext(ctx context.Context) *UploadFileParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the upload file params
+//
+// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
 func (o *UploadFileParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

@@ -36,6 +36,8 @@ func NewGetTaskDetailsParamsWithTimeout(timeout time.Duration) *GetTaskDetailsPa
 
 // NewGetTaskDetailsParamsWithContext creates a new GetTaskDetailsParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
 func NewGetTaskDetailsParamsWithContext(ctx context.Context) *GetTaskDetailsParams {
 	return &GetTaskDetailsParams{
 		Context: ctx,
@@ -67,7 +69,9 @@ type GetTaskDetailsParams struct {
 	*/
 	ID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -99,12 +103,16 @@ func (o *GetTaskDetailsParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the get task details params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
 func (o *GetTaskDetailsParams) WithContext(ctx context.Context) *GetTaskDetailsParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the get task details params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
 func (o *GetTaskDetailsParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

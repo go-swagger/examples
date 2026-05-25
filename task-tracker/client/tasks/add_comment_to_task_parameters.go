@@ -36,6 +36,8 @@ func NewAddCommentToTaskParamsWithTimeout(timeout time.Duration) *AddCommentToTa
 
 // NewAddCommentToTaskParamsWithContext creates a new AddCommentToTaskParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
 func NewAddCommentToTaskParamsWithContext(ctx context.Context) *AddCommentToTaskParams {
 	return &AddCommentToTaskParams{
 		Context: ctx,
@@ -73,7 +75,9 @@ type AddCommentToTaskParams struct {
 	*/
 	ID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -105,12 +109,16 @@ func (o *AddCommentToTaskParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the add comment to task params
+//
+// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
 func (o *AddCommentToTaskParams) WithContext(ctx context.Context) *AddCommentToTaskParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the add comment to task params
+//
+// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
 func (o *AddCommentToTaskParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

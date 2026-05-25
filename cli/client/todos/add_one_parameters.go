@@ -36,6 +36,8 @@ func NewAddOneParamsWithTimeout(timeout time.Duration) *AddOneParams {
 
 // NewAddOneParamsWithContext creates a new AddOneParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
 func NewAddOneParamsWithContext(ctx context.Context) *AddOneParams {
 	return &AddOneParams{
 		Context: ctx,
@@ -62,7 +64,9 @@ type AddOneParams struct {
 	// Body.
 	Body *models.Item
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -94,12 +98,16 @@ func (o *AddOneParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the add one params
+//
+// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
 func (o *AddOneParams) WithContext(ctx context.Context) *AddOneParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the add one params
+//
+// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
 func (o *AddOneParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

@@ -37,6 +37,8 @@ func NewListTasksParamsWithTimeout(timeout time.Duration) *ListTasksParams {
 
 // NewListTasksParamsWithContext creates a new ListTasksParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
 func NewListTasksParamsWithContext(ctx context.Context) *ListTasksParams {
 	return &ListTasksParams{
 		Context: ctx,
@@ -89,7 +91,9 @@ type ListTasksParams struct {
 	*/
 	Tags []string
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -132,12 +136,16 @@ func (o *ListTasksParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the list tasks params
+//
+// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
 func (o *ListTasksParams) WithContext(ctx context.Context) *ListTasksParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the list tasks params
+//
+// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
 func (o *ListTasksParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

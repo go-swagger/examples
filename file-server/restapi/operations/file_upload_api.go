@@ -37,7 +37,7 @@ func NewFileUploadAPI(spec *loads.Document) *FileUploadAPI {
 		BearerAuthenticator: security.BearerAuth,
 
 		JSONConsumer:          runtime.JSONConsumer(),
-		MultipartformConsumer: runtime.DiscardConsumer,
+		MultipartformConsumer: runtime.ByteStreamConsumer(),
 
 		JSONProducer: runtime.JSONProducer(),
 

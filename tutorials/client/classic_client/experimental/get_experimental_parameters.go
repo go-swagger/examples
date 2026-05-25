@@ -35,6 +35,8 @@ func NewGetExperimentalParamsWithTimeout(timeout time.Duration) *GetExperimental
 
 // NewGetExperimentalParamsWithContext creates a new GetExperimentalParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
 func NewGetExperimentalParamsWithContext(ctx context.Context) *GetExperimentalParams {
 	return &GetExperimentalParams{
 		Context: ctx,
@@ -61,7 +63,9 @@ type GetExperimentalParams struct {
 	// ID.
 	ID *string
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -93,12 +97,16 @@ func (o *GetExperimentalParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the get experimental params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
 func (o *GetExperimentalParams) WithContext(ctx context.Context) *GetExperimentalParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the get experimental params
+//
+// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
 func (o *GetExperimentalParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }
