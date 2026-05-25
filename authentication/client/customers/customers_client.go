@@ -3,17 +3,20 @@
 package customers
 
 import (
+	"context"
+
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new customers API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
 // New creates a new customers API client with basic auth credentials.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -27,6 +30,7 @@ func NewClientWithBasicAuth(host, basePath, scheme, user, password string) Clien
 }
 
 // New creates a new customers API client with a bearer token for authentication.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -39,10 +43,10 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 }
 
 /*
-Client for customers API
+Client for customers API.
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 }
 
@@ -93,23 +97,45 @@ func WithAcceptApplicationKeyauthAPIV1JSON(r *runtime.ClientOperation) {
 	r.ProducesMediaTypes = []string{"application/keyauth.api.v1+json"}
 }
 
-// ClientService is the interface for Client methods
+// ClientService is the interface for Client methods.
 type ClientService interface {
 	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error)
 
 	GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error)
 
-	SetTransport(transport runtime.ClientTransport)
+	SetTransport(transport runtime.ContextualTransport)
 }
 
 /*
-Create creates a new customer to track
+Createcreates a new customer to track.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.CreateContext] instead.
 */
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.CreateContext(ctx, params, authInfo, opts...)
+}
+
+/*
+CreateContextcreates a new customer to track.
+
+Do not use the deprecated [CreateParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) CreateContext(ctx context.Context, params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "create",
 		Method:             "POST",
@@ -120,13 +146,14 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 		Params:             params,
 		Reader:             &CreateReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -146,13 +173,35 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-GetID gets a customer Id given an s s n
+GetIDgets a customer Id given an s s n.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.GetIDContext] instead.
 */
 func (a *Client) GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.GetIDContext(ctx, params, authInfo, opts...)
+}
+
+/*
+GetIDContextgets a customer Id given an s s n.
+
+Do not use the deprecated [GetIDParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) GetIDContext(ctx context.Context, params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetIDParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "getId",
 		Method:             "GET",
@@ -163,13 +212,14 @@ func (a *Client) GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWrite
 		Params:             params,
 		Reader:             &GetIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -189,6 +239,6 @@ func (a *Client) GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWrite
 }
 
 // SetTransport changes the transport on the client
-func (a *Client) SetTransport(transport runtime.ClientTransport) {
+func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
 }

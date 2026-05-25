@@ -13,15 +13,13 @@ import (
 var Default = NewHTTPClient(nil)
 
 const (
-	// DefaultHost is the default Host
-	// found in Meta (info) section of spec file
+	// DefaultHost is the default Host found in Meta (info) section of spec file.
 	DefaultHost string = "localhost"
-	// DefaultBasePath is the default BasePath
-	// found in Meta (info) section of spec file
+	// DefaultBasePath is the default BasePath found in Meta (info) section of spec file.
 	DefaultBasePath string = "/"
 )
 
-// DefaultSchemes are the default schemes found in Meta (info) section of spec file
+// DefaultSchemes are the default schemes found in Meta (info) section of spec file.
 var DefaultSchemes = []string{"https"}
 
 // NewHTTPClient creates a new jigsaw HTTP client.
@@ -37,13 +35,14 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Jig
 		cfg = DefaultTransportConfig()
 	}
 
-	// create transport and client
+	// create transport and client.
 	transport := httptransport.New(cfg.Host, cfg.BasePath, cfg.Schemes)
+
 	return New(transport, formats)
 }
 
-// New creates a new jigsaw client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Jigsaw {
+// New creates a new jigsaw client.
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) *Jigsaw {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
@@ -52,6 +51,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Jigsaw {
 	cli := new(Jigsaw)
 	cli.Transport = transport
 	cli.Operations = operations.New(transport, formats)
+
 	return cli
 }
 
@@ -94,15 +94,15 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// Jigsaw is a client for jigsaw
+// Jigsaw is a client for jigsaw.
 type Jigsaw struct {
 	Operations operations.ClientService
 
-	Transport runtime.ClientTransport
+	Transport runtime.ContextualTransport
 }
 
-// SetTransport changes the transport on the client and all its subresources
-func (c *Jigsaw) SetTransport(transport runtime.ClientTransport) {
+// SetTransport changes the transport on the client and all its subresources.
+func (c *Jigsaw) SetTransport(transport runtime.ContextualTransport) {
 	c.Transport = transport
 	c.Operations.SetTransport(transport)
 }

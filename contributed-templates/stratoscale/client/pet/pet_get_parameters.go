@@ -36,6 +36,8 @@ func NewPetGetParamsWithTimeout(timeout time.Duration) *PetGetParams {
 
 // NewPetGetParamsWithContext creates a new PetGetParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
 func NewPetGetParamsWithContext(ctx context.Context) *PetGetParams {
 	return &PetGetParams{
 		Context: ctx,
@@ -67,7 +69,9 @@ type PetGetParams struct {
 	*/
 	PetID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -99,12 +103,16 @@ func (o *PetGetParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the pet get params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
 func (o *PetGetParams) WithContext(ctx context.Context) *PetGetParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the pet get params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
 func (o *PetGetParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

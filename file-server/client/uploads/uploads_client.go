@@ -3,6 +3,7 @@
 package uploads
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/go-openapi/runtime"
@@ -11,11 +12,12 @@ import (
 )
 
 // New creates a new uploads API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
 // New creates a new uploads API client with basic auth credentials.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -29,6 +31,7 @@ func NewClientWithBasicAuth(host, basePath, scheme, user, password string) Clien
 }
 
 // New creates a new uploads API client with a bearer token for authentication.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -41,10 +44,10 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 }
 
 /*
-Client for uploads API
+Client for uploads API.
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 }
 
@@ -75,21 +78,43 @@ func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
 	r.ConsumesMediaTypes = []string{"multipart/form-data"}
 }
 
-// ClientService is the interface for Client methods
+// ClientService is the interface for Client methods.
 type ClientService interface {
 	UploadFile(params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error)
 
-	SetTransport(transport runtime.ClientTransport)
+	SetTransport(transport runtime.ContextualTransport)
 }
 
 /*
-UploadFile uploads
+UploadFileuploads.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.UploadFileContext] instead.
 */
 func (a *Client) UploadFile(params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.UploadFileContext(ctx, params, opts...)
+}
+
+/*
+UploadFileContextuploads.
+
+Do not use the deprecated [UploadFileParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) UploadFileContext(ctx context.Context, params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUploadFileParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "uploadFile",
 		Method:             "POST",
@@ -99,13 +124,14 @@ func (a *Client) UploadFile(params *UploadFileParams, opts ...ClientOption) (*Up
 		Schemes:            []string{"http"},
 		Params:             params,
 		Reader:             &UploadFileReader{formats: a.formats},
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +152,6 @@ func (a *Client) UploadFile(params *UploadFileParams, opts ...ClientOption) (*Up
 }
 
 // SetTransport changes the transport on the client
-func (a *Client) SetTransport(transport runtime.ClientTransport) {
+func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
 }

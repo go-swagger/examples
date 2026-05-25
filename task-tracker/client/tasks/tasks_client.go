@@ -3,17 +3,20 @@
 package tasks
 
 import (
+	"context"
+
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new tasks API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
 // New creates a new tasks API client with basic auth credentials.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -27,6 +30,7 @@ func NewClientWithBasicAuth(host, basePath, scheme, user, password string) Clien
 }
 
 // New creates a new tasks API client with a bearer token for authentication.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -39,10 +43,10 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 }
 
 /*
-Client for tasks API
+Client for tasks API.
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 }
 
@@ -98,7 +102,7 @@ func WithAcceptApplicationVndGoswaggerExamplesTaskTrackerV1JSON(r *runtime.Clien
 	r.ProducesMediaTypes = []string{"application/vnd.goswagger.examples.task-tracker.v1+json"}
 }
 
-// ClientService is the interface for Client methods
+// ClientService is the interface for Client methods.
 type ClientService interface {
 	AddCommentToTask(params *AddCommentToTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddCommentToTaskCreated, error)
 
@@ -116,21 +120,49 @@ type ClientService interface {
 
 	UploadTaskFile(params *UploadTaskFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTaskFileCreated, error)
 
-	SetTransport(transport runtime.ClientTransport)
+	SetTransport(transport runtime.ContextualTransport)
 }
 
 /*
-	AddCommentToTask adds a comment to a task
+	AddCommentToTaskadds a comment to a task.
 
 	The comment can contain ___github markdown___ syntax.
 
 Fenced codeblocks etc are supported through pygments.
+.
+
+	This method does not support injected context.
+	However, timeout and opentracing contexts are honored whenever enabled.
+
+	If you need to pass a specific context, use [Client.AddCommentToTaskContext] instead.
 */
 func (a *Client) AddCommentToTask(params *AddCommentToTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddCommentToTaskCreated, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.AddCommentToTaskContext(ctx, params, authInfo, opts...)
+}
+
+/*
+	AddCommentToTaskContextadds a comment to a task.
+
+	The comment can contain ___github markdown___ syntax.
+
+Fenced codeblocks etc are supported through pygments.
+.
+
+	Do not use the deprecated [AddCommentToTaskParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) AddCommentToTaskContext(ctx context.Context, params *AddCommentToTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddCommentToTaskCreated, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewAddCommentToTaskParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "addCommentToTask",
 		Method:             "POST",
@@ -141,13 +173,14 @@ func (a *Client) AddCommentToTask(params *AddCommentToTaskParams, authInfo runti
 		Params:             params,
 		Reader:             &AddCommentToTaskReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -167,18 +200,47 @@ func (a *Client) AddCommentToTask(params *AddCommentToTaskParams, authInfo runti
 }
 
 /*
-	CreateTask creates a task object
+	CreateTaskcreates a task object.
 
 	Allows for creating a task.
 
 This operation requires authentication so that we know which user
 created the task.
+.
+
+	This method does not support injected context.
+	However, timeout and opentracing contexts are honored whenever enabled.
+
+	If you need to pass a specific context, use [Client.CreateTaskContext] instead.
 */
 func (a *Client) CreateTask(params *CreateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTaskCreated, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.CreateTaskContext(ctx, params, authInfo, opts...)
+}
+
+/*
+	CreateTaskContextcreates a task object.
+
+	Allows for creating a task.
+
+This operation requires authentication so that we know which user
+created the task.
+.
+
+	Do not use the deprecated [CreateTaskParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) CreateTaskContext(ctx context.Context, params *CreateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTaskCreated, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTaskParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "createTask",
 		Method:             "POST",
@@ -189,13 +251,14 @@ func (a *Client) CreateTask(params *CreateTaskParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &CreateTaskReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -215,15 +278,43 @@ func (a *Client) CreateTask(params *CreateTaskParams, authInfo runtime.ClientAut
 }
 
 /*
-DeleteTask deletes a task
+	DeleteTaskdeletes a task.
 
-This is a soft delete and changes the task status to ignored.
+	This is a soft delete and changes the task status to ignored.
+
+.
+
+	This method does not support injected context.
+	However, timeout and opentracing contexts are honored whenever enabled.
+
+	If you need to pass a specific context, use [Client.DeleteTaskContext] instead.
 */
 func (a *Client) DeleteTask(params *DeleteTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTaskNoContent, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.DeleteTaskContext(ctx, params, authInfo, opts...)
+}
+
+/*
+	DeleteTaskContextdeletes a task.
+
+	This is a soft delete and changes the task status to ignored.
+
+.
+
+	Do not use the deprecated [DeleteTaskParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) DeleteTaskContext(ctx context.Context, params *DeleteTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTaskNoContent, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTaskParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "deleteTask",
 		Method:             "DELETE",
@@ -234,13 +325,14 @@ func (a *Client) DeleteTask(params *DeleteTaskParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &DeleteTaskReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -260,15 +352,43 @@ func (a *Client) DeleteTask(params *DeleteTaskParams, authInfo runtime.ClientAut
 }
 
 /*
-GetTaskComments gets the comments for a task
+	GetTaskCommentsgets the comments for a task.
 
-The comments require a size parameter.
+	The comments require a size parameter.
+
+.
+
+	This method does not support injected context.
+	However, timeout and opentracing contexts are honored whenever enabled.
+
+	If you need to pass a specific context, use [Client.GetTaskCommentsContext] instead.
 */
 func (a *Client) GetTaskComments(params *GetTaskCommentsParams, opts ...ClientOption) (*GetTaskCommentsOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.GetTaskCommentsContext(ctx, params, opts...)
+}
+
+/*
+	GetTaskCommentsContextgets the comments for a task.
+
+	The comments require a size parameter.
+
+.
+
+	Do not use the deprecated [GetTaskCommentsParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) GetTaskCommentsContext(ctx context.Context, params *GetTaskCommentsParams, opts ...ClientOption) (*GetTaskCommentsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTaskCommentsParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "getTaskComments",
 		Method:             "GET",
@@ -278,13 +398,14 @@ func (a *Client) GetTaskComments(params *GetTaskCommentsParams, opts ...ClientOp
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetTaskCommentsReader{formats: a.formats},
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -304,19 +425,49 @@ func (a *Client) GetTaskComments(params *GetTaskCommentsParams, opts ...ClientOp
 }
 
 /*
-	GetTaskDetails gets the details for a task
+	GetTaskDetailsgets the details for a task.
 
 	The details view has more information than the card view.
 
 You can see who reported the issue and who last updated it when.
 
 There are also comments for each issue.
+.
+
+	This method does not support injected context.
+	However, timeout and opentracing contexts are honored whenever enabled.
+
+	If you need to pass a specific context, use [Client.GetTaskDetailsContext] instead.
 */
 func (a *Client) GetTaskDetails(params *GetTaskDetailsParams, opts ...ClientOption) (*GetTaskDetailsOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.GetTaskDetailsContext(ctx, params, opts...)
+}
+
+/*
+	GetTaskDetailsContextgets the details for a task.
+
+	The details view has more information than the card view.
+
+You can see who reported the issue and who last updated it when.
+
+There are also comments for each issue.
+.
+
+	Do not use the deprecated [GetTaskDetailsParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) GetTaskDetailsContext(ctx context.Context, params *GetTaskDetailsParams, opts ...ClientOption) (*GetTaskDetailsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTaskDetailsParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "getTaskDetails",
 		Method:             "GET",
@@ -326,13 +477,14 @@ func (a *Client) GetTaskDetails(params *GetTaskDetailsParams, opts ...ClientOpti
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetTaskDetailsReader{formats: a.formats},
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -352,19 +504,49 @@ func (a *Client) GetTaskDetails(params *GetTaskDetailsParams, opts ...ClientOpti
 }
 
 /*
-	ListTasks lists the tasks
+	ListTaskslists the tasks.
 
 	Allows for specifying a number of filter parameters to
 
 narrow down the results.
 Also allows for specifying a **sinceId** and **pageSize** parameter
 to page through large result sets.
+.
+
+	This method does not support injected context.
+	However, timeout and opentracing contexts are honored whenever enabled.
+
+	If you need to pass a specific context, use [Client.ListTasksContext] instead.
 */
 func (a *Client) ListTasks(params *ListTasksParams, opts ...ClientOption) (*ListTasksOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ListTasksContext(ctx, params, opts...)
+}
+
+/*
+	ListTasksContextlists the tasks.
+
+	Allows for specifying a number of filter parameters to
+
+narrow down the results.
+Also allows for specifying a **sinceId** and **pageSize** parameter
+to page through large result sets.
+.
+
+	Do not use the deprecated [ListTasksParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) ListTasksContext(ctx context.Context, params *ListTasksParams, opts ...ClientOption) (*ListTasksOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListTasksParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "listTasks",
 		Method:             "GET",
@@ -374,13 +556,14 @@ func (a *Client) ListTasks(params *ListTasksParams, opts ...ClientOption) (*List
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ListTasksReader{formats: a.formats},
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -400,18 +583,47 @@ func (a *Client) ListTasks(params *ListTasksParams, opts ...ClientOption) (*List
 }
 
 /*
-	UpdateTask updates the details for a task
+	UpdateTaskupdates the details for a task.
 
 	Allows for updating a task.
 
 This operation requires authentication so that we know which user
 last updated the task.
+.
+
+	This method does not support injected context.
+	However, timeout and opentracing contexts are honored whenever enabled.
+
+	If you need to pass a specific context, use [Client.UpdateTaskContext] instead.
 */
 func (a *Client) UpdateTask(params *UpdateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTaskOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.UpdateTaskContext(ctx, params, authInfo, opts...)
+}
+
+/*
+	UpdateTaskContextupdates the details for a task.
+
+	Allows for updating a task.
+
+This operation requires authentication so that we know which user
+last updated the task.
+.
+
+	Do not use the deprecated [UpdateTaskParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) UpdateTaskContext(ctx context.Context, params *UpdateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTaskOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateTaskParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "updateTask",
 		Method:             "PUT",
@@ -422,13 +634,14 @@ func (a *Client) UpdateTask(params *UpdateTaskParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &UpdateTaskReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -448,15 +661,39 @@ func (a *Client) UpdateTask(params *UpdateTaskParams, authInfo runtime.ClientAut
 }
 
 /*
-UploadTaskFile adds a file to a task
+UploadTaskFileadds a file to a task.
 
-The file can't be larger than **5MB**
+The file can't be larger than **5MB**.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.UploadTaskFileContext] instead.
 */
 func (a *Client) UploadTaskFile(params *UploadTaskFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTaskFileCreated, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.UploadTaskFileContext(ctx, params, authInfo, opts...)
+}
+
+/*
+UploadTaskFileContextadds a file to a task.
+
+The file can't be larger than **5MB**.
+
+Do not use the deprecated [UploadTaskFileParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) UploadTaskFileContext(ctx context.Context, params *UploadTaskFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTaskFileCreated, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUploadTaskFileParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "uploadTaskFile",
 		Method:             "POST",
@@ -467,13 +704,14 @@ func (a *Client) UploadTaskFile(params *UploadTaskFileParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &UploadTaskFileReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -493,6 +731,6 @@ func (a *Client) UploadTaskFile(params *UploadTaskFileParams, authInfo runtime.C
 }
 
 // SetTransport changes the transport on the client
-func (a *Client) SetTransport(transport runtime.ClientTransport) {
+func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
 }

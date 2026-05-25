@@ -39,7 +39,7 @@ func NewPetstoreAPI(spec *loads.Document) *PetstoreAPI {
 		BearerAuthenticator: security.BearerAuth,
 
 		JSONConsumer:    runtime.JSONConsumer(),
-		UrlformConsumer: runtime.DiscardConsumer,
+		UrlformConsumer: runtime.ByteStreamConsumer(),
 		XMLConsumer:     runtime.XMLConsumer(),
 
 		JSONProducer: runtime.JSONProducer(),

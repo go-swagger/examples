@@ -36,6 +36,8 @@ func NewCreateTaskParamsWithTimeout(timeout time.Duration) *CreateTaskParams {
 
 // NewCreateTaskParamsWithContext creates a new CreateTaskParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
 func NewCreateTaskParamsWithContext(ctx context.Context) *CreateTaskParams {
 	return &CreateTaskParams{
 		Context: ctx,
@@ -65,7 +67,9 @@ type CreateTaskParams struct {
 	*/
 	Body *models.Task
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -97,12 +101,16 @@ func (o *CreateTaskParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the create task params
+//
+// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
 func (o *CreateTaskParams) WithContext(ctx context.Context) *CreateTaskParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the create task params
+//
+// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
 func (o *CreateTaskParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

@@ -36,7 +36,7 @@ func configureAPI(api *operations.TaskTrackerAPI) http.Handler {
 	// api.UseRedoc()
 
 	api.JSONConsumer = runtime.JSONConsumer()
-	api.MultipartformConsumer = runtime.DiscardConsumer
+	api.MultipartformConsumer = runtime.ByteStreamConsumer()
 
 	api.JSONProducer = runtime.JSONProducer()
 

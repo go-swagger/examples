@@ -36,6 +36,8 @@ func NewOrderDeleteParamsWithTimeout(timeout time.Duration) *OrderDeleteParams {
 
 // NewOrderDeleteParamsWithContext creates a new OrderDeleteParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
 func NewOrderDeleteParamsWithContext(ctx context.Context) *OrderDeleteParams {
 	return &OrderDeleteParams{
 		Context: ctx,
@@ -67,7 +69,9 @@ type OrderDeleteParams struct {
 	*/
 	OrderID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -99,12 +103,16 @@ func (o *OrderDeleteParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the order delete params
+//
+// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
 func (o *OrderDeleteParams) WithContext(ctx context.Context) *OrderDeleteParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the order delete params
+//
+// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
 func (o *OrderDeleteParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

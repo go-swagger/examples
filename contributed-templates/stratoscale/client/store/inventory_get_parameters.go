@@ -35,6 +35,8 @@ func NewInventoryGetParamsWithTimeout(timeout time.Duration) *InventoryGetParams
 
 // NewInventoryGetParamsWithContext creates a new InventoryGetParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
 func NewInventoryGetParamsWithContext(ctx context.Context) *InventoryGetParams {
 	return &InventoryGetParams{
 		Context: ctx,
@@ -57,7 +59,9 @@ InventoryGetParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type InventoryGetParams struct {
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -89,12 +93,16 @@ func (o *InventoryGetParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the inventory get params
+//
+// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
 func (o *InventoryGetParams) WithContext(ctx context.Context) *InventoryGetParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the inventory get params
+//
+// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
 func (o *InventoryGetParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

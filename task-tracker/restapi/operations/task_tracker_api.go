@@ -37,7 +37,7 @@ func NewTaskTrackerAPI(spec *loads.Document) *TaskTrackerAPI {
 		BearerAuthenticator: security.BearerAuth,
 
 		JSONConsumer:          runtime.JSONConsumer(),
-		MultipartformConsumer: runtime.DiscardConsumer,
+		MultipartformConsumer: runtime.ByteStreamConsumer(),
 
 		JSONProducer: runtime.JSONProducer(),
 

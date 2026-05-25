@@ -36,6 +36,8 @@ func NewPetUploadImageParamsWithTimeout(timeout time.Duration) *PetUploadImagePa
 
 // NewPetUploadImageParamsWithContext creates a new PetUploadImageParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
 func NewPetUploadImageParamsWithContext(ctx context.Context) *PetUploadImageParams {
 	return &PetUploadImageParams{
 		Context: ctx,
@@ -79,7 +81,9 @@ type PetUploadImageParams struct {
 	*/
 	PetID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -111,12 +115,16 @@ func (o *PetUploadImageParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the pet upload image params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
 func (o *PetUploadImageParams) WithContext(ctx context.Context) *PetUploadImageParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the pet upload image params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
 func (o *PetUploadImageParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

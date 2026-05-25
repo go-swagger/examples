@@ -37,6 +37,8 @@ func NewUpdateOneParamsWithTimeout(timeout time.Duration) *UpdateOneParams {
 
 // NewUpdateOneParamsWithContext creates a new UpdateOneParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
 func NewUpdateOneParamsWithContext(ctx context.Context) *UpdateOneParams {
 	return &UpdateOneParams{
 		Context: ctx,
@@ -68,7 +70,9 @@ type UpdateOneParams struct {
 	// Format: int64
 	ID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -100,12 +104,16 @@ func (o *UpdateOneParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the update one params
+//
+// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
 func (o *UpdateOneParams) WithContext(ctx context.Context) *UpdateOneParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the update one params
+//
+// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
 func (o *UpdateOneParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

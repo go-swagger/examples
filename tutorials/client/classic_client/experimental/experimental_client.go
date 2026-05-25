@@ -3,6 +3,7 @@
 package experimental
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/go-openapi/runtime"
@@ -11,11 +12,12 @@ import (
 )
 
 // New creates a new experimental API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
 // New creates a new experimental API client with basic auth credentials.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -29,6 +31,7 @@ func NewClientWithBasicAuth(host, basePath, scheme, user, password string) Clien
 }
 
 // New creates a new experimental API client with a bearer token for authentication.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -41,10 +44,10 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 }
 
 /*
-Client for experimental API
+Client for experimental API.
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 }
 
@@ -95,23 +98,45 @@ func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
 	r.ProducesMediaTypes = []string{"application/json"}
 }
 
-// ClientService is the interface for Client methods
+// ClientService is the interface for Client methods.
 type ClientService interface {
 	GetExperimental(params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error)
 
 	PutExperimental(params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error)
 
-	SetTransport(transport runtime.ClientTransport)
+	SetTransport(transport runtime.ContextualTransport)
 }
 
 /*
-GetExperimental get experimental API
+GetExperimentalget experimental API.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.GetExperimentalContext] instead.
 */
 func (a *Client) GetExperimental(params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.GetExperimentalContext(ctx, params, authInfo, opts...)
+}
+
+/*
+GetExperimentalContextget experimental API.
+
+Do not use the deprecated [GetExperimentalParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) GetExperimentalContext(ctx context.Context, params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetExperimentalParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "GetExperimental",
 		Method:             "GET",
@@ -122,13 +147,14 @@ func (a *Client) GetExperimental(params *GetExperimentalParams, authInfo runtime
 		Params:             params,
 		Reader:             &GetExperimentalReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -149,13 +175,35 @@ func (a *Client) GetExperimental(params *GetExperimentalParams, authInfo runtime
 }
 
 /*
-PutExperimental put experimental API
+PutExperimentalput experimental API.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.PutExperimentalContext] instead.
 */
 func (a *Client) PutExperimental(params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.PutExperimentalContext(ctx, params, authInfo, opts...)
+}
+
+/*
+PutExperimentalContextput experimental API.
+
+Do not use the deprecated [PutExperimentalParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) PutExperimentalContext(ctx context.Context, params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewPutExperimentalParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "PutExperimental",
 		Method:             "PUT",
@@ -166,13 +214,14 @@ func (a *Client) PutExperimental(params *PutExperimentalParams, authInfo runtime
 		Params:             params,
 		Reader:             &PutExperimentalReader{formats: a.formats},
 		AuthInfo:           authInfo,
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -193,6 +242,6 @@ func (a *Client) PutExperimental(params *PutExperimentalParams, authInfo runtime
 }
 
 // SetTransport changes the transport on the client
-func (a *Client) SetTransport(transport runtime.ClientTransport) {
+func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
 }

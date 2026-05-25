@@ -35,6 +35,8 @@ func NewChunkedParamsWithTimeout(timeout time.Duration) *ChunkedParams {
 
 // NewChunkedParamsWithContext creates a new ChunkedParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
 func NewChunkedParamsWithContext(ctx context.Context) *ChunkedParams {
 	return &ChunkedParams{
 		Context: ctx,
@@ -57,7 +59,9 @@ ChunkedParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type ChunkedParams struct {
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -89,12 +93,16 @@ func (o *ChunkedParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the chunked params
+//
+// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
 func (o *ChunkedParams) WithContext(ctx context.Context) *ChunkedParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the chunked params
+//
+// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
 func (o *ChunkedParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

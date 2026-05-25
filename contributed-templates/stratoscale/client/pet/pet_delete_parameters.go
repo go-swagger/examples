@@ -36,6 +36,8 @@ func NewPetDeleteParamsWithTimeout(timeout time.Duration) *PetDeleteParams {
 
 // NewPetDeleteParamsWithContext creates a new PetDeleteParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
 func NewPetDeleteParamsWithContext(ctx context.Context) *PetDeleteParams {
 	return &PetDeleteParams{
 		Context: ctx,
@@ -70,7 +72,9 @@ type PetDeleteParams struct {
 	*/
 	PetID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -102,12 +106,16 @@ func (o *PetDeleteParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the pet delete params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
 func (o *PetDeleteParams) WithContext(ctx context.Context) *PetDeleteParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the pet delete params
+//
+// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
 func (o *PetDeleteParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

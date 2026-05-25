@@ -36,6 +36,8 @@ func NewOrderGetParamsWithTimeout(timeout time.Duration) *OrderGetParams {
 
 // NewOrderGetParamsWithContext creates a new OrderGetParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
 func NewOrderGetParamsWithContext(ctx context.Context) *OrderGetParams {
 	return &OrderGetParams{
 		Context: ctx,
@@ -67,7 +69,9 @@ type OrderGetParams struct {
 	*/
 	OrderID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -99,12 +103,16 @@ func (o *OrderGetParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the order get params
+//
+// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
 func (o *OrderGetParams) WithContext(ctx context.Context) *OrderGetParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the order get params
+//
+// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
 func (o *OrderGetParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

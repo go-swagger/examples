@@ -36,6 +36,8 @@ func NewDeleteTaskParamsWithTimeout(timeout time.Duration) *DeleteTaskParams {
 
 // NewDeleteTaskParamsWithContext creates a new DeleteTaskParams object
 // with the ability to set a context for a request.
+//
+// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
 func NewDeleteTaskParamsWithContext(ctx context.Context) *DeleteTaskParams {
 	return &DeleteTaskParams{
 		Context: ctx,
@@ -67,7 +69,9 @@ type DeleteTaskParams struct {
 	*/
 	ID int64
 
-	timeout    time.Duration
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
 	Context    context.Context
 	HTTPClient *http.Client
 }
@@ -99,12 +103,16 @@ func (o *DeleteTaskParams) SetTimeout(timeout time.Duration) {
 }
 
 // WithContext adds the context to the delete task params
+//
+// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
 func (o *DeleteTaskParams) WithContext(ctx context.Context) *DeleteTaskParams {
 	o.SetContext(ctx)
 	return o
 }
 
 // SetContext adds the context to the delete task params
+//
+// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
 func (o *DeleteTaskParams) SetContext(ctx context.Context) {
 	o.Context = ctx
 }

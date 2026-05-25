@@ -13,15 +13,13 @@ import (
 var Default = NewHTTPClient(nil)
 
 const (
-	// DefaultHost is the default Host
-	// found in Meta (info) section of spec file
+	// DefaultHost is the default Host found in Meta (info) section of spec file.
 	DefaultHost string = "localhost:8322"
-	// DefaultBasePath is the default BasePath
-	// found in Meta (info) section of spec file
+	// DefaultBasePath is the default BasePath found in Meta (info) section of spec file.
 	DefaultBasePath string = "/api"
 )
 
-// DefaultSchemes are the default schemes found in Meta (info) section of spec file
+// DefaultSchemes are the default schemes found in Meta (info) section of spec file.
 var DefaultSchemes = []string{"http", "https"}
 
 // NewHTTPClient creates a new task tracker HTTP client.
@@ -37,13 +35,14 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Tas
 		cfg = DefaultTransportConfig()
 	}
 
-	// create transport and client
+	// create transport and client.
 	transport := httptransport.New(cfg.Host, cfg.BasePath, cfg.Schemes)
+
 	return New(transport, formats)
 }
 
-// New creates a new task tracker client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *TaskTracker {
+// New creates a new task tracker client.
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) *TaskTracker {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
@@ -52,6 +51,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *TaskTracke
 	cli := new(TaskTracker)
 	cli.Transport = transport
 	cli.Tasks = tasks.New(transport, formats)
+
 	return cli
 }
 
@@ -94,15 +94,15 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// TaskTracker is a client for task tracker
+// TaskTracker is a client for task tracker.
 type TaskTracker struct {
 	Tasks tasks.ClientService
 
-	Transport runtime.ClientTransport
+	Transport runtime.ContextualTransport
 }
 
-// SetTransport changes the transport on the client and all its subresources
-func (c *TaskTracker) SetTransport(transport runtime.ClientTransport) {
+// SetTransport changes the transport on the client and all its subresources.
+func (c *TaskTracker) SetTransport(transport runtime.ContextualTransport) {
 	c.Transport = transport
 	c.Tasks.SetTransport(transport)
 }

@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"context"
 	"fmt"
 	"io"
 
@@ -12,11 +13,12 @@ import (
 )
 
 // New creates a new operations API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
 // New creates a new operations API client with basic auth credentials.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -30,6 +32,7 @@ func NewClientWithBasicAuth(host, basePath, scheme, user, password string) Clien
 }
 
 // New creates a new operations API client with a bearer token for authentication.
+//
 // It takes the following parameters:
 // - host: http host (github.com).
 // - basePath: any base path for the API client ("/v1", "/v3").
@@ -42,33 +45,57 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 }
 
 /*
-Client for operations API
+Client for operations API.
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 }
 
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
-// ClientService is the interface for Client methods
+// ClientService is the interface for Client methods.
 type ClientService interface {
 	Chunked(params *ChunkedParams, writer io.Writer, opts ...ClientOption) (*ChunkedOK, error)
 
-	SetTransport(transport runtime.ClientTransport)
+	SetTransport(transport runtime.ContextualTransport)
 }
 
 /*
-Chunked chunkeds
+Chunkedchunkeds.
 
-delivers text/plain via Encoding: Chunked
+delivers text/plain via Encoding: Chunked.
+
+This method does not support injected context.
+However, timeout and opentracing contexts are honored whenever enabled.
+
+If you need to pass a specific context, use [Client.ChunkedContext] instead.
 */
 func (a *Client) Chunked(params *ChunkedParams, writer io.Writer, opts ...ClientOption) (*ChunkedOK, error) {
+	var ctx context.Context
+	if params.Context != nil {
+		ctx = params.Context
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ChunkedContext(ctx, params, writer, opts...)
+}
+
+/*
+ChunkedContextchunkeds.
+
+delivers text/plain via Encoding: Chunked.
+
+Do not use the deprecated [ChunkedParams.Context] with this method: it would be ignored.
+*/
+func (a *Client) ChunkedContext(ctx context.Context, params *ChunkedParams, writer io.Writer, opts ...ClientOption) (*ChunkedOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewChunkedParams()
 	}
+
 	op := &runtime.ClientOperation{
 		ID:                 "chunked",
 		Method:             "GET",
@@ -78,13 +105,14 @@ func (a *Client) Chunked(params *ChunkedParams, writer io.Writer, opts ...Client
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &ChunkedReader{formats: a.formats, writer: writer},
-		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
+
 	for _, opt := range opts {
 		opt(op)
 	}
-	result, err := a.transport.Submit(op)
+
+	result, err := a.transport.SubmitContext(ctx, op)
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +133,6 @@ func (a *Client) Chunked(params *ChunkedParams, writer io.Writer, opts ...Client
 }
 
 // SetTransport changes the transport on the client
-func (a *Client) SetTransport(transport runtime.ClientTransport) {
+func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
 }
