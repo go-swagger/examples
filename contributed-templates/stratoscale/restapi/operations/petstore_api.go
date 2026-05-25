@@ -15,7 +15,6 @@ import (
 	"github.com/go-openapi/spec"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag/cmdutils"
-
 	"github.com/go-swagger/examples/contributed-templates/stratoscale/restapi/operations/pet"
 	"github.com/go-swagger/examples/contributed-templates/stratoscale/restapi/operations/store"
 )

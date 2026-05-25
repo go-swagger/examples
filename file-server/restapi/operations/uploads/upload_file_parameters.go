@@ -3,7 +3,6 @@
 package uploads
 
 import (
-	stderrors "errors"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -19,6 +18,11 @@ import (
 // The default value is 32 MB.
 // The multipart parser stores up to this + 10MB.
 var UploadFileMaxParseMemory int64 = 32 << 20
+
+// UploadFileMaxBodySize caps the size of the form body.
+//
+// The default value is 32 MB. Larger bodies will error with http status 413.
+var UploadFileMaxBodySize int64 = 32 << 20
 
 // NewUploadFileParams creates a new UploadFileParams object
 //
@@ -51,35 +55,30 @@ func (o *UploadFileParams) BindRequest(r *http.Request, route *middleware.Matche
 	var res []error
 
 	o.HTTPRequest = r
-
-	if err := r.ParseMultipartForm(UploadFileMaxParseMemory); err != nil {
-		if !stderrors.Is(err, http.ErrNotMultipart) {
-			return errors.New(400, "%v", err)
-		} else if errParse := r.ParseForm(); errParse != nil {
-			return errors.New(400, "%v", errParse)
-		}
-	}
-
-	file, fileHeader, err := r.FormFile("file")
+	isBlocking, err := runtime.BindForm(r,
+		runtime.BindFormMaxParseMemory(UploadFileMaxParseMemory),
+		runtime.BindFormMaxBody(UploadFileMaxBodySize),
+		runtime.BindFormFile("file", true, o.bindFile),
+	)
 	if err != nil {
-		res = append(res, errors.New(400, "reading file %q failed: %v", "file", err))
-	} else {
-		if errBind := o.bindFile(file, fileHeader); errBind != nil {
-			// Required: true
-			res = append(res, errBind)
-		} else {
-			o.File = &runtime.File{Data: file, Header: fileHeader}
+		if isBlocking {
+			return err
 		}
+
+		res = append(res, err)
 	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
-// bindFile binds file parameter File.
+// bindFile validates file parameter File1 and assigns it as a *runtime.File on success.
 //
 // The only supported validations on files are MinLength and MaxLength
 func (o *UploadFileParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
+
+	o.File = &runtime.File{Data: file, Header: header}
 	return nil
 }

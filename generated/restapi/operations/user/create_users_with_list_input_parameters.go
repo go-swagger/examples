@@ -8,7 +8,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
-
 	"github.com/go-swagger/examples/generated/models"
 )
 

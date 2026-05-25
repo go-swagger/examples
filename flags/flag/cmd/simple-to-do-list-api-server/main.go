@@ -3,14 +3,12 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
 
-	"flag"
-
 	"github.com/go-openapi/loads"
-
 	"github.com/go-swagger/examples/flags/flag/restapi"
 	"github.com/go-swagger/examples/flags/flag/restapi/operations"
 )

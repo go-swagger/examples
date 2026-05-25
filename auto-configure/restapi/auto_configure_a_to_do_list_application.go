@@ -10,7 +10,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
-
 	"github.com/go-swagger/examples/auto-configure/implementation"
 	"github.com/go-swagger/examples/auto-configure/restapi/operations"
 	"github.com/go-swagger/examples/auto-configure/restapi/operations/todos"

@@ -3,7 +3,6 @@
 package tasks
 
 import (
-	stderrors "errors"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -21,6 +20,11 @@ import (
 // The default value is 32 MB.
 // The multipart parser stores up to this + 10MB.
 var UploadTaskFileMaxParseMemory int64 = 32 << 20
+
+// UploadTaskFileMaxBodySize caps the size of the form body.
+//
+// The default value is 32 MB. Larger bodies will error with http status 413.
+var UploadTaskFileMaxBodySize int64 = 32 << 20
 
 // NewUploadTaskFileParams creates a new UploadTaskFileParams object
 //
@@ -63,33 +67,23 @@ func (o *UploadTaskFileParams) BindRequest(r *http.Request, route *middleware.Ma
 	var res []error
 
 	o.HTTPRequest = r
-
-	if err := r.ParseMultipartForm(UploadTaskFileMaxParseMemory); err != nil {
-		if !stderrors.Is(err, http.ErrNotMultipart) {
-			return errors.New(400, "%v", err)
-		} else if errParse := r.ParseForm(); errParse != nil {
-			return errors.New(400, "%v", errParse)
+	isBlocking, err := runtime.BindForm(r,
+		runtime.BindFormMaxParseMemory(UploadTaskFileMaxParseMemory),
+		runtime.BindFormMaxBody(UploadTaskFileMaxBodySize),
+		runtime.BindFormFile("file", false, o.bindFile),
+	)
+	if err != nil {
+		if isBlocking {
+			return err
 		}
+
+		res = append(res, err)
 	}
 	fds := runtime.Values(r.Form)
 
 	fdDescription, fdhkDescription, _ := fds.GetOK("description")
 	if err := o.bindDescription(fdDescription, fdhkDescription, route.Formats); err != nil {
 		res = append(res, err)
-	}
-
-	file, fileHeader, err := r.FormFile("file")
-	if err != nil {
-		if !stderrors.Is(err, http.ErrMissingFile) {
-			res = append(res, errors.New(400, "reading file %q failed: %v", "file", err))
-		}
-		// no-op for missing but optional file parameter
-	} else {
-		if errBind := o.bindFile(file, fileHeader); errBind != nil {
-			res = append(res, errBind)
-		} else {
-			o.File = &runtime.File{Data: file, Header: fileHeader}
-		}
 	}
 
 	rID, rhkID, _ := route.Params.GetOK("id")
@@ -119,10 +113,12 @@ func (o *UploadTaskFileParams) bindDescription(rawData []string, hasKey bool, fo
 	return nil
 }
 
-// bindFile binds file parameter File.
+// bindFile validates file parameter File1 and assigns it as a *runtime.File on success.
 //
 // The only supported validations on files are MinLength and MaxLength
 func (o *UploadTaskFileParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
+
+	o.File = &runtime.File{Data: file, Header: header}
 	return nil
 }
 

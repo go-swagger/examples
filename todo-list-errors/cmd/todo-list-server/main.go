@@ -10,7 +10,6 @@ import (
 	flags "github.com/jessevdk/go-flags"
 
 	"github.com/go-openapi/loads"
-
 	"github.com/go-swagger/examples/todo-list-errors/restapi"
 	"github.com/go-swagger/examples/todo-list-errors/restapi/operations"
 )
