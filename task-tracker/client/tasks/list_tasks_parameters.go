@@ -22,26 +22,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListTasksParams() *ListTasksParams {
-	return &ListTasksParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewListTasksParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewListTasksParamsWithTimeout creates a new ListTasksParams object
 // with the ability to set a timeout on a request.
 func NewListTasksParamsWithTimeout(timeout time.Duration) *ListTasksParams {
 	return &ListTasksParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewListTasksParamsWithContext creates a new ListTasksParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
+// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams].
 func NewListTasksParamsWithContext(ctx context.Context) *ListTasksParams {
 	return &ListTasksParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -91,11 +93,9 @@ type ListTasksParams struct {
 	*/
 	Tags []string
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the list tasks params (not the query body).
@@ -118,97 +118,96 @@ func (o *ListTasksParams) SetDefaults() {
 		PageSize: &pageSizeDefault,
 	}
 
-	val.timeout = o.timeout
-	val.Context = o.Context
+	val.inner.timeout = o.inner.timeout
+	val.inner.ctx = o.inner.ctx
 	val.HTTPClient = o.HTTPClient
 	*o = val
 }
 
-// WithTimeout adds the timeout to the list tasks params
+// WithTimeout adds the timeout to the list tasks params.
 func (o *ListTasksParams) WithTimeout(timeout time.Duration) *ListTasksParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the list tasks params
+// SetTimeout adds the timeout to the list tasks params.
 func (o *ListTasksParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the list tasks params
+// WithContext adds the context to the list tasks params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
+// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams].
 func (o *ListTasksParams) WithContext(ctx context.Context) *ListTasksParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the list tasks params
+// SetContext adds the context to the list tasks params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams]
+// Deprecated: use the operation call with context to pass the context instead of [ListTasksParams].
 func (o *ListTasksParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the list tasks params
+// WithHTTPClient adds the HTTPClient to the list tasks params.
 func (o *ListTasksParams) WithHTTPClient(client *http.Client) *ListTasksParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the list tasks params
+// SetHTTPClient adds the HTTPClient to the list tasks params.
 func (o *ListTasksParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithPageSize adds the pageSize to the list tasks params
+// WithPageSize adds the pageSize to the list tasks params.
 func (o *ListTasksParams) WithPageSize(pageSize *int32) *ListTasksParams {
 	o.SetPageSize(pageSize)
 	return o
 }
 
-// SetPageSize adds the pageSize to the list tasks params
+// SetPageSize adds the pageSize to the list tasks params.
 func (o *ListTasksParams) SetPageSize(pageSize *int32) {
 	o.PageSize = pageSize
 }
 
-// WithSinceID adds the sinceID to the list tasks params
+// WithSinceID adds the sinceID to the list tasks params.
 func (o *ListTasksParams) WithSinceID(sinceID *int64) *ListTasksParams {
 	o.SetSinceID(sinceID)
 	return o
 }
 
-// SetSinceID adds the sinceId to the list tasks params
+// SetSinceID adds the sinceId to the list tasks params.
 func (o *ListTasksParams) SetSinceID(sinceID *int64) {
 	o.SinceID = sinceID
 }
 
-// WithStatus adds the status to the list tasks params
+// WithStatus adds the status to the list tasks params.
 func (o *ListTasksParams) WithStatus(status []string) *ListTasksParams {
 	o.SetStatus(status)
 	return o
 }
 
-// SetStatus adds the status to the list tasks params
+// SetStatus adds the status to the list tasks params.
 func (o *ListTasksParams) SetStatus(status []string) {
 	o.Status = status
 }
 
-// WithTags adds the tags to the list tasks params
+// WithTags adds the tags to the list tasks params.
 func (o *ListTasksParams) WithTags(tags []string) *ListTasksParams {
 	o.SetTags(tags)
 	return o
 }
 
-// SetTags adds the tags to the list tasks params
+// SetTags adds the tags to the list tasks params.
 func (o *ListTasksParams) SetTags(tags []string) {
 	o.Tags = tags
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *ListTasksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error
@@ -275,7 +274,7 @@ func (o *ListTasksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 	return nil
 }
 
-// bindParamListTasks binds the parameter status
+// bindParamListTasks binds the parameter status.
 func (o *ListTasksParams) bindParamStatus(formats strfmt.Registry) []string {
 	statusIR := o.Status
 
@@ -292,7 +291,7 @@ func (o *ListTasksParams) bindParamStatus(formats strfmt.Registry) []string {
 	return statusIS
 }
 
-// bindParamListTasks binds the parameter tags
+// bindParamListTasks binds the parameter tags.
 func (o *ListTasksParams) bindParamTags(formats strfmt.Registry) []string {
 	tagsIR := o.Tags
 

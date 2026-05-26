@@ -20,26 +20,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewChunkedParams() *ChunkedParams {
-	return &ChunkedParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewChunkedParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewChunkedParamsWithTimeout creates a new ChunkedParams object
 // with the ability to set a timeout on a request.
 func NewChunkedParamsWithTimeout(timeout time.Duration) *ChunkedParams {
 	return &ChunkedParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewChunkedParamsWithContext creates a new ChunkedParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
+// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams].
 func NewChunkedParamsWithContext(ctx context.Context) *ChunkedParams {
 	return &ChunkedParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -59,11 +61,9 @@ ChunkedParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type ChunkedParams struct {
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the chunked params (not the query body).
@@ -81,47 +81,46 @@ func (o *ChunkedParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the chunked params
+// WithTimeout adds the timeout to the chunked params.
 func (o *ChunkedParams) WithTimeout(timeout time.Duration) *ChunkedParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the chunked params
+// SetTimeout adds the timeout to the chunked params.
 func (o *ChunkedParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the chunked params
+// WithContext adds the context to the chunked params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
+// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams].
 func (o *ChunkedParams) WithContext(ctx context.Context) *ChunkedParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the chunked params
+// SetContext adds the context to the chunked params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams]
+// Deprecated: use the operation call with context to pass the context instead of [ChunkedParams].
 func (o *ChunkedParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the chunked params
+// WithHTTPClient adds the HTTPClient to the chunked params.
 func (o *ChunkedParams) WithHTTPClient(client *http.Client) *ChunkedParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the chunked params
+// SetHTTPClient adds the HTTPClient to the chunked params.
 func (o *ChunkedParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *ChunkedParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

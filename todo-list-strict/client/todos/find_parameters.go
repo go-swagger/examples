@@ -22,26 +22,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewFindParams() *FindParams {
-	return &FindParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewFindParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewFindParamsWithTimeout creates a new FindParams object
 // with the ability to set a timeout on a request.
 func NewFindParamsWithTimeout(timeout time.Duration) *FindParams {
 	return &FindParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewFindParamsWithContext creates a new FindParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [FindParams]
+// Deprecated: use the operation call with context to pass the context instead of [FindParams].
 func NewFindParamsWithContext(ctx context.Context) *FindParams {
 	return &FindParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -75,11 +77,9 @@ type FindParams struct {
 	// Tags.
 	Tags []int32
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [FindParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the find params (not the query body).
@@ -97,80 +97,79 @@ func (o *FindParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the find params
+// WithTimeout adds the timeout to the find params.
 func (o *FindParams) WithTimeout(timeout time.Duration) *FindParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the find params
+// SetTimeout adds the timeout to the find params.
 func (o *FindParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the find params
+// WithContext adds the context to the find params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [FindParams]
+// Deprecated: use the operation call with context to pass the context instead of [FindParams].
 func (o *FindParams) WithContext(ctx context.Context) *FindParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the find params
+// SetContext adds the context to the find params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [FindParams]
+// Deprecated: use the operation call with context to pass the context instead of [FindParams].
 func (o *FindParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the find params
+// WithHTTPClient adds the HTTPClient to the find params.
 func (o *FindParams) WithHTTPClient(client *http.Client) *FindParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the find params
+// SetHTTPClient adds the HTTPClient to the find params.
 func (o *FindParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithXRateLimit adds the xRateLimit to the find params
+// WithXRateLimit adds the xRateLimit to the find params.
 func (o *FindParams) WithXRateLimit(xRateLimit int32) *FindParams {
 	o.SetXRateLimit(xRateLimit)
 	return o
 }
 
-// SetXRateLimit adds the xRateLimit to the find params
+// SetXRateLimit adds the xRateLimit to the find params.
 func (o *FindParams) SetXRateLimit(xRateLimit int32) {
 	o.XRateLimit = xRateLimit
 }
 
-// WithLimit adds the limit to the find params
+// WithLimit adds the limit to the find params.
 func (o *FindParams) WithLimit(limit int32) *FindParams {
 	o.SetLimit(limit)
 	return o
 }
 
-// SetLimit adds the limit to the find params
+// SetLimit adds the limit to the find params.
 func (o *FindParams) SetLimit(limit int32) {
 	o.Limit = limit
 }
 
-// WithTags adds the tags to the find params
+// WithTags adds the tags to the find params.
 func (o *FindParams) WithTags(tags []int32) *FindParams {
 	o.SetTags(tags)
 	return o
 }
 
-// SetTags adds the tags to the find params
+// SetTags adds the tags to the find params.
 func (o *FindParams) SetTags(tags []int32) {
 	o.Tags = tags
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *FindParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error
@@ -204,7 +203,7 @@ func (o *FindParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry
 	return nil
 }
 
-// bindParamFind binds the parameter tags
+// bindParamFind binds the parameter tags.
 func (o *FindParams) bindParamTags(formats strfmt.Registry) []string {
 	tagsIR := o.Tags
 

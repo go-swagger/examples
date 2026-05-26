@@ -20,26 +20,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUploadFileParams() *UploadFileParams {
-	return &UploadFileParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewUploadFileParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewUploadFileParamsWithTimeout creates a new UploadFileParams object
 // with the ability to set a timeout on a request.
 func NewUploadFileParamsWithTimeout(timeout time.Duration) *UploadFileParams {
 	return &UploadFileParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewUploadFileParamsWithContext creates a new UploadFileParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
+// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams].
 func NewUploadFileParamsWithContext(ctx context.Context) *UploadFileParams {
 	return &UploadFileParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -63,11 +65,9 @@ type UploadFileParams struct {
 	// File.
 	File runtime.NamedReadCloser
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the upload file params (not the query body).
@@ -85,58 +85,57 @@ func (o *UploadFileParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the upload file params
+// WithTimeout adds the timeout to the upload file params.
 func (o *UploadFileParams) WithTimeout(timeout time.Duration) *UploadFileParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the upload file params
+// SetTimeout adds the timeout to the upload file params.
 func (o *UploadFileParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the upload file params
+// WithContext adds the context to the upload file params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
+// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams].
 func (o *UploadFileParams) WithContext(ctx context.Context) *UploadFileParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the upload file params
+// SetContext adds the context to the upload file params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams]
+// Deprecated: use the operation call with context to pass the context instead of [UploadFileParams].
 func (o *UploadFileParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the upload file params
+// WithHTTPClient adds the HTTPClient to the upload file params.
 func (o *UploadFileParams) WithHTTPClient(client *http.Client) *UploadFileParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the upload file params
+// SetHTTPClient adds the HTTPClient to the upload file params.
 func (o *UploadFileParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithFile adds the file to the upload file params
+// WithFile adds the file to the upload file params.
 func (o *UploadFileParams) WithFile(file runtime.NamedReadCloser) *UploadFileParams {
 	o.SetFile(file)
 	return o
 }
 
-// SetFile adds the file to the upload file params
+// SetFile adds the file to the upload file params.
 func (o *UploadFileParams) SetFile(file runtime.NamedReadCloser) {
 	o.File = file
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *UploadFileParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

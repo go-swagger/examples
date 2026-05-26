@@ -5,6 +5,7 @@ package uploads
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -100,8 +101,8 @@ If you need to pass a specific context, use [Client.UploadFileContext] instead.
 */
 func (a *Client) UploadFile(params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -159,4 +160,12 @@ func (a *Client) UploadFileContext(ctx context.Context, params *UploadFileParams
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [UploadsParams].
+	ctx context.Context
 }

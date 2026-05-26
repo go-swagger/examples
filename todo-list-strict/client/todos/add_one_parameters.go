@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewAddOneParams() *AddOneParams {
-	return &AddOneParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewAddOneParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewAddOneParamsWithTimeout creates a new AddOneParams object
 // with the ability to set a timeout on a request.
 func NewAddOneParamsWithTimeout(timeout time.Duration) *AddOneParams {
 	return &AddOneParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewAddOneParamsWithContext creates a new AddOneParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [AddOneParams].
 func NewAddOneParamsWithContext(ctx context.Context) *AddOneParams {
 	return &AddOneParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -64,11 +66,9 @@ type AddOneParams struct {
 	// Body.
 	Body *models.Item
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the add one params (not the query body).
@@ -86,58 +86,57 @@ func (o *AddOneParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the add one params
+// WithTimeout adds the timeout to the add one params.
 func (o *AddOneParams) WithTimeout(timeout time.Duration) *AddOneParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the add one params
+// SetTimeout adds the timeout to the add one params.
 func (o *AddOneParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the add one params
+// WithContext adds the context to the add one params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [AddOneParams].
 func (o *AddOneParams) WithContext(ctx context.Context) *AddOneParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the add one params
+// SetContext adds the context to the add one params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [AddOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [AddOneParams].
 func (o *AddOneParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the add one params
+// WithHTTPClient adds the HTTPClient to the add one params.
 func (o *AddOneParams) WithHTTPClient(client *http.Client) *AddOneParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the add one params
+// SetHTTPClient adds the HTTPClient to the add one params.
 func (o *AddOneParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the add one params
+// WithBody adds the body to the add one params.
 func (o *AddOneParams) WithBody(body *models.Item) *AddOneParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the add one params
+// SetBody adds the body to the add one params.
 func (o *AddOneParams) SetBody(body *models.Item) {
 	o.Body = body
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *AddOneParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetTaskDetailsParams() *GetTaskDetailsParams {
-	return &GetTaskDetailsParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewGetTaskDetailsParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewGetTaskDetailsParamsWithTimeout creates a new GetTaskDetailsParams object
 // with the ability to set a timeout on a request.
 func NewGetTaskDetailsParamsWithTimeout(timeout time.Duration) *GetTaskDetailsParams {
 	return &GetTaskDetailsParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewGetTaskDetailsParamsWithContext creates a new GetTaskDetailsParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams].
 func NewGetTaskDetailsParamsWithContext(ctx context.Context) *GetTaskDetailsParams {
 	return &GetTaskDetailsParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -69,11 +71,9 @@ type GetTaskDetailsParams struct {
 	*/
 	ID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the get task details params (not the query body).
@@ -91,58 +91,57 @@ func (o *GetTaskDetailsParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the get task details params
+// WithTimeout adds the timeout to the get task details params.
 func (o *GetTaskDetailsParams) WithTimeout(timeout time.Duration) *GetTaskDetailsParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the get task details params
+// SetTimeout adds the timeout to the get task details params.
 func (o *GetTaskDetailsParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the get task details params
+// WithContext adds the context to the get task details params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams].
 func (o *GetTaskDetailsParams) WithContext(ctx context.Context) *GetTaskDetailsParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the get task details params
+// SetContext adds the context to the get task details params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskDetailsParams].
 func (o *GetTaskDetailsParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the get task details params
+// WithHTTPClient adds the HTTPClient to the get task details params.
 func (o *GetTaskDetailsParams) WithHTTPClient(client *http.Client) *GetTaskDetailsParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the get task details params
+// SetHTTPClient adds the HTTPClient to the get task details params.
 func (o *GetTaskDetailsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the get task details params
+// WithID adds the id to the get task details params.
 func (o *GetTaskDetailsParams) WithID(id int64) *GetTaskDetailsParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the get task details params
+// SetID adds the id to the get task details params.
 func (o *GetTaskDetailsParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *GetTaskDetailsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

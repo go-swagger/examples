@@ -5,14 +5,15 @@ package store
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-openapi/runtime"
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 //go:generate mockery --name API --keeptree --with-expecter --case underscore
 
-// API is the interface of the store client
+// API is the interface of the store client.
 type API interface {
 	/*
 	   InventoryGet returns pet inventories by status*/
@@ -33,7 +34,7 @@ type API interface {
 }
 
 // New creates a new store API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
 	return &Client{
 		transport: transport,
 		formats:   formats,
@@ -45,16 +46,16 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo ru
 Client for store API
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
 /*
-InventoryGet returns pet inventories by status
+InventoryGet returns pet inventories by status.
 */
 func (a *Client) InventoryGet(ctx context.Context, params *InventoryGetParams) (*InventoryGetOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "InventoryGet",
 		Method:             "GET",
 		PathPattern:        "/store/inventory",
@@ -64,7 +65,6 @@ func (a *Client) InventoryGet(ctx context.Context, params *InventoryGetParams) (
 		Params:             params,
 		Reader:             &InventoryGetReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -78,16 +78,16 @@ func (a *Client) InventoryGet(ctx context.Context, params *InventoryGetParams) (
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for InventoryGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-OrderCreate places an order for a pet
+OrderCreate places an order for a pet.
 */
 func (a *Client) OrderCreate(ctx context.Context, params *OrderCreateParams) (*OrderCreateOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "OrderCreate",
 		Method:             "POST",
 		PathPattern:        "/store/order",
@@ -97,7 +97,6 @@ func (a *Client) OrderCreate(ctx context.Context, params *OrderCreateParams) (*O
 		Params:             params,
 		Reader:             &OrderCreateReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -115,18 +114,18 @@ func (a *Client) OrderCreate(ctx context.Context, params *OrderCreateParams) (*O
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for OrderCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-OrderDelete deletes purchase order by ID
+OrderDelete deletes purchase order by ID.
 
-For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
+For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors.
 */
 func (a *Client) OrderDelete(ctx context.Context, params *OrderDeleteParams) (*OrderDeleteNoContent, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "OrderDelete",
 		Method:             "DELETE",
 		PathPattern:        "/store/order/{orderId}",
@@ -136,7 +135,6 @@ func (a *Client) OrderDelete(ctx context.Context, params *OrderDeleteParams) (*O
 		Params:             params,
 		Reader:             &OrderDeleteReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -156,18 +154,18 @@ func (a *Client) OrderDelete(ctx context.Context, params *OrderDeleteParams) (*O
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for OrderDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-OrderGet finds purchase order by ID
+OrderGet finds purchase order by ID.
 
-For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
+For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions.
 */
 func (a *Client) OrderGet(ctx context.Context, params *OrderGetParams) (*OrderGetOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "OrderGet",
 		Method:             "GET",
 		PathPattern:        "/store/order/{orderId}",
@@ -177,7 +175,6 @@ func (a *Client) OrderGet(ctx context.Context, params *OrderGetParams) (*OrderGe
 		Params:             params,
 		Reader:             &OrderGetReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -197,7 +194,15 @@ func (a *Client) OrderGet(ctx context.Context, params *OrderGetParams) (*OrderGe
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for OrderGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [StoreParams].
+	ctx context.Context
 }

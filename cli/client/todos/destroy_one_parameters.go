@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDestroyOneParams() *DestroyOneParams {
-	return &DestroyOneParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewDestroyOneParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewDestroyOneParamsWithTimeout creates a new DestroyOneParams object
 // with the ability to set a timeout on a request.
 func NewDestroyOneParamsWithTimeout(timeout time.Duration) *DestroyOneParams {
 	return &DestroyOneParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewDestroyOneParamsWithContext creates a new DestroyOneParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams].
 func NewDestroyOneParamsWithContext(ctx context.Context) *DestroyOneParams {
 	return &DestroyOneParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -66,11 +68,9 @@ type DestroyOneParams struct {
 	// Format: int64
 	ID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the destroy one params (not the query body).
@@ -88,58 +88,57 @@ func (o *DestroyOneParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the destroy one params
+// WithTimeout adds the timeout to the destroy one params.
 func (o *DestroyOneParams) WithTimeout(timeout time.Duration) *DestroyOneParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the destroy one params
+// SetTimeout adds the timeout to the destroy one params.
 func (o *DestroyOneParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the destroy one params
+// WithContext adds the context to the destroy one params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams].
 func (o *DestroyOneParams) WithContext(ctx context.Context) *DestroyOneParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the destroy one params
+// SetContext adds the context to the destroy one params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [DestroyOneParams].
 func (o *DestroyOneParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the destroy one params
+// WithHTTPClient adds the HTTPClient to the destroy one params.
 func (o *DestroyOneParams) WithHTTPClient(client *http.Client) *DestroyOneParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the destroy one params
+// SetHTTPClient adds the HTTPClient to the destroy one params.
 func (o *DestroyOneParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the destroy one params
+// WithID adds the id to the destroy one params.
 func (o *DestroyOneParams) WithID(id int64) *DestroyOneParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the destroy one params
+// SetID adds the id to the destroy one params.
 func (o *DestroyOneParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *DestroyOneParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

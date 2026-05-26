@@ -5,14 +5,15 @@ package pet
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-openapi/runtime"
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 //go:generate mockery --name API --keeptree --with-expecter --case underscore
 
-// API is the interface of the pet client
+// API is the interface of the pet client.
 type API interface {
 	/*
 	   PetCreate adds a new pet to the store*/
@@ -35,7 +36,7 @@ type API interface {
 }
 
 // New creates a new pet API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
 	return &Client{
 		transport: transport,
 		formats:   formats,
@@ -47,16 +48,16 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo ru
 Client for pet API
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
 /*
-PetCreate adds a new pet to the store
+PetCreate adds a new pet to the store.
 */
 func (a *Client) PetCreate(ctx context.Context, params *PetCreateParams) (*PetCreateCreated, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetCreate",
 		Method:             "POST",
 		PathPattern:        "/pet",
@@ -66,7 +67,6 @@ func (a *Client) PetCreate(ctx context.Context, params *PetCreateParams) (*PetCr
 		Params:             params,
 		Reader:             &PetCreateReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -84,16 +84,16 @@ func (a *Client) PetCreate(ctx context.Context, params *PetCreateParams) (*PetCr
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for PetCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PetDelete deletes a pet
+PetDelete deletes a pet.
 */
 func (a *Client) PetDelete(ctx context.Context, params *PetDeleteParams) (*PetDeleteNoContent, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetDelete",
 		Method:             "DELETE",
 		PathPattern:        "/pet/{petId}",
@@ -103,7 +103,6 @@ func (a *Client) PetDelete(ctx context.Context, params *PetDeleteParams) (*PetDe
 		Params:             params,
 		Reader:             &PetDeleteReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -123,16 +122,16 @@ func (a *Client) PetDelete(ctx context.Context, params *PetDeleteParams) (*PetDe
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for PetDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PetGet gets pet by it s ID
+PetGet gets pet by it s ID.
 */
 func (a *Client) PetGet(ctx context.Context, params *PetGetParams) (*PetGetOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetGet",
 		Method:             "GET",
 		PathPattern:        "/pet/{petId}",
@@ -142,7 +141,6 @@ func (a *Client) PetGet(ctx context.Context, params *PetGetParams) (*PetGetOK, e
 		Params:             params,
 		Reader:             &PetGetReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -162,16 +160,16 @@ func (a *Client) PetGet(ctx context.Context, params *PetGetParams) (*PetGetOK, e
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for PetGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PetList lists pets
+PetList lists pets.
 */
 func (a *Client) PetList(ctx context.Context, params *PetListParams) (*PetListOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetList",
 		Method:             "GET",
 		PathPattern:        "/pet",
@@ -181,7 +179,6 @@ func (a *Client) PetList(ctx context.Context, params *PetListParams) (*PetListOK
 		Params:             params,
 		Reader:             &PetListReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -199,16 +196,16 @@ func (a *Client) PetList(ctx context.Context, params *PetListParams) (*PetListOK
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for PetList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PetUpdate updates an existing pet
+PetUpdate updates an existing pet.
 */
 func (a *Client) PetUpdate(ctx context.Context, params *PetUpdateParams) (*PetUpdateCreated, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetUpdate",
 		Method:             "PUT",
 		PathPattern:        "/pet",
@@ -218,7 +215,6 @@ func (a *Client) PetUpdate(ctx context.Context, params *PetUpdateParams) (*PetUp
 		Params:             params,
 		Reader:             &PetUpdateReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -240,16 +236,16 @@ func (a *Client) PetUpdate(ctx context.Context, params *PetUpdateParams) (*PetUp
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for PetUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PetUploadImage uploads an image
+PetUploadImage uploads an image.
 */
 func (a *Client) PetUploadImage(ctx context.Context, params *PetUploadImageParams) (*PetUploadImageOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetUploadImage",
 		Method:             "POST",
 		PathPattern:        "/pet/{petId}/image",
@@ -259,7 +255,6 @@ func (a *Client) PetUploadImage(ctx context.Context, params *PetUploadImageParam
 		Params:             params,
 		Reader:             &PetUploadImageReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -273,7 +268,15 @@ func (a *Client) PetUploadImage(ctx context.Context, params *PetUploadImageParam
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for PetUploadImage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [PetParams].
+	ctx context.Context
 }

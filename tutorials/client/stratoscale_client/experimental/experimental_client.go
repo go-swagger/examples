@@ -5,14 +5,15 @@ package experimental
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-openapi/runtime"
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 //go:generate mockery --name API --keeptree --with-expecter --case underscore
 
-// API is the interface of the experimental client
+// API is the interface of the experimental client.
 type API interface {
 	/*
 	   GetExperimental get experimental API*/
@@ -23,7 +24,7 @@ type API interface {
 }
 
 // New creates a new experimental API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
 	return &Client{
 		transport: transport,
 		formats:   formats,
@@ -35,16 +36,16 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo ru
 Client for experimental API
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
 /*
-GetExperimental get experimental API
+GetExperimental get experimental API.
 */
 func (a *Client) GetExperimental(ctx context.Context, params *GetExperimentalParams) (*GetExperimentalOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "GetExperimental",
 		Method:             "GET",
 		PathPattern:        "/experimental",
@@ -54,7 +55,6 @@ func (a *Client) GetExperimental(ctx context.Context, params *GetExperimentalPar
 		Params:             params,
 		Reader:             &GetExperimentalReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -72,16 +72,16 @@ func (a *Client) GetExperimental(ctx context.Context, params *GetExperimentalPar
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for GetExperimental: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PutExperimental put experimental API
+PutExperimental put experimental API.
 */
 func (a *Client) PutExperimental(ctx context.Context, params *PutExperimentalParams) (*PutExperimentalOK, *PutExperimentalNoContent, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PutExperimental",
 		Method:             "PUT",
 		PathPattern:        "/experimental",
@@ -91,7 +91,6 @@ func (a *Client) PutExperimental(ctx context.Context, params *PutExperimentalPar
 		Params:             params,
 		Reader:             &PutExperimentalReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -111,7 +110,15 @@ func (a *Client) PutExperimental(ctx context.Context, params *PutExperimentalPar
 
 	// no default response is defined.
 	//
-	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue
+	// safeguard: normally, in the absence of a default response, unknown responses return an error above: so this is a codegen issue.
 	msg := fmt.Sprintf("unexpected success response for PutExperimental: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [ExperimentalParams].
+	ctx context.Context
 }

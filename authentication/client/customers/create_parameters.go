@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateParams() *CreateParams {
-	return &CreateParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewCreateParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewCreateParamsWithTimeout creates a new CreateParams object
 // with the ability to set a timeout on a request.
 func NewCreateParamsWithTimeout(timeout time.Duration) *CreateParams {
 	return &CreateParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewCreateParamsWithContext creates a new CreateParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [CreateParams].
 func NewCreateParamsWithContext(ctx context.Context) *CreateParams {
 	return &CreateParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -64,11 +66,9 @@ type CreateParams struct {
 	// Info.
 	Info *models.Customer
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the create params (not the query body).
@@ -86,58 +86,57 @@ func (o *CreateParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the create params
+// WithTimeout adds the timeout to the create params.
 func (o *CreateParams) WithTimeout(timeout time.Duration) *CreateParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the create params
+// SetTimeout adds the timeout to the create params.
 func (o *CreateParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the create params
+// WithContext adds the context to the create params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [CreateParams].
 func (o *CreateParams) WithContext(ctx context.Context) *CreateParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the create params
+// SetContext adds the context to the create params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [CreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [CreateParams].
 func (o *CreateParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the create params
+// WithHTTPClient adds the HTTPClient to the create params.
 func (o *CreateParams) WithHTTPClient(client *http.Client) *CreateParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the create params
+// SetHTTPClient adds the HTTPClient to the create params.
 func (o *CreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithInfo adds the info to the create params
+// WithInfo adds the info to the create params.
 func (o *CreateParams) WithInfo(info *models.Customer) *CreateParams {
 	o.SetInfo(info)
 	return o
 }
 
-// SetInfo adds the info to the create params
+// SetInfo adds the info to the create params.
 func (o *CreateParams) SetInfo(info *models.Customer) {
 	o.Info = info
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *CreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateTaskParams() *CreateTaskParams {
-	return &CreateTaskParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewCreateTaskParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewCreateTaskParamsWithTimeout creates a new CreateTaskParams object
 // with the ability to set a timeout on a request.
 func NewCreateTaskParamsWithTimeout(timeout time.Duration) *CreateTaskParams {
 	return &CreateTaskParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewCreateTaskParamsWithContext creates a new CreateTaskParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams].
 func NewCreateTaskParamsWithContext(ctx context.Context) *CreateTaskParams {
 	return &CreateTaskParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -67,11 +69,9 @@ type CreateTaskParams struct {
 	*/
 	Body *models.Task
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the create task params (not the query body).
@@ -89,58 +89,57 @@ func (o *CreateTaskParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the create task params
+// WithTimeout adds the timeout to the create task params.
 func (o *CreateTaskParams) WithTimeout(timeout time.Duration) *CreateTaskParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the create task params
+// SetTimeout adds the timeout to the create task params.
 func (o *CreateTaskParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the create task params
+// WithContext adds the context to the create task params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams].
 func (o *CreateTaskParams) WithContext(ctx context.Context) *CreateTaskParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the create task params
+// SetContext adds the context to the create task params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [CreateTaskParams].
 func (o *CreateTaskParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the create task params
+// WithHTTPClient adds the HTTPClient to the create task params.
 func (o *CreateTaskParams) WithHTTPClient(client *http.Client) *CreateTaskParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the create task params
+// SetHTTPClient adds the HTTPClient to the create task params.
 func (o *CreateTaskParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the create task params
+// WithBody adds the body to the create task params.
 func (o *CreateTaskParams) WithBody(body *models.Task) *CreateTaskParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the create task params
+// SetBody adds the body to the create task params.
 func (o *CreateTaskParams) SetBody(body *models.Task) {
 	o.Body = body
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *CreateTaskParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

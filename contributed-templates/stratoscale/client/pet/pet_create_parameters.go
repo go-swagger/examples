@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPetCreateParams() *PetCreateParams {
-	return &PetCreateParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewPetCreateParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewPetCreateParamsWithTimeout creates a new PetCreateParams object
 // with the ability to set a timeout on a request.
 func NewPetCreateParamsWithTimeout(timeout time.Duration) *PetCreateParams {
 	return &PetCreateParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewPetCreateParamsWithContext creates a new PetCreateParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams].
 func NewPetCreateParamsWithContext(ctx context.Context) *PetCreateParams {
 	return &PetCreateParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -67,11 +69,9 @@ type PetCreateParams struct {
 	*/
 	Body *models.Pet
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the pet create params (not the query body).
@@ -89,58 +89,57 @@ func (o *PetCreateParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the pet create params
+// WithTimeout adds the timeout to the pet create params.
 func (o *PetCreateParams) WithTimeout(timeout time.Duration) *PetCreateParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the pet create params
+// SetTimeout adds the timeout to the pet create params.
 func (o *PetCreateParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the pet create params
+// WithContext adds the context to the pet create params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams].
 func (o *PetCreateParams) WithContext(ctx context.Context) *PetCreateParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the pet create params
+// SetContext adds the context to the pet create params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetCreateParams].
 func (o *PetCreateParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the pet create params
+// WithHTTPClient adds the HTTPClient to the pet create params.
 func (o *PetCreateParams) WithHTTPClient(client *http.Client) *PetCreateParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the pet create params
+// SetHTTPClient adds the HTTPClient to the pet create params.
 func (o *PetCreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the pet create params
+// WithBody adds the body to the pet create params.
 func (o *PetCreateParams) WithBody(body *models.Pet) *PetCreateParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the pet create params
+// SetBody adds the body to the pet create params.
 func (o *PetCreateParams) SetBody(body *models.Pet) {
 	o.Body = body
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *PetCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

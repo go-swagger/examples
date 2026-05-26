@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrderCreateParams() *OrderCreateParams {
-	return &OrderCreateParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewOrderCreateParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewOrderCreateParamsWithTimeout creates a new OrderCreateParams object
 // with the ability to set a timeout on a request.
 func NewOrderCreateParamsWithTimeout(timeout time.Duration) *OrderCreateParams {
 	return &OrderCreateParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewOrderCreateParamsWithContext creates a new OrderCreateParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderCreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderCreateParams].
 func NewOrderCreateParamsWithContext(ctx context.Context) *OrderCreateParams {
 	return &OrderCreateParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -67,11 +69,9 @@ type OrderCreateParams struct {
 	*/
 	Body *models.Order
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [OrderCreateParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the order create params (not the query body).
@@ -89,58 +89,57 @@ func (o *OrderCreateParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the order create params
+// WithTimeout adds the timeout to the order create params.
 func (o *OrderCreateParams) WithTimeout(timeout time.Duration) *OrderCreateParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the order create params
+// SetTimeout adds the timeout to the order create params.
 func (o *OrderCreateParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the order create params
+// WithContext adds the context to the order create params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderCreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderCreateParams].
 func (o *OrderCreateParams) WithContext(ctx context.Context) *OrderCreateParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the order create params
+// SetContext adds the context to the order create params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderCreateParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderCreateParams].
 func (o *OrderCreateParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the order create params
+// WithHTTPClient adds the HTTPClient to the order create params.
 func (o *OrderCreateParams) WithHTTPClient(client *http.Client) *OrderCreateParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the order create params
+// SetHTTPClient adds the HTTPClient to the order create params.
 func (o *OrderCreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the order create params
+// WithBody adds the body to the order create params.
 func (o *OrderCreateParams) WithBody(body *models.Order) *OrderCreateParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the order create params
+// SetBody adds the body to the order create params.
 func (o *OrderCreateParams) SetBody(body *models.Order) {
 	o.Body = body
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *OrderCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewElapseParams() *ElapseParams {
-	return &ElapseParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewElapseParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewElapseParamsWithTimeout creates a new ElapseParams object
 // with the ability to set a timeout on a request.
 func NewElapseParamsWithTimeout(timeout time.Duration) *ElapseParams {
 	return &ElapseParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewElapseParamsWithContext creates a new ElapseParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
+// Deprecated: use the operation call with context to pass the context instead of [ElapseParams].
 func NewElapseParamsWithContext(ctx context.Context) *ElapseParams {
 	return &ElapseParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -67,11 +69,9 @@ type ElapseParams struct {
 	*/
 	Length int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the elapse params (not the query body).
@@ -89,58 +89,57 @@ func (o *ElapseParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the elapse params
+// WithTimeout adds the timeout to the elapse params.
 func (o *ElapseParams) WithTimeout(timeout time.Duration) *ElapseParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the elapse params
+// SetTimeout adds the timeout to the elapse params.
 func (o *ElapseParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the elapse params
+// WithContext adds the context to the elapse params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
+// Deprecated: use the operation call with context to pass the context instead of [ElapseParams].
 func (o *ElapseParams) WithContext(ctx context.Context) *ElapseParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the elapse params
+// SetContext adds the context to the elapse params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [ElapseParams]
+// Deprecated: use the operation call with context to pass the context instead of [ElapseParams].
 func (o *ElapseParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the elapse params
+// WithHTTPClient adds the HTTPClient to the elapse params.
 func (o *ElapseParams) WithHTTPClient(client *http.Client) *ElapseParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the elapse params
+// SetHTTPClient adds the HTTPClient to the elapse params.
 func (o *ElapseParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithLength adds the length to the elapse params
+// WithLength adds the length to the elapse params.
 func (o *ElapseParams) WithLength(length int64) *ElapseParams {
 	o.SetLength(length)
 	return o
 }
 
-// SetLength adds the length to the elapse params
+// SetLength adds the length to the elapse params.
 func (o *ElapseParams) SetLength(length int64) {
 	o.Length = length
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *ElapseParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

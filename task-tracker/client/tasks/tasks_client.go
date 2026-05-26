@@ -4,6 +4,7 @@ package tasks
 
 import (
 	"context"
+	"time"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -171,8 +172,8 @@ Fenced codeblocks etc are supported through pygments.
 */
 func (a *Client) AddCommentToTask(params *AddCommentToTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddCommentToTaskCreated, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -248,8 +249,8 @@ created the task.
 */
 func (a *Client) CreateTask(params *CreateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTaskCreated, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -324,8 +325,8 @@ func (a *Client) CreateTaskContext(ctx context.Context, params *CreateTaskParams
 */
 func (a *Client) DeleteTask(params *DeleteTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTaskNoContent, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -398,8 +399,8 @@ func (a *Client) DeleteTaskContext(ctx context.Context, params *DeleteTaskParams
 */
 func (a *Client) GetTaskComments(params *GetTaskCommentsParams, opts ...ClientOption) (*GetTaskCommentsOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -474,8 +475,8 @@ There are also comments for each issue.
 */
 func (a *Client) GetTaskDetails(params *GetTaskDetailsParams, opts ...ClientOption) (*GetTaskDetailsOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -553,8 +554,8 @@ to page through large result sets.
 */
 func (a *Client) ListTasks(params *ListTasksParams, opts ...ClientOption) (*ListTasksOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -631,8 +632,8 @@ last updated the task.
 */
 func (a *Client) UpdateTask(params *UpdateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTaskOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -705,8 +706,8 @@ If you need to pass a specific context, use [Client.UploadTaskFileContext] inste
 */
 func (a *Client) UploadTaskFile(params *UploadTaskFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTaskFileCreated, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -766,4 +767,12 @@ func (a *Client) UploadTaskFileContext(ctx context.Context, params *UploadTaskFi
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [TasksParams].
+	ctx context.Context
 }

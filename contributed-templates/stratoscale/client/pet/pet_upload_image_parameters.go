@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPetUploadImageParams() *PetUploadImageParams {
-	return &PetUploadImageParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewPetUploadImageParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewPetUploadImageParamsWithTimeout creates a new PetUploadImageParams object
 // with the ability to set a timeout on a request.
 func NewPetUploadImageParamsWithTimeout(timeout time.Duration) *PetUploadImageParams {
 	return &PetUploadImageParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewPetUploadImageParamsWithContext creates a new PetUploadImageParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams].
 func NewPetUploadImageParamsWithContext(ctx context.Context) *PetUploadImageParams {
 	return &PetUploadImageParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -81,11 +83,9 @@ type PetUploadImageParams struct {
 	*/
 	PetID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the pet upload image params (not the query body).
@@ -103,80 +103,79 @@ func (o *PetUploadImageParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the pet upload image params
+// WithTimeout adds the timeout to the pet upload image params.
 func (o *PetUploadImageParams) WithTimeout(timeout time.Duration) *PetUploadImageParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the pet upload image params
+// SetTimeout adds the timeout to the pet upload image params.
 func (o *PetUploadImageParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the pet upload image params
+// WithContext adds the context to the pet upload image params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams].
 func (o *PetUploadImageParams) WithContext(ctx context.Context) *PetUploadImageParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the pet upload image params
+// SetContext adds the context to the pet upload image params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetUploadImageParams].
 func (o *PetUploadImageParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the pet upload image params
+// WithHTTPClient adds the HTTPClient to the pet upload image params.
 func (o *PetUploadImageParams) WithHTTPClient(client *http.Client) *PetUploadImageParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the pet upload image params
+// SetHTTPClient adds the HTTPClient to the pet upload image params.
 func (o *PetUploadImageParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAdditionalMetadata adds the additionalMetadata to the pet upload image params
+// WithAdditionalMetadata adds the additionalMetadata to the pet upload image params.
 func (o *PetUploadImageParams) WithAdditionalMetadata(additionalMetadata *string) *PetUploadImageParams {
 	o.SetAdditionalMetadata(additionalMetadata)
 	return o
 }
 
-// SetAdditionalMetadata adds the additionalMetadata to the pet upload image params
+// SetAdditionalMetadata adds the additionalMetadata to the pet upload image params.
 func (o *PetUploadImageParams) SetAdditionalMetadata(additionalMetadata *string) {
 	o.AdditionalMetadata = additionalMetadata
 }
 
-// WithFile adds the file to the pet upload image params
+// WithFile adds the file to the pet upload image params.
 func (o *PetUploadImageParams) WithFile(file runtime.NamedReadCloser) *PetUploadImageParams {
 	o.SetFile(file)
 	return o
 }
 
-// SetFile adds the file to the pet upload image params
+// SetFile adds the file to the pet upload image params.
 func (o *PetUploadImageParams) SetFile(file runtime.NamedReadCloser) {
 	o.File = file
 }
 
-// WithPetID adds the petID to the pet upload image params
+// WithPetID adds the petID to the pet upload image params.
 func (o *PetUploadImageParams) WithPetID(petID int64) *PetUploadImageParams {
 	o.SetPetID(petID)
 	return o
 }
 
-// SetPetID adds the petId to the pet upload image params
+// SetPetID adds the petId to the pet upload image params.
 func (o *PetUploadImageParams) SetPetID(petID int64) {
 	o.PetID = petID
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *PetUploadImageParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error
