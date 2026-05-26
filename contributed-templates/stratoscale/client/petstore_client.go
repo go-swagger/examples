@@ -14,23 +14,21 @@ import (
 )
 
 const (
-	// DefaultHost is the default Host
-	// found in Meta (info) section of spec file
+	// DefaultHost is the default Host found in Meta (info) section of spec file.
 	DefaultHost string = "petstore.service.strato"
-	// DefaultBasePath is the default BasePath
-	// found in Meta (info) section of spec file
+	// DefaultBasePath is the default BasePath found in Meta (info) section of spec file.
 	DefaultBasePath string = "/api/v2"
 )
 
-// DefaultSchemes are the default schemes found in Meta (info) section of spec file
+// DefaultSchemes are the default schemes found in Meta (info) section of spec file.
 var DefaultSchemes = []string{"http"}
 
 type Config struct {
-	// URL is the base URL of the upstream server
+	// URL is the base URL of the upstream server.
 	URL *url.URL
-	// Transport is an inner transport for the client
+	// Transport is an inner transport for the client.
 	Transport http.RoundTripper
-	// AuthInfo is for authentication
+	// AuthInfo is for authentication.
 	AuthInfo runtime.ClientAuthInfoWriter
 }
 
@@ -60,7 +58,7 @@ func New(c Config) *Petstore {
 	return cli
 }
 
-// Petstore is a client for petstore
+// Petstore is a client for petstore.
 type Petstore struct {
 	Pet       pet.API
 	Store     store.API

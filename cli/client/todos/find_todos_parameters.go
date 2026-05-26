@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewFindTodosParams() *FindTodosParams {
-	return &FindTodosParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewFindTodosParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewFindTodosParamsWithTimeout creates a new FindTodosParams object
 // with the ability to set a timeout on a request.
 func NewFindTodosParamsWithTimeout(timeout time.Duration) *FindTodosParams {
 	return &FindTodosParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewFindTodosParamsWithContext creates a new FindTodosParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
+// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams].
 func NewFindTodosParamsWithContext(ctx context.Context) *FindTodosParams {
 	return &FindTodosParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -72,11 +74,9 @@ type FindTodosParams struct {
 	// Format: int64
 	Since *int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the find todos params (not the query body).
@@ -99,75 +99,74 @@ func (o *FindTodosParams) SetDefaults() {
 		Limit: &limitDefault,
 	}
 
-	val.timeout = o.timeout
-	val.Context = o.Context
+	val.inner.timeout = o.inner.timeout
+	val.inner.ctx = o.inner.ctx
 	val.HTTPClient = o.HTTPClient
 	*o = val
 }
 
-// WithTimeout adds the timeout to the find todos params
+// WithTimeout adds the timeout to the find todos params.
 func (o *FindTodosParams) WithTimeout(timeout time.Duration) *FindTodosParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the find todos params
+// SetTimeout adds the timeout to the find todos params.
 func (o *FindTodosParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the find todos params
+// WithContext adds the context to the find todos params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
+// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams].
 func (o *FindTodosParams) WithContext(ctx context.Context) *FindTodosParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the find todos params
+// SetContext adds the context to the find todos params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams]
+// Deprecated: use the operation call with context to pass the context instead of [FindTodosParams].
 func (o *FindTodosParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the find todos params
+// WithHTTPClient adds the HTTPClient to the find todos params.
 func (o *FindTodosParams) WithHTTPClient(client *http.Client) *FindTodosParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the find todos params
+// SetHTTPClient adds the HTTPClient to the find todos params.
 func (o *FindTodosParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithLimit adds the limit to the find todos params
+// WithLimit adds the limit to the find todos params.
 func (o *FindTodosParams) WithLimit(limit *int32) *FindTodosParams {
 	o.SetLimit(limit)
 	return o
 }
 
-// SetLimit adds the limit to the find todos params
+// SetLimit adds the limit to the find todos params.
 func (o *FindTodosParams) SetLimit(limit *int32) {
 	o.Limit = limit
 }
 
-// WithSince adds the since to the find todos params
+// WithSince adds the since to the find todos params.
 func (o *FindTodosParams) WithSince(since *int64) *FindTodosParams {
 	o.SetSince(since)
 	return o
 }
 
-// SetSince adds the since to the find todos params
+// SetSince adds the since to the find todos params.
 func (o *FindTodosParams) SetSince(since *int64) {
 	o.Since = since
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *FindTodosParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

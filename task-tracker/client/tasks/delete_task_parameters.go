@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeleteTaskParams() *DeleteTaskParams {
-	return &DeleteTaskParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewDeleteTaskParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewDeleteTaskParamsWithTimeout creates a new DeleteTaskParams object
 // with the ability to set a timeout on a request.
 func NewDeleteTaskParamsWithTimeout(timeout time.Duration) *DeleteTaskParams {
 	return &DeleteTaskParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewDeleteTaskParamsWithContext creates a new DeleteTaskParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams].
 func NewDeleteTaskParamsWithContext(ctx context.Context) *DeleteTaskParams {
 	return &DeleteTaskParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -69,11 +71,9 @@ type DeleteTaskParams struct {
 	*/
 	ID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the delete task params (not the query body).
@@ -91,58 +91,57 @@ func (o *DeleteTaskParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the delete task params
+// WithTimeout adds the timeout to the delete task params.
 func (o *DeleteTaskParams) WithTimeout(timeout time.Duration) *DeleteTaskParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the delete task params
+// SetTimeout adds the timeout to the delete task params.
 func (o *DeleteTaskParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the delete task params
+// WithContext adds the context to the delete task params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams].
 func (o *DeleteTaskParams) WithContext(ctx context.Context) *DeleteTaskParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the delete task params
+// SetContext adds the context to the delete task params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [DeleteTaskParams].
 func (o *DeleteTaskParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the delete task params
+// WithHTTPClient adds the HTTPClient to the delete task params.
 func (o *DeleteTaskParams) WithHTTPClient(client *http.Client) *DeleteTaskParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the delete task params
+// SetHTTPClient adds the HTTPClient to the delete task params.
 func (o *DeleteTaskParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the delete task params
+// WithID adds the id to the delete task params.
 func (o *DeleteTaskParams) WithID(id int64) *DeleteTaskParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the delete task params
+// SetID adds the id to the delete task params.
 func (o *DeleteTaskParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *DeleteTaskParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

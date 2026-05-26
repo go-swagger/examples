@@ -5,6 +5,7 @@ package operations
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -117,8 +118,8 @@ If you need to pass a specific context, use [Client.PutTest2766Context] instead.
 */
 func (a *Client) PutTest2766(params *PutTest2766Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutTest2766OK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -177,4 +178,12 @@ func (a *Client) PutTest2766Context(ctx context.Context, params *PutTest2766Para
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [OperationsParams].
+	ctx context.Context
 }

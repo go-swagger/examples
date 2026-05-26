@@ -4,14 +4,15 @@ package todos
 
 import (
 	"context"
+	"time"
 
 	"github.com/go-openapi/runtime"
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 //go:generate mockery --name API --keeptree --with-expecter --case underscore
 
-// API is the interface of the todos client
+// API is the interface of the todos client.
 type API interface {
 	/*
 	   AddOne add one API*/
@@ -28,7 +29,7 @@ type API interface {
 }
 
 // New creates a new todos API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
+func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInfo runtime.ClientAuthInfoWriter) *Client {
 	return &Client{
 		transport: transport,
 		formats:   formats,
@@ -40,16 +41,16 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry, authInfo ru
 Client for todos API
 */
 type Client struct {
-	transport runtime.ClientTransport
+	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
 /*
-AddOne add one API
+AddOne add one API.
 */
 func (a *Client) AddOne(ctx context.Context, params *AddOneParams) (*AddOneCreated, *AddOneNoContent, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "addOne",
 		Method:             "POST",
 		PathPattern:        "/",
@@ -59,7 +60,6 @@ func (a *Client) AddOne(ctx context.Context, params *AddOneParams) (*AddOneCreat
 		Params:             params,
 		Reader:             &AddOneReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -75,17 +75,17 @@ func (a *Client) AddOne(ctx context.Context, params *AddOneParams) (*AddOneCreat
 
 	// unexpected response.
 	//
-	// a default response is provided: fill this and return an error
+	// a default response is provided: fill this and return an error.
 	unexpectedSuccess := result.(*AddOneDefault)
 
 	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-DestroyOne destroy one API
+DestroyOne destroy one API.
 */
 func (a *Client) DestroyOne(ctx context.Context, params *DestroyOneParams) (*DestroyOneNoContent, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "destroyOne",
 		Method:             "DELETE",
 		PathPattern:        "/{id}",
@@ -95,7 +95,6 @@ func (a *Client) DestroyOne(ctx context.Context, params *DestroyOneParams) (*Des
 		Params:             params,
 		Reader:             &DestroyOneReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -107,17 +106,17 @@ func (a *Client) DestroyOne(ctx context.Context, params *DestroyOneParams) (*Des
 
 	// unexpected response.
 	//
-	// a default response is provided: fill this and return an error
+	// a default response is provided: fill this and return an error.
 	unexpectedSuccess := result.(*DestroyOneDefault)
 
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-Find find API
+Find find API.
 */
 func (a *Client) Find(ctx context.Context, params *FindParams) (*FindOK, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "find",
 		Method:             "GET",
 		PathPattern:        "/",
@@ -127,7 +126,6 @@ func (a *Client) Find(ctx context.Context, params *FindParams) (*FindOK, error) 
 		Params:             params,
 		Reader:             &FindReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -139,17 +137,17 @@ func (a *Client) Find(ctx context.Context, params *FindParams) (*FindOK, error) 
 
 	// unexpected response.
 	//
-	// a default response is provided: fill this and return an error
+	// a default response is provided: fill this and return an error.
 	unexpectedSuccess := result.(*FindDefault)
 
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
-UpdateOne update one API
+UpdateOne update one API.
 */
 func (a *Client) UpdateOne(ctx context.Context, params *UpdateOneParams) (*UpdateOneOK, *UpdateOneNoContent, error) {
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "updateOne",
 		Method:             "PUT",
 		PathPattern:        "/{id}",
@@ -159,7 +157,6 @@ func (a *Client) UpdateOne(ctx context.Context, params *UpdateOneParams) (*Updat
 		Params:             params,
 		Reader:             &UpdateOneReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
-		Context:            ctx,
 		Client:             params.HTTPClient,
 	})
 	if err != nil {
@@ -175,8 +172,16 @@ func (a *Client) UpdateOne(ctx context.Context, params *UpdateOneParams) (*Updat
 
 	// unexpected response.
 	//
-	// a default response is provided: fill this and return an error
+	// a default response is provided: fill this and return an error.
 	unexpectedSuccess := result.(*UpdateOneDefault)
 
 	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [TodosParams].
+	ctx context.Context
 }

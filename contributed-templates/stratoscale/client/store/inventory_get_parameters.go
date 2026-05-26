@@ -20,26 +20,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewInventoryGetParams() *InventoryGetParams {
-	return &InventoryGetParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewInventoryGetParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewInventoryGetParamsWithTimeout creates a new InventoryGetParams object
 // with the ability to set a timeout on a request.
 func NewInventoryGetParamsWithTimeout(timeout time.Duration) *InventoryGetParams {
 	return &InventoryGetParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewInventoryGetParamsWithContext creates a new InventoryGetParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams].
 func NewInventoryGetParamsWithContext(ctx context.Context) *InventoryGetParams {
 	return &InventoryGetParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -59,11 +61,9 @@ InventoryGetParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type InventoryGetParams struct {
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the inventory get params (not the query body).
@@ -81,47 +81,46 @@ func (o *InventoryGetParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the inventory get params
+// WithTimeout adds the timeout to the inventory get params.
 func (o *InventoryGetParams) WithTimeout(timeout time.Duration) *InventoryGetParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the inventory get params
+// SetTimeout adds the timeout to the inventory get params.
 func (o *InventoryGetParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the inventory get params
+// WithContext adds the context to the inventory get params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams].
 func (o *InventoryGetParams) WithContext(ctx context.Context) *InventoryGetParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the inventory get params
+// SetContext adds the context to the inventory get params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [InventoryGetParams].
 func (o *InventoryGetParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the inventory get params
+// WithHTTPClient adds the HTTPClient to the inventory get params.
 func (o *InventoryGetParams) WithHTTPClient(client *http.Client) *InventoryGetParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the inventory get params
+// SetHTTPClient adds the HTTPClient to the inventory get params.
 func (o *InventoryGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *InventoryGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

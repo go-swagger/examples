@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrderDeleteParams() *OrderDeleteParams {
-	return &OrderDeleteParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewOrderDeleteParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewOrderDeleteParamsWithTimeout creates a new OrderDeleteParams object
 // with the ability to set a timeout on a request.
 func NewOrderDeleteParamsWithTimeout(timeout time.Duration) *OrderDeleteParams {
 	return &OrderDeleteParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewOrderDeleteParamsWithContext creates a new OrderDeleteParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams].
 func NewOrderDeleteParamsWithContext(ctx context.Context) *OrderDeleteParams {
 	return &OrderDeleteParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -69,11 +71,9 @@ type OrderDeleteParams struct {
 	*/
 	OrderID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the order delete params (not the query body).
@@ -91,58 +91,57 @@ func (o *OrderDeleteParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the order delete params
+// WithTimeout adds the timeout to the order delete params.
 func (o *OrderDeleteParams) WithTimeout(timeout time.Duration) *OrderDeleteParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the order delete params
+// SetTimeout adds the timeout to the order delete params.
 func (o *OrderDeleteParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the order delete params
+// WithContext adds the context to the order delete params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams].
 func (o *OrderDeleteParams) WithContext(ctx context.Context) *OrderDeleteParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the order delete params
+// SetContext adds the context to the order delete params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderDeleteParams].
 func (o *OrderDeleteParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the order delete params
+// WithHTTPClient adds the HTTPClient to the order delete params.
 func (o *OrderDeleteParams) WithHTTPClient(client *http.Client) *OrderDeleteParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the order delete params
+// SetHTTPClient adds the HTTPClient to the order delete params.
 func (o *OrderDeleteParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithOrderID adds the orderID to the order delete params
+// WithOrderID adds the orderID to the order delete params.
 func (o *OrderDeleteParams) WithOrderID(orderID int64) *OrderDeleteParams {
 	o.SetOrderID(orderID)
 	return o
 }
 
-// SetOrderID adds the orderId to the order delete params
+// SetOrderID adds the orderId to the order delete params.
 func (o *OrderDeleteParams) SetOrderID(orderID int64) {
 	o.OrderID = orderID
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *OrderDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

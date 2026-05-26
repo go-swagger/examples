@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPetGetParams() *PetGetParams {
-	return &PetGetParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewPetGetParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewPetGetParamsWithTimeout creates a new PetGetParams object
 // with the ability to set a timeout on a request.
 func NewPetGetParamsWithTimeout(timeout time.Duration) *PetGetParams {
 	return &PetGetParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewPetGetParamsWithContext creates a new PetGetParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetGetParams].
 func NewPetGetParamsWithContext(ctx context.Context) *PetGetParams {
 	return &PetGetParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -69,11 +71,9 @@ type PetGetParams struct {
 	*/
 	PetID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the pet get params (not the query body).
@@ -91,58 +91,57 @@ func (o *PetGetParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the pet get params
+// WithTimeout adds the timeout to the pet get params.
 func (o *PetGetParams) WithTimeout(timeout time.Duration) *PetGetParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the pet get params
+// SetTimeout adds the timeout to the pet get params.
 func (o *PetGetParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the pet get params
+// WithContext adds the context to the pet get params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetGetParams].
 func (o *PetGetParams) WithContext(ctx context.Context) *PetGetParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the pet get params
+// SetContext adds the context to the pet get params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetGetParams].
 func (o *PetGetParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the pet get params
+// WithHTTPClient adds the HTTPClient to the pet get params.
 func (o *PetGetParams) WithHTTPClient(client *http.Client) *PetGetParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the pet get params
+// SetHTTPClient adds the HTTPClient to the pet get params.
 func (o *PetGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithPetID adds the petID to the pet get params
+// WithPetID adds the petID to the pet get params.
 func (o *PetGetParams) WithPetID(petID int64) *PetGetParams {
 	o.SetPetID(petID)
 	return o
 }
 
-// SetPetID adds the petId to the pet get params
+// SetPetID adds the petId to the pet get params.
 func (o *PetGetParams) SetPetID(petID int64) {
 	o.PetID = petID
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *PetGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

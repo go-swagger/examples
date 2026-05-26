@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewOrderGetParams() *OrderGetParams {
-	return &OrderGetParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewOrderGetParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewOrderGetParamsWithTimeout creates a new OrderGetParams object
 // with the ability to set a timeout on a request.
 func NewOrderGetParamsWithTimeout(timeout time.Duration) *OrderGetParams {
 	return &OrderGetParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewOrderGetParamsWithContext creates a new OrderGetParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams].
 func NewOrderGetParamsWithContext(ctx context.Context) *OrderGetParams {
 	return &OrderGetParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -69,11 +71,9 @@ type OrderGetParams struct {
 	*/
 	OrderID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the order get params (not the query body).
@@ -91,58 +91,57 @@ func (o *OrderGetParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the order get params
+// WithTimeout adds the timeout to the order get params.
 func (o *OrderGetParams) WithTimeout(timeout time.Duration) *OrderGetParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the order get params
+// SetTimeout adds the timeout to the order get params.
 func (o *OrderGetParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the order get params
+// WithContext adds the context to the order get params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams].
 func (o *OrderGetParams) WithContext(ctx context.Context) *OrderGetParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the order get params
+// SetContext adds the context to the order get params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams]
+// Deprecated: use the operation call with context to pass the context instead of [OrderGetParams].
 func (o *OrderGetParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the order get params
+// WithHTTPClient adds the HTTPClient to the order get params.
 func (o *OrderGetParams) WithHTTPClient(client *http.Client) *OrderGetParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the order get params
+// SetHTTPClient adds the HTTPClient to the order get params.
 func (o *OrderGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithOrderID adds the orderID to the order get params
+// WithOrderID adds the orderID to the order get params.
 func (o *OrderGetParams) WithOrderID(orderID int64) *OrderGetParams {
 	o.SetOrderID(orderID)
 	return o
 }
 
-// SetOrderID adds the orderId to the order get params
+// SetOrderID adds the orderId to the order get params.
 func (o *OrderGetParams) SetOrderID(orderID int64) {
 	o.OrderID = orderID
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *OrderGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

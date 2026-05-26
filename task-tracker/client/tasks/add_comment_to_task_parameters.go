@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewAddCommentToTaskParams() *AddCommentToTaskParams {
-	return &AddCommentToTaskParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewAddCommentToTaskParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewAddCommentToTaskParamsWithTimeout creates a new AddCommentToTaskParams object
 // with the ability to set a timeout on a request.
 func NewAddCommentToTaskParamsWithTimeout(timeout time.Duration) *AddCommentToTaskParams {
 	return &AddCommentToTaskParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewAddCommentToTaskParamsWithContext creates a new AddCommentToTaskParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams].
 func NewAddCommentToTaskParamsWithContext(ctx context.Context) *AddCommentToTaskParams {
 	return &AddCommentToTaskParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -75,11 +77,9 @@ type AddCommentToTaskParams struct {
 	*/
 	ID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the add comment to task params (not the query body).
@@ -97,69 +97,68 @@ func (o *AddCommentToTaskParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the add comment to task params
+// WithTimeout adds the timeout to the add comment to task params.
 func (o *AddCommentToTaskParams) WithTimeout(timeout time.Duration) *AddCommentToTaskParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the add comment to task params
+// SetTimeout adds the timeout to the add comment to task params.
 func (o *AddCommentToTaskParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the add comment to task params
+// WithContext adds the context to the add comment to task params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams].
 func (o *AddCommentToTaskParams) WithContext(ctx context.Context) *AddCommentToTaskParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the add comment to task params
+// SetContext adds the context to the add comment to task params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams]
+// Deprecated: use the operation call with context to pass the context instead of [AddCommentToTaskParams].
 func (o *AddCommentToTaskParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the add comment to task params
+// WithHTTPClient adds the HTTPClient to the add comment to task params.
 func (o *AddCommentToTaskParams) WithHTTPClient(client *http.Client) *AddCommentToTaskParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the add comment to task params
+// SetHTTPClient adds the HTTPClient to the add comment to task params.
 func (o *AddCommentToTaskParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the add comment to task params
+// WithBody adds the body to the add comment to task params.
 func (o *AddCommentToTaskParams) WithBody(body AddCommentToTaskBody) *AddCommentToTaskParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the add comment to task params
+// SetBody adds the body to the add comment to task params.
 func (o *AddCommentToTaskParams) SetBody(body AddCommentToTaskBody) {
 	o.Body = body
 }
 
-// WithID adds the id to the add comment to task params
+// WithID adds the id to the add comment to task params.
 func (o *AddCommentToTaskParams) WithID(id int64) *AddCommentToTaskParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the add comment to task params
+// SetID adds the id to the add comment to task params.
 func (o *AddCommentToTaskParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *AddCommentToTaskParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

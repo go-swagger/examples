@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPetDeleteParams() *PetDeleteParams {
-	return &PetDeleteParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewPetDeleteParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewPetDeleteParamsWithTimeout creates a new PetDeleteParams object
 // with the ability to set a timeout on a request.
 func NewPetDeleteParamsWithTimeout(timeout time.Duration) *PetDeleteParams {
 	return &PetDeleteParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewPetDeleteParamsWithContext creates a new PetDeleteParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams].
 func NewPetDeleteParamsWithContext(ctx context.Context) *PetDeleteParams {
 	return &PetDeleteParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -72,11 +74,9 @@ type PetDeleteParams struct {
 	*/
 	PetID int64
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the pet delete params (not the query body).
@@ -94,69 +94,68 @@ func (o *PetDeleteParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the pet delete params
+// WithTimeout adds the timeout to the pet delete params.
 func (o *PetDeleteParams) WithTimeout(timeout time.Duration) *PetDeleteParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the pet delete params
+// SetTimeout adds the timeout to the pet delete params.
 func (o *PetDeleteParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the pet delete params
+// WithContext adds the context to the pet delete params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams].
 func (o *PetDeleteParams) WithContext(ctx context.Context) *PetDeleteParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the pet delete params
+// SetContext adds the context to the pet delete params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetDeleteParams].
 func (o *PetDeleteParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the pet delete params
+// WithHTTPClient adds the HTTPClient to the pet delete params.
 func (o *PetDeleteParams) WithHTTPClient(client *http.Client) *PetDeleteParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the pet delete params
+// SetHTTPClient adds the HTTPClient to the pet delete params.
 func (o *PetDeleteParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithAPIKey adds the apiKey to the pet delete params
+// WithAPIKey adds the apiKey to the pet delete params.
 func (o *PetDeleteParams) WithAPIKey(apiKey *string) *PetDeleteParams {
 	o.SetAPIKey(apiKey)
 	return o
 }
 
-// SetAPIKey adds the apiKey to the pet delete params
+// SetAPIKey adds the apiKey to the pet delete params.
 func (o *PetDeleteParams) SetAPIKey(apiKey *string) {
 	o.APIKey = apiKey
 }
 
-// WithPetID adds the petID to the pet delete params
+// WithPetID adds the petID to the pet delete params.
 func (o *PetDeleteParams) WithPetID(petID int64) *PetDeleteParams {
 	o.SetPetID(petID)
 	return o
 }
 
-// SetPetID adds the petId to the pet delete params
+// SetPetID adds the petId to the pet delete params.
 func (o *PetDeleteParams) SetPetID(petID int64) {
 	o.PetID = petID
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *PetDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

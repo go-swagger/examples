@@ -20,26 +20,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetExperimentalParams() *GetExperimentalParams {
-	return &GetExperimentalParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewGetExperimentalParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewGetExperimentalParamsWithTimeout creates a new GetExperimentalParams object
 // with the ability to set a timeout on a request.
 func NewGetExperimentalParamsWithTimeout(timeout time.Duration) *GetExperimentalParams {
 	return &GetExperimentalParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewGetExperimentalParamsWithContext creates a new GetExperimentalParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams].
 func NewGetExperimentalParamsWithContext(ctx context.Context) *GetExperimentalParams {
 	return &GetExperimentalParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -63,11 +65,9 @@ type GetExperimentalParams struct {
 	// ID.
 	ID *string
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the get experimental params (not the query body).
@@ -85,58 +85,57 @@ func (o *GetExperimentalParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the get experimental params
+// WithTimeout adds the timeout to the get experimental params.
 func (o *GetExperimentalParams) WithTimeout(timeout time.Duration) *GetExperimentalParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the get experimental params
+// SetTimeout adds the timeout to the get experimental params.
 func (o *GetExperimentalParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the get experimental params
+// WithContext adds the context to the get experimental params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams].
 func (o *GetExperimentalParams) WithContext(ctx context.Context) *GetExperimentalParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the get experimental params
+// SetContext adds the context to the get experimental params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetExperimentalParams].
 func (o *GetExperimentalParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the get experimental params
+// WithHTTPClient adds the HTTPClient to the get experimental params.
 func (o *GetExperimentalParams) WithHTTPClient(client *http.Client) *GetExperimentalParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the get experimental params
+// SetHTTPClient adds the HTTPClient to the get experimental params.
 func (o *GetExperimentalParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the get experimental params
+// WithID adds the id to the get experimental params.
 func (o *GetExperimentalParams) WithID(id *string) *GetExperimentalParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the get experimental params
+// SetID adds the id to the get experimental params.
 func (o *GetExperimentalParams) SetID(id *string) {
 	o.ID = id
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *GetExperimentalParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

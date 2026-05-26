@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetTaskCommentsParams() *GetTaskCommentsParams {
-	return &GetTaskCommentsParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewGetTaskCommentsParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewGetTaskCommentsParamsWithTimeout creates a new GetTaskCommentsParams object
 // with the ability to set a timeout on a request.
 func NewGetTaskCommentsParamsWithTimeout(timeout time.Duration) *GetTaskCommentsParams {
 	return &GetTaskCommentsParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewGetTaskCommentsParamsWithContext creates a new GetTaskCommentsParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams].
 func NewGetTaskCommentsParamsWithContext(ctx context.Context) *GetTaskCommentsParams {
 	return &GetTaskCommentsParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -86,11 +88,9 @@ type GetTaskCommentsParams struct {
 	*/
 	Since *strfmt.DateTime
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the get task comments params (not the query body).
@@ -113,86 +113,85 @@ func (o *GetTaskCommentsParams) SetDefaults() {
 		PageSize: &pageSizeDefault,
 	}
 
-	val.timeout = o.timeout
-	val.Context = o.Context
+	val.inner.timeout = o.inner.timeout
+	val.inner.ctx = o.inner.ctx
 	val.HTTPClient = o.HTTPClient
 	*o = val
 }
 
-// WithTimeout adds the timeout to the get task comments params
+// WithTimeout adds the timeout to the get task comments params.
 func (o *GetTaskCommentsParams) WithTimeout(timeout time.Duration) *GetTaskCommentsParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the get task comments params
+// SetTimeout adds the timeout to the get task comments params.
 func (o *GetTaskCommentsParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the get task comments params
+// WithContext adds the context to the get task comments params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams].
 func (o *GetTaskCommentsParams) WithContext(ctx context.Context) *GetTaskCommentsParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the get task comments params
+// SetContext adds the context to the get task comments params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams]
+// Deprecated: use the operation call with context to pass the context instead of [GetTaskCommentsParams].
 func (o *GetTaskCommentsParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the get task comments params
+// WithHTTPClient adds the HTTPClient to the get task comments params.
 func (o *GetTaskCommentsParams) WithHTTPClient(client *http.Client) *GetTaskCommentsParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the get task comments params
+// SetHTTPClient adds the HTTPClient to the get task comments params.
 func (o *GetTaskCommentsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the get task comments params
+// WithID adds the id to the get task comments params.
 func (o *GetTaskCommentsParams) WithID(id int64) *GetTaskCommentsParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the get task comments params
+// SetID adds the id to the get task comments params.
 func (o *GetTaskCommentsParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WithPageSize adds the pageSize to the get task comments params
+// WithPageSize adds the pageSize to the get task comments params.
 func (o *GetTaskCommentsParams) WithPageSize(pageSize *int32) *GetTaskCommentsParams {
 	o.SetPageSize(pageSize)
 	return o
 }
 
-// SetPageSize adds the pageSize to the get task comments params
+// SetPageSize adds the pageSize to the get task comments params.
 func (o *GetTaskCommentsParams) SetPageSize(pageSize *int32) {
 	o.PageSize = pageSize
 }
 
-// WithSince adds the since to the get task comments params
+// WithSince adds the since to the get task comments params.
 func (o *GetTaskCommentsParams) WithSince(since *strfmt.DateTime) *GetTaskCommentsParams {
 	o.SetSince(since)
 	return o
 }
 
-// SetSince adds the since to the get task comments params
+// SetSince adds the since to the get task comments params.
 func (o *GetTaskCommentsParams) SetSince(since *strfmt.DateTime) {
 	o.Since = since
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *GetTaskCommentsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

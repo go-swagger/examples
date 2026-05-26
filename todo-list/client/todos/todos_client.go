@@ -4,6 +4,7 @@ package todos
 
 import (
 	"context"
+	"time"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -128,8 +129,8 @@ If you need to pass a specific context, use [Client.AddOneContext] instead.
 */
 func (a *Client) AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -194,8 +195,8 @@ If you need to pass a specific context, use [Client.DestroyOneContext] instead.
 */
 func (a *Client) DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -260,8 +261,8 @@ If you need to pass a specific context, use [Client.FindContext] instead.
 */
 func (a *Client) Find(params *FindParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -326,8 +327,8 @@ If you need to pass a specific context, use [Client.UpdateOneContext] instead.
 */
 func (a *Client) UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -385,4 +386,12 @@ func (a *Client) UpdateOneContext(ctx context.Context, params *UpdateOneParams, 
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [TodosParams].
+	ctx context.Context
 }

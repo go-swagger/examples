@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"time"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -79,8 +80,8 @@ If you need to pass a specific context, use [Client.ElapseContext] instead.
 */
 func (a *Client) Elapse(params *ElapseParams, writer io.Writer, opts ...ClientOption) (*ElapseOK, error) {
 	var ctx context.Context
-	if params.Context != nil {
-		ctx = params.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
 	}
@@ -140,4 +141,12 @@ func (a *Client) ElapseContext(ctx context.Context, params *ElapseParams, writer
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ContextualTransport) {
 	a.transport = transport
+}
+
+// innerParams captures internal fields so they don't conflict with user-supplied parameters.
+type innerParams struct {
+	timeout time.Duration
+
+	// Deprecated: use the operation call with context to pass the context instead of [OperationsParams].
+	ctx context.Context
 }

@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPutExperimentalParams() *PutExperimentalParams {
-	return &PutExperimentalParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewPutExperimentalParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewPutExperimentalParamsWithTimeout creates a new PutExperimentalParams object
 // with the ability to set a timeout on a request.
 func NewPutExperimentalParamsWithTimeout(timeout time.Duration) *PutExperimentalParams {
 	return &PutExperimentalParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewPutExperimentalParamsWithContext creates a new PutExperimentalParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PutExperimentalParams]
+// Deprecated: use the operation call with context to pass the context instead of [PutExperimentalParams].
 func NewPutExperimentalParamsWithContext(ctx context.Context) *PutExperimentalParams {
 	return &PutExperimentalParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -67,11 +69,9 @@ type PutExperimentalParams struct {
 	// ID.
 	ID *string
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [PutExperimentalParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the put experimental params (not the query body).
@@ -89,69 +89,68 @@ func (o *PutExperimentalParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the put experimental params
+// WithTimeout adds the timeout to the put experimental params.
 func (o *PutExperimentalParams) WithTimeout(timeout time.Duration) *PutExperimentalParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the put experimental params
+// SetTimeout adds the timeout to the put experimental params.
 func (o *PutExperimentalParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the put experimental params
+// WithContext adds the context to the put experimental params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PutExperimentalParams]
+// Deprecated: use the operation call with context to pass the context instead of [PutExperimentalParams].
 func (o *PutExperimentalParams) WithContext(ctx context.Context) *PutExperimentalParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the put experimental params
+// SetContext adds the context to the put experimental params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PutExperimentalParams]
+// Deprecated: use the operation call with context to pass the context instead of [PutExperimentalParams].
 func (o *PutExperimentalParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the put experimental params
+// WithHTTPClient adds the HTTPClient to the put experimental params.
 func (o *PutExperimentalParams) WithHTTPClient(client *http.Client) *PutExperimentalParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the put experimental params
+// SetHTTPClient adds the HTTPClient to the put experimental params.
 func (o *PutExperimentalParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the put experimental params
+// WithBody adds the body to the put experimental params.
 func (o *PutExperimentalParams) WithBody(body *models.Item) *PutExperimentalParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the put experimental params
+// SetBody adds the body to the put experimental params.
 func (o *PutExperimentalParams) SetBody(body *models.Item) {
 	o.Body = body
 }
 
-// WithID adds the id to the put experimental params
+// WithID adds the id to the put experimental params.
 func (o *PutExperimentalParams) WithID(id *string) *PutExperimentalParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the put experimental params
+// SetID adds the id to the put experimental params.
 func (o *PutExperimentalParams) SetID(id *string) {
 	o.ID = id
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *PutExperimentalParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

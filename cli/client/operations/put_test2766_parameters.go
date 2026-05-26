@@ -22,26 +22,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPutTest2766Params() *PutTest2766Params {
-	return &PutTest2766Params{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewPutTest2766ParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewPutTest2766ParamsWithTimeout creates a new PutTest2766Params object
 // with the ability to set a timeout on a request.
 func NewPutTest2766ParamsWithTimeout(timeout time.Duration) *PutTest2766Params {
 	return &PutTest2766Params{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewPutTest2766ParamsWithContext creates a new PutTest2766Params object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
+// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params].
 func NewPutTest2766ParamsWithContext(ctx context.Context) *PutTest2766Params {
 	return &PutTest2766Params{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -68,11 +70,9 @@ type PutTest2766Params struct {
 	// Body.
 	Body *models.GithubReactions
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the put test2766 params (not the query body).
@@ -90,69 +90,68 @@ func (o *PutTest2766Params) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the put test2766 params
+// WithTimeout adds the timeout to the put test2766 params.
 func (o *PutTest2766Params) WithTimeout(timeout time.Duration) *PutTest2766Params {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the put test2766 params
+// SetTimeout adds the timeout to the put test2766 params.
 func (o *PutTest2766Params) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the put test2766 params
+// WithContext adds the context to the put test2766 params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
+// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params].
 func (o *PutTest2766Params) WithContext(ctx context.Context) *PutTest2766Params {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the put test2766 params
+// SetContext adds the context to the put test2766 params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params]
+// Deprecated: use the operation call with context to pass the context instead of [PutTest2766Params].
 func (o *PutTest2766Params) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the put test2766 params
+// WithHTTPClient adds the HTTPClient to the put test2766 params.
 func (o *PutTest2766Params) WithHTTPClient(client *http.Client) *PutTest2766Params {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the put test2766 params
+// SetHTTPClient adds the HTTPClient to the put test2766 params.
 func (o *PutTest2766Params) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithMinus1 adds the minus1 to the put test2766 params
+// WithMinus1 adds the minus1 to the put test2766 params.
 func (o *PutTest2766Params) WithMinus1(minus1 *int64) *PutTest2766Params {
 	o.SetMinus1(minus1)
 	return o
 }
 
-// SetMinus1 adds the 1 to the put test2766 params
+// SetMinus1 adds the 1 to the put test2766 params.
 func (o *PutTest2766Params) SetMinus1(minus1 *int64) {
 	o.Minus1 = minus1
 }
 
-// WithBody adds the body to the put test2766 params
+// WithBody adds the body to the put test2766 params.
 func (o *PutTest2766Params) WithBody(body *models.GithubReactions) *PutTest2766Params {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the put test2766 params
+// SetBody adds the body to the put test2766 params.
 func (o *PutTest2766Params) SetBody(body *models.GithubReactions) {
 	o.Body = body
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *PutTest2766Params) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error

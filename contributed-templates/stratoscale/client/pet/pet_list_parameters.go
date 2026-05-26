@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPetListParams() *PetListParams {
-	return &PetListParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewPetListParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewPetListParamsWithTimeout creates a new PetListParams object
 // with the ability to set a timeout on a request.
 func NewPetListParamsWithTimeout(timeout time.Duration) *PetListParams {
 	return &PetListParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewPetListParamsWithContext creates a new PetListParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetListParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetListParams].
 func NewPetListParamsWithContext(ctx context.Context) *PetListParams {
 	return &PetListParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -67,11 +69,9 @@ type PetListParams struct {
 	*/
 	Status []string
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [PetListParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the pet list params (not the query body).
@@ -89,58 +89,57 @@ func (o *PetListParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the pet list params
+// WithTimeout adds the timeout to the pet list params.
 func (o *PetListParams) WithTimeout(timeout time.Duration) *PetListParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the pet list params
+// SetTimeout adds the timeout to the pet list params.
 func (o *PetListParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the pet list params
+// WithContext adds the context to the pet list params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetListParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetListParams].
 func (o *PetListParams) WithContext(ctx context.Context) *PetListParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the pet list params
+// SetContext adds the context to the pet list params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [PetListParams]
+// Deprecated: use the operation call with context to pass the context instead of [PetListParams].
 func (o *PetListParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the pet list params
+// WithHTTPClient adds the HTTPClient to the pet list params.
 func (o *PetListParams) WithHTTPClient(client *http.Client) *PetListParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the pet list params
+// SetHTTPClient adds the HTTPClient to the pet list params.
 func (o *PetListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithStatus adds the status to the pet list params
+// WithStatus adds the status to the pet list params.
 func (o *PetListParams) WithStatus(status []string) *PetListParams {
 	o.SetStatus(status)
 	return o
 }
 
-// SetStatus adds the status to the pet list params
+// SetStatus adds the status to the pet list params.
 func (o *PetListParams) SetStatus(status []string) {
 	o.Status = status
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *PetListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error
@@ -162,7 +161,7 @@ func (o *PetListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 	return nil
 }
 
-// bindParamPetList binds the parameter status
+// bindParamPetList binds the parameter status.
 func (o *PetListParams) bindParamStatus(formats strfmt.Registry) []string {
 	statusIR := o.Status
 

@@ -21,26 +21,28 @@ import (
 //
 // To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateOneParams() *UpdateOneParams {
-	return &UpdateOneParams{
-		timeout: cr.DefaultTimeout,
-	}
+	return NewUpdateOneParamsWithTimeout(cr.DefaultTimeout)
 }
 
 // NewUpdateOneParamsWithTimeout creates a new UpdateOneParams object
 // with the ability to set a timeout on a request.
 func NewUpdateOneParamsWithTimeout(timeout time.Duration) *UpdateOneParams {
 	return &UpdateOneParams{
-		timeout: timeout,
+		inner: innerParams{
+			timeout: timeout,
+		},
 	}
 }
 
 // NewUpdateOneParamsWithContext creates a new UpdateOneParams object
 // with the ability to set a context for a request.
 //
-// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams].
 func NewUpdateOneParamsWithContext(ctx context.Context) *UpdateOneParams {
 	return &UpdateOneParams{
-		Context: ctx,
+		inner: innerParams{
+			ctx: ctx,
+		},
 	}
 }
 
@@ -67,11 +69,9 @@ type UpdateOneParams struct {
 	// ID.
 	ID string
 
-	timeout time.Duration
-
-	// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
-	Context    context.Context
 	HTTPClient *http.Client
+
+	inner innerParams
 }
 
 // WithDefaults hydrates default values in the update one params (not the query body).
@@ -89,69 +89,68 @@ func (o *UpdateOneParams) SetDefaults() {
 	// no default values defined for this parameter
 }
 
-// WithTimeout adds the timeout to the update one params
+// WithTimeout adds the timeout to the update one params.
 func (o *UpdateOneParams) WithTimeout(timeout time.Duration) *UpdateOneParams {
 	o.SetTimeout(timeout)
 	return o
 }
 
-// SetTimeout adds the timeout to the update one params
+// SetTimeout adds the timeout to the update one params.
 func (o *UpdateOneParams) SetTimeout(timeout time.Duration) {
-	o.timeout = timeout
+	o.inner.timeout = timeout
 }
 
-// WithContext adds the context to the update one params
+// WithContext adds the context to the update one params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams].
 func (o *UpdateOneParams) WithContext(ctx context.Context) *UpdateOneParams {
 	o.SetContext(ctx)
 	return o
 }
 
-// SetContext adds the context to the update one params
+// SetContext adds the context to the update one params.
 //
-// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams]
+// Deprecated: use the operation call with context to pass the context instead of [UpdateOneParams].
 func (o *UpdateOneParams) SetContext(ctx context.Context) {
-	o.Context = ctx
+	o.inner.ctx = ctx
 }
 
-// WithHTTPClient adds the HTTPClient to the update one params
+// WithHTTPClient adds the HTTPClient to the update one params.
 func (o *UpdateOneParams) WithHTTPClient(client *http.Client) *UpdateOneParams {
 	o.SetHTTPClient(client)
 	return o
 }
 
-// SetHTTPClient adds the HTTPClient to the update one params
+// SetHTTPClient adds the HTTPClient to the update one params.
 func (o *UpdateOneParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the update one params
+// WithBody adds the body to the update one params.
 func (o *UpdateOneParams) WithBody(body *models.Item) *UpdateOneParams {
 	o.SetBody(body)
 	return o
 }
 
-// SetBody adds the body to the update one params
+// SetBody adds the body to the update one params.
 func (o *UpdateOneParams) SetBody(body *models.Item) {
 	o.Body = body
 }
 
-// WithID adds the id to the update one params
+// WithID adds the id to the update one params.
 func (o *UpdateOneParams) WithID(id string) *UpdateOneParams {
 	o.SetID(id)
 	return o
 }
 
-// SetID adds the id to the update one params
+// SetID adds the id to the update one params.
 func (o *UpdateOneParams) SetID(id string) {
 	o.ID = id
 }
 
-// WriteToRequest writes these params to a swagger request
+// WriteToRequest writes these params to a [runtime.ClientRequest].
 func (o *UpdateOneParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
-
-	if err := r.SetTimeout(o.timeout); err != nil {
+	if err := r.SetTimeout(o.inner.timeout); err != nil {
 		return err
 	}
 	var res []error
