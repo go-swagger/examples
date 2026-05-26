@@ -99,9 +99,18 @@ func WithAcceptApplicationKeyauthAPIV1JSON(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods.
 type ClientService interface {
+
+	// Create create a new customer to track.
 	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error)
 
+	// CreateContext create a new customer to track.
+	CreateContext(ctx context.Context, params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error)
+
+	// GetID get a customer Id given an s s n.
 	GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error)
+
+	// GetIDContext get a customer Id given an s s n.
+	GetIDContext(ctx context.Context, params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error)
 
 	SetTransport(transport runtime.ContextualTransport)
 }

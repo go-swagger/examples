@@ -101,11 +101,19 @@ func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
 type ClientService interface {
 	AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error)
 
+	AddOneContext(ctx context.Context, params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error)
+
 	DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error)
+
+	DestroyOneContext(ctx context.Context, params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error)
 
 	FindTodos(params *FindTodosParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindTodosOK, error)
 
+	FindTodosContext(ctx context.Context, params *FindTodosParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindTodosOK, error)
+
 	UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error)
+
+	UpdateOneContext(ctx context.Context, params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error)
 
 	SetTransport(transport runtime.ContextualTransport)
 }

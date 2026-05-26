@@ -57,7 +57,12 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods.
 type ClientService interface {
+
+	// Chunked chunked.
 	Chunked(params *ChunkedParams, writer io.Writer, opts ...ClientOption) (*ChunkedOK, error)
+
+	// ChunkedContext chunked.
+	ChunkedContext(ctx context.Context, params *ChunkedParams, writer io.Writer, opts ...ClientOption) (*ChunkedOK, error)
 
 	SetTransport(transport runtime.ContextualTransport)
 }

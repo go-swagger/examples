@@ -102,7 +102,11 @@ func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
 type ClientService interface {
 	GetExperimental(params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error)
 
+	GetExperimentalContext(ctx context.Context, params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error)
+
 	PutExperimental(params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error)
+
+	PutExperimentalContext(ctx context.Context, params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error)
 
 	SetTransport(transport runtime.ContextualTransport)
 }

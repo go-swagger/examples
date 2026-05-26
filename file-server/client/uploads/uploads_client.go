@@ -80,7 +80,12 @@ func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods.
 type ClientService interface {
+
+	// UploadFile uploads.
 	UploadFile(params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error)
+
+	// UploadFileContext uploads.
+	UploadFileContext(ctx context.Context, params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error)
 
 	SetTransport(transport runtime.ContextualTransport)
 }
