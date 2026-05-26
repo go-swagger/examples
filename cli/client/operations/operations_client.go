@@ -102,6 +102,8 @@ func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
 type ClientService interface {
 	PutTest2766(params *PutTest2766Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutTest2766OK, error)
 
+	PutTest2766Context(ctx context.Context, params *PutTest2766Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutTest2766OK, error)
+
 	SetTransport(transport runtime.ContextualTransport)
 }
 

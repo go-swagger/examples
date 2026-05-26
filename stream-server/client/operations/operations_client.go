@@ -57,7 +57,12 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods.
 type ClientService interface {
+
+	// Elapse count down the number of seconds.
 	Elapse(params *ElapseParams, writer io.Writer, opts ...ClientOption) (*ElapseOK, error)
+
+	// ElapseContext count down the number of seconds.
+	ElapseContext(ctx context.Context, params *ElapseParams, writer io.Writer, opts ...ClientOption) (*ElapseOK, error)
 
 	SetTransport(transport runtime.ContextualTransport)
 }

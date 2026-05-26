@@ -104,21 +104,54 @@ func WithAcceptApplicationVndGoswaggerExamplesTaskTrackerV1JSON(r *runtime.Clien
 
 // ClientService is the interface for Client methods.
 type ClientService interface {
+
+	// AddCommentToTask adds a comment to a task.
 	AddCommentToTask(params *AddCommentToTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddCommentToTaskCreated, error)
 
+	// AddCommentToTaskContext adds a comment to a task.
+	AddCommentToTaskContext(ctx context.Context, params *AddCommentToTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddCommentToTaskCreated, error)
+
+	// CreateTask creates a task object.
 	CreateTask(params *CreateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTaskCreated, error)
 
+	// CreateTaskContext creates a task object.
+	CreateTaskContext(ctx context.Context, params *CreateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTaskCreated, error)
+
+	// DeleteTask deletes a task.
 	DeleteTask(params *DeleteTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTaskNoContent, error)
 
+	// DeleteTaskContext deletes a task.
+	DeleteTaskContext(ctx context.Context, params *DeleteTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTaskNoContent, error)
+
+	// GetTaskComments gets the comments for a task.
 	GetTaskComments(params *GetTaskCommentsParams, opts ...ClientOption) (*GetTaskCommentsOK, error)
 
+	// GetTaskCommentsContext gets the comments for a task.
+	GetTaskCommentsContext(ctx context.Context, params *GetTaskCommentsParams, opts ...ClientOption) (*GetTaskCommentsOK, error)
+
+	// GetTaskDetails gets the details for a task.
 	GetTaskDetails(params *GetTaskDetailsParams, opts ...ClientOption) (*GetTaskDetailsOK, error)
 
+	// GetTaskDetailsContext gets the details for a task.
+	GetTaskDetailsContext(ctx context.Context, params *GetTaskDetailsParams, opts ...ClientOption) (*GetTaskDetailsOK, error)
+
+	// ListTasks lists the tasks.
 	ListTasks(params *ListTasksParams, opts ...ClientOption) (*ListTasksOK, error)
 
+	// ListTasksContext lists the tasks.
+	ListTasksContext(ctx context.Context, params *ListTasksParams, opts ...ClientOption) (*ListTasksOK, error)
+
+	// UpdateTask updates the details for a task.
 	UpdateTask(params *UpdateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTaskOK, error)
 
+	// UpdateTaskContext updates the details for a task.
+	UpdateTaskContext(ctx context.Context, params *UpdateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTaskOK, error)
+
+	// UploadTaskFile adds a file to a task.
 	UploadTaskFile(params *UploadTaskFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTaskFileCreated, error)
+
+	// UploadTaskFileContext adds a file to a task.
+	UploadTaskFileContext(ctx context.Context, params *UploadTaskFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTaskFileCreated, error)
 
 	SetTransport(transport runtime.ContextualTransport)
 }
