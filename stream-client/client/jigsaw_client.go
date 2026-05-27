@@ -3,6 +3,8 @@
 package client
 
 import (
+	"maps"
+
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
@@ -37,6 +39,8 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Jig
 
 	// create transport and client.
 	transport := httptransport.New(cfg.Host, cfg.BasePath, cfg.Schemes)
+	maps.Copy(transport.Producers, cfg.Producers)
+	maps.Copy(transport.Consumers, cfg.Consumers)
 
 	return New(transport, formats)
 }
@@ -68,9 +72,11 @@ func DefaultTransportConfig() *TransportConfig {
 // TransportConfig contains the transport related info,
 // found in the meta section of the spec file.
 type TransportConfig struct {
-	Host     string
-	BasePath string
-	Schemes  []string
+	Host      string
+	BasePath  string
+	Schemes   []string
+	Producers map[string]runtime.Producer
+	Consumers map[string]runtime.Consumer
 }
 
 // WithHost overrides the default host,
@@ -91,6 +97,18 @@ func (cfg *TransportConfig) WithBasePath(basePath string) *TransportConfig {
 // provided by the meta section of the spec file.
 func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	cfg.Schemes = schemes
+	return cfg
+}
+
+// WithProducers overrides the default producers registered by [httptransport.Runtime].
+func (cfg *TransportConfig) WithProducers(producers map[string]runtime.Producer) *TransportConfig {
+	cfg.Producers = producers
+	return cfg
+}
+
+// WithConsumers overrides the default consumers registered by [httptransport.Runtime].
+func (cfg *TransportConfig) WithConsumers(consumers map[string]runtime.Consumer) *TransportConfig {
+	cfg.Consumers = consumers
 	return cfg
 }
 
