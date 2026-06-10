@@ -13,20 +13,15 @@ import (
 // ListTasksOKCode is the HTTP code returned for type ListTasksOK
 const ListTasksOKCode int = 200
 
-/*
-ListTasksOK Successful response
-
-swagger:response listTasksOK
-*/
+// ListTasksOK Successful response
+//
+// swagger:response listTasksOK
 type ListTasksOK struct {
-	/*the last task id known to the application
 
-	 */
+	// the last task id known to the application
 	XLastTaskID int64 `json:"X-Last-Task-Id"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []*models.TaskCard `json:"body,omitempty"`
 }
 
@@ -83,16 +78,12 @@ func (o *ListTasksOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // ListTasksUnprocessableEntityCode is the HTTP code returned for type ListTasksUnprocessableEntity
 const ListTasksUnprocessableEntityCode int = 422
 
-/*
-ListTasksUnprocessableEntity Validation error
-
-swagger:response listTasksUnprocessableEntity
-*/
+// ListTasksUnprocessableEntity Validation error
+//
+// swagger:response listTasksUnprocessableEntity
 type ListTasksUnprocessableEntity struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.ValidationError `json:"body,omitempty"`
 }
 
@@ -125,21 +116,15 @@ func (o *ListTasksUnprocessableEntity) WriteResponse(rw http.ResponseWriter, pro
 	}
 }
 
-/*
-ListTasksDefault Error response
-
-swagger:response listTasksDefault
-*/
+// ListTasksDefault Error response
+//
+// swagger:response listTasksDefault
 type ListTasksDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

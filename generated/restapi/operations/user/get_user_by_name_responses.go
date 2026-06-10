@@ -12,16 +12,12 @@ import (
 // GetUserByNameOKCode is the HTTP code returned for type GetUserByNameOK
 const GetUserByNameOKCode int = 200
 
-/*
-GetUserByNameOK successful operation
-
-swagger:response getUserByNameOK
-*/
+// GetUserByNameOK successful operation
+//
+// swagger:response getUserByNameOK
 type GetUserByNameOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.User `json:"body,omitempty"`
 }
 
@@ -57,11 +53,9 @@ func (o *GetUserByNameOK) WriteResponse(rw http.ResponseWriter, producer runtime
 // GetUserByNameBadRequestCode is the HTTP code returned for type GetUserByNameBadRequest
 const GetUserByNameBadRequestCode int = 400
 
-/*
-GetUserByNameBadRequest Invalid username supplied
-
-swagger:response getUserByNameBadRequest
-*/
+// GetUserByNameBadRequest Invalid username supplied
+//
+// swagger:response getUserByNameBadRequest
 type GetUserByNameBadRequest struct {
 }
 
@@ -82,11 +76,9 @@ func (o *GetUserByNameBadRequest) WriteResponse(rw http.ResponseWriter, producer
 // GetUserByNameNotFoundCode is the HTTP code returned for type GetUserByNameNotFound
 const GetUserByNameNotFoundCode int = 404
 
-/*
-GetUserByNameNotFound User not found
-
-swagger:response getUserByNameNotFound
-*/
+// GetUserByNameNotFound User not found
+//
+// swagger:response getUserByNameNotFound
 type GetUserByNameNotFound struct {
 }
 

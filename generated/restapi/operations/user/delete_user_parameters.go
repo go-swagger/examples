@@ -25,11 +25,9 @@ func NewDeleteUserParams() DeleteUserParams {
 type DeleteUserParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*The name that needs to be deleted
-	  Required: true
-	  In: path
-	*/
+	// The name that needs to be deleted
+	// Required: true
+	// In: path
 	Username string
 }
 

@@ -37,11 +37,9 @@ func NewPetUploadImageOK() *PetUploadImageOK {
 	return &PetUploadImageOK{}
 }
 
-/*
-PetUploadImageOK describes a response with status code 200, with default header values.
-
-successful operation
-*/
+// PetUploadImageOK describes a response with status code 200, with default header values.
+//
+// successful operation
 type PetUploadImageOK struct {
 	Payload *models.APIResponse
 }

@@ -34,16 +34,10 @@ func NewFindTodosParams() FindTodosParams {
 type FindTodosParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  In: query
-	  Default: 20
-	*/
+	// In: query
+	// Default: 20
 	Limit *int32
-
-	/*
-	  In: query
-	*/
+	// In: query
 	Since *int64
 }
 

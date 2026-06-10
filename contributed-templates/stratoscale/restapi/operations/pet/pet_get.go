@@ -26,11 +26,9 @@ func NewPetGet(ctx *middleware.Context, handler PetGetHandler) *PetGet {
 	return &PetGet{Context: ctx, Handler: handler}
 }
 
-/*
-	PetGet swagger:route GET /pet/{petId} pet petGet
-
-Get pet by it's ID
-*/
+// PetGet swagger:route GET /pet/{petId} pet petGet
+//
+// Get pet by it's ID
 type PetGet struct {
 	Context *middleware.Context
 	Handler PetGetHandler

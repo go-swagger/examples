@@ -11,11 +11,9 @@ import (
 // DeleteOrderBadRequestCode is the HTTP code returned for type DeleteOrderBadRequest
 const DeleteOrderBadRequestCode int = 400
 
-/*
-DeleteOrderBadRequest Invalid ID supplied
-
-swagger:response deleteOrderBadRequest
-*/
+// DeleteOrderBadRequest Invalid ID supplied
+//
+// swagger:response deleteOrderBadRequest
 type DeleteOrderBadRequest struct {
 }
 
@@ -36,11 +34,9 @@ func (o *DeleteOrderBadRequest) WriteResponse(rw http.ResponseWriter, producer r
 // DeleteOrderNotFoundCode is the HTTP code returned for type DeleteOrderNotFound
 const DeleteOrderNotFoundCode int = 404
 
-/*
-DeleteOrderNotFound Order not found
-
-swagger:response deleteOrderNotFound
-*/
+// DeleteOrderNotFound Order not found
+//
+// swagger:response deleteOrderNotFound
 type DeleteOrderNotFound struct {
 }
 

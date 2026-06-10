@@ -15,23 +15,23 @@ import (
 
 // API is the interface of the pet client.
 type API interface {
-	/*
-	   PetCreate adds a new pet to the store*/
+
+	// PetCreate adds a new pet to the store
 	PetCreate(ctx context.Context, params *PetCreateParams) (*PetCreateCreated, error)
-	/*
-	   PetDelete deletes a pet*/
+
+	// PetDelete deletes a pet
 	PetDelete(ctx context.Context, params *PetDeleteParams) (*PetDeleteNoContent, error)
-	/*
-	   PetGet gets pet by it s ID*/
+
+	// PetGet gets pet by it s ID
 	PetGet(ctx context.Context, params *PetGetParams) (*PetGetOK, error)
-	/*
-	   PetList lists pets*/
+
+	// PetList lists pets
 	PetList(ctx context.Context, params *PetListParams) (*PetListOK, error)
-	/*
-	   PetUpdate updates an existing pet*/
+
+	// PetUpdate updates an existing pet
 	PetUpdate(ctx context.Context, params *PetUpdateParams) (*PetUpdateCreated, error)
-	/*
-	   PetUploadImage uploads an image*/
+
+	// PetUploadImage uploads an image
 	PetUploadImage(ctx context.Context, params *PetUploadImageParams) (*PetUploadImageOK, error)
 }
 
@@ -44,18 +44,14 @@ func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInf
 	}
 }
 
-/*
-Client for pet API
-*/
+// Client for pet API
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
-/*
-PetCreate adds a new pet to the store.
-*/
+// PetCreate adds a new pet to the store.
 func (a *Client) PetCreate(ctx context.Context, params *PetCreateParams) (*PetCreateCreated, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetCreate",
@@ -89,9 +85,7 @@ func (a *Client) PetCreate(ctx context.Context, params *PetCreateParams) (*PetCr
 	panic(msg)
 }
 
-/*
-PetDelete deletes a pet.
-*/
+// PetDelete deletes a pet.
 func (a *Client) PetDelete(ctx context.Context, params *PetDeleteParams) (*PetDeleteNoContent, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetDelete",
@@ -127,9 +121,7 @@ func (a *Client) PetDelete(ctx context.Context, params *PetDeleteParams) (*PetDe
 	panic(msg)
 }
 
-/*
-PetGet gets pet by it s ID.
-*/
+// PetGet gets pet by it s ID.
 func (a *Client) PetGet(ctx context.Context, params *PetGetParams) (*PetGetOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetGet",
@@ -165,9 +157,7 @@ func (a *Client) PetGet(ctx context.Context, params *PetGetParams) (*PetGetOK, e
 	panic(msg)
 }
 
-/*
-PetList lists pets.
-*/
+// PetList lists pets.
 func (a *Client) PetList(ctx context.Context, params *PetListParams) (*PetListOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetList",
@@ -201,9 +191,7 @@ func (a *Client) PetList(ctx context.Context, params *PetListParams) (*PetListOK
 	panic(msg)
 }
 
-/*
-PetUpdate updates an existing pet.
-*/
+// PetUpdate updates an existing pet.
 func (a *Client) PetUpdate(ctx context.Context, params *PetUpdateParams) (*PetUpdateCreated, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetUpdate",
@@ -241,9 +229,7 @@ func (a *Client) PetUpdate(ctx context.Context, params *PetUpdateParams) (*PetUp
 	panic(msg)
 }
 
-/*
-PetUploadImage uploads an image.
-*/
+// PetUploadImage uploads an image.
 func (a *Client) PetUploadImage(ctx context.Context, params *PetUploadImageParams) (*PetUploadImageOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PetUploadImage",

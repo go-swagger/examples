@@ -63,12 +63,11 @@ OrderDeleteParams contains all the parameters to send to the API endpoint
 */
 type OrderDeleteParams struct {
 
-	/* OrderID.
-
-	   ID of the order that needs to be deleted
-
-	   Format: int64
-	*/
+	// OrderID.
+	//
+	// ID of the order that needs to be deleted
+	//
+	// Format: int64
 	OrderID int64
 
 	HTTPClient *http.Client

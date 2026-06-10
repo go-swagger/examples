@@ -63,29 +63,26 @@ GetTaskCommentsParams contains all the parameters to send to the API endpoint
 */
 type GetTaskCommentsParams struct {
 
-	/* ID.
-
-	   The id of the item
-
-	   Format: int64
-	*/
+	// ID.
+	//
+	// The id of the item
+	//
+	// Format: int64
 	ID int64
 
-	/* PageSize.
-
-	   Amount of items to return in a single page
-
-	   Format: int32
-	   Default: 20
-	*/
+	// PageSize.
+	//
+	// Amount of items to return in a single page
+	//
+	// Format: int32
+	// Default: 20
 	PageSize *int32
 
-	/* Since.
-
-	   The created time of the oldest seen comment
-
-	   Format: date-time
-	*/
+	// Since.
+	//
+	// The created time of the oldest seen comment
+	//
+	// Format: date-time
 	Since *strfmt.DateTime
 
 	HTTPClient *http.Client

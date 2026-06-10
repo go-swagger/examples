@@ -44,11 +44,9 @@ func NewGetTaskCommentsOK() *GetTaskCommentsOK {
 	return &GetTaskCommentsOK{}
 }
 
-/*
-GetTaskCommentsOK describes a response with status code 200, with default header values.
-
-The list of comments
-*/
+// GetTaskCommentsOK describes a response with status code 200, with default header values.
+//
+// The list of comments
 type GetTaskCommentsOK struct {
 	Payload []*models.Comment
 }
@@ -114,11 +112,9 @@ func NewGetTaskCommentsDefault(code int) *GetTaskCommentsDefault {
 	}
 }
 
-/*
-GetTaskCommentsDefault describes a response with status code -1, with default header values.
-
-Error response
-*/
+// GetTaskCommentsDefault describes a response with status code -1, with default header values.
+//
+// Error response
 type GetTaskCommentsDefault struct {
 	_statusCode int
 	XErrorCode  string

@@ -43,11 +43,9 @@ func NewPetListOK() *PetListOK {
 	return &PetListOK{}
 }
 
-/*
-PetListOK describes a response with status code 200, with default header values.
-
-successful operation
-*/
+// PetListOK describes a response with status code 200, with default header values.
+//
+// successful operation
 type PetListOK struct {
 	Payload []*models.Pet
 }
@@ -111,11 +109,9 @@ func NewPetListBadRequest() *PetListBadRequest {
 	return &PetListBadRequest{}
 }
 
-/*
-PetListBadRequest describes a response with status code 400, with default header values.
-
-Invalid status value
-*/
+// PetListBadRequest describes a response with status code 400, with default header values.
+//
+// Invalid status value
 type PetListBadRequest struct {
 }
 

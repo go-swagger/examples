@@ -41,24 +41,15 @@ func NewFindParams() FindParams {
 type FindParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  Required: true
-	  In: header
-	*/
+	// Required: true
+	// In: header
 	XRateLimit int32
-
-	/*
-	  Required: true
-	  In: formData
-	*/
+	// Required: true
+	// In: formData
 	Limit int32
-
-	/*
-	  Required: true
-	  In: formData
-	  Collection Format: multi
-	*/
+	// Required: true
+	// In: formData
+	// Collection Format: multi
 	Tags []int32
 }
 

@@ -26,11 +26,9 @@ func NewUpdatePetWithForm(ctx *middleware.Context, handler UpdatePetWithFormHand
 	return &UpdatePetWithForm{Context: ctx, Handler: handler}
 }
 
-/*
-	UpdatePetWithForm swagger:route POST /pets/{petId} pet updatePetWithForm
-
-Updates a pet in the store with form data
-*/
+// UpdatePetWithForm swagger:route POST /pets/{petId} pet updatePetWithForm
+//
+// Updates a pet in the store with form data
 type UpdatePetWithForm struct {
 	Context *middleware.Context
 	Handler UpdatePetWithFormHandler

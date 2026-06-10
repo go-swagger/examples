@@ -76,7 +76,7 @@ func registerOperationTodosUpdateOneBodyParamFlags(cmdPrefix string, cmd *cobra.
 	if cmdPrefix == "" {
 		flagBodyName = "body"
 	} else {
-		flagBodyName = fmt.Sprintf("%v.body", cmdPrefix)
+		flagBodyName = fmt.Sprintf("%v.%s", cmdPrefix, "body")
 	}
 
 	_ = cmd.PersistentFlags().String(flagBodyName, "", `Optional json string for [body]. `)
@@ -97,7 +97,7 @@ func registerOperationTodosUpdateOneIDParamFlags(cmdPrefix string, cmd *cobra.Co
 	if cmdPrefix == "" {
 		flagIDName = "id"
 	} else {
-		flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
+		flagIDName = fmt.Sprintf("%v.%s", cmdPrefix, "id")
 	}
 
 	var flagIDDefault int64
@@ -139,7 +139,7 @@ func retrieveOperationTodosUpdateOneBodyFlag(m *todos.UpdateOneParams, cmdPrefix
 		if err != nil {
 			return err, false
 		}
-		logDebugf("Body dry-run payload: %v", string(flagBodyValueDebugBytes))
+		logDebugf("%s dry-run payload: %v", "Body", string(flagBodyValueDebugBytes))
 	}
 
 	retAdded = retAdded || added
@@ -155,7 +155,7 @@ func retrieveOperationTodosUpdateOneIDFlag(m *todos.UpdateOneParams, cmdPrefix s
 		if cmdPrefix == "" {
 			flagIDName = "id"
 		} else {
-			flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
+			flagIDName = fmt.Sprintf("%v.%s", cmdPrefix, "id")
 		}
 
 		flagIDValue, err := cmd.Flags().GetInt64(flagIDName)

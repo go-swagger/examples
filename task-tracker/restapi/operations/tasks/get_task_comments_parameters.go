@@ -35,22 +35,16 @@ func NewGetTaskCommentsParams() GetTaskCommentsParams {
 type GetTaskCommentsParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*The id of the item
-	  Required: true
-	  In: path
-	*/
+	// The id of the item
+	// Required: true
+	// In: path
 	ID int64
-
-	/*Amount of items to return in a single page
-	  In: query
-	  Default: 20
-	*/
+	// Amount of items to return in a single page
+	// In: query
+	// Default: 20
 	PageSize *int32
-
-	/*The created time of the oldest seen comment
-	  In: query
-	*/
+	// The created time of the oldest seen comment
+	// In: query
 	Since *strfmt.DateTime
 }
 

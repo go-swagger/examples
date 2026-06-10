@@ -13,15 +13,12 @@ import (
 // CreateTaskCreatedCode is the HTTP code returned for type CreateTaskCreated
 const CreateTaskCreatedCode int = 201
 
-/*
-CreateTaskCreated Task created
-
-swagger:response createTaskCreated
-*/
+// CreateTaskCreated Task created
+//
+// swagger:response createTaskCreated
 type CreateTaskCreated struct {
-	/*URL to the newly added Task
 
-	 */
+	// URL to the newly added Task
 	Location strfmt.URI `json:"Location"`
 }
 
@@ -57,21 +54,15 @@ func (o *CreateTaskCreated) WriteResponse(rw http.ResponseWriter, producer runti
 	rw.WriteHeader(201)
 }
 
-/*
-CreateTaskDefault Error response
-
-swagger:response createTaskDefault
-*/
+// CreateTaskDefault Error response
+//
+// swagger:response createTaskDefault
 type CreateTaskDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

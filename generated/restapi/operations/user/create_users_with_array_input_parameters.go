@@ -26,10 +26,8 @@ func NewCreateUsersWithArrayInputParams() CreateUsersWithArrayInputParams {
 type CreateUsersWithArrayInputParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*List of user object
-	  In: body
-	*/
+	// List of user object
+	// In: body
 	Body []*models.User
 }
 

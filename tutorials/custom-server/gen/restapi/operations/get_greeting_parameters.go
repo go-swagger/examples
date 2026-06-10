@@ -26,10 +26,8 @@ func NewGetGreetingParams() GetGreetingParams {
 type GetGreetingParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*defaults to World if not given
-	  In: query
-	*/
+	// defaults to World if not given
+	// In: query
 	Name *string
 }
 

@@ -12,16 +12,12 @@ import (
 // OrderGetOKCode is the HTTP code returned for type OrderGetOK
 const OrderGetOKCode int = 200
 
-/*
-OrderGetOK successful operation
-
-swagger:response orderGetOK
-*/
+// OrderGetOK successful operation
+//
+// swagger:response orderGetOK
 type OrderGetOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Order `json:"body,omitempty"`
 }
 
@@ -57,11 +53,9 @@ func (o *OrderGetOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // OrderGetBadRequestCode is the HTTP code returned for type OrderGetBadRequest
 const OrderGetBadRequestCode int = 400
 
-/*
-OrderGetBadRequest Invalid ID supplied
-
-swagger:response orderGetBadRequest
-*/
+// OrderGetBadRequest Invalid ID supplied
+//
+// swagger:response orderGetBadRequest
 type OrderGetBadRequest struct {
 }
 
@@ -82,11 +76,9 @@ func (o *OrderGetBadRequest) WriteResponse(rw http.ResponseWriter, producer runt
 // OrderGetNotFoundCode is the HTTP code returned for type OrderGetNotFound
 const OrderGetNotFoundCode int = 404
 
-/*
-OrderGetNotFound Order not found
-
-swagger:response orderGetNotFound
-*/
+// OrderGetNotFound Order not found
+//
+// swagger:response orderGetNotFound
 type OrderGetNotFound struct {
 }
 

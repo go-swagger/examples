@@ -27,10 +27,8 @@ func NewCreateUserParams() CreateUserParams {
 type CreateUserParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Created user object
-	  In: body
-	*/
+	// Created user object
+	// In: body
 	Body *models.User
 }
 

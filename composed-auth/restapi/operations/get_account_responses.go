@@ -12,16 +12,12 @@ import (
 // GetAccountOKCode is the HTTP code returned for type GetAccountOK
 const GetAccountOKCode int = 200
 
-/*
-GetAccountOK registered user personal account infos
-
-swagger:response getAccountOK
-*/
+// GetAccountOK registered user personal account infos
+//
+// swagger:response getAccountOK
 type GetAccountOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload any `json:"body,omitempty"`
 }
 
@@ -55,11 +51,9 @@ func (o *GetAccountOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pr
 // GetAccountUnauthorizedCode is the HTTP code returned for type GetAccountUnauthorized
 const GetAccountUnauthorizedCode int = 401
 
-/*
-GetAccountUnauthorized unauthorized access for a lack of authentication
-
-swagger:response getAccountUnauthorized
-*/
+// GetAccountUnauthorized unauthorized access for a lack of authentication
+//
+// swagger:response getAccountUnauthorized
 type GetAccountUnauthorized struct {
 }
 
@@ -77,17 +71,13 @@ func (o *GetAccountUnauthorized) WriteResponse(rw http.ResponseWriter, producer 
 	rw.WriteHeader(401)
 }
 
-/*
-GetAccountDefault other error response
-
-swagger:response getAccountDefault
-*/
+// GetAccountDefault other error response
+//
+// swagger:response getAccountDefault
 type GetAccountDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

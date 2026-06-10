@@ -12,16 +12,12 @@ import (
 // GreetNameOKCode is the HTTP code returned for type GreetNameOK
 const GreetNameOKCode int = 200
 
-/*
-GreetNameOK greeting
-
-swagger:response greetNameOK
-*/
+// GreetNameOK greeting
+//
+// swagger:response greetNameOK
 type GreetNameOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Greeting `json:"body,omitempty"`
 }
 
@@ -54,17 +50,13 @@ func (o *GreetNameOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 	}
 }
 
-/*
-GreetNameDefault error
-
-swagger:response greetNameDefault
-*/
+// GreetNameDefault error
+//
+// swagger:response greetNameDefault
 type GreetNameDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

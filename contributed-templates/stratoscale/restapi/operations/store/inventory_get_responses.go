@@ -11,16 +11,12 @@ import (
 // InventoryGetOKCode is the HTTP code returned for type InventoryGetOK
 const InventoryGetOKCode int = 200
 
-/*
-InventoryGetOK successful operation
-
-swagger:response inventoryGetOK
-*/
+// InventoryGetOK successful operation
+//
+// swagger:response inventoryGetOK
 type InventoryGetOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload map[string]int32 `json:"body,omitempty"`
 }
 

@@ -12,16 +12,12 @@ import (
 // PetCreateCreatedCode is the HTTP code returned for type PetCreateCreated
 const PetCreateCreatedCode int = 201
 
-/*
-PetCreateCreated Created
-
-swagger:response petCreateCreated
-*/
+// PetCreateCreated Created
+//
+// swagger:response petCreateCreated
 type PetCreateCreated struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Pet `json:"body,omitempty"`
 }
 
@@ -57,11 +53,9 @@ func (o *PetCreateCreated) WriteResponse(rw http.ResponseWriter, producer runtim
 // PetCreateMethodNotAllowedCode is the HTTP code returned for type PetCreateMethodNotAllowed
 const PetCreateMethodNotAllowedCode int = 405
 
-/*
-PetCreateMethodNotAllowed Invalid input
-
-swagger:response petCreateMethodNotAllowed
-*/
+// PetCreateMethodNotAllowed Invalid input
+//
+// swagger:response petCreateMethodNotAllowed
 type PetCreateMethodNotAllowed struct {
 }
 

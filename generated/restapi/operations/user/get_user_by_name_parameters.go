@@ -25,11 +25,9 @@ func NewGetUserByNameParams() GetUserByNameParams {
 type GetUserByNameParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*The name that needs to be fetched. Use user1 for testing.
-	  Required: true
-	  In: path
-	*/
+	// The name that needs to be fetched. Use user1 for testing.
+	// Required: true
+	// In: path
 	Username string
 }
 

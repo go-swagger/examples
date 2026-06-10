@@ -29,11 +29,8 @@ func NewAddOrderParams() AddOrderParams {
 type AddOrderParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  Required: true
-	  In: body
-	*/
+	// Required: true
+	// In: body
 	Order *models.Order
 }
 

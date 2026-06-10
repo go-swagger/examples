@@ -12,16 +12,12 @@ import (
 // GetLoginOKCode is the HTTP code returned for type GetLoginOK
 const GetLoginOKCode int = 200
 
-/*
-GetLoginOK login
-
-swagger:response getLoginOK
-*/
+// GetLoginOK login
+//
+// swagger:response getLoginOK
 type GetLoginOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *GetLoginOKBody `json:"body,omitempty"`
 }
 
@@ -54,17 +50,13 @@ func (o *GetLoginOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 	}
 }
 
-/*
-GetLoginDefault error
-
-swagger:response getLoginDefault
-*/
+// GetLoginDefault error
+//
+// swagger:response getLoginDefault
 type GetLoginDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

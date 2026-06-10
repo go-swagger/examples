@@ -177,13 +177,11 @@ func NewPetstoreAPI(spec *loads.Document) *PetstoreAPI {
 	}
 }
 
-/*
-PetstoreAPI This is a sample server Petstore server.
-
-[Learn about Swagger](http://swagger.wordnik.com) or join the IRC channel '#swagger' on irc.freenode.net.
-
-For this sample, you can use the api key 'special-key' to test the authorization filters
-*/
+// PetstoreAPI This is a sample server Petstore server.
+//
+// [Learn about Swagger](http://swagger.wordnik.com) or join the IRC channel '#swagger' on irc.freenode.net.
+//
+// For this sample, you can use the api key 'special-key' to test the authorization filters
 type PetstoreAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

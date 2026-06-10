@@ -111,14 +111,12 @@ func NewTaskTrackerAPI(spec *loads.Document) *TaskTrackerAPI {
 	}
 }
 
-/*
-TaskTrackerAPI This application implements a very simple issue tracker.
-It's implemented as an API which is described by this swagger spec document.
-
-The go-swagger project uses this specification to test the code generation.
-This document contains all possible values for a swagger definition.
-This means that it exercises the framework relatively well.
-*/
+// TaskTrackerAPI This application implements a very simple issue tracker.
+// It's implemented as an API which is described by this swagger spec document.
+//
+// The go-swagger project uses this specification to test the code generation.
+// This document contains all possible values for a swagger definition.
+// This means that it exercises the framework relatively well.
 type TaskTrackerAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

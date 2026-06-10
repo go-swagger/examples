@@ -39,11 +39,8 @@ func NewUploadFileParams() UploadFileParams {
 type UploadFileParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  Required: true
-	  In: formData
-	*/
+	// Required: true
+	// In: formData
 	File io.ReadCloser
 }
 

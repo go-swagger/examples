@@ -12,11 +12,9 @@ import (
 // AddCommentToTaskCreatedCode is the HTTP code returned for type AddCommentToTaskCreated
 const AddCommentToTaskCreatedCode int = 201
 
-/*
-AddCommentToTaskCreated Comment added
-
-swagger:response addCommentToTaskCreated
-*/
+// AddCommentToTaskCreated Comment added
+//
+// swagger:response addCommentToTaskCreated
 type AddCommentToTaskCreated struct {
 }
 
@@ -34,21 +32,15 @@ func (o *AddCommentToTaskCreated) WriteResponse(rw http.ResponseWriter, producer
 	rw.WriteHeader(201)
 }
 
-/*
-AddCommentToTaskDefault Error response
-
-swagger:response addCommentToTaskDefault
-*/
+// AddCommentToTaskDefault Error response
+//
+// swagger:response addCommentToTaskDefault
 type AddCommentToTaskDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

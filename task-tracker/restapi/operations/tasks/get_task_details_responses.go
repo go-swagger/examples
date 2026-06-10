@@ -12,16 +12,12 @@ import (
 // GetTaskDetailsOKCode is the HTTP code returned for type GetTaskDetailsOK
 const GetTaskDetailsOKCode int = 200
 
-/*
-GetTaskDetailsOK Task details
-
-swagger:response getTaskDetailsOK
-*/
+// GetTaskDetailsOK Task details
+//
+// swagger:response getTaskDetailsOK
 type GetTaskDetailsOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Task `json:"body,omitempty"`
 }
 
@@ -57,16 +53,12 @@ func (o *GetTaskDetailsOK) WriteResponse(rw http.ResponseWriter, producer runtim
 // GetTaskDetailsUnprocessableEntityCode is the HTTP code returned for type GetTaskDetailsUnprocessableEntity
 const GetTaskDetailsUnprocessableEntityCode int = 422
 
-/*
-GetTaskDetailsUnprocessableEntity Validation error
-
-swagger:response getTaskDetailsUnprocessableEntity
-*/
+// GetTaskDetailsUnprocessableEntity Validation error
+//
+// swagger:response getTaskDetailsUnprocessableEntity
 type GetTaskDetailsUnprocessableEntity struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.ValidationError `json:"body,omitempty"`
 }
 
@@ -99,21 +91,15 @@ func (o *GetTaskDetailsUnprocessableEntity) WriteResponse(rw http.ResponseWriter
 	}
 }
 
-/*
-GetTaskDetailsDefault Error response
-
-swagger:response getTaskDetailsDefault
-*/
+// GetTaskDetailsDefault Error response
+//
+// swagger:response getTaskDetailsDefault
 type GetTaskDetailsDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

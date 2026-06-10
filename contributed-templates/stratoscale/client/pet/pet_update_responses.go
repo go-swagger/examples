@@ -55,11 +55,9 @@ func NewPetUpdateCreated() *PetUpdateCreated {
 	return &PetUpdateCreated{}
 }
 
-/*
-PetUpdateCreated describes a response with status code 201, with default header values.
-
-Updated successfully
-*/
+// PetUpdateCreated describes a response with status code 201, with default header values.
+//
+// Updated successfully
 type PetUpdateCreated struct {
 	Payload *models.Pet
 }
@@ -125,11 +123,9 @@ func NewPetUpdateBadRequest() *PetUpdateBadRequest {
 	return &PetUpdateBadRequest{}
 }
 
-/*
-PetUpdateBadRequest describes a response with status code 400, with default header values.
-
-Invalid ID supplied
-*/
+// PetUpdateBadRequest describes a response with status code 400, with default header values.
+//
+// Invalid ID supplied
 type PetUpdateBadRequest struct {
 }
 
@@ -181,11 +177,9 @@ func NewPetUpdateNotFound() *PetUpdateNotFound {
 	return &PetUpdateNotFound{}
 }
 
-/*
-PetUpdateNotFound describes a response with status code 404, with default header values.
-
-Pet not found
-*/
+// PetUpdateNotFound describes a response with status code 404, with default header values.
+//
+// Pet not found
 type PetUpdateNotFound struct {
 }
 
@@ -237,11 +231,9 @@ func NewPetUpdateMethodNotAllowed() *PetUpdateMethodNotAllowed {
 	return &PetUpdateMethodNotAllowed{}
 }
 
-/*
-PetUpdateMethodNotAllowed describes a response with status code 405, with default header values.
-
-Validation exception
-*/
+// PetUpdateMethodNotAllowed describes a response with status code 405, with default header values.
+//
+// Validation exception
 type PetUpdateMethodNotAllowed struct {
 }
 

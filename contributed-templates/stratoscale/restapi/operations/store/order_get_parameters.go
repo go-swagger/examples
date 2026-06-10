@@ -27,13 +27,11 @@ func NewOrderGetParams() OrderGetParams {
 type OrderGetParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*ID of pet that needs to be fetched
-	  Required: true
-	  Maximum: 10
-	  Minimum: 1
-	  In: path
-	*/
+	// ID of pet that needs to be fetched
+	// Required: true
+	// Maximum: 10
+	// Minimum: 1
+	// In: path
 	OrderID int64
 }
 

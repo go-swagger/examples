@@ -26,13 +26,11 @@ func NewGetPetByID(ctx *middleware.Context, handler GetPetByIDHandler) *GetPetBy
 	return &GetPetByID{Context: ctx, Handler: handler}
 }
 
-/*
-	GetPetByID swagger:route GET /pets/{petId} pet getPetById
-
-# Find pet by ID
-
-Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions
-*/
+// GetPetByID swagger:route GET /pets/{petId} pet getPetById
+//
+// # Find pet by ID
+//
+// Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions
 type GetPetByID struct {
 	Context *middleware.Context
 	Handler GetPetByIDHandler

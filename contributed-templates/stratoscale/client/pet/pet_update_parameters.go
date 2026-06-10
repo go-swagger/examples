@@ -63,10 +63,9 @@ PetUpdateParams contains all the parameters to send to the API endpoint
 */
 type PetUpdateParams struct {
 
-	/* Body.
-
-	   Pet object that needs to be added to the store
-	*/
+	// Body.
+	//
+	// Pet object that needs to be added to the store
 	Body *models.Pet
 
 	HTTPClient *http.Client

@@ -37,11 +37,9 @@ func NewPutTest2766OK() *PutTest2766OK {
 	return &PutTest2766OK{}
 }
 
-/*
-PutTest2766OK describes a response with status code 200, with default header values.
-
-test issue #2766
-*/
+// PutTest2766OK describes a response with status code 200, with default header values.
+//
+// test issue #2766
 type PutTest2766OK struct {
 	Payload *models.GithubReactions
 }

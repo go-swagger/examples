@@ -26,11 +26,9 @@ func NewPetGetParams() PetGetParams {
 type PetGetParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*ID of pet to return
-	  Required: true
-	  In: path
-	*/
+	// ID of pet to return
+	// Required: true
+	// In: path
 	PetID int64
 }
 

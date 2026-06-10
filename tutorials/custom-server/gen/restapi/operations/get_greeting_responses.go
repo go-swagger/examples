@@ -11,16 +11,13 @@ import (
 // GetGreetingOKCode is the HTTP code returned for type GetGreetingOK
 const GetGreetingOKCode int = 200
 
-/*
-GetGreetingOK returns a greeting
-
-swagger:response getGreetingOK
-*/
+// GetGreetingOK returns a greeting
+//
+// swagger:response getGreetingOK
 type GetGreetingOK struct {
 
-	/*contains the actual greeting as plain text
-	  In: Body
-	*/
+	// contains the actual greeting as plain text
+	// In: Body
 	Payload string `json:"body,omitempty"`
 }
 

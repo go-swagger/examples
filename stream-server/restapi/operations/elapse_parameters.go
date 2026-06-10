@@ -27,13 +27,11 @@ func NewElapseParams() ElapseParams {
 type ElapseParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*How many seconds to count down
-	  Required: true
-	  Maximum: 30
-	  Minimum: 2
-	  In: path
-	*/
+	// How many seconds to count down
+	// Required: true
+	// Maximum: 30
+	// Minimum: 2
+	// In: path
 	Length int64
 }
 

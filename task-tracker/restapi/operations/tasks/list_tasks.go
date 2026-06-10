@@ -26,16 +26,14 @@ func NewListTasks(ctx *middleware.Context, handler ListTasksHandler) *ListTasks 
 	return &ListTasks{Context: ctx, Handler: handler}
 }
 
-/*
-	ListTasks swagger:route GET /tasks tasks listTasks
-
-# Lists the tasks
-
-Allows for specifying a number of filter parameters to
-narrow down the results.
-Also allows for specifying a **sinceId** and **pageSize** parameter
-to page through large result sets.
-*/
+// ListTasks swagger:route GET /tasks tasks listTasks
+//
+// # Lists the tasks
+//
+// Allows for specifying a number of filter parameters to
+// narrow down the results.
+// Also allows for specifying a **sinceId** and **pageSize** parameter
+// to page through large result sets.
 type ListTasks struct {
 	Context *middleware.Context
 	Handler ListTasksHandler

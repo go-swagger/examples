@@ -44,9 +44,7 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 	return &Client{transport: transport, formats: strfmt.Default}
 }
 
-/*
-Client for uploads API.
-*/
+// Client for uploads API.
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
@@ -91,14 +89,12 @@ type ClientService interface {
 	SetTransport(transport runtime.ContextualTransport)
 }
 
-/*
-UploadFileuploads.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.UploadFileContext] instead.
-*/
+// UploadFile uploads.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.UploadFileContext] instead.
 func (a *Client) UploadFile(params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -110,11 +106,9 @@ func (a *Client) UploadFile(params *UploadFileParams, opts ...ClientOption) (*Up
 	return a.UploadFileContext(ctx, params, opts...)
 }
 
-/*
-UploadFileContextuploads.
-
-Do not use the deprecated [UploadFileParams.Context] with this method: it would be ignored.
-*/
+// UploadFileContext uploads.
+//
+// Do not use the deprecated [UploadFileParams.Context] with this method: it would be ignored.
 func (a *Client) UploadFileContext(ctx context.Context, params *UploadFileParams, opts ...ClientOption) (*UploadFileOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {

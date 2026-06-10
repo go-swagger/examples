@@ -13,16 +13,12 @@ import (
 // UpdateOneOKCode is the HTTP code returned for type UpdateOneOK
 const UpdateOneOKCode int = 200
 
-/*
-UpdateOneOK OK
-
-swagger:response updateOneOK
-*/
+// UpdateOneOK OK
+//
+// swagger:response updateOneOK
 type UpdateOneOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Item `json:"body,omitempty"`
 }
 
@@ -57,17 +53,13 @@ func (o *UpdateOneOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 
 func (o *UpdateOneOK) UpdateOneResponder() {}
 
-/*
-UpdateOneDefault error
-
-swagger:response updateOneDefault
-*/
+// UpdateOneDefault error
+//
+// swagger:response updateOneDefault
 type UpdateOneDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

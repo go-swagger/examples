@@ -12,16 +12,12 @@ import (
 // UpdateTaskOKCode is the HTTP code returned for type UpdateTaskOK
 const UpdateTaskOKCode int = 200
 
-/*
-UpdateTaskOK Task details
-
-swagger:response updateTaskOK
-*/
+// UpdateTaskOK Task details
+//
+// swagger:response updateTaskOK
 type UpdateTaskOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Task `json:"body,omitempty"`
 }
 
@@ -57,16 +53,12 @@ func (o *UpdateTaskOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pr
 // UpdateTaskUnprocessableEntityCode is the HTTP code returned for type UpdateTaskUnprocessableEntity
 const UpdateTaskUnprocessableEntityCode int = 422
 
-/*
-UpdateTaskUnprocessableEntity Validation error
-
-swagger:response updateTaskUnprocessableEntity
-*/
+// UpdateTaskUnprocessableEntity Validation error
+//
+// swagger:response updateTaskUnprocessableEntity
 type UpdateTaskUnprocessableEntity struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.ValidationError `json:"body,omitempty"`
 }
 
@@ -99,21 +91,15 @@ func (o *UpdateTaskUnprocessableEntity) WriteResponse(rw http.ResponseWriter, pr
 	}
 }
 
-/*
-UpdateTaskDefault Error response
-
-swagger:response updateTaskDefault
-*/
+// UpdateTaskDefault Error response
+//
+// swagger:response updateTaskDefault
 type UpdateTaskDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

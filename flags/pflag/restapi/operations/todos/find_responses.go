@@ -12,16 +12,12 @@ import (
 // FindOKCode is the HTTP code returned for type FindOK
 const FindOKCode int = 200
 
-/*
-FindOK OK
-
-swagger:response findOK
-*/
+// FindOK OK
+//
+// swagger:response findOK
 type FindOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []*models.Item `json:"body,omitempty"`
 }
 
@@ -57,17 +53,13 @@ func (o *FindOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer
 	}
 }
 
-/*
-FindDefault error
-
-swagger:response findDefault
-*/
+// FindDefault error
+//
+// swagger:response findDefault
 type FindDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

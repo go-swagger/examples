@@ -12,11 +12,9 @@ import (
 // AddOrderOKCode is the HTTP code returned for type AddOrderOK
 const AddOrderOKCode int = 200
 
-/*
-AddOrderOK empty response
-
-swagger:response addOrderOK
-*/
+// AddOrderOK empty response
+//
+// swagger:response addOrderOK
 type AddOrderOK struct {
 }
 
@@ -37,11 +35,9 @@ func (o *AddOrderOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // AddOrderUnauthorizedCode is the HTTP code returned for type AddOrderUnauthorized
 const AddOrderUnauthorizedCode int = 401
 
-/*
-AddOrderUnauthorized unauthorized access for a lack of authentication
-
-swagger:response addOrderUnauthorized
-*/
+// AddOrderUnauthorized unauthorized access for a lack of authentication
+//
+// swagger:response addOrderUnauthorized
 type AddOrderUnauthorized struct {
 }
 
@@ -62,11 +58,9 @@ func (o *AddOrderUnauthorized) WriteResponse(rw http.ResponseWriter, producer ru
 // AddOrderForbiddenCode is the HTTP code returned for type AddOrderForbidden
 const AddOrderForbiddenCode int = 403
 
-/*
-AddOrderForbidden forbidden access for a lack of sufficient privileges
-
-swagger:response addOrderForbidden
-*/
+// AddOrderForbidden forbidden access for a lack of sufficient privileges
+//
+// swagger:response addOrderForbidden
 type AddOrderForbidden struct {
 }
 
@@ -84,17 +78,13 @@ func (o *AddOrderForbidden) WriteResponse(rw http.ResponseWriter, producer runti
 	rw.WriteHeader(403)
 }
 
-/*
-AddOrderDefault other error response
-
-swagger:response addOrderDefault
-*/
+// AddOrderDefault other error response
+//
+// swagger:response addOrderDefault
 type AddOrderDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

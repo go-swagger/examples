@@ -26,11 +26,9 @@ func NewGreetName(ctx *middleware.Context, handler GreetNameHandler) *GreetName 
 	return &GreetName{Context: ctx, Handler: handler}
 }
 
-/*
-	GreetName swagger:route GET /greet/{name} greeter greetName
-
-Return a greeting addressed to the caller.
-*/
+// GreetName swagger:route GET /greet/{name} greeter greetName
+//
+// Return a greeting addressed to the caller.
 type GreetName struct {
 	Context *middleware.Context
 	Handler GreetNameHandler

@@ -71,7 +71,7 @@ func registerOperationTodosDestroyOneIDParamFlags(cmdPrefix string, cmd *cobra.C
 	if cmdPrefix == "" {
 		flagIDName = "id"
 	} else {
-		flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
+		flagIDName = fmt.Sprintf("%v.%s", cmdPrefix, "id")
 	}
 
 	var flagIDDefault int64
@@ -89,7 +89,7 @@ func retrieveOperationTodosDestroyOneIDFlag(m *todos.DestroyOneParams, cmdPrefix
 		if cmdPrefix == "" {
 			flagIDName = "id"
 		} else {
-			flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
+			flagIDName = fmt.Sprintf("%v.%s", cmdPrefix, "id")
 		}
 
 		flagIDValue, err := cmd.Flags().GetInt64(flagIDName)

@@ -66,11 +66,9 @@ func NewTodoListAPI(spec *loads.Document) *TodoListAPI {
 	}
 }
 
-/*
-TodoListAPI This is a simple todo list API
-illustrating go-swagger codegen
-capabilities.
-*/
+// TodoListAPI This is a simple todo list API
+// illustrating go-swagger codegen
+// capabilities.
 type TodoListAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

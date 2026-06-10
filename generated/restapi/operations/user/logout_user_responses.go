@@ -8,11 +8,9 @@ import (
 	"github.com/go-openapi/runtime"
 )
 
-/*
-LogoutUserDefault successful operation
-
-swagger:response logoutUserDefault
-*/
+// LogoutUserDefault successful operation
+//
+// swagger:response logoutUserDefault
 type LogoutUserDefault struct {
 	_statusCode int
 }

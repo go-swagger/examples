@@ -26,11 +26,9 @@ func NewGetPetByIDParams() GetPetByIDParams {
 type GetPetByIDParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*ID of pet that needs to be fetched
-	  Required: true
-	  In: path
-	*/
+	// ID of pet that needs to be fetched
+	// Required: true
+	// In: path
 	PetID int64
 }
 

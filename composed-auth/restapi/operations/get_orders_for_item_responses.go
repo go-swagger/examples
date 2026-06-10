@@ -12,16 +12,12 @@ import (
 // GetOrdersForItemOKCode is the HTTP code returned for type GetOrdersForItemOK
 const GetOrdersForItemOKCode int = 200
 
-/*
-GetOrdersForItemOK multiple orders
-
-swagger:response getOrdersForItemOK
-*/
+// GetOrdersForItemOK multiple orders
+//
+// swagger:response getOrdersForItemOK
 type GetOrdersForItemOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []*models.Order `json:"body,omitempty"`
 }
 
@@ -60,11 +56,9 @@ func (o *GetOrdersForItemOK) WriteResponse(rw http.ResponseWriter, producer runt
 // GetOrdersForItemUnauthorizedCode is the HTTP code returned for type GetOrdersForItemUnauthorized
 const GetOrdersForItemUnauthorizedCode int = 401
 
-/*
-GetOrdersForItemUnauthorized unauthorized access for a lack of authentication
-
-swagger:response getOrdersForItemUnauthorized
-*/
+// GetOrdersForItemUnauthorized unauthorized access for a lack of authentication
+//
+// swagger:response getOrdersForItemUnauthorized
 type GetOrdersForItemUnauthorized struct {
 }
 
@@ -85,11 +79,9 @@ func (o *GetOrdersForItemUnauthorized) WriteResponse(rw http.ResponseWriter, pro
 // GetOrdersForItemForbiddenCode is the HTTP code returned for type GetOrdersForItemForbidden
 const GetOrdersForItemForbiddenCode int = 403
 
-/*
-GetOrdersForItemForbidden forbidden access for a lack of sufficient privileges
-
-swagger:response getOrdersForItemForbidden
-*/
+// GetOrdersForItemForbidden forbidden access for a lack of sufficient privileges
+//
+// swagger:response getOrdersForItemForbidden
 type GetOrdersForItemForbidden struct {
 }
 
@@ -107,17 +99,13 @@ func (o *GetOrdersForItemForbidden) WriteResponse(rw http.ResponseWriter, produc
 	rw.WriteHeader(403)
 }
 
-/*
-GetOrdersForItemDefault other error response
-
-swagger:response getOrdersForItemDefault
-*/
+// GetOrdersForItemDefault other error response
+//
+// swagger:response getOrdersForItemDefault
 type GetOrdersForItemDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

@@ -12,11 +12,9 @@ import (
 // UploadTaskFileCreatedCode is the HTTP code returned for type UploadTaskFileCreated
 const UploadTaskFileCreatedCode int = 201
 
-/*
-UploadTaskFileCreated File added
-
-swagger:response uploadTaskFileCreated
-*/
+// UploadTaskFileCreated File added
+//
+// swagger:response uploadTaskFileCreated
 type UploadTaskFileCreated struct {
 }
 
@@ -34,21 +32,15 @@ func (o *UploadTaskFileCreated) WriteResponse(rw http.ResponseWriter, producer r
 	rw.WriteHeader(201)
 }
 
-/*
-UploadTaskFileDefault Error response
-
-swagger:response uploadTaskFileDefault
-*/
+// UploadTaskFileDefault Error response
+//
+// swagger:response uploadTaskFileDefault
 type UploadTaskFileDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

@@ -43,11 +43,9 @@ func NewPetCreateCreated() *PetCreateCreated {
 	return &PetCreateCreated{}
 }
 
-/*
-PetCreateCreated describes a response with status code 201, with default header values.
-
-Created
-*/
+// PetCreateCreated describes a response with status code 201, with default header values.
+//
+// Created
 type PetCreateCreated struct {
 	Payload *models.Pet
 }
@@ -113,11 +111,9 @@ func NewPetCreateMethodNotAllowed() *PetCreateMethodNotAllowed {
 	return &PetCreateMethodNotAllowed{}
 }
 
-/*
-PetCreateMethodNotAllowed describes a response with status code 405, with default header values.
-
-Invalid input
-*/
+// PetCreateMethodNotAllowed describes a response with status code 405, with default header values.
+//
+// Invalid input
 type PetCreateMethodNotAllowed struct {
 }
 

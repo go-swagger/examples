@@ -26,13 +26,11 @@ func NewDeleteUser(ctx *middleware.Context, handler DeleteUserHandler) *DeleteUs
 	return &DeleteUser{Context: ctx, Handler: handler}
 }
 
-/*
-	DeleteUser swagger:route DELETE /users/{username} user deleteUser
-
-# Delete user
-
-This can only be done by the logged in user.
-*/
+// DeleteUser swagger:route DELETE /users/{username} user deleteUser
+//
+// # Delete user
+//
+// This can only be done by the logged in user.
 type DeleteUser struct {
 	Context *middleware.Context
 	Handler DeleteUserHandler

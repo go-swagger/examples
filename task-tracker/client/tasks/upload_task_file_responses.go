@@ -44,11 +44,9 @@ func NewUploadTaskFileCreated() *UploadTaskFileCreated {
 	return &UploadTaskFileCreated{}
 }
 
-/*
-UploadTaskFileCreated describes a response with status code 201, with default header values.
-
-File added
-*/
+// UploadTaskFileCreated describes a response with status code 201, with default header values.
+//
+// File added
 type UploadTaskFileCreated struct {
 }
 
@@ -102,11 +100,9 @@ func NewUploadTaskFileDefault(code int) *UploadTaskFileDefault {
 	}
 }
 
-/*
-UploadTaskFileDefault describes a response with status code -1, with default header values.
-
-Error response
-*/
+// UploadTaskFileDefault describes a response with status code -1, with default header values.
+//
+// Error response
 type UploadTaskFileDefault struct {
 	_statusCode int
 	XErrorCode  string

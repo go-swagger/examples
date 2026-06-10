@@ -56,11 +56,9 @@ func NewGetIDOK() *GetIDOK {
 	return &GetIDOK{}
 }
 
-/*
-GetIDOK describes a response with status code 200, with default header values.
-
-OK
-*/
+// GetIDOK describes a response with status code 200, with default header values.
+//
+// OK
 type GetIDOK struct {
 	Payload *models.Customer
 }
@@ -126,11 +124,9 @@ func NewGetIDUnauthorized() *GetIDUnauthorized {
 	return &GetIDUnauthorized{}
 }
 
-/*
-GetIDUnauthorized describes a response with status code 401, with default header values.
-
-unauthorized
-*/
+// GetIDUnauthorized describes a response with status code 401, with default header values.
+//
+// unauthorized
 type GetIDUnauthorized struct {
 	Payload *models.Error
 }
@@ -196,11 +192,9 @@ func NewGetIDNotFound() *GetIDNotFound {
 	return &GetIDNotFound{}
 }
 
-/*
-GetIDNotFound describes a response with status code 404, with default header values.
-
-resource not found
-*/
+// GetIDNotFound describes a response with status code 404, with default header values.
+//
+// resource not found
 type GetIDNotFound struct {
 	Payload *models.Error
 }
@@ -268,11 +262,9 @@ func NewGetIDDefault(code int) *GetIDDefault {
 	}
 }
 
-/*
-GetIDDefault describes a response with status code -1, with default header values.
-
-error
-*/
+// GetIDDefault describes a response with status code -1, with default header values.
+//
+// error
 type GetIDDefault struct {
 	_statusCode int
 

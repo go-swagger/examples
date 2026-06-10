@@ -29,11 +29,9 @@ func NewOrderCreateParams() OrderCreateParams {
 type OrderCreateParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*order placed for purchasing the pet
-	  Required: true
-	  In: body
-	*/
+	// order placed for purchasing the pet
+	// Required: true
+	// In: body
 	Body *models.Order
 }
 

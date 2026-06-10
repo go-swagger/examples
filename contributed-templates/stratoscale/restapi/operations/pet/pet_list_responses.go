@@ -12,16 +12,12 @@ import (
 // PetListOKCode is the HTTP code returned for type PetListOK
 const PetListOKCode int = 200
 
-/*
-PetListOK successful operation
-
-swagger:response petListOK
-*/
+// PetListOK successful operation
+//
+// swagger:response petListOK
 type PetListOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []*models.Pet `json:"body,omitempty"`
 }
 
@@ -60,11 +56,9 @@ func (o *PetListOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produ
 // PetListBadRequestCode is the HTTP code returned for type PetListBadRequest
 const PetListBadRequestCode int = 400
 
-/*
-PetListBadRequest Invalid status value
-
-swagger:response petListBadRequest
-*/
+// PetListBadRequest Invalid status value
+//
+// swagger:response petListBadRequest
 type PetListBadRequest struct {
 }
 

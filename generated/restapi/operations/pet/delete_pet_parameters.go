@@ -27,17 +27,12 @@ func NewDeletePetParams() DeletePetParams {
 type DeletePetParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  Required: true
-	  In: header
-	*/
+	// Required: true
+	// In: header
 	APIKey string
-
-	/*Pet id to delete
-	  Required: true
-	  In: path
-	*/
+	// Pet id to delete
+	// Required: true
+	// In: path
 	PetID int64
 }
 

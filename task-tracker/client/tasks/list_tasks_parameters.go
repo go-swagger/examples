@@ -64,33 +64,29 @@ ListTasksParams contains all the parameters to send to the API endpoint
 */
 type ListTasksParams struct {
 
-	/* PageSize.
-
-	   Amount of items to return in a single page
-
-	   Format: int32
-	   Default: 20
-	*/
+	// PageSize.
+	//
+	// Amount of items to return in a single page
+	//
+	// Format: int32
+	// Default: 20
 	PageSize *int32
 
-	/* SinceID.
-
-	   The last id that was seen.
-
-	   Format: int64
-	*/
+	// SinceID.
+	//
+	// The last id that was seen.
+	//
+	// Format: int64
 	SinceID *int64
 
-	/* Status.
-
-	   the status to filter by
-	*/
+	// Status.
+	//
+	// the status to filter by
 	Status []string
 
-	/* Tags.
-
-	   the tags to filter by
-	*/
+	// Tags.
+	//
+	// the tags to filter by
 	Tags []string
 
 	HTTPClient *http.Client

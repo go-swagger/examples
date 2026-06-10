@@ -26,13 +26,11 @@ func NewFindPetsByTags(ctx *middleware.Context, handler FindPetsByTagsHandler) *
 	return &FindPetsByTags{Context: ctx, Handler: handler}
 }
 
-/*
-	FindPetsByTags swagger:route GET /pets/findByTags pet findPetsByTags
-
-# Finds Pets by tags
-
-Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-*/
+// FindPetsByTags swagger:route GET /pets/findByTags pet findPetsByTags
+//
+// # Finds Pets by tags
+//
+// Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
 type FindPetsByTags struct {
 	Context *middleware.Context
 	Handler FindPetsByTagsHandler

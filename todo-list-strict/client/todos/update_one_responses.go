@@ -44,11 +44,9 @@ func NewUpdateOneOK() *UpdateOneOK {
 	return &UpdateOneOK{}
 }
 
-/*
-UpdateOneOK describes a response with status code 200, with default header values.
-
-OK
-*/
+// UpdateOneOK describes a response with status code 200, with default header values.
+//
+// OK
 type UpdateOneOK struct {
 	Payload *models.Item
 }
@@ -116,11 +114,9 @@ func NewUpdateOneDefault(code int) *UpdateOneDefault {
 	}
 }
 
-/*
-UpdateOneDefault describes a response with status code -1, with default header values.
-
-error
-*/
+// UpdateOneDefault describes a response with status code -1, with default header values.
+//
+// error
 type UpdateOneDefault struct {
 	_statusCode int
 

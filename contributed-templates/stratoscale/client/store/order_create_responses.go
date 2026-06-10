@@ -43,11 +43,9 @@ func NewOrderCreateOK() *OrderCreateOK {
 	return &OrderCreateOK{}
 }
 
-/*
-OrderCreateOK describes a response with status code 200, with default header values.
-
-successful operation
-*/
+// OrderCreateOK describes a response with status code 200, with default header values.
+//
+// successful operation
 type OrderCreateOK struct {
 	Payload *models.Order
 }
@@ -113,11 +111,9 @@ func NewOrderCreateBadRequest() *OrderCreateBadRequest {
 	return &OrderCreateBadRequest{}
 }
 
-/*
-OrderCreateBadRequest describes a response with status code 400, with default header values.
-
-Invalid Order
-*/
+// OrderCreateBadRequest describes a response with status code 400, with default header values.
+//
+// Invalid Order
 type OrderCreateBadRequest struct {
 }
 

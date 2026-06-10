@@ -28,13 +28,11 @@ func NewGetAccount(ctx *middleware.Context, handler GetAccountHandler) *GetAccou
 	return &GetAccount{Context: ctx, Handler: handler}
 }
 
-/*
-	GetAccount swagger:route GET /account getAccount
-
-registered user account
-
-Every registered user should be able to access this operation
-*/
+// GetAccount swagger:route GET /account getAccount
+//
+// registered user account
+//
+// Every registered user should be able to access this operation
 type GetAccount struct {
 	Context *middleware.Context
 	Handler GetAccountHandler

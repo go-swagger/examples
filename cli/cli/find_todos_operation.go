@@ -77,7 +77,7 @@ func registerOperationTodosFindTodosLimitParamFlags(cmdPrefix string, cmd *cobra
 	if cmdPrefix == "" {
 		flagLimitName = "limit"
 	} else {
-		flagLimitName = fmt.Sprintf("%v.limit", cmdPrefix)
+		flagLimitName = fmt.Sprintf("%v.%s", cmdPrefix, "limit")
 	}
 
 	var flagLimitDefault int32 = 20
@@ -95,7 +95,7 @@ func registerOperationTodosFindTodosSinceParamFlags(cmdPrefix string, cmd *cobra
 	if cmdPrefix == "" {
 		flagSinceName = "since"
 	} else {
-		flagSinceName = fmt.Sprintf("%v.since", cmdPrefix)
+		flagSinceName = fmt.Sprintf("%v.%s", cmdPrefix, "since")
 	}
 
 	var flagSinceDefault int64
@@ -113,7 +113,7 @@ func retrieveOperationTodosFindTodosLimitFlag(m *todos.FindTodosParams, cmdPrefi
 		if cmdPrefix == "" {
 			flagLimitName = "limit"
 		} else {
-			flagLimitName = fmt.Sprintf("%v.limit", cmdPrefix)
+			flagLimitName = fmt.Sprintf("%v.%s", cmdPrefix, "limit")
 		}
 
 		flagLimitValue, err := cmd.Flags().GetInt32(flagLimitName)
@@ -135,7 +135,7 @@ func retrieveOperationTodosFindTodosSinceFlag(m *todos.FindTodosParams, cmdPrefi
 		if cmdPrefix == "" {
 			flagSinceName = "since"
 		} else {
-			flagSinceName = fmt.Sprintf("%v.since", cmdPrefix)
+			flagSinceName = fmt.Sprintf("%v.%s", cmdPrefix, "since")
 		}
 
 		flagSinceValue, err := cmd.Flags().GetInt64(flagSinceName)

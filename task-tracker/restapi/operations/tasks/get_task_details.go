@@ -26,16 +26,14 @@ func NewGetTaskDetails(ctx *middleware.Context, handler GetTaskDetailsHandler) *
 	return &GetTaskDetails{Context: ctx, Handler: handler}
 }
 
-/*
-	GetTaskDetails swagger:route GET /tasks/{id} tasks getTaskDetails
-
-Gets the details for a task.
-
-The details view has more information than the card view.
-You can see who reported the issue and who last updated it when.
-
-There are also comments for each issue.
-*/
+// GetTaskDetails swagger:route GET /tasks/{id} tasks getTaskDetails
+//
+// Gets the details for a task.
+//
+// The details view has more information than the card view.
+// You can see who reported the issue and who last updated it when.
+//
+// There are also comments for each issue.
 type GetTaskDetails struct {
 	Context *middleware.Context
 	Handler GetTaskDetailsHandler

@@ -52,17 +52,14 @@ func NewListTasksOK() *ListTasksOK {
 	return &ListTasksOK{}
 }
 
-/*
-ListTasksOK describes a response with status code 200, with default header values.
-
-Successful response
-*/
+// ListTasksOK describes a response with status code 200, with default header values.
+//
+// Successful response
 type ListTasksOK struct {
 
-	/* the last task id known to the application
-
-	   Format: int64
-	*/
+	// the last task id known to the application
+	//
+	// Format: int64
 	XLastTaskID int64
 
 	Payload []*models.TaskCard
@@ -138,11 +135,9 @@ func NewListTasksUnprocessableEntity() *ListTasksUnprocessableEntity {
 	return &ListTasksUnprocessableEntity{}
 }
 
-/*
-ListTasksUnprocessableEntity describes a response with status code 422, with default header values.
-
-Validation error
-*/
+// ListTasksUnprocessableEntity describes a response with status code 422, with default header values.
+//
+// Validation error
 type ListTasksUnprocessableEntity struct {
 	Payload *models.ValidationError
 }
@@ -210,11 +205,9 @@ func NewListTasksDefault(code int) *ListTasksDefault {
 	}
 }
 
-/*
-ListTasksDefault describes a response with status code -1, with default header values.
-
-Error response
-*/
+// ListTasksDefault describes a response with status code -1, with default header values.
+//
+// Error response
 type ListTasksDefault struct {
 	_statusCode int
 	XErrorCode  string

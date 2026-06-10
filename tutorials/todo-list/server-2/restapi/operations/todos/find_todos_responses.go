@@ -12,16 +12,12 @@ import (
 // FindTodosOKCode is the HTTP code returned for type FindTodosOK
 const FindTodosOKCode int = 200
 
-/*
-FindTodosOK list the todo operations
-
-swagger:response findTodosOK
-*/
+// FindTodosOK list the todo operations
+//
+// swagger:response findTodosOK
 type FindTodosOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []*models.Item `json:"body,omitempty"`
 }
 
@@ -57,17 +53,13 @@ func (o *FindTodosOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 	}
 }
 
-/*
-FindTodosDefault generic error response
-
-swagger:response findTodosDefault
-*/
+// FindTodosDefault generic error response
+//
+// swagger:response findTodosDefault
 type FindTodosDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

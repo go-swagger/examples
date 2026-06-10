@@ -15,21 +15,21 @@ import (
 
 // API is the interface of the store client.
 type API interface {
-	/*
-	   InventoryGet returns pet inventories by status*/
+
+	// InventoryGet returns pet inventories by status
 	InventoryGet(ctx context.Context, params *InventoryGetParams) (*InventoryGetOK, error)
-	/*
-	   OrderCreate places an order for a pet*/
+
+	// OrderCreate places an order for a pet
 	OrderCreate(ctx context.Context, params *OrderCreateParams) (*OrderCreateOK, error)
-	/*
-	   OrderDelete deletes purchase order by ID
 
-	   For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors*/
+	// OrderDelete deletes purchase order by ID
+	//
+	// For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
 	OrderDelete(ctx context.Context, params *OrderDeleteParams) (*OrderDeleteNoContent, error)
-	/*
-	   OrderGet finds purchase order by ID
 
-	   For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions*/
+	// OrderGet finds purchase order by ID
+	//
+	// For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
 	OrderGet(ctx context.Context, params *OrderGetParams) (*OrderGetOK, error)
 }
 
@@ -42,18 +42,14 @@ func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInf
 	}
 }
 
-/*
-Client for store API
-*/
+// Client for store API
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
-/*
-InventoryGet returns pet inventories by status.
-*/
+// InventoryGet returns pet inventories by status.
 func (a *Client) InventoryGet(ctx context.Context, params *InventoryGetParams) (*InventoryGetOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "InventoryGet",
@@ -83,9 +79,7 @@ func (a *Client) InventoryGet(ctx context.Context, params *InventoryGetParams) (
 	panic(msg)
 }
 
-/*
-OrderCreate places an order for a pet.
-*/
+// OrderCreate places an order for a pet.
 func (a *Client) OrderCreate(ctx context.Context, params *OrderCreateParams) (*OrderCreateOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "OrderCreate",
@@ -119,11 +113,9 @@ func (a *Client) OrderCreate(ctx context.Context, params *OrderCreateParams) (*O
 	panic(msg)
 }
 
-/*
-OrderDelete deletes purchase order by ID.
-
-For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors.
-*/
+// OrderDelete deletes purchase order by ID.
+//
+// For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors.
 func (a *Client) OrderDelete(ctx context.Context, params *OrderDeleteParams) (*OrderDeleteNoContent, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "OrderDelete",
@@ -159,11 +151,9 @@ func (a *Client) OrderDelete(ctx context.Context, params *OrderDeleteParams) (*O
 	panic(msg)
 }
 
-/*
-OrderGet finds purchase order by ID.
-
-For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions.
-*/
+// OrderGet finds purchase order by ID.
+//
+// For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions.
 func (a *Client) OrderGet(ctx context.Context, params *OrderGetParams) (*OrderGetOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "OrderGet",

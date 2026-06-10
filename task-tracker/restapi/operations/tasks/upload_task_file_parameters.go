@@ -41,21 +41,15 @@ func NewUploadTaskFileParams() UploadTaskFileParams {
 type UploadTaskFileParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Extra information describing the file
-	  In: formData
-	*/
+	// Extra information describing the file
+	// In: formData
 	Description *string
-
-	/*The file to upload
-	  In: formData
-	*/
+	// The file to upload
+	// In: formData
 	File io.ReadCloser
-
-	/*The id of the item
-	  Required: true
-	  In: path
-	*/
+	// The id of the item
+	// Required: true
+	// In: path
 	ID int64
 }
 

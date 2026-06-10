@@ -41,7 +41,7 @@ func registerItemPropCompleted(depth int, cmdPrefix string, cmd *cobra.Command) 
 	if cmdPrefix == "" {
 		flagCompletedName = "completed"
 	} else {
-		flagCompletedName = fmt.Sprintf("%v.completed", cmdPrefix)
+		flagCompletedName = fmt.Sprintf("%v.%s", cmdPrefix, "completed")
 	}
 
 	var flagCompletedDefault bool
@@ -62,7 +62,7 @@ func registerItemPropDescription(depth int, cmdPrefix string, cmd *cobra.Command
 	if cmdPrefix == "" {
 		flagDescriptionName = "description"
 	} else {
-		flagDescriptionName = fmt.Sprintf("%v.description", cmdPrefix)
+		flagDescriptionName = fmt.Sprintf("%v.%s", cmdPrefix, "description")
 	}
 
 	var flagDescriptionDefault string
@@ -83,7 +83,7 @@ func registerItemPropID(depth int, cmdPrefix string, cmd *cobra.Command) error {
 	if cmdPrefix == "" {
 		flagIDName = "id"
 	} else {
-		flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
+		flagIDName = fmt.Sprintf("%v.%s", cmdPrefix, "id")
 	}
 
 	var flagIDDefault int64
@@ -124,14 +124,14 @@ func retrieveItemPropCompletedFlags(depth int, m *models.Item, cmdPrefix string,
 	}
 	retAdded := false
 
-	flagCompletedName := fmt.Sprintf("%v.completed", cmdPrefix)
+	flagCompletedName := fmt.Sprintf("%v.%s", cmdPrefix, "completed")
 	if cmd.Flags().Changed(flagCompletedName) {
 
 		var flagCompletedName string
 		if cmdPrefix == "" {
 			flagCompletedName = "completed"
 		} else {
-			flagCompletedName = fmt.Sprintf("%v.completed", cmdPrefix)
+			flagCompletedName = fmt.Sprintf("%v.%s", cmdPrefix, "completed")
 		}
 
 		flagCompletedValue, err := cmd.Flags().GetBool(flagCompletedName)
@@ -152,14 +152,14 @@ func retrieveItemPropDescriptionFlags(depth int, m *models.Item, cmdPrefix strin
 	}
 	retAdded := false
 
-	flagDescriptionName := fmt.Sprintf("%v.description", cmdPrefix)
+	flagDescriptionName := fmt.Sprintf("%v.%s", cmdPrefix, "description")
 	if cmd.Flags().Changed(flagDescriptionName) {
 
 		var flagDescriptionName string
 		if cmdPrefix == "" {
 			flagDescriptionName = "description"
 		} else {
-			flagDescriptionName = fmt.Sprintf("%v.description", cmdPrefix)
+			flagDescriptionName = fmt.Sprintf("%v.%s", cmdPrefix, "description")
 		}
 
 		flagDescriptionValue, err := cmd.Flags().GetString(flagDescriptionName)
@@ -180,14 +180,14 @@ func retrieveItemPropIDFlags(depth int, m *models.Item, cmdPrefix string, cmd *c
 	}
 	retAdded := false
 
-	flagIDName := fmt.Sprintf("%v.id", cmdPrefix)
+	flagIDName := fmt.Sprintf("%v.%s", cmdPrefix, "id")
 	if cmd.Flags().Changed(flagIDName) {
 
 		var flagIDName string
 		if cmdPrefix == "" {
 			flagIDName = "id"
 		} else {
-			flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
+			flagIDName = fmt.Sprintf("%v.%s", cmdPrefix, "id")
 		}
 
 		flagIDValue, err := cmd.Flags().GetInt64(flagIDName)

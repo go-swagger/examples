@@ -39,23 +39,17 @@ func NewUpdatePetWithFormParams() UpdatePetWithFormParams {
 type UpdatePetWithFormParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Updated name of the pet
-	  Required: true
-	  In: formData
-	*/
+	// Updated name of the pet
+	// Required: true
+	// In: formData
 	Name string
-
-	/*ID of pet that needs to be updated
-	  Required: true
-	  In: path
-	*/
+	// ID of pet that needs to be updated
+	// Required: true
+	// In: path
 	PetID string
-
-	/*Updated status of the pet
-	  Required: true
-	  In: formData
-	*/
+	// Updated status of the pet
+	// Required: true
+	// In: formData
 	Status string
 }
 

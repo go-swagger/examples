@@ -26,13 +26,11 @@ func NewGetOrderByID(ctx *middleware.Context, handler GetOrderByIDHandler) *GetO
 	return &GetOrderByID{Context: ctx, Handler: handler}
 }
 
-/*
-	GetOrderByID swagger:route GET /stores/order/{orderId} store getOrderById
-
-# Find purchase order by ID
-
-For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
-*/
+// GetOrderByID swagger:route GET /stores/order/{orderId} store getOrderById
+//
+// # Find purchase order by ID
+//
+// For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
 type GetOrderByID struct {
 	Context *middleware.Context
 	Handler GetOrderByIDHandler

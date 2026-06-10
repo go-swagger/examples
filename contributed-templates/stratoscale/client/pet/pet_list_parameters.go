@@ -63,10 +63,9 @@ PetListParams contains all the parameters to send to the API endpoint
 */
 type PetListParams struct {
 
-	/* Status.
-
-	   Status values that need to be considered for filter
-	*/
+	// Status.
+	//
+	// Status values that need to be considered for filter
 	Status []string
 
 	HTTPClient *http.Client

@@ -48,11 +48,9 @@ func NewAddCommentToTaskCreated() *AddCommentToTaskCreated {
 	return &AddCommentToTaskCreated{}
 }
 
-/*
-AddCommentToTaskCreated describes a response with status code 201, with default header values.
-
-Comment added
-*/
+// AddCommentToTaskCreated describes a response with status code 201, with default header values.
+//
+// Comment added
 type AddCommentToTaskCreated struct {
 }
 
@@ -106,11 +104,9 @@ func NewAddCommentToTaskDefault(code int) *AddCommentToTaskDefault {
 	}
 }
 
-/*
-AddCommentToTaskDefault describes a response with status code -1, with default header values.
-
-Error response
-*/
+// AddCommentToTaskDefault describes a response with status code -1, with default header values.
+//
+// Error response
 type AddCommentToTaskDefault struct {
 	_statusCode int
 	XErrorCode  string
@@ -181,13 +177,11 @@ func (o *AddCommentToTaskDefault) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*
-AddCommentToTaskBody A comment to create
+// AddCommentToTaskBody A comment to create
 //
 // These values can have github flavored markdown.
 //
-swagger:model AddCommentToTaskBody
-*/
+// swagger:model AddCommentToTaskBody
 type AddCommentToTaskBody struct {
 
 	// content

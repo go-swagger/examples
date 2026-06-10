@@ -25,11 +25,9 @@ func NewDeleteOrderParams() DeleteOrderParams {
 type DeleteOrderParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*ID of the order that needs to be deleted
-	  Required: true
-	  In: path
-	*/
+	// ID of the order that needs to be deleted
+	// Required: true
+	// In: path
 	OrderID string
 }
 

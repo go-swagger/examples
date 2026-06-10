@@ -63,24 +63,21 @@ UploadTaskFileParams contains all the parameters to send to the API endpoint
 */
 type UploadTaskFileParams struct {
 
-	/* Description.
-
-	   Extra information describing the file
-	*/
+	// Description.
+	//
+	// Extra information describing the file
 	Description *string
 
-	/* File.
-
-	   The file to upload
-	*/
+	// File.
+	//
+	// The file to upload
 	File runtime.NamedReadCloser
 
-	/* ID.
-
-	   The id of the item
-
-	   Format: int64
-	*/
+	// ID.
+	//
+	// The id of the item
+	//
+	// Format: int64
 	ID int64
 
 	HTTPClient *http.Client

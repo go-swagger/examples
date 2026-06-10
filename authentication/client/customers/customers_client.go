@@ -43,9 +43,7 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 	return &Client{transport: transport, formats: strfmt.Default}
 }
 
-/*
-Client for customers API.
-*/
+// Client for customers API.
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
@@ -116,14 +114,12 @@ type ClientService interface {
 	SetTransport(transport runtime.ContextualTransport)
 }
 
-/*
-Createcreates a new customer to track.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.CreateContext] instead.
-*/
+// Create creates a new customer to track.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.CreateContext] instead.
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -135,11 +131,9 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 	return a.CreateContext(ctx, params, authInfo, opts...)
 }
 
-/*
-CreateContextcreates a new customer to track.
-
-Do not use the deprecated [CreateParams.Context] with this method: it would be ignored.
-*/
+// CreateContext creates a new customer to track.
+//
+// Do not use the deprecated [CreateParams.Context] with this method: it would be ignored.
 func (a *Client) CreateContext(ctx context.Context, params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
@@ -182,14 +176,12 @@ func (a *Client) CreateContext(ctx context.Context, params *CreateParams, authIn
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
-/*
-GetIDgets a customer Id given an s s n.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.GetIDContext] instead.
-*/
+// GetID gets a customer Id given an s s n.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.GetIDContext] instead.
 func (a *Client) GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -201,11 +193,9 @@ func (a *Client) GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWrite
 	return a.GetIDContext(ctx, params, authInfo, opts...)
 }
 
-/*
-GetIDContextgets a customer Id given an s s n.
-
-Do not use the deprecated [GetIDParams.Context] with this method: it would be ignored.
-*/
+// GetIDContext gets a customer Id given an s s n.
+//
+// Do not use the deprecated [GetIDParams.Context] with this method: it would be ignored.
 func (a *Client) GetIDContext(ctx context.Context, params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {

@@ -26,13 +26,11 @@ func NewOrderDelete(ctx *middleware.Context, handler OrderDeleteHandler) *OrderD
 	return &OrderDelete{Context: ctx, Handler: handler}
 }
 
-/*
-	OrderDelete swagger:route DELETE /store/order/{orderId} store orderDelete
-
-# Delete purchase order by ID
-
-For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
-*/
+// OrderDelete swagger:route DELETE /store/order/{orderId} store orderDelete
+//
+// # Delete purchase order by ID
+//
+// For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
 type OrderDelete struct {
 	Context *middleware.Context
 	Handler OrderDeleteHandler

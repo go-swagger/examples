@@ -49,11 +49,9 @@ func NewOrderGetOK() *OrderGetOK {
 	return &OrderGetOK{}
 }
 
-/*
-OrderGetOK describes a response with status code 200, with default header values.
-
-successful operation
-*/
+// OrderGetOK describes a response with status code 200, with default header values.
+//
+// successful operation
 type OrderGetOK struct {
 	Payload *models.Order
 }
@@ -119,11 +117,9 @@ func NewOrderGetBadRequest() *OrderGetBadRequest {
 	return &OrderGetBadRequest{}
 }
 
-/*
-OrderGetBadRequest describes a response with status code 400, with default header values.
-
-Invalid ID supplied
-*/
+// OrderGetBadRequest describes a response with status code 400, with default header values.
+//
+// Invalid ID supplied
 type OrderGetBadRequest struct {
 }
 
@@ -175,11 +171,9 @@ func NewOrderGetNotFound() *OrderGetNotFound {
 	return &OrderGetNotFound{}
 }
 
-/*
-OrderGetNotFound describes a response with status code 404, with default header values.
-
-Order not found
-*/
+// OrderGetNotFound describes a response with status code 404, with default header values.
+//
+// Order not found
 type OrderGetNotFound struct {
 }
 

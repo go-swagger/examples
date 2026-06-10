@@ -12,16 +12,12 @@ import (
 // PetUpdateCreatedCode is the HTTP code returned for type PetUpdateCreated
 const PetUpdateCreatedCode int = 201
 
-/*
-PetUpdateCreated Updated successfully
-
-swagger:response petUpdateCreated
-*/
+// PetUpdateCreated Updated successfully
+//
+// swagger:response petUpdateCreated
 type PetUpdateCreated struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Pet `json:"body,omitempty"`
 }
 
@@ -57,11 +53,9 @@ func (o *PetUpdateCreated) WriteResponse(rw http.ResponseWriter, producer runtim
 // PetUpdateBadRequestCode is the HTTP code returned for type PetUpdateBadRequest
 const PetUpdateBadRequestCode int = 400
 
-/*
-PetUpdateBadRequest Invalid ID supplied
-
-swagger:response petUpdateBadRequest
-*/
+// PetUpdateBadRequest Invalid ID supplied
+//
+// swagger:response petUpdateBadRequest
 type PetUpdateBadRequest struct {
 }
 
@@ -82,11 +76,9 @@ func (o *PetUpdateBadRequest) WriteResponse(rw http.ResponseWriter, producer run
 // PetUpdateNotFoundCode is the HTTP code returned for type PetUpdateNotFound
 const PetUpdateNotFoundCode int = 404
 
-/*
-PetUpdateNotFound Pet not found
-
-swagger:response petUpdateNotFound
-*/
+// PetUpdateNotFound Pet not found
+//
+// swagger:response petUpdateNotFound
 type PetUpdateNotFound struct {
 }
 
@@ -107,11 +99,9 @@ func (o *PetUpdateNotFound) WriteResponse(rw http.ResponseWriter, producer runti
 // PetUpdateMethodNotAllowedCode is the HTTP code returned for type PetUpdateMethodNotAllowed
 const PetUpdateMethodNotAllowedCode int = 405
 
-/*
-PetUpdateMethodNotAllowed Validation exception
-
-swagger:response petUpdateMethodNotAllowed
-*/
+// PetUpdateMethodNotAllowed Validation exception
+//
+// swagger:response petUpdateMethodNotAllowed
 type PetUpdateMethodNotAllowed struct {
 }
 

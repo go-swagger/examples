@@ -43,9 +43,7 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 	return &Client{transport: transport, formats: strfmt.Default}
 }
 
-/*
-Client for todos API.
-*/
+// Client for todos API.
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
@@ -119,14 +117,12 @@ type ClientService interface {
 	SetTransport(transport runtime.ContextualTransport)
 }
 
-/*
-AddOneadd one API.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.AddOneContext] instead.
-*/
+// AddOne add one API.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.AddOneContext] instead.
 func (a *Client) AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -138,11 +134,9 @@ func (a *Client) AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWri
 	return a.AddOneContext(ctx, params, authInfo, opts...)
 }
 
-/*
-AddOneContextadd one API.
-
-Do not use the deprecated [AddOneParams.Context] with this method: it would be ignored.
-*/
+// AddOneContext add one API.
+//
+// Do not use the deprecated [AddOneParams.Context] with this method: it would be ignored.
 func (a *Client) AddOneContext(ctx context.Context, params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
@@ -185,14 +179,12 @@ func (a *Client) AddOneContext(ctx context.Context, params *AddOneParams, authIn
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
-/*
-DestroyOnedestroy one API.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.DestroyOneContext] instead.
-*/
+// DestroyOne destroy one API.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.DestroyOneContext] instead.
 func (a *Client) DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -204,11 +196,9 @@ func (a *Client) DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAut
 	return a.DestroyOneContext(ctx, params, authInfo, opts...)
 }
 
-/*
-DestroyOneContextdestroy one API.
-
-Do not use the deprecated [DestroyOneParams.Context] with this method: it would be ignored.
-*/
+// DestroyOneContext destroy one API.
+//
+// Do not use the deprecated [DestroyOneParams.Context] with this method: it would be ignored.
 func (a *Client) DestroyOneContext(ctx context.Context, params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
@@ -251,14 +241,12 @@ func (a *Client) DestroyOneContext(ctx context.Context, params *DestroyOneParams
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
-/*
-Findfind API.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.FindContext] instead.
-*/
+// Find find API.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.FindContext] instead.
 func (a *Client) Find(params *FindParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindOK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -270,11 +258,9 @@ func (a *Client) Find(params *FindParams, authInfo runtime.ClientAuthInfoWriter,
 	return a.FindContext(ctx, params, authInfo, opts...)
 }
 
-/*
-FindContextfind API.
-
-Do not use the deprecated [FindParams.Context] with this method: it would be ignored.
-*/
+// FindContext find API.
+//
+// Do not use the deprecated [FindParams.Context] with this method: it would be ignored.
 func (a *Client) FindContext(ctx context.Context, params *FindParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
@@ -317,14 +303,12 @@ func (a *Client) FindContext(ctx context.Context, params *FindParams, authInfo r
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
-/*
-UpdateOneupdate one API.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.UpdateOneContext] instead.
-*/
+// UpdateOne update one API.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.UpdateOneContext] instead.
 func (a *Client) UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -336,11 +320,9 @@ func (a *Client) UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthI
 	return a.UpdateOneContext(ctx, params, authInfo, opts...)
 }
 
-/*
-UpdateOneContextupdate one API.
-
-Do not use the deprecated [UpdateOneParams.Context] with this method: it would be ignored.
-*/
+// UpdateOneContext update one API.
+//
+// Do not use the deprecated [UpdateOneParams.Context] with this method: it would be ignored.
 func (a *Client) UpdateOneContext(ctx context.Context, params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {

@@ -46,7 +46,7 @@ type Authable interface {
 	KeyAuth(token string) (any, error)
 }
 
-/* TodosHandler  */
+// TodosHandler
 type TodosHandler interface {
 	AddOne(params todos.AddOneParams, principal any) middleware.Responder
 	DestroyOne(params todos.DestroyOneParams, principal any) middleware.Responder

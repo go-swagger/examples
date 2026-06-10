@@ -37,29 +37,21 @@ func NewListTasksParams() ListTasksParams {
 type ListTasksParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Amount of items to return in a single page
-	  In: query
-	  Default: 20
-	*/
+	// Amount of items to return in a single page
+	// In: query
+	// Default: 20
 	PageSize *int32
-
-	/*The last id that was seen.
-	  In: query
-	*/
+	// The last id that was seen.
+	// In: query
 	SinceID *int64
-
-	/*the status to filter by
-	  Unique: true
-	  In: query
-	  Collection Format: pipes
-	*/
+	// the status to filter by
+	// Unique: true
+	// In: query
+	// Collection Format: pipes
 	Status []string
-
-	/*the tags to filter by
-	  Unique: true
-	  In: query
-	*/
+	// the tags to filter by
+	// Unique: true
+	// In: query
 	Tags []string
 }
 

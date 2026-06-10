@@ -63,10 +63,9 @@ OrderCreateParams contains all the parameters to send to the API endpoint
 */
 type OrderCreateParams struct {
 
-	/* Body.
-
-	   order placed for purchasing the pet
-	*/
+	// Body.
+	//
+	// order placed for purchasing the pet
 	Body *models.Order
 
 	HTTPClient *http.Client

@@ -44,11 +44,9 @@ func NewFindTodosOK() *FindTodosOK {
 	return &FindTodosOK{}
 }
 
-/*
-FindTodosOK describes a response with status code 200, with default header values.
-
-list the todo operations
-*/
+// FindTodosOK describes a response with status code 200, with default header values.
+//
+// list the todo operations
 type FindTodosOK struct {
 	Payload []*models.Item
 }
@@ -114,11 +112,9 @@ func NewFindTodosDefault(code int) *FindTodosDefault {
 	}
 }
 
-/*
-FindTodosDefault describes a response with status code -1, with default header values.
-
-generic error response
-*/
+// FindTodosDefault describes a response with status code -1, with default header values.
+//
+// generic error response
 type FindTodosDefault struct {
 	_statusCode int
 
