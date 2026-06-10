@@ -29,11 +29,9 @@ func NewGetLogin(ctx *middleware.Context, handler GetLoginHandler) *GetLogin {
 	return &GetLogin{Context: ctx, Handler: handler}
 }
 
-/*
-	GetLogin swagger:route GET /login getLogin
-
-login through oauth2 server
-*/
+// GetLogin swagger:route GET /login getLogin
+//
+// login through oauth2 server
 type GetLogin struct {
 	Context *middleware.Context
 	Handler GetLoginHandler

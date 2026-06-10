@@ -26,15 +26,11 @@ func NewLoginUserParams() LoginUserParams {
 type LoginUserParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*The password for login in clear text
-	  In: query
-	*/
+	// The password for login in clear text
+	// In: query
 	Password *string
-
-	/*The user name for login
-	  In: query
-	*/
+	// The user name for login
+	// In: query
 	Username *string
 }
 

@@ -26,14 +26,12 @@ func NewPostTestParams() PostTestParams {
 type PostTestParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Defines a parameter as an array of external types.
-	The body parameter is defined as []custom.MyAlternateString
-
-	No definition is generated in models.
-
-	  In: body
-	*/
+	// Defines a parameter as an array of external types.
+	// The body parameter is defined as []custom.MyAlternateString
+	//
+	// No definition is generated in models.
+	//
+	// In: body
 	CustomizedStrings []custom.MyAlternateString
 }
 

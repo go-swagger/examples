@@ -26,11 +26,9 @@ func NewGreet(ctx *middleware.Context, handler GreetHandler) *Greet {
 	return &Greet{Context: ctx, Handler: handler}
 }
 
-/*
-	Greet swagger:route GET /greet greeter greet
-
-Return a default greeting.
-*/
+// Greet swagger:route GET /greet greeter greet
+//
+// Return a default greeting.
 type Greet struct {
 	Context *middleware.Context
 	Handler GreetHandler

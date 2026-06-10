@@ -9,20 +9,16 @@ import (
 	custom "github.com/go-swagger/examples/external-types/fred"
 )
 
-/*
-PostTestDefault An inlined reference to an aliased external package.
-The response is defined as map[string][]map[string]custom.MyAlternateString
-
-No definition is generated in models.
-
-swagger:response postTestDefault
-*/
+// PostTestDefault An inlined reference to an aliased external package.
+// The response is defined as map[string][]map[string]custom.MyAlternateString
+//
+// No definition is generated in models.
+//
+// swagger:response postTestDefault
 type PostTestDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload map[string][]map[string]custom.MyAlternateString `json:"body,omitempty"`
 }
 

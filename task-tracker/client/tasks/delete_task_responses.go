@@ -44,11 +44,9 @@ func NewDeleteTaskNoContent() *DeleteTaskNoContent {
 	return &DeleteTaskNoContent{}
 }
 
-/*
-DeleteTaskNoContent describes a response with status code 204, with default header values.
-
-Task deleted
-*/
+// DeleteTaskNoContent describes a response with status code 204, with default header values.
+//
+// Task deleted
 type DeleteTaskNoContent struct {
 }
 
@@ -102,11 +100,9 @@ func NewDeleteTaskDefault(code int) *DeleteTaskDefault {
 	}
 }
 
-/*
-DeleteTaskDefault describes a response with status code -1, with default header values.
-
-Error response
-*/
+// DeleteTaskDefault describes a response with status code -1, with default header values.
+//
+// Error response
 type DeleteTaskDefault struct {
 	_statusCode int
 	XErrorCode  string

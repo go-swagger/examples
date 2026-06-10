@@ -37,7 +37,7 @@ func registerErrorPropCode(depth int, cmdPrefix string, cmd *cobra.Command) erro
 	if cmdPrefix == "" {
 		flagCodeName = "code"
 	} else {
-		flagCodeName = fmt.Sprintf("%v.code", cmdPrefix)
+		flagCodeName = fmt.Sprintf("%v.%s", cmdPrefix, "code")
 	}
 
 	var flagCodeDefault int64
@@ -58,7 +58,7 @@ func registerErrorPropMessage(depth int, cmdPrefix string, cmd *cobra.Command) e
 	if cmdPrefix == "" {
 		flagMessageName = "message"
 	} else {
-		flagMessageName = fmt.Sprintf("%v.message", cmdPrefix)
+		flagMessageName = fmt.Sprintf("%v.%s", cmdPrefix, "message")
 	}
 
 	var flagMessageDefault string
@@ -93,14 +93,14 @@ func retrieveErrorPropCodeFlags(depth int, m *models.Error, cmdPrefix string, cm
 	}
 	retAdded := false
 
-	flagCodeName := fmt.Sprintf("%v.code", cmdPrefix)
+	flagCodeName := fmt.Sprintf("%v.%s", cmdPrefix, "code")
 	if cmd.Flags().Changed(flagCodeName) {
 
 		var flagCodeName string
 		if cmdPrefix == "" {
 			flagCodeName = "code"
 		} else {
-			flagCodeName = fmt.Sprintf("%v.code", cmdPrefix)
+			flagCodeName = fmt.Sprintf("%v.%s", cmdPrefix, "code")
 		}
 
 		flagCodeValue, err := cmd.Flags().GetInt64(flagCodeName)
@@ -121,14 +121,14 @@ func retrieveErrorPropMessageFlags(depth int, m *models.Error, cmdPrefix string,
 	}
 	retAdded := false
 
-	flagMessageName := fmt.Sprintf("%v.message", cmdPrefix)
+	flagMessageName := fmt.Sprintf("%v.%s", cmdPrefix, "message")
 	if cmd.Flags().Changed(flagMessageName) {
 
 		var flagMessageName string
 		if cmdPrefix == "" {
 			flagMessageName = "message"
 		} else {
-			flagMessageName = fmt.Sprintf("%v.message", cmdPrefix)
+			flagMessageName = fmt.Sprintf("%v.%s", cmdPrefix, "message")
 		}
 
 		flagMessageValue, err := cmd.Flags().GetString(flagMessageName)

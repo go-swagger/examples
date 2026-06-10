@@ -49,7 +49,7 @@ func NewFileUploadAPI(spec *loads.Document) *FileUploadAPI {
 	}
 }
 
-/*FileUploadAPI Example server uploading a file */
+// FileUploadAPI Example server uploading a file
 type FileUploadAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

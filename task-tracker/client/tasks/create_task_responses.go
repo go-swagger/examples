@@ -45,17 +45,14 @@ func NewCreateTaskCreated() *CreateTaskCreated {
 	return &CreateTaskCreated{}
 }
 
-/*
-CreateTaskCreated describes a response with status code 201, with default header values.
-
-Task created
-*/
+// CreateTaskCreated describes a response with status code 201, with default header values.
+//
+// Task created
 type CreateTaskCreated struct {
 
-	/* URL to the newly added Task
-
-	   Format: uri
-	*/
+	// URL to the newly added Task
+	//
+	// Format: uri
 	Location strfmt.URI
 }
 
@@ -120,11 +117,9 @@ func NewCreateTaskDefault(code int) *CreateTaskDefault {
 	}
 }
 
-/*
-CreateTaskDefault describes a response with status code -1, with default header values.
-
-Error response
-*/
+// CreateTaskDefault describes a response with status code -1, with default header values.
+//
+// Error response
 type CreateTaskDefault struct {
 	_statusCode int
 	XErrorCode  string

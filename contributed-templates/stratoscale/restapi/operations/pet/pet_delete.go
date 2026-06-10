@@ -26,11 +26,9 @@ func NewPetDelete(ctx *middleware.Context, handler PetDeleteHandler) *PetDelete 
 	return &PetDelete{Context: ctx, Handler: handler}
 }
 
-/*
-	PetDelete swagger:route DELETE /pet/{petId} pet petDelete
-
-Deletes a pet
-*/
+// PetDelete swagger:route DELETE /pet/{petId} pet petDelete
+//
+// Deletes a pet
 type PetDelete struct {
 	Context *middleware.Context
 	Handler PetDeleteHandler

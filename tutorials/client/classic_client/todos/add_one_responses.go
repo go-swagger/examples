@@ -50,11 +50,9 @@ func NewAddOneCreated() *AddOneCreated {
 	return &AddOneCreated{}
 }
 
-/*
-AddOneCreated describes a response with status code 201, with default header values.
-
-Created
-*/
+// AddOneCreated describes a response with status code 201, with default header values.
+//
+// Created
 type AddOneCreated struct {
 	Payload *models.Item
 }
@@ -120,11 +118,9 @@ func NewAddOneNoContent() *AddOneNoContent {
 	return &AddOneNoContent{}
 }
 
-/*
-AddOneNoContent describes a response with status code 204, with default header values.
-
-Already there
-*/
+// AddOneNoContent describes a response with status code 204, with default header values.
+//
+// Already there
 type AddOneNoContent struct {
 }
 
@@ -178,11 +174,9 @@ func NewAddOneDefault(code int) *AddOneDefault {
 	}
 }
 
-/*
-AddOneDefault describes a response with status code -1, with default header values.
-
-error
-*/
+// AddOneDefault describes a response with status code -1, with default header values.
+//
+// error
 type AddOneDefault struct {
 	_statusCode int
 

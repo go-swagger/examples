@@ -11,11 +11,9 @@ import (
 // UpdateUserBadRequestCode is the HTTP code returned for type UpdateUserBadRequest
 const UpdateUserBadRequestCode int = 400
 
-/*
-UpdateUserBadRequest Invalid user supplied
-
-swagger:response updateUserBadRequest
-*/
+// UpdateUserBadRequest Invalid user supplied
+//
+// swagger:response updateUserBadRequest
 type UpdateUserBadRequest struct {
 }
 
@@ -36,11 +34,9 @@ func (o *UpdateUserBadRequest) WriteResponse(rw http.ResponseWriter, producer ru
 // UpdateUserNotFoundCode is the HTTP code returned for type UpdateUserNotFound
 const UpdateUserNotFoundCode int = 404
 
-/*
-UpdateUserNotFound User not found
-
-swagger:response updateUserNotFound
-*/
+// UpdateUserNotFound User not found
+//
+// swagger:response updateUserNotFound
 type UpdateUserNotFound struct {
 }
 

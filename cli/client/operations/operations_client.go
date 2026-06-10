@@ -44,9 +44,7 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 	return &Client{transport: transport, formats: strfmt.Default}
 }
 
-/*
-Client for operations API.
-*/
+// Client for operations API.
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
@@ -108,14 +106,12 @@ type ClientService interface {
 	SetTransport(transport runtime.ContextualTransport)
 }
 
-/*
-PutTest2766put test2766 API.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.PutTest2766Context] instead.
-*/
+// PutTest2766 put test2766 API.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.PutTest2766Context] instead.
 func (a *Client) PutTest2766(params *PutTest2766Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutTest2766OK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -127,11 +123,9 @@ func (a *Client) PutTest2766(params *PutTest2766Params, authInfo runtime.ClientA
 	return a.PutTest2766Context(ctx, params, authInfo, opts...)
 }
 
-/*
-PutTest2766Contextput test2766 API.
-
-Do not use the deprecated [PutTest2766Params.Context] with this method: it would be ignored.
-*/
+// PutTest2766Context put test2766 API.
+//
+// Do not use the deprecated [PutTest2766Params.Context] with this method: it would be ignored.
 func (a *Client) PutTest2766Context(ctx context.Context, params *PutTest2766Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutTest2766OK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {

@@ -66,7 +66,7 @@ func NewAuthSampleAPI(spec *loads.Document) *AuthSampleAPI {
 	}
 }
 
-/*AuthSampleAPI the auth sample API */
+// AuthSampleAPI the auth sample API
 type AuthSampleAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

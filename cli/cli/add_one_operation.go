@@ -70,7 +70,7 @@ func registerOperationTodosAddOneBodyParamFlags(cmdPrefix string, cmd *cobra.Com
 	if cmdPrefix == "" {
 		flagBodyName = "body"
 	} else {
-		flagBodyName = fmt.Sprintf("%v.body", cmdPrefix)
+		flagBodyName = fmt.Sprintf("%v.%s", cmdPrefix, "body")
 	}
 
 	_ = cmd.PersistentFlags().String(flagBodyName, "", `Optional json string for [body]. `)
@@ -115,7 +115,7 @@ func retrieveOperationTodosAddOneBodyFlag(m *todos.AddOneParams, cmdPrefix strin
 		if err != nil {
 			return err, false
 		}
-		logDebugf("Body dry-run payload: %v", string(flagBodyValueDebugBytes))
+		logDebugf("%s dry-run payload: %v", "Body", string(flagBodyValueDebugBytes))
 	}
 
 	retAdded = retAdded || added

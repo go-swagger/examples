@@ -26,11 +26,9 @@ func NewGetGreeting(ctx *middleware.Context, handler GetGreetingHandler) *GetGre
 	return &GetGreeting{Context: ctx, Handler: handler}
 }
 
-/*
-	GetGreeting swagger:route GET /hello getGreeting
-
-GetGreeting get greeting API
-*/
+// GetGreeting swagger:route GET /hello getGreeting
+//
+// GetGreeting get greeting API
 type GetGreeting struct {
 	Context *middleware.Context
 	Handler GetGreetingHandler

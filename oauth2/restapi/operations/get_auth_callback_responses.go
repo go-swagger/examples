@@ -12,16 +12,12 @@ import (
 // GetAuthCallbackOKCode is the HTTP code returned for type GetAuthCallbackOK
 const GetAuthCallbackOKCode int = 200
 
-/*
-GetAuthCallbackOK login
-
-swagger:response getAuthCallbackOK
-*/
+// GetAuthCallbackOK login
+//
+// swagger:response getAuthCallbackOK
 type GetAuthCallbackOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *GetAuthCallbackOKBody `json:"body,omitempty"`
 }
 
@@ -54,17 +50,13 @@ func (o *GetAuthCallbackOK) WriteResponse(rw http.ResponseWriter, producer runti
 	}
 }
 
-/*
-GetAuthCallbackDefault error
-
-swagger:response getAuthCallbackDefault
-*/
+// GetAuthCallbackDefault error
+//
+// swagger:response getAuthCallbackDefault
 type GetAuthCallbackDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

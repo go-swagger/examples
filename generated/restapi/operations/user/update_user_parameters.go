@@ -28,16 +28,12 @@ func NewUpdateUserParams() UpdateUserParams {
 type UpdateUserParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Updated user object
-	  In: body
-	*/
+	// Updated user object
+	// In: body
 	Body *models.User
-
-	/*name that need to be deleted
-	  Required: true
-	  In: path
-	*/
+	// name that need to be deleted
+	// Required: true
+	// In: path
 	Username string
 }
 

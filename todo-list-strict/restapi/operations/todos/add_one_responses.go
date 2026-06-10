@@ -13,16 +13,12 @@ import (
 // AddOneCreatedCode is the HTTP code returned for type AddOneCreated
 const AddOneCreatedCode int = 201
 
-/*
-AddOneCreated Created
-
-swagger:response addOneCreated
-*/
+// AddOneCreated Created
+//
+// swagger:response addOneCreated
 type AddOneCreated struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Item `json:"body,omitempty"`
 }
 
@@ -57,17 +53,13 @@ func (o *AddOneCreated) WriteResponse(rw http.ResponseWriter, producer runtime.P
 
 func (o *AddOneCreated) AddOneResponder() {}
 
-/*
-AddOneDefault error
-
-swagger:response addOneDefault
-*/
+// AddOneDefault error
+//
+// swagger:response addOneDefault
 type AddOneDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

@@ -63,12 +63,11 @@ PetGetParams contains all the parameters to send to the API endpoint
 */
 type PetGetParams struct {
 
-	/* PetID.
-
-	   ID of pet to return
-
-	   Format: int64
-	*/
+	// PetID.
+	//
+	// ID of pet to return
+	//
+	// Format: int64
 	PetID int64
 
 	HTTPClient *http.Client

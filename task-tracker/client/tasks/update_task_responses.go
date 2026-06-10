@@ -50,11 +50,9 @@ func NewUpdateTaskOK() *UpdateTaskOK {
 	return &UpdateTaskOK{}
 }
 
-/*
-UpdateTaskOK describes a response with status code 200, with default header values.
-
-Task details
-*/
+// UpdateTaskOK describes a response with status code 200, with default header values.
+//
+// Task details
 type UpdateTaskOK struct {
 	Payload *models.Task
 }
@@ -120,11 +118,9 @@ func NewUpdateTaskUnprocessableEntity() *UpdateTaskUnprocessableEntity {
 	return &UpdateTaskUnprocessableEntity{}
 }
 
-/*
-UpdateTaskUnprocessableEntity describes a response with status code 422, with default header values.
-
-Validation error
-*/
+// UpdateTaskUnprocessableEntity describes a response with status code 422, with default header values.
+//
+// Validation error
 type UpdateTaskUnprocessableEntity struct {
 	Payload *models.ValidationError
 }
@@ -192,11 +188,9 @@ func NewUpdateTaskDefault(code int) *UpdateTaskDefault {
 	}
 }
 
-/*
-UpdateTaskDefault describes a response with status code -1, with default header values.
-
-Error response
-*/
+// UpdateTaskDefault describes a response with status code -1, with default header values.
+//
+// Error response
 type UpdateTaskDefault struct {
 	_statusCode int
 	XErrorCode  string

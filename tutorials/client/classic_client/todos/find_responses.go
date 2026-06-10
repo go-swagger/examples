@@ -44,11 +44,9 @@ func NewFindOK() *FindOK {
 	return &FindOK{}
 }
 
-/*
-FindOK describes a response with status code 200, with default header values.
-
-OK
-*/
+// FindOK describes a response with status code 200, with default header values.
+//
+// OK
 type FindOK struct {
 	Payload []*models.Item
 }
@@ -114,11 +112,9 @@ func NewFindDefault(code int) *FindDefault {
 	}
 }
 
-/*
-FindDefault describes a response with status code -1, with default header values.
-
-error
-*/
+// FindDefault describes a response with status code -1, with default header values.
+//
+// error
 type FindDefault struct {
 	_statusCode int
 

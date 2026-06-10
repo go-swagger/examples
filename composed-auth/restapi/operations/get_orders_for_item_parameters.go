@@ -25,11 +25,8 @@ func NewGetOrdersForItemParams() GetOrdersForItemParams {
 type GetOrdersForItemParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  Required: true
-	  In: path
-	*/
+	// Required: true
+	// In: path
 	ItemID string
 }
 

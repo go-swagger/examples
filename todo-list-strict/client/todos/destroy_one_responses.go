@@ -44,11 +44,9 @@ func NewDestroyOneNoContent() *DestroyOneNoContent {
 	return &DestroyOneNoContent{}
 }
 
-/*
-DestroyOneNoContent describes a response with status code 204, with default header values.
-
-Deleted
-*/
+// DestroyOneNoContent describes a response with status code 204, with default header values.
+//
+// Deleted
 type DestroyOneNoContent struct {
 }
 
@@ -102,11 +100,9 @@ func NewDestroyOneDefault(code int) *DestroyOneDefault {
 	}
 }
 
-/*
-DestroyOneDefault describes a response with status code -1, with default header values.
-
-error
-*/
+// DestroyOneDefault describes a response with status code -1, with default header values.
+//
+// error
 type DestroyOneDefault struct {
 	_statusCode int
 

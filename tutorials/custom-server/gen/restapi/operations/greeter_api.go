@@ -47,7 +47,7 @@ func NewGreeterAPI(spec *loads.Document) *GreeterAPI {
 	}
 }
 
-/*GreeterAPI the greeter API */
+// GreeterAPI the greeter API
 type GreeterAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

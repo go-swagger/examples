@@ -15,11 +15,11 @@ import (
 
 // API is the interface of the experimental client.
 type API interface {
-	/*
-	   GetExperimental get experimental API*/
+
+	// GetExperimental get experimental API
 	GetExperimental(ctx context.Context, params *GetExperimentalParams) (*GetExperimentalOK, error)
-	/*
-	   PutExperimental put experimental API*/
+
+	// PutExperimental put experimental API
 	PutExperimental(ctx context.Context, params *PutExperimentalParams) (*PutExperimentalOK, *PutExperimentalNoContent, error)
 }
 
@@ -32,18 +32,14 @@ func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInf
 	}
 }
 
-/*
-Client for experimental API
-*/
+// Client for experimental API
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
-/*
-GetExperimental get experimental API.
-*/
+// GetExperimental get experimental API.
 func (a *Client) GetExperimental(ctx context.Context, params *GetExperimentalParams) (*GetExperimentalOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "GetExperimental",
@@ -77,9 +73,7 @@ func (a *Client) GetExperimental(ctx context.Context, params *GetExperimentalPar
 	panic(msg)
 }
 
-/*
-PutExperimental put experimental API.
-*/
+// PutExperimental put experimental API.
 func (a *Client) PutExperimental(ctx context.Context, params *PutExperimentalParams) (*PutExperimentalOK, *PutExperimentalNoContent, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "PutExperimental",

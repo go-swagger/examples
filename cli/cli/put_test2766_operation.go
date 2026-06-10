@@ -78,7 +78,7 @@ func registerOperationOperationsPutTest2766Minus1ParamFlags(cmdPrefix string, cm
 	if cmdPrefix == "" {
 		flagMinus1Name = "-1"
 	} else {
-		flagMinus1Name = fmt.Sprintf("%v.-1", cmdPrefix)
+		flagMinus1Name = fmt.Sprintf("%v.%s", cmdPrefix, "-1")
 	}
 
 	var flagMinus1Default int64
@@ -94,7 +94,7 @@ func registerOperationOperationsPutTest2766BodyParamFlags(cmdPrefix string, cmd 
 	if cmdPrefix == "" {
 		flagBodyName = "body"
 	} else {
-		flagBodyName = fmt.Sprintf("%v.body", cmdPrefix)
+		flagBodyName = fmt.Sprintf("%v.%s", cmdPrefix, "body")
 	}
 
 	_ = cmd.PersistentFlags().String(flagBodyName, "", `Optional json string for [body]. `)
@@ -115,7 +115,7 @@ func retrieveOperationOperationsPutTest2766Minus1Flag(m *operations.PutTest2766P
 		if cmdPrefix == "" {
 			flagMinus1Name = "-1"
 		} else {
-			flagMinus1Name = fmt.Sprintf("%v.-1", cmdPrefix)
+			flagMinus1Name = fmt.Sprintf("%v.%s", cmdPrefix, "-1")
 		}
 
 		flagMinus1Value, err := cmd.Flags().GetInt64(flagMinus1Name)
@@ -161,7 +161,7 @@ func retrieveOperationOperationsPutTest2766BodyFlag(m *operations.PutTest2766Par
 		if err != nil {
 			return err, false
 		}
-		logDebugf("Body dry-run payload: %v", string(flagBodyValueDebugBytes))
+		logDebugf("%s dry-run payload: %v", "Body", string(flagBodyValueDebugBytes))
 	}
 
 	retAdded = retAdded || added

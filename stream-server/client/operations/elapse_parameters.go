@@ -63,10 +63,9 @@ ElapseParams contains all the parameters to send to the API endpoint
 */
 type ElapseParams struct {
 
-	/* Length.
-
-	   How many seconds to count down
-	*/
+	// Length.
+	//
+	// How many seconds to count down
 	Length int64
 
 	HTTPClient *http.Client

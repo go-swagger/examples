@@ -11,11 +11,9 @@ import (
 // UpdatePetBadRequestCode is the HTTP code returned for type UpdatePetBadRequest
 const UpdatePetBadRequestCode int = 400
 
-/*
-UpdatePetBadRequest Invalid ID supplied
-
-swagger:response updatePetBadRequest
-*/
+// UpdatePetBadRequest Invalid ID supplied
+//
+// swagger:response updatePetBadRequest
 type UpdatePetBadRequest struct {
 }
 
@@ -36,11 +34,9 @@ func (o *UpdatePetBadRequest) WriteResponse(rw http.ResponseWriter, producer run
 // UpdatePetNotFoundCode is the HTTP code returned for type UpdatePetNotFound
 const UpdatePetNotFoundCode int = 404
 
-/*
-UpdatePetNotFound Pet not found
-
-swagger:response updatePetNotFound
-*/
+// UpdatePetNotFound Pet not found
+//
+// swagger:response updatePetNotFound
 type UpdatePetNotFound struct {
 }
 
@@ -61,11 +57,9 @@ func (o *UpdatePetNotFound) WriteResponse(rw http.ResponseWriter, producer runti
 // UpdatePetMethodNotAllowedCode is the HTTP code returned for type UpdatePetMethodNotAllowed
 const UpdatePetMethodNotAllowedCode int = 405
 
-/*
-UpdatePetMethodNotAllowed Validation exception
-
-swagger:response updatePetMethodNotAllowed
-*/
+// UpdatePetMethodNotAllowed Validation exception
+//
+// swagger:response updatePetMethodNotAllowed
 type UpdatePetMethodNotAllowed struct {
 }
 

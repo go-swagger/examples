@@ -12,16 +12,12 @@ import (
 // ElapseOKCode is the HTTP code returned for type ElapseOK
 const ElapseOKCode int = 200
 
-/*
-ElapseOK Secondly update on remaining time
-
-swagger:response elapseOK
-*/
+// ElapseOK Secondly update on remaining time
+//
+// swagger:response elapseOK
 type ElapseOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload io.ReadCloser `json:"body,omitempty"`
 }
 
@@ -55,11 +51,9 @@ func (o *ElapseOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produc
 // ElapseForbiddenCode is the HTTP code returned for type ElapseForbidden
 const ElapseForbiddenCode int = 403
 
-/*
-ElapseForbidden Contrived - thrown when length of 11 is chosen
-
-swagger:response elapseForbidden
-*/
+// ElapseForbidden Contrived - thrown when length of 11 is chosen
+//
+// swagger:response elapseForbidden
 type ElapseForbidden struct {
 }
 

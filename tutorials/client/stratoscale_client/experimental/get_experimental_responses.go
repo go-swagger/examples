@@ -43,11 +43,9 @@ func NewGetExperimentalOK() *GetExperimentalOK {
 	return &GetExperimentalOK{}
 }
 
-/*
-GetExperimentalOK describes a response with status code 200, with default header values.
-
-OK
-*/
+// GetExperimentalOK describes a response with status code 200, with default header values.
+//
+// OK
 type GetExperimentalOK struct {
 	Payload *models.Item
 }
@@ -113,11 +111,9 @@ func NewGetExperimentalUnauthorized() *GetExperimentalUnauthorized {
 	return &GetExperimentalUnauthorized{}
 }
 
-/*
-GetExperimentalUnauthorized describes a response with status code 401, with default header values.
-
-wrong
-*/
+// GetExperimentalUnauthorized describes a response with status code 401, with default header values.
+//
+// wrong
 type GetExperimentalUnauthorized struct {
 }
 

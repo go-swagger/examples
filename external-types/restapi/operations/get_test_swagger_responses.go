@@ -9,19 +9,15 @@ import (
 	"github.com/go-swagger/examples/external-types/models"
 )
 
-/*
-GetTestDefault A reference to a type already defined in the models package
-(defaults to <<target>/models, defined by CLI flag --model-package).
-The response payload is defined as: *models.Zzz
-
-swagger:response getTestDefault
-*/
+// GetTestDefault A reference to a type already defined in the models package
+// (defaults to <<target>/models, defined by CLI flag --model-package).
+// The response payload is defined as: *models.Zzz
+//
+// swagger:response getTestDefault
 type GetTestDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Zzz `json:"body,omitempty"`
 }
 

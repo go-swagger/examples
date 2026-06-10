@@ -11,16 +11,12 @@ import (
 // LoginUserOKCode is the HTTP code returned for type LoginUserOK
 const LoginUserOKCode int = 200
 
-/*
-LoginUserOK successful operation
-
-swagger:response loginUserOK
-*/
+// LoginUserOK successful operation
+//
+// swagger:response loginUserOK
 type LoginUserOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload string `json:"body,omitempty"`
 }
 
@@ -54,11 +50,9 @@ func (o *LoginUserOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pro
 // LoginUserBadRequestCode is the HTTP code returned for type LoginUserBadRequest
 const LoginUserBadRequestCode int = 400
 
-/*
-LoginUserBadRequest Invalid username/password supplied
-
-swagger:response loginUserBadRequest
-*/
+// LoginUserBadRequest Invalid username/password supplied
+//
+// swagger:response loginUserBadRequest
 type LoginUserBadRequest struct {
 }
 

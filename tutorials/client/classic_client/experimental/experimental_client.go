@@ -44,9 +44,7 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 	return &Client{transport: transport, formats: strfmt.Default}
 }
 
-/*
-Client for experimental API.
-*/
+// Client for experimental API.
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
@@ -112,14 +110,12 @@ type ClientService interface {
 	SetTransport(transport runtime.ContextualTransport)
 }
 
-/*
-GetExperimentalget experimental API.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.GetExperimentalContext] instead.
-*/
+// GetExperimental get experimental API.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.GetExperimentalContext] instead.
 func (a *Client) GetExperimental(params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -131,11 +127,9 @@ func (a *Client) GetExperimental(params *GetExperimentalParams, authInfo runtime
 	return a.GetExperimentalContext(ctx, params, authInfo, opts...)
 }
 
-/*
-GetExperimentalContextget experimental API.
-
-Do not use the deprecated [GetExperimentalParams.Context] with this method: it would be ignored.
-*/
+// GetExperimentalContext get experimental API.
+//
+// Do not use the deprecated [GetExperimentalParams.Context] with this method: it would be ignored.
 func (a *Client) GetExperimentalContext(ctx context.Context, params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
@@ -179,14 +173,12 @@ func (a *Client) GetExperimentalContext(ctx context.Context, params *GetExperime
 	panic(msg)
 }
 
-/*
-PutExperimentalput experimental API.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.PutExperimentalContext] instead.
-*/
+// PutExperimental put experimental API.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.PutExperimentalContext] instead.
 func (a *Client) PutExperimental(params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -198,11 +190,9 @@ func (a *Client) PutExperimental(params *PutExperimentalParams, authInfo runtime
 	return a.PutExperimentalContext(ctx, params, authInfo, opts...)
 }
 
-/*
-PutExperimentalContextput experimental API.
-
-Do not use the deprecated [PutExperimentalParams.Context] with this method: it would be ignored.
-*/
+// PutExperimentalContext put experimental API.
+//
+// Do not use the deprecated [PutExperimentalParams.Context] with this method: it would be ignored.
 func (a *Client) PutExperimentalContext(ctx context.Context, params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {

@@ -11,11 +11,9 @@ import (
 // UploadFileOKCode is the HTTP code returned for type UploadFileOK
 const UploadFileOKCode int = 200
 
-/*
-UploadFileOK OK
-
-swagger:response uploadFileOK
-*/
+// UploadFileOK OK
+//
+// swagger:response uploadFileOK
 type UploadFileOK struct {
 }
 

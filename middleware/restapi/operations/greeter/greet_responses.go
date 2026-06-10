@@ -12,16 +12,12 @@ import (
 // GreetOKCode is the HTTP code returned for type GreetOK
 const GreetOKCode int = 200
 
-/*
-GreetOK greeting
-
-swagger:response greetOK
-*/
+// GreetOK greeting
+//
+// swagger:response greetOK
 type GreetOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Greeting `json:"body,omitempty"`
 }
 
@@ -54,17 +50,13 @@ func (o *GreetOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produce
 	}
 }
 
-/*
-GreetDefault error
-
-swagger:response greetDefault
-*/
+// GreetDefault error
+//
+// swagger:response greetDefault
 type GreetDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

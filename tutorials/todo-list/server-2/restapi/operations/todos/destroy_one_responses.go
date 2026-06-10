@@ -12,11 +12,9 @@ import (
 // DestroyOneNoContentCode is the HTTP code returned for type DestroyOneNoContent
 const DestroyOneNoContentCode int = 204
 
-/*
-DestroyOneNoContent Deleted
-
-swagger:response destroyOneNoContent
-*/
+// DestroyOneNoContent Deleted
+//
+// swagger:response destroyOneNoContent
 type DestroyOneNoContent struct {
 }
 
@@ -34,17 +32,13 @@ func (o *DestroyOneNoContent) WriteResponse(rw http.ResponseWriter, producer run
 	rw.WriteHeader(204)
 }
 
-/*
-DestroyOneDefault error
-
-swagger:response destroyOneDefault
-*/
+// DestroyOneDefault error
+//
+// swagger:response destroyOneDefault
 type DestroyOneDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

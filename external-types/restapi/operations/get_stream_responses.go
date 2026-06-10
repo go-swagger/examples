@@ -9,19 +9,15 @@ import (
 	"github.com/go-swagger/examples/external-types/models"
 )
 
-/*
-GetStreamDefault Uses an external definition for an interface (e.g. io.Reader)
-
-No validation is expected on binary format.
-
-swagger:response getStreamDefault
-*/
+// GetStreamDefault Uses an external definition for an interface (e.g. io.Reader)
+//
+// No validation is expected on binary format.
+//
+// swagger:response getStreamDefault
 type GetStreamDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload models.MyStreamer `json:"body,omitempty"`
 }
 

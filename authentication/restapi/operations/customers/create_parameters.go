@@ -27,10 +27,7 @@ func NewCreateParams() CreateParams {
 type CreateParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  In: body
-	*/
+	// In: body
 	Info *models.Customer
 }
 

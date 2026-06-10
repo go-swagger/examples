@@ -12,16 +12,12 @@ import (
 // PetUploadImageOKCode is the HTTP code returned for type PetUploadImageOK
 const PetUploadImageOKCode int = 200
 
-/*
-PetUploadImageOK successful operation
-
-swagger:response petUploadImageOK
-*/
+// PetUploadImageOK successful operation
+//
+// swagger:response petUploadImageOK
 type PetUploadImageOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.APIResponse `json:"body,omitempty"`
 }
 

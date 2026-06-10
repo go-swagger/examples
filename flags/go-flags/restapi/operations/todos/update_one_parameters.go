@@ -28,16 +28,10 @@ func NewUpdateOneParams() UpdateOneParams {
 type UpdateOneParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  In: body
-	*/
+	// In: body
 	Body *models.Item
-
-	/*
-	  Required: true
-	  In: path
-	*/
+	// Required: true
+	// In: path
 	ID string
 }
 

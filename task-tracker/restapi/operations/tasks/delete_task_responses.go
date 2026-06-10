@@ -12,11 +12,9 @@ import (
 // DeleteTaskNoContentCode is the HTTP code returned for type DeleteTaskNoContent
 const DeleteTaskNoContentCode int = 204
 
-/*
-DeleteTaskNoContent Task deleted
-
-swagger:response deleteTaskNoContent
-*/
+// DeleteTaskNoContent Task deleted
+//
+// swagger:response deleteTaskNoContent
 type DeleteTaskNoContent struct {
 }
 
@@ -34,21 +32,15 @@ func (o *DeleteTaskNoContent) WriteResponse(rw http.ResponseWriter, producer run
 	rw.WriteHeader(204)
 }
 
-/*
-DeleteTaskDefault Error response
-
-swagger:response deleteTaskDefault
-*/
+// DeleteTaskDefault Error response
+//
+// swagger:response deleteTaskDefault
 type DeleteTaskDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

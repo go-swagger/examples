@@ -26,11 +26,9 @@ func NewGetTaskDetailsParams() GetTaskDetailsParams {
 type GetTaskDetailsParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*The id of the item
-	  Required: true
-	  In: path
-	*/
+	// The id of the item
+	// Required: true
+	// In: path
 	ID int64
 }
 

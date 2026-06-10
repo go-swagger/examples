@@ -27,10 +27,7 @@ func NewGetIDParams() GetIDParams {
 type GetIDParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  In: body
-	*/
+	// In: body
 	Info *models.SocialID
 }
 

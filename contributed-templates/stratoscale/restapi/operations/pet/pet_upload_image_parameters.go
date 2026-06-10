@@ -41,21 +41,15 @@ func NewPetUploadImageParams() PetUploadImageParams {
 type PetUploadImageParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Additional data to pass to server
-	  In: formData
-	*/
+	// Additional data to pass to server
+	// In: formData
 	AdditionalMetadata *string
-
-	/*file to upload
-	  In: formData
-	*/
+	// file to upload
+	// In: formData
 	File io.ReadCloser
-
-	/*ID of pet to update
-	  Required: true
-	  In: path
-	*/
+	// ID of pet to update
+	// Required: true
+	// In: path
 	PetID int64
 }
 

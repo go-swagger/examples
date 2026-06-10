@@ -26,13 +26,11 @@ func NewCreateUser(ctx *middleware.Context, handler CreateUserHandler) *CreateUs
 	return &CreateUser{Context: ctx, Handler: handler}
 }
 
-/*
-	CreateUser swagger:route POST /users user createUser
-
-# Create user
-
-This can only be done by the logged in user.
-*/
+// CreateUser swagger:route POST /users user createUser
+//
+// # Create user
+//
+// This can only be done by the logged in user.
 type CreateUser struct {
 	Context *middleware.Context
 	Handler CreateUserHandler

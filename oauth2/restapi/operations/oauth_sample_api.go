@@ -78,7 +78,7 @@ func NewOauthSampleAPI(spec *loads.Document) *OauthSampleAPI {
 	}
 }
 
-/*OauthSampleAPI the oauth sample API */
+// OauthSampleAPI the oauth sample API
 type OauthSampleAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

@@ -26,11 +26,9 @@ func NewLoginUser(ctx *middleware.Context, handler LoginUserHandler) *LoginUser 
 	return &LoginUser{Context: ctx, Handler: handler}
 }
 
-/*
-	LoginUser swagger:route GET /users/login user loginUser
-
-Logs user into the system
-*/
+// LoginUser swagger:route GET /users/login user loginUser
+//
+// Logs user into the system
 type LoginUser struct {
 	Context *middleware.Context
 	Handler LoginUserHandler

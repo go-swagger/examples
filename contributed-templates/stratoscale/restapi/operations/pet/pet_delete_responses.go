@@ -11,11 +11,9 @@ import (
 // PetDeleteNoContentCode is the HTTP code returned for type PetDeleteNoContent
 const PetDeleteNoContentCode int = 204
 
-/*
-PetDeleteNoContent Deleted successfully
-
-swagger:response petDeleteNoContent
-*/
+// PetDeleteNoContent Deleted successfully
+//
+// swagger:response petDeleteNoContent
 type PetDeleteNoContent struct {
 }
 
@@ -36,11 +34,9 @@ func (o *PetDeleteNoContent) WriteResponse(rw http.ResponseWriter, producer runt
 // PetDeleteBadRequestCode is the HTTP code returned for type PetDeleteBadRequest
 const PetDeleteBadRequestCode int = 400
 
-/*
-PetDeleteBadRequest Invalid ID supplied
-
-swagger:response petDeleteBadRequest
-*/
+// PetDeleteBadRequest Invalid ID supplied
+//
+// swagger:response petDeleteBadRequest
 type PetDeleteBadRequest struct {
 }
 
@@ -61,11 +57,9 @@ func (o *PetDeleteBadRequest) WriteResponse(rw http.ResponseWriter, producer run
 // PetDeleteNotFoundCode is the HTTP code returned for type PetDeleteNotFound
 const PetDeleteNotFoundCode int = 404
 
-/*
-PetDeleteNotFound Pet not found
-
-swagger:response petDeleteNotFound
-*/
+// PetDeleteNotFound Pet not found
+//
+// swagger:response petDeleteNotFound
 type PetDeleteNotFound struct {
 }
 

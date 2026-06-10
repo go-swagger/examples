@@ -45,9 +45,7 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 	return &Client{transport: transport, formats: strfmt.Default}
 }
 
-/*
-Client for operations API.
-*/
+// Client for operations API.
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
@@ -68,16 +66,14 @@ type ClientService interface {
 	SetTransport(transport runtime.ContextualTransport)
 }
 
-/*
-Elapsecounts down the number of seconds.
-
-Count down the seconds remaining.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.ElapseContext] instead.
-*/
+// Elapse counts down the number of seconds.
+//
+// Count down the seconds remaining.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ElapseContext] instead.
 func (a *Client) Elapse(params *ElapseParams, writer io.Writer, opts ...ClientOption) (*ElapseOK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -89,13 +85,11 @@ func (a *Client) Elapse(params *ElapseParams, writer io.Writer, opts ...ClientOp
 	return a.ElapseContext(ctx, params, writer, opts...)
 }
 
-/*
-ElapseContextcounts down the number of seconds.
-
-Count down the seconds remaining.
-
-Do not use the deprecated [ElapseParams.Context] with this method: it would be ignored.
-*/
+// ElapseContext counts down the number of seconds.
+//
+// Count down the seconds remaining.
+//
+// Do not use the deprecated [ElapseParams.Context] with this method: it would be ignored.
 func (a *Client) ElapseContext(ctx context.Context, params *ElapseParams, writer io.Writer, opts ...ClientOption) (*ElapseOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {

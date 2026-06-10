@@ -11,11 +11,9 @@ import (
 // AddPetMethodNotAllowedCode is the HTTP code returned for type AddPetMethodNotAllowed
 const AddPetMethodNotAllowedCode int = 405
 
-/*
-AddPetMethodNotAllowed Invalid input
-
-swagger:response addPetMethodNotAllowed
-*/
+// AddPetMethodNotAllowed Invalid input
+//
+// swagger:response addPetMethodNotAllowed
 type AddPetMethodNotAllowed struct {
 }
 

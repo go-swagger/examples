@@ -27,10 +27,7 @@ func NewAddOneParams() AddOneParams {
 type AddOneParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  In: body
-	*/
+	// In: body
 	Body *models.Item
 }
 

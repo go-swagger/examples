@@ -12,16 +12,12 @@ import (
 // PetGetOKCode is the HTTP code returned for type PetGetOK
 const PetGetOKCode int = 200
 
-/*
-PetGetOK successful operation
-
-swagger:response petGetOK
-*/
+// PetGetOK successful operation
+//
+// swagger:response petGetOK
 type PetGetOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Pet `json:"body,omitempty"`
 }
 
@@ -57,11 +53,9 @@ func (o *PetGetOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produc
 // PetGetBadRequestCode is the HTTP code returned for type PetGetBadRequest
 const PetGetBadRequestCode int = 400
 
-/*
-PetGetBadRequest Invalid ID supplied
-
-swagger:response petGetBadRequest
-*/
+// PetGetBadRequest Invalid ID supplied
+//
+// swagger:response petGetBadRequest
 type PetGetBadRequest struct {
 }
 
@@ -82,11 +76,9 @@ func (o *PetGetBadRequest) WriteResponse(rw http.ResponseWriter, producer runtim
 // PetGetNotFoundCode is the HTTP code returned for type PetGetNotFound
 const PetGetNotFoundCode int = 404
 
-/*
-PetGetNotFound Pet not found
-
-swagger:response petGetNotFound
-*/
+// PetGetNotFound Pet not found
+//
+// swagger:response petGetNotFound
 type PetGetNotFound struct {
 }
 

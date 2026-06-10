@@ -47,7 +47,7 @@ func NewCountdownAPI(spec *loads.Document) *CountdownAPI {
 	}
 }
 
-/*CountdownAPI Example server for emitting newline delimited JSON */
+// CountdownAPI Example server for emitting newline delimited JSON
 type CountdownAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

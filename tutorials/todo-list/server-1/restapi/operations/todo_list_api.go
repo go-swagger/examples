@@ -48,7 +48,7 @@ func NewTodoListAPI(spec *loads.Document) *TodoListAPI {
 	}
 }
 
-/*TodoListAPI The product of a tutorial on goswagger.io */
+// TodoListAPI The product of a tutorial on goswagger.io
 type TodoListAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

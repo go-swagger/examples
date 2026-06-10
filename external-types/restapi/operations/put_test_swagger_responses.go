@@ -9,18 +9,14 @@ import (
 	custom "github.com/go-swagger/examples/external-types/fred"
 )
 
-/*
-PutTestDefault A map of an aliased external package. Now the alias is "custom".
-This response is defined as: map[string]custom.MyAlternateString
-
-swagger:response putTestDefault
-*/
+// PutTestDefault A map of an aliased external package. Now the alias is "custom".
+// This response is defined as: map[string]custom.MyAlternateString
+//
+// swagger:response putTestDefault
 type PutTestDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload map[string]custom.MyAlternateString `json:"body,omitempty"`
 }
 

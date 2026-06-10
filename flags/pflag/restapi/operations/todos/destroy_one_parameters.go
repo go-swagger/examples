@@ -25,11 +25,8 @@ func NewDestroyOneParams() DestroyOneParams {
 type DestroyOneParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*
-	  Required: true
-	  In: path
-	*/
+	// Required: true
+	// In: path
 	ID string
 }
 

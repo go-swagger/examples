@@ -26,11 +26,9 @@ func NewAddPet(ctx *middleware.Context, handler AddPetHandler) *AddPet {
 	return &AddPet{Context: ctx, Handler: handler}
 }
 
-/*
-	AddPet swagger:route POST /pets pet addPet
-
-Add a new pet to the store
-*/
+// AddPet swagger:route POST /pets pet addPet
+//
+// Add a new pet to the store
 type AddPet struct {
 	Context *middleware.Context
 	Handler AddPetHandler

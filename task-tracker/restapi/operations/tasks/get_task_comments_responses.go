@@ -12,16 +12,12 @@ import (
 // GetTaskCommentsOKCode is the HTTP code returned for type GetTaskCommentsOK
 const GetTaskCommentsOKCode int = 200
 
-/*
-GetTaskCommentsOK The list of comments
-
-swagger:response getTaskCommentsOK
-*/
+// GetTaskCommentsOK The list of comments
+//
+// swagger:response getTaskCommentsOK
 type GetTaskCommentsOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []*models.Comment `json:"body,omitempty"`
 }
 
@@ -57,21 +53,15 @@ func (o *GetTaskCommentsOK) WriteResponse(rw http.ResponseWriter, producer runti
 	}
 }
 
-/*
-GetTaskCommentsDefault Error response
-
-swagger:response getTaskCommentsDefault
-*/
+// GetTaskCommentsDefault Error response
+//
+// swagger:response getTaskCommentsDefault
 type GetTaskCommentsDefault struct {
 	_statusCode int
-	/*
 
-	 */
 	XErrorCode string `json:"X-Error-Code"`
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

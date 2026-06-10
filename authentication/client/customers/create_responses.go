@@ -44,11 +44,9 @@ func NewCreateCreated() *CreateCreated {
 	return &CreateCreated{}
 }
 
-/*
-CreateCreated describes a response with status code 201, with default header values.
-
-created
-*/
+// CreateCreated describes a response with status code 201, with default header values.
+//
+// created
 type CreateCreated struct {
 	Payload *models.Customer
 }
@@ -116,11 +114,9 @@ func NewCreateDefault(code int) *CreateDefault {
 	}
 }
 
-/*
-CreateDefault describes a response with status code -1, with default header values.
-
-error
-*/
+// CreateDefault describes a response with status code -1, with default header values.
+//
+// error
 type CreateDefault struct {
 	_statusCode int
 

@@ -26,11 +26,9 @@ func NewPetUpdate(ctx *middleware.Context, handler PetUpdateHandler) *PetUpdate 
 	return &PetUpdate{Context: ctx, Handler: handler}
 }
 
-/*
-	PetUpdate swagger:route PUT /pet pet petUpdate
-
-Update an existing pet
-*/
+// PetUpdate swagger:route PUT /pet pet petUpdate
+//
+// Update an existing pet
 type PetUpdate struct {
 	Context *middleware.Context
 	Handler PetUpdateHandler

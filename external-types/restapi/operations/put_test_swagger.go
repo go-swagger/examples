@@ -26,11 +26,9 @@ func NewPutTest(ctx *middleware.Context, handler PutTestHandler) *PutTest {
 	return &PutTest{Context: ctx, Handler: handler}
 }
 
-/*
-	PutTest swagger:route PUT /test putTest
-
-PutTest put test API
-*/
+// PutTest swagger:route PUT /test putTest
+//
+// PutTest put test API
 type PutTest struct {
 	Context *middleware.Context
 	Handler PutTestHandler

@@ -79,7 +79,7 @@ func NewAToDoListApplicationAPI(spec *loads.Document) *AToDoListApplicationAPI {
 	}
 }
 
-/*AToDoListApplicationAPI The product of a tutorial on goswagger.io */
+// AToDoListApplicationAPI The product of a tutorial on goswagger.io
 type AToDoListApplicationAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

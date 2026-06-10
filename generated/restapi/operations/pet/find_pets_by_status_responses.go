@@ -12,16 +12,12 @@ import (
 // FindPetsByStatusOKCode is the HTTP code returned for type FindPetsByStatusOK
 const FindPetsByStatusOKCode int = 200
 
-/*
-FindPetsByStatusOK successful operation
-
-swagger:response findPetsByStatusOK
-*/
+// FindPetsByStatusOK successful operation
+//
+// swagger:response findPetsByStatusOK
 type FindPetsByStatusOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []*models.Pet `json:"body,omitempty"`
 }
 
@@ -60,11 +56,9 @@ func (o *FindPetsByStatusOK) WriteResponse(rw http.ResponseWriter, producer runt
 // FindPetsByStatusBadRequestCode is the HTTP code returned for type FindPetsByStatusBadRequest
 const FindPetsByStatusBadRequestCode int = 400
 
-/*
-FindPetsByStatusBadRequest Invalid status value
-
-swagger:response findPetsByStatusBadRequest
-*/
+// FindPetsByStatusBadRequest Invalid status value
+//
+// swagger:response findPetsByStatusBadRequest
 type FindPetsByStatusBadRequest struct {
 }
 

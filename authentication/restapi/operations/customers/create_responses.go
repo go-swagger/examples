@@ -12,16 +12,12 @@ import (
 // CreateCreatedCode is the HTTP code returned for type CreateCreated
 const CreateCreatedCode int = 201
 
-/*
-CreateCreated created
-
-swagger:response createCreated
-*/
+// CreateCreated created
+//
+// swagger:response createCreated
 type CreateCreated struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Customer `json:"body,omitempty"`
 }
 
@@ -54,17 +50,13 @@ func (o *CreateCreated) WriteResponse(rw http.ResponseWriter, producer runtime.P
 	}
 }
 
-/*
-CreateDefault error
-
-swagger:response createDefault
-*/
+// CreateDefault error
+//
+// swagger:response createDefault
 type CreateDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

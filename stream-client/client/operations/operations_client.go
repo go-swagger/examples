@@ -45,9 +45,7 @@ func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) Client
 	return &Client{transport: transport, formats: strfmt.Default}
 }
 
-/*
-Client for operations API.
-*/
+// Client for operations API.
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
@@ -68,16 +66,14 @@ type ClientService interface {
 	SetTransport(transport runtime.ContextualTransport)
 }
 
-/*
-Chunkedchunkeds.
-
-delivers text/plain via Encoding: Chunked.
-
-This method does not support injected context.
-However, timeout and opentracing contexts are honored whenever enabled.
-
-If you need to pass a specific context, use [Client.ChunkedContext] instead.
-*/
+// Chunked chunkeds.
+//
+// delivers text/plain via Encoding: Chunked.
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ChunkedContext] instead.
 func (a *Client) Chunked(params *ChunkedParams, writer io.Writer, opts ...ClientOption) (*ChunkedOK, error) {
 	var ctx context.Context
 	if params.inner.ctx != nil {
@@ -89,13 +85,11 @@ func (a *Client) Chunked(params *ChunkedParams, writer io.Writer, opts ...Client
 	return a.ChunkedContext(ctx, params, writer, opts...)
 }
 
-/*
-ChunkedContextchunkeds.
-
-delivers text/plain via Encoding: Chunked.
-
-Do not use the deprecated [ChunkedParams.Context] with this method: it would be ignored.
-*/
+// ChunkedContext chunkeds.
+//
+// delivers text/plain via Encoding: Chunked.
+//
+// Do not use the deprecated [ChunkedParams.Context] with this method: it would be ignored.
 func (a *Client) ChunkedContext(ctx context.Context, params *ChunkedParams, writer io.Writer, opts ...ClientOption) (*ChunkedOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {

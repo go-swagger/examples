@@ -8,11 +8,9 @@ import (
 	"github.com/go-openapi/runtime"
 )
 
-/*
-CreateUserDefault successful operation
-
-swagger:response createUserDefault
-*/
+// CreateUserDefault successful operation
+//
+// swagger:response createUserDefault
 type CreateUserDefault struct {
 	_statusCode int
 }

@@ -26,11 +26,9 @@ func NewPlaceOrder(ctx *middleware.Context, handler PlaceOrderHandler) *PlaceOrd
 	return &PlaceOrder{Context: ctx, Handler: handler}
 }
 
-/*
-	PlaceOrder swagger:route POST /stores/order store placeOrder
-
-Place an order for a pet
-*/
+// PlaceOrder swagger:route POST /stores/order store placeOrder
+//
+// Place an order for a pet
 type PlaceOrder struct {
 	Context *middleware.Context
 	Handler PlaceOrderHandler

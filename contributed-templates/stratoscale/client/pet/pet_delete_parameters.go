@@ -66,12 +66,11 @@ type PetDeleteParams struct {
 	// APIKey.
 	APIKey *string
 
-	/* PetID.
-
-	   Pet id to delete
-
-	   Format: int64
-	*/
+	// PetID.
+	//
+	// Pet id to delete
+	//
+	// Format: int64
 	PetID int64
 
 	HTTPClient *http.Client

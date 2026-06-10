@@ -41,7 +41,7 @@ func registerGithubReactionsPropPlus1(depth int, cmdPrefix string, cmd *cobra.Co
 	if cmdPrefix == "" {
 		flagPlus1Name = "+1"
 	} else {
-		flagPlus1Name = fmt.Sprintf("%v.+1", cmdPrefix)
+		flagPlus1Name = fmt.Sprintf("%v.%s", cmdPrefix, "+1")
 	}
 
 	var flagPlus1Default int64
@@ -62,7 +62,7 @@ func registerGithubReactionsPropMinus1(depth int, cmdPrefix string, cmd *cobra.C
 	if cmdPrefix == "" {
 		flagMinus1Name = "-1"
 	} else {
-		flagMinus1Name = fmt.Sprintf("%v.-1", cmdPrefix)
+		flagMinus1Name = fmt.Sprintf("%v.%s", cmdPrefix, "-1")
 	}
 
 	var flagMinus1Default int64
@@ -83,7 +83,7 @@ func registerGithubReactionsPropConfused(depth int, cmdPrefix string, cmd *cobra
 	if cmdPrefix == "" {
 		flagConfusedName = "confused"
 	} else {
-		flagConfusedName = fmt.Sprintf("%v.confused", cmdPrefix)
+		flagConfusedName = fmt.Sprintf("%v.%s", cmdPrefix, "confused")
 	}
 
 	var flagConfusedDefault int64
@@ -124,14 +124,14 @@ func retrieveGithubReactionsPropPlus1Flags(depth int, m *models.GithubReactions,
 	}
 	retAdded := false
 
-	flagPlus1Name := fmt.Sprintf("%v.+1", cmdPrefix)
+	flagPlus1Name := fmt.Sprintf("%v.%s", cmdPrefix, "+1")
 	if cmd.Flags().Changed(flagPlus1Name) {
 
 		var flagPlus1Name string
 		if cmdPrefix == "" {
 			flagPlus1Name = "+1"
 		} else {
-			flagPlus1Name = fmt.Sprintf("%v.+1", cmdPrefix)
+			flagPlus1Name = fmt.Sprintf("%v.%s", cmdPrefix, "+1")
 		}
 
 		flagPlus1Value, err := cmd.Flags().GetInt64(flagPlus1Name)
@@ -152,14 +152,14 @@ func retrieveGithubReactionsPropMinus1Flags(depth int, m *models.GithubReactions
 	}
 	retAdded := false
 
-	flagMinus1Name := fmt.Sprintf("%v.-1", cmdPrefix)
+	flagMinus1Name := fmt.Sprintf("%v.%s", cmdPrefix, "-1")
 	if cmd.Flags().Changed(flagMinus1Name) {
 
 		var flagMinus1Name string
 		if cmdPrefix == "" {
 			flagMinus1Name = "-1"
 		} else {
-			flagMinus1Name = fmt.Sprintf("%v.-1", cmdPrefix)
+			flagMinus1Name = fmt.Sprintf("%v.%s", cmdPrefix, "-1")
 		}
 
 		flagMinus1Value, err := cmd.Flags().GetInt64(flagMinus1Name)
@@ -180,14 +180,14 @@ func retrieveGithubReactionsPropConfusedFlags(depth int, m *models.GithubReactio
 	}
 	retAdded := false
 
-	flagConfusedName := fmt.Sprintf("%v.confused", cmdPrefix)
+	flagConfusedName := fmt.Sprintf("%v.%s", cmdPrefix, "confused")
 	if cmd.Flags().Changed(flagConfusedName) {
 
 		var flagConfusedName string
 		if cmdPrefix == "" {
 			flagConfusedName = "confused"
 		} else {
-			flagConfusedName = fmt.Sprintf("%v.confused", cmdPrefix)
+			flagConfusedName = fmt.Sprintf("%v.%s", cmdPrefix, "confused")
 		}
 
 		flagConfusedValue, err := cmd.Flags().GetInt64(flagConfusedName)

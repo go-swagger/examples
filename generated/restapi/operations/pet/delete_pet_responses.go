@@ -11,11 +11,9 @@ import (
 // DeletePetBadRequestCode is the HTTP code returned for type DeletePetBadRequest
 const DeletePetBadRequestCode int = 400
 
-/*
-DeletePetBadRequest Invalid pet value
-
-swagger:response deletePetBadRequest
-*/
+// DeletePetBadRequest Invalid pet value
+//
+// swagger:response deletePetBadRequest
 type DeletePetBadRequest struct {
 }
 

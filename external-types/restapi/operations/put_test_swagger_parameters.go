@@ -29,15 +29,13 @@ func NewPutTestParams() PutTestParams {
 type PutTestParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*A reference to a type defined in the "fred" package, aliased
-	as "alternate".
-
-	MyAlternate alternate.MyAlternateType
-
-	  Required: true
-	  In: body
-	*/
+	// A reference to a type defined in the "fred" package, aliased
+	// as "alternate".
+	//
+	// MyAlternate alternate.MyAlternateType
+	//
+	// Required: true
+	// In: body
 	MyAlternate alternate.MyAlternateType
 }
 

@@ -12,16 +12,12 @@ import (
 // GetIDOKCode is the HTTP code returned for type GetIDOK
 const GetIDOKCode int = 200
 
-/*
-GetIDOK OK
-
-swagger:response getIdOK
-*/
+// GetIDOK OK
+//
+// swagger:response getIdOK
 type GetIDOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Customer `json:"body,omitempty"`
 }
 
@@ -57,16 +53,12 @@ func (o *GetIDOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produce
 // GetIDUnauthorizedCode is the HTTP code returned for type GetIDUnauthorized
 const GetIDUnauthorizedCode int = 401
 
-/*
-GetIDUnauthorized unauthorized
-
-swagger:response getIdUnauthorized
-*/
+// GetIDUnauthorized unauthorized
+//
+// swagger:response getIdUnauthorized
 type GetIDUnauthorized struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 
@@ -102,16 +94,12 @@ func (o *GetIDUnauthorized) WriteResponse(rw http.ResponseWriter, producer runti
 // GetIDNotFoundCode is the HTTP code returned for type GetIDNotFound
 const GetIDNotFoundCode int = 404
 
-/*
-GetIDNotFound resource not found
-
-swagger:response getIdNotFound
-*/
+// GetIDNotFound resource not found
+//
+// swagger:response getIdNotFound
 type GetIDNotFound struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 
@@ -144,17 +132,13 @@ func (o *GetIDNotFound) WriteResponse(rw http.ResponseWriter, producer runtime.P
 	}
 }
 
-/*
-GetIDDefault error
-
-swagger:response getIdDefault
-*/
+// GetIDDefault error
+//
+// swagger:response getIdDefault
 type GetIDDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 

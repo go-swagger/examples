@@ -26,11 +26,9 @@ func NewCreateUsersWithListInput(ctx *middleware.Context, handler CreateUsersWit
 	return &CreateUsersWithListInput{Context: ctx, Handler: handler}
 }
 
-/*
-	CreateUsersWithListInput swagger:route POST /users/createWithList user createUsersWithListInput
-
-Creates list of users with given input array
-*/
+// CreateUsersWithListInput swagger:route POST /users/createWithList user createUsersWithListInput
+//
+// Creates list of users with given input array
 type CreateUsersWithListInput struct {
 	Context *middleware.Context
 	Handler CreateUsersWithListInputHandler

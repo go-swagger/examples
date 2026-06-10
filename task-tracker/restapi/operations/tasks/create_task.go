@@ -26,15 +26,13 @@ func NewCreateTask(ctx *middleware.Context, handler CreateTaskHandler) *CreateTa
 	return &CreateTask{Context: ctx, Handler: handler}
 }
 
-/*
-	CreateTask swagger:route POST /tasks tasks createTask
-
-Creates a 'Task' object.
-
-Allows for creating a task.
-This operation requires authentication so that we know which user
-created the task.
-*/
+// CreateTask swagger:route POST /tasks tasks createTask
+//
+// Creates a 'Task' object.
+//
+// Allows for creating a task.
+// This operation requires authentication so that we know which user
+// created the task.
 type CreateTask struct {
 	Context *middleware.Context
 	Handler CreateTaskHandler

@@ -28,12 +28,10 @@ func NewPetListParams() PetListParams {
 type PetListParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Status values that need to be considered for filter
-	  Required: true
-	  In: query
-	  Collection Format: multi
-	*/
+	// Status values that need to be considered for filter
+	// Required: true
+	// In: query
+	// Collection Format: multi
 	Status []string
 }
 

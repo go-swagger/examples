@@ -49,11 +49,9 @@ func NewPutExperimentalOK() *PutExperimentalOK {
 	return &PutExperimentalOK{}
 }
 
-/*
-PutExperimentalOK describes a response with status code 200, with default header values.
-
-OK
-*/
+// PutExperimentalOK describes a response with status code 200, with default header values.
+//
+// OK
 type PutExperimentalOK struct {
 	Payload *models.Item
 }
@@ -119,11 +117,9 @@ func NewPutExperimentalNoContent() *PutExperimentalNoContent {
 	return &PutExperimentalNoContent{}
 }
 
-/*
-PutExperimentalNoContent describes a response with status code 204, with default header values.
-
-No change
-*/
+// PutExperimentalNoContent describes a response with status code 204, with default header values.
+//
+// No change
 type PutExperimentalNoContent struct {
 }
 
@@ -175,11 +171,9 @@ func NewPutExperimentalMethodNotAllowed() *PutExperimentalMethodNotAllowed {
 	return &PutExperimentalMethodNotAllowed{}
 }
 
-/*
-PutExperimentalMethodNotAllowed describes a response with status code 405, with default header values.
-
-very wrong
-*/
+// PutExperimentalMethodNotAllowed describes a response with status code 405, with default header values.
+//
+// very wrong
 type PutExperimentalMethodNotAllowed struct {
 }
 

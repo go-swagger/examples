@@ -26,11 +26,9 @@ func NewGetUserByName(ctx *middleware.Context, handler GetUserByNameHandler) *Ge
 	return &GetUserByName{Context: ctx, Handler: handler}
 }
 
-/*
-	GetUserByName swagger:route GET /users/{username} user getUserByName
-
-Get user by user name
-*/
+// GetUserByName swagger:route GET /users/{username} user getUserByName
+//
+// Get user by user name
 type GetUserByName struct {
 	Context *middleware.Context
 	Handler GetUserByNameHandler

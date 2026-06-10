@@ -14,17 +14,17 @@ import (
 
 // API is the interface of the todos client.
 type API interface {
-	/*
-	   AddOne add one API*/
+
+	// AddOne add one API
 	AddOne(ctx context.Context, params *AddOneParams) (*AddOneCreated, *AddOneNoContent, error)
-	/*
-	   DestroyOne destroy one API*/
+
+	// DestroyOne destroy one API
 	DestroyOne(ctx context.Context, params *DestroyOneParams) (*DestroyOneNoContent, error)
-	/*
-	   Find find API*/
+
+	// Find find API
 	Find(ctx context.Context, params *FindParams) (*FindOK, error)
-	/*
-	   UpdateOne update one API*/
+
+	// UpdateOne update one API
 	UpdateOne(ctx context.Context, params *UpdateOneParams) (*UpdateOneOK, *UpdateOneNoContent, error)
 }
 
@@ -37,18 +37,14 @@ func New(transport runtime.ContextualTransport, formats strfmt.Registry, authInf
 	}
 }
 
-/*
-Client for todos API
-*/
+// Client for todos API
 type Client struct {
 	transport runtime.ContextualTransport
 	formats   strfmt.Registry
 	authInfo  runtime.ClientAuthInfoWriter
 }
 
-/*
-AddOne add one API.
-*/
+// AddOne add one API.
 func (a *Client) AddOne(ctx context.Context, params *AddOneParams) (*AddOneCreated, *AddOneNoContent, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "addOne",
@@ -81,9 +77,7 @@ func (a *Client) AddOne(ctx context.Context, params *AddOneParams) (*AddOneCreat
 	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
-/*
-DestroyOne destroy one API.
-*/
+// DestroyOne destroy one API.
 func (a *Client) DestroyOne(ctx context.Context, params *DestroyOneParams) (*DestroyOneNoContent, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "destroyOne",
@@ -112,9 +106,7 @@ func (a *Client) DestroyOne(ctx context.Context, params *DestroyOneParams) (*Des
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
-/*
-Find find API.
-*/
+// Find find API.
 func (a *Client) Find(ctx context.Context, params *FindParams) (*FindOK, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "find",
@@ -143,9 +135,7 @@ func (a *Client) Find(ctx context.Context, params *FindParams) (*FindOK, error) 
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
-/*
-UpdateOne update one API.
-*/
+// UpdateOne update one API.
 func (a *Client) UpdateOne(ctx context.Context, params *UpdateOneParams) (*UpdateOneOK, *UpdateOneNoContent, error) {
 	result, err := a.transport.SubmitContext(ctx, &runtime.ClientOperation{
 		ID:                 "updateOne",

@@ -49,11 +49,9 @@ func NewPetGetOK() *PetGetOK {
 	return &PetGetOK{}
 }
 
-/*
-PetGetOK describes a response with status code 200, with default header values.
-
-successful operation
-*/
+// PetGetOK describes a response with status code 200, with default header values.
+//
+// successful operation
 type PetGetOK struct {
 	Payload *models.Pet
 }
@@ -119,11 +117,9 @@ func NewPetGetBadRequest() *PetGetBadRequest {
 	return &PetGetBadRequest{}
 }
 
-/*
-PetGetBadRequest describes a response with status code 400, with default header values.
-
-Invalid ID supplied
-*/
+// PetGetBadRequest describes a response with status code 400, with default header values.
+//
+// Invalid ID supplied
 type PetGetBadRequest struct {
 }
 
@@ -175,11 +171,9 @@ func NewPetGetNotFound() *PetGetNotFound {
 	return &PetGetNotFound{}
 }
 
-/*
-PetGetNotFound describes a response with status code 404, with default header values.
-
-Pet not found
-*/
+// PetGetNotFound describes a response with status code 404, with default header values.
+//
+// Pet not found
 type PetGetNotFound struct {
 }
 

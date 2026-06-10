@@ -28,14 +28,12 @@ func NewAddOrder(ctx *middleware.Context, handler AddOrderHandler) *AddOrder {
 	return &AddOrder{Context: ctx, Handler: handler}
 }
 
-/*
-	AddOrder swagger:route POST /order/add addOrder
-
-post a new order
-
-Registered customers should be able to add purchase orders.
-Registered inventory managers should be able to add replenishment orders.
-*/
+// AddOrder swagger:route POST /order/add addOrder
+//
+// post a new order
+//
+// Registered customers should be able to add purchase orders.
+// Registered inventory managers should be able to add replenishment orders.
 type AddOrder struct {
 	Context *middleware.Context
 	Handler AddOrderHandler

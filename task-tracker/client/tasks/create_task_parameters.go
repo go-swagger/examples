@@ -63,10 +63,9 @@ CreateTaskParams contains all the parameters to send to the API endpoint
 */
 type CreateTaskParams struct {
 
-	/* Body.
-
-	   The task to create
-	*/
+	// Body.
+	//
+	// The task to create
 	Body *models.Task
 
 	HTTPClient *http.Client

@@ -31,17 +31,13 @@ func NewUpdateTaskParams() UpdateTaskParams {
 type UpdateTaskParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*The task to update
-	  Required: true
-	  In: body
-	*/
+	// The task to update
+	// Required: true
+	// In: body
 	Body *models.Task
-
-	/*The id of the item
-	  Required: true
-	  In: path
-	*/
+	// The id of the item
+	// Required: true
+	// In: path
 	ID int64
 }
 

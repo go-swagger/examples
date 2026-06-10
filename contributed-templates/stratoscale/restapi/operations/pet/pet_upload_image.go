@@ -26,11 +26,9 @@ func NewPetUploadImage(ctx *middleware.Context, handler PetUploadImageHandler) *
 	return &PetUploadImage{Context: ctx, Handler: handler}
 }
 
-/*
-	PetUploadImage swagger:route POST /pet/{petId}/image pet petUploadImage
-
-uploads an image
-*/
+// PetUploadImage swagger:route POST /pet/{petId}/image pet petUploadImage
+//
+// uploads an image
 type PetUploadImage struct {
 	Context *middleware.Context
 	Handler PetUploadImageHandler

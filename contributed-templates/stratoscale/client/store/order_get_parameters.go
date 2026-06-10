@@ -63,12 +63,11 @@ OrderGetParams contains all the parameters to send to the API endpoint
 */
 type OrderGetParams struct {
 
-	/* OrderID.
-
-	   ID of pet that needs to be fetched
-
-	   Format: int64
-	*/
+	// OrderID.
+	//
+	// ID of pet that needs to be fetched
+	//
+	// Format: int64
 	OrderID int64
 
 	HTTPClient *http.Client

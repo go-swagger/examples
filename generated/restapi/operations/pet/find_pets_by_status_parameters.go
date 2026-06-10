@@ -26,11 +26,9 @@ func NewFindPetsByStatusParams() FindPetsByStatusParams {
 type FindPetsByStatusParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*Status values that need to be considered for filter
-	  In: query
-	  Collection Format: multi
-	*/
+	// Status values that need to be considered for filter
+	// In: query
+	// Collection Format: multi
 	Status []string
 }
 

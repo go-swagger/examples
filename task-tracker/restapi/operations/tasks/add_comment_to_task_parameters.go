@@ -28,16 +28,12 @@ func NewAddCommentToTaskParams() AddCommentToTaskParams {
 type AddCommentToTaskParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-
-	/*The comment to add
-	  In: body
-	*/
+	// The comment to add
+	// In: body
 	Body AddCommentToTaskBody
-
-	/*The id of the item
-	  Required: true
-	  In: path
-	*/
+	// The id of the item
+	// Required: true
+	// In: path
 	ID int64
 }
 

@@ -12,16 +12,12 @@ import (
 // GetItemsOKCode is the HTTP code returned for type GetItemsOK
 const GetItemsOKCode int = 200
 
-/*
-GetItemsOK multiple items
-
-swagger:response getItemsOK
-*/
+// GetItemsOK multiple items
+//
+// swagger:response getItemsOK
 type GetItemsOK struct {
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload []models.Item `json:"body,omitempty"`
 }
 
@@ -57,17 +53,13 @@ func (o *GetItemsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 	}
 }
 
-/*
-GetItemsDefault other error response
-
-swagger:response getItemsDefault
-*/
+// GetItemsDefault other error response
+//
+// swagger:response getItemsDefault
 type GetItemsDefault struct {
 	_statusCode int
 
-	/*
-	  In: Body
-	*/
+	// In: Body
 	Payload *models.Error `json:"body,omitempty"`
 }
 
