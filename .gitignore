@@ -79,3 +79,4 @@ composed-auth/keys/*.prv
 composed-auth/tokens/*.jwt
 
 go.work.sum
+.worktrees

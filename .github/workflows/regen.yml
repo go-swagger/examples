@@ -74,5 +74,4 @@ jobs:
           draft: false
           assignees: fredbi
           reviewers: fredbi
-          sign-commits: true
           signoff: true
