@@ -4,12 +4,12 @@
 
 | Total Contributors | Total Contributions |
 | --- | --- |
-| 33  | 307  |
+| 33  | 309  |
 
 | Username | All Time Contribution Count | All Commits |
 | --- | --- | --- |
 | @casualjim | 203 | <https://github.com/go-swagger/examples/commits?author=casualjim> |
-| @fredbi | 50 | <https://github.com/go-swagger/examples/commits?author=fredbi> |
+| @fredbi | 52 | <https://github.com/go-swagger/examples/commits?author=fredbi> |
 | @youyuanwu | 17 | <https://github.com/go-swagger/examples/commits?author=youyuanwu> |
 | @kenjones-cisco | 4 | <https://github.com/go-swagger/examples/commits?author=kenjones-cisco> |
 | @GlenDC | 3 | <https://github.com/go-swagger/examples/commits?author=GlenDC> |
