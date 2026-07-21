@@ -15,6 +15,7 @@ import (
 
 // Milestone A milestone is a particular goal that is important to the project for this issue tracker.
 //
+// INSERT ANOTHER COMMENT THERE
 // Milestones can have a escription and due date.
 // This can be useful for filters and such.
 //
@@ -23,12 +24,14 @@ type Milestone struct {
 
 	// The description of the milestone.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// A description is a free text field that allows for a more detailed explanation of what the milestone is trying to achieve.
 	//
 	Description string `json:"description,omitempty"`
 
 	// An optional due date for this milestone.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This property is optional, but when present it lets people know when they can expect this milestone to be completed.
 	//
 	// Format: date
@@ -36,6 +39,7 @@ type Milestone struct {
 
 	// The name of the milestone.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// Each milestone should get a unique name.
 	//
 	// Required: true
@@ -185,6 +189,7 @@ func (m *Milestone) UnmarshalBinary(b []byte) error {
 
 // MilestoneStats Some counters for this milestone.
 //
+// INSERT ANOTHER COMMENT THERE
 // This object contains counts for the remaining open issues and the amount of issues that have been closed.
 //
 // swagger:model MilestoneStats

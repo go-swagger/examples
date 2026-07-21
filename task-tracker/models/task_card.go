@@ -17,6 +17,7 @@ import (
 
 // TaskCard a card for a task
 //
+// INSERT ANOTHER COMMENT THERE
 // A task card is a minimalistic representation of a task. Useful for display in list views, like a card list.
 //
 // swagger:model TaskCard
@@ -27,6 +28,7 @@ type TaskCard struct {
 
 	// The description of the task.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// The task description is a longer, more detailed description of the issue.
 	// Perhaps it even mentions steps to reproduce.
 	//
@@ -39,12 +41,14 @@ type TaskCard struct {
 
 	// The id of the task.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// A unique identifier for the task. These are created in ascending order.
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
 	// the karma donated to this item.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// Karma is a lot like voting.  Users can donate a certain amount or karma to an issue.
 	// This is used to determine the weight users place on an issue. Not that +1 comments aren't great.
 	//
@@ -57,6 +61,7 @@ type TaskCard struct {
 
 	// The time at which this issue was reported.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This field is read-only, so it's only sent as part of the response.
 	//
 	// Read Only: true
@@ -70,6 +75,7 @@ type TaskCard struct {
 
 	// the status of the issue
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// There are 4 possible values for a status.
 	// Ignored means as much as accepted but not now, perhaps later.
 	//
@@ -79,6 +85,7 @@ type TaskCard struct {
 
 	// task tags.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// a task can be tagged with text blurbs.
 	// Max Items: 5
 	// Unique: true
@@ -86,6 +93,7 @@ type TaskCard struct {
 
 	// The title of the task.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// The title for a task, this needs to be at least 5 chars long.
 	// Titles don't allow any formatting, besides emoji.
 	//

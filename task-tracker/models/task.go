@@ -17,6 +17,7 @@ import (
 
 // Task a structure describing a complete task.
 //
+// INSERT ANOTHER COMMENT THERE
 // A Task is the main entity in this application. Everything revolves around tasks and managing them.
 //
 // swagger:model Task
@@ -25,12 +26,14 @@ type Task struct {
 
 	// The attached files.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// An issue can have at most 20 files attached to it.
 	//
 	Attachments map[string]TaskAttachmentsAnon `json:"attachments,omitempty"`
 
 	// The 5 most recent items for this issue.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// The detail view of an issue includes the 5 most recent comments.
 	// This field is read only, comments are added through a separate process.
 	//
@@ -39,6 +42,7 @@ type Task struct {
 
 	// The time at which this issue was last updated.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This field is read only so it's only sent as part of the response.
 	//
 	// Read Only: true
@@ -456,6 +460,7 @@ type TaskAttachmentsAnon struct {
 
 	// The content type of the file.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// The content type of the file is inferred from the upload request.
 	//
 	// Read Only: true
@@ -463,6 +468,7 @@ type TaskAttachmentsAnon struct {
 
 	// Extra information to attach to the file.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This is a free form text field with support for github flavored markdown.
 	//
 	// Min Length: 3
@@ -470,6 +476,7 @@ type TaskAttachmentsAnon struct {
 
 	// The name of the file.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This name is inferred from the upload request.
 	//
 	// Read Only: true
@@ -477,12 +484,14 @@ type TaskAttachmentsAnon struct {
 
 	// The file size in bytes.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This property was generated during the upload request of the file.
 	// Read Only: true
 	Size float64 `json:"size,omitempty"`
 
 	// The url to download or view the file.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This URL is generated on the server, based on where it was able to store the file when it was uploaded.
 	//
 	// Read Only: true
@@ -500,6 +509,7 @@ func (m *TaskAttachmentsAnon) UnmarshalJSON(data []byte) error {
 
 		// The content type of the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// The content type of the file is inferred from the upload request.
 		//
 		// Read Only: true
@@ -507,6 +517,7 @@ func (m *TaskAttachmentsAnon) UnmarshalJSON(data []byte) error {
 
 		// Extra information to attach to the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This is a free form text field with support for github flavored markdown.
 		//
 		// Min Length: 3
@@ -514,6 +525,7 @@ func (m *TaskAttachmentsAnon) UnmarshalJSON(data []byte) error {
 
 		// The name of the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This name is inferred from the upload request.
 		//
 		// Read Only: true
@@ -521,12 +533,14 @@ func (m *TaskAttachmentsAnon) UnmarshalJSON(data []byte) error {
 
 		// The file size in bytes.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This property was generated during the upload request of the file.
 		// Read Only: true
 		Size float64 `json:"size,omitempty"`
 
 		// The url to download or view the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This URL is generated on the server, based on where it was able to store the file when it was uploaded.
 		//
 		// Read Only: true
@@ -578,6 +592,7 @@ func (m TaskAttachmentsAnon) MarshalJSON() ([]byte, error) {
 
 		// The content type of the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// The content type of the file is inferred from the upload request.
 		//
 		// Read Only: true
@@ -585,6 +600,7 @@ func (m TaskAttachmentsAnon) MarshalJSON() ([]byte, error) {
 
 		// Extra information to attach to the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This is a free form text field with support for github flavored markdown.
 		//
 		// Min Length: 3
@@ -592,6 +608,7 @@ func (m TaskAttachmentsAnon) MarshalJSON() ([]byte, error) {
 
 		// The name of the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This name is inferred from the upload request.
 		//
 		// Read Only: true
@@ -599,12 +616,14 @@ func (m TaskAttachmentsAnon) MarshalJSON() ([]byte, error) {
 
 		// The file size in bytes.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This property was generated during the upload request of the file.
 		// Read Only: true
 		Size float64 `json:"size,omitempty"`
 
 		// The url to download or view the file.
 		//
+		// INSERT ANOTHER COMMENT THERE
 		// This URL is generated on the server, based on where it was able to store the file when it was uploaded.
 		//
 		// Read Only: true

@@ -14,6 +14,7 @@ import (
 
 // UserCard A minimal representation of a user.
 //
+// INSERT ANOTHER COMMENT THERE
 // This representation of a user is mainly meant for inclusion in other models, or for list views.
 //
 // swagger:model UserCard
@@ -21,6 +22,7 @@ type UserCard struct {
 
 	// When true this user is an admin.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// Only employees of the owning company can be admins.
 	// Admins are like project owners but have access to all the projects in the application.
 	// There aren't many admins, and it's only used for extremely critical issues with the application.
@@ -30,6 +32,7 @@ type UserCard struct {
 
 	// The amount of karma this user has available.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// In this application users get a cerain amount of karma allotted.
 	// This karma can be donated to other users to show appreciation, or it can be used
 	// by a user to vote on issues.
@@ -41,6 +44,7 @@ type UserCard struct {
 
 	// A unique identifier for a user.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This id is automatically generated on the server when a user is created.
 	//
 	// Required: true
@@ -49,6 +53,7 @@ type UserCard struct {
 
 	// The screen name for the user.
 	//
+	// INSERT ANOTHER COMMENT THERE
 	// This is used for vanity type urls as well as login credentials.
 	//
 	// Required: true
