@@ -9,6 +9,7 @@ produces:
 schemes:
   - http
 basePath: /api
+# snippet:security
 securityDefinitions:
   OauthSecurity:
     type: oauth2
@@ -18,6 +19,7 @@ securityDefinitions:
     scopes:
       admin: Admin scope
       user: User scope
+# endsnippet:security
 security:
   - OauthSecurity:
     - user

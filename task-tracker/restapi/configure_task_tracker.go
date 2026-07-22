@@ -40,6 +40,7 @@ func configureAPI(api *operations.TaskTrackerAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	// snippet:auth
 	// Applies when the "token" query is set
 	if api.APIKeyAuth == nil {
 		api.APIKeyAuth = func(token string) (any, error) {
@@ -56,6 +57,7 @@ func configureAPI(api *operations.TaskTrackerAPI) http.Handler {
 			return nil, errors.NotImplemented("api key auth (token_header) X-Token from header param [X-Token] has not yet been implemented")
 		}
 	}
+	// endsnippet:auth
 
 	// Set your custom authorizer if needed. Default one is security.Authorized()
 	// Expected interface runtime.Authorizer

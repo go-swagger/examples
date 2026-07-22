@@ -11,6 +11,7 @@ consumes:
   - application/keyauth.api.v1+json
 produces:
   - application/keyauth.api.v1+json
+# snippet:security
 securityDefinitions:
   key:
     type: apiKey
@@ -18,6 +19,7 @@ securityDefinitions:
     name: x-token
 security:
   - key: []
+# endsnippet:security
 paths:
   /customers:
     post:

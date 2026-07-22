@@ -55,6 +55,7 @@ var (
 	}
 )
 
+// snippet:login
 func login(r *http.Request) middleware.Responder {
 	// implements the login with a redirection
 	return middleware.ResponderFunc(
@@ -63,6 +64,9 @@ func login(r *http.Request) middleware.Responder {
 		})
 }
 
+// endsnippet:login
+
+// snippet:callback
 func callback(r *http.Request) (string, error) {
 	// we expect the redirected client to call us back
 	// with 2 query params: state and code.
@@ -95,6 +99,8 @@ func callback(r *http.Request) (string, error) {
 	log.Println("Raw token data:", oauth2Token)
 	return oauth2Token.AccessToken, nil
 }
+
+// endsnippet:callback
 
 func authenticated(token string) (bool, error) {
 	// validates the token by sending a request at userInfoURL

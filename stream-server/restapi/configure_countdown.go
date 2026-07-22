@@ -38,6 +38,7 @@ func configureAPI(api *operations.CountdownAPI) http.Handler {
 	api.JSONProducer = runtime.JSONProducer()
 
 	myCounter := &biz.MyCounter{}
+	// snippet:handler
 	api.ElapseHandler = operations.ElapseHandlerFunc(func(params operations.ElapseParams) middleware.Responder {
 		if params.Length == 11 {
 			return operations.NewElapseForbidden()
@@ -49,12 +50,14 @@ func configureAPI(api *operations.CountdownAPI) http.Handler {
 			_ = myCounter.Down(params.Length, &flushWriter{f: f, w: rw})
 		})
 	})
+	// endsnippet:handler
 
 	api.ServerShutdown = func() {}
 
 	return setupGlobalMiddleware(api.Serve(setupMiddlewares))
 }
 
+// snippet:flush-writer
 // Via https://play.golang.org/p/PpbPyXbtEs
 type flushWriter struct {
 	f http.Flusher
@@ -69,6 +72,8 @@ func (fw *flushWriter) Write(p []byte) (n int, err error) {
 	}
 	return
 }
+
+// endsnippet:flush-writer
 
 // The TLS configuration before HTTPS server starts.
 func configureTLS(tlsConfig *tls.Config) {

@@ -33,11 +33,15 @@
 // swagger:meta
 package demo
 
+// snippet:aliases
+
 // Identifier represents a unique identifier.
 type Identifier string
 
 // UserID is an alias to Identifier for user-specific IDs.
 type UserID = Identifier
+
+// endsnippet:aliases
 
 // User represents a user in the system.
 type User struct {

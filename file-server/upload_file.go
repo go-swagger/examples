@@ -30,6 +30,7 @@ func main() {
 	}
 }
 
+// snippet:client-upload
 func upload(reader runtime.NamedReadCloser) error {
 	config := client.DefaultTransportConfig().WithHost("localhost:8000")
 
@@ -41,3 +42,5 @@ func upload(reader runtime.NamedReadCloser) error {
 
 	return err
 }
+
+// endsnippet:client-upload

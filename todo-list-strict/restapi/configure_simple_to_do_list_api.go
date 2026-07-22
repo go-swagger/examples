@@ -55,6 +55,7 @@ func configureAPI(api *operations.SimpleToDoListAPIAPI) http.Handler {
 	// You may change here the memory limit for this multipart form parser. Below is the default (32 MB).
 	// todos.FindMaxParseMemory = 32 << 20
 
+	// snippet:strict-handler
 	if api.TodosAddOneHandler == nil {
 		api.TodosAddOneHandler = todos.AddOneHandlerFunc(func(params todos.AddOneParams, principal any) todos.AddOneResponder {
 			_ = params
@@ -63,6 +64,7 @@ func configureAPI(api *operations.SimpleToDoListAPIAPI) http.Handler {
 			return todos.AddOneNotImplemented()
 		})
 	}
+	// endsnippet:strict-handler
 	if api.TodosDestroyOneHandler == nil {
 		api.TodosDestroyOneHandler = todos.DestroyOneHandlerFunc(func(params todos.DestroyOneParams, principal any) todos.DestroyOneResponder {
 			_ = params

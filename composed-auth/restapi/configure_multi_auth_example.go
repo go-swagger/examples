@@ -36,6 +36,7 @@ func configureAPI(api *operations.MultiAuthExampleAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	// snippet:wiring
 	api.HasRoleAuth = func(token string, scopes []string) (*models.Principal, error) {
 		// The header: Authorization: Bearer {base64 string} (or ?access_token={base 64 string} param) has already
 		// been decoded by the runtime as a token
@@ -59,6 +60,7 @@ func configureAPI(api *operations.MultiAuthExampleAPI) http.Handler {
 		api.Logger("ResellerQueryAuth handler called")
 		return auth.IsReseller(token)
 	}
+	// endsnippet:wiring
 
 	// Set your custom authorizer if needed. Default one is security.Authorized()
 	// Expected interface runtime.Authorizer

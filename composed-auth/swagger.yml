@@ -40,6 +40,7 @@ schemes:
   - http   # https in a normal setup
 basePath: /api
 securityDefinitions:
+  # snippet:schemes
   isRegistered:
     # This scheme uses the header: "Authorization: Basic {base64 encoded string defined by username:password}"
     # Scopes are not supported with this type of authorization.
@@ -71,6 +72,7 @@ securityDefinitions:
     scopes:
       customer: scope of registered customers
       inventoryManager: scope of resellers acting as inventory managers
+  # endsnippet:schemes
 
 # Default Security requirements for all operations
 security:
@@ -140,6 +142,7 @@ paths:
         Registered customers should be able to add purchase orders.
         Registered inventory managers should be able to add replenishment orders.
 
+      # snippet:composed-security
       security:
         - isRegistered: []
           hasRole: [ customer ]
@@ -147,6 +150,7 @@ paths:
           hasRole: [ inventoryManager ]
         - isResellerQuery: []
           hasRole: [ inventoryManager ]
+      # endsnippet:composed-security
       parameters:
         - name: order
           in: body

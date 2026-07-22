@@ -25,6 +25,7 @@
           type: integer
           minimum: 2
           maximum: 30
+        # snippet:streaming-response
         responses:
           200:
             description: Secondly update on remaining time
@@ -37,6 +38,7 @@
               format: binary
           403:
             description: Contrived - thrown when length of 11 is chosen
+        # endsnippet:streaming-response
   definitions:
     # Notice this is never directly used/referenced anywhere else in the
     # Swagger document. However, the generated `models` object is used in

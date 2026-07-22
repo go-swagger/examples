@@ -22,6 +22,7 @@ func main() {
 }
 
 func serve() error {
+	// snippet:wiring
 	// load embedded swagger file
 	swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
 	if err != nil {
@@ -31,6 +32,7 @@ func serve() error {
 	// create new service API
 	api := operations.NewGreeterAPI(swaggerSpec)
 	server := restapi.NewServer(api)
+	// endsnippet:wiring
 	defer func() {
 		_ = server.Shutdown()
 	}()
@@ -40,6 +42,7 @@ func serve() error {
 	// set the port this service will be run on
 	server.Port = *portFlag
 
+	// snippet:handler
 	// GetGreetingHandler greets the given name,
 	// in case the name is not given, it will default to World
 	api.GetGreetingHandler = operations.GetGreetingHandlerFunc(
@@ -52,6 +55,7 @@ func serve() error {
 			greeting := fmt.Sprintf("Hello, %s!", name)
 			return operations.NewGetGreetingOK().WithPayload(greeting)
 		})
+	// endsnippet:handler
 
 	// serve API
 	return server.Serve()

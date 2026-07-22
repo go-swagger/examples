@@ -39,6 +39,7 @@ func configureAPI(api *operations.OauthSampleAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	// snippet:oauth-auth
 	api.OauthSecurityAuth = func(token string, scopes []string) (*models.Principal, error) {
 		_ = scopes
 
@@ -53,6 +54,7 @@ func configureAPI(api *operations.OauthSampleAPI) http.Handler {
 
 		return &prin, nil
 	}
+	// endsnippet:oauth-auth
 
 	// Set your custom authorizer if needed. Default one is security.Authorized()
 	// Expected interface runtime.Authorizer

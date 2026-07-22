@@ -61,6 +61,8 @@ func Mount(next http.Handler) http.Handler {
 	})
 }
 
+// snippet:instrument
+
 // Instrument records request count and latency for the wrapped handler.
 //
 // It is meant to be installed in the generated server's setupMiddlewares hook
@@ -88,6 +90,8 @@ func Instrument(next http.Handler) http.Handler {
 		requestDuration.With(obs).Observe(time.Since(start).Seconds())
 	})
 }
+
+// endsnippet:instrument
 
 type statusRecorder struct {
 	http.ResponseWriter

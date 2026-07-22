@@ -23,6 +23,7 @@ func configureFlags(api *operations.TodoListAPI) {
 	_ = api
 }
 
+// snippet:catcher
 func catcher(w http.ResponseWriter, r *http.Request, err error) {
 	if errors.Is(err, errAlreadyExists) {
 		slog.Info("we catch custom error! congratulations!")
@@ -33,6 +34,8 @@ func catcher(w http.ResponseWriter, r *http.Request, err error) {
 
 //nolint:gochecknoglobals
 var errAlreadyExists = errors.New("already exists")
+
+// endsnippet:catcher
 
 func configureAPI(api *operations.TodoListAPI) http.Handler {
 	// configure the api here
@@ -54,12 +57,14 @@ func configureAPI(api *operations.TodoListAPI) http.Handler {
 	// You may change here the memory limit for this multipart form parser. Below is the default (32 MB).
 	// todos.FindMaxParseMemory = 32 << 20
 
+	// snippet:handler
 	api.TodosAddOneHandler = todos.AddOneHandlerFunc(
 		func(params todos.AddOneParams) (middleware.Responder, error) {
 			_ = params
 
 			return nil, errAlreadyExists
 		})
+	// endsnippet:handler
 
 	api.PreServerShutdown = func() {}
 	api.ServerShutdown = func() {}

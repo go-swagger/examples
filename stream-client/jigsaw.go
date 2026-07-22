@@ -20,6 +20,7 @@ import (
 	"github.com/go-swagger/examples/stream-client/client/operations"
 )
 
+// snippet:buffer
 // Buffer knows how to UnmarshalText
 type Buffer struct {
 	*bytes.Buffer
@@ -30,6 +31,8 @@ func (b *Buffer) UnmarshalText(text []byte) error {
 	_, err := b.Write(text)
 	return err
 }
+
+// endsnippet:buffer
 
 // NewBuffer creates a new buffer that knows how to unmarshal text/plain
 func NewBuffer() *Buffer {
@@ -84,6 +87,7 @@ func customTransport(withChunks bool) *httptransport.Runtime {
 }
 
 // chunkedBlocking consumes some text/plain resource, blocking for the response to be completely sent
+// snippet:blocking
 func chunkedBlocking(withChunks bool) error {
 	c := client.New(customTransport(withChunks), nil).Operations
 
@@ -102,6 +106,8 @@ func chunkedBlocking(withChunks bool) error {
 	log.Printf("result: %v", string(data))
 	return nil
 }
+
+// endsnippet:blocking
 
 // chunkedNonBlocking consumes some text/plain resource asynchronously
 func chunkedNonBlocking(withChunks bool) error {

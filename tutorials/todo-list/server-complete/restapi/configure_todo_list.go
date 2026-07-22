@@ -121,6 +121,7 @@ func configureAPI(api *operations.TodoListAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	// snippet:handlers
 	api.TodosAddOneHandler = todos.AddOneHandlerFunc(func(params todos.AddOneParams) middleware.Responder {
 		if err := addItem(params.Body); err != nil {
 			return todos.NewAddOneDefault(500).WithPayload(&models.Error{Code: 500, Message: conv.Pointer(err.Error())})
@@ -133,6 +134,7 @@ func configureAPI(api *operations.TodoListAPI) http.Handler {
 		}
 		return todos.NewDestroyOneNoContent()
 	})
+	// endsnippet:handlers
 	api.TodosFindTodosHandler = todos.FindTodosHandlerFunc(func(params todos.FindTodosParams) middleware.Responder {
 		mergedParams := todos.NewFindTodosParams()
 		mergedParams.Since = conv.Pointer(int64(0))
