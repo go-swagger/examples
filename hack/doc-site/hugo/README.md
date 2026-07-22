@@ -1,7 +1,7 @@
 # Hugo documentation site
 
 This directory holds the Hugo configuration that builds
-<https://go-openapi.github.io/examples/>.
+<https://goswagger.io/examples/>.
 
 ## Layout
 
@@ -59,4 +59,4 @@ GitHub Actions workflow `.github/workflows/update-doc.yml`:
 - Builds on every push to `master` and on tags `v*` that touch `docs/**`,
   `hack/doc-site/**`, or the workflow itself
 - Publishes the rendered site to GitHub Pages
-  (<https://go-swagger.github.io/examples/>)
+  (<https://goswagger.io/examples/>)

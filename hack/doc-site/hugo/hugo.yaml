@@ -1,4 +1,4 @@
-baseURL: https://go-swagger.github.io/examples/
+baseURL: https://goswagger.io/examples/
 title: go-swagger examples
 theme: hugo-relearn
 languageCode: en-us
@@ -130,7 +130,7 @@ params:
   ordersectionsby: 'weight'
   # Proposal for enhancement: configure versions
   #versions:
-  #- baseURL: https://go-swagger.github.io/examples/
+  #- baseURL: https://goswagger.io/examples/
   #  identifier: v2.1.0
   #  isLatest: true
   #version: 'v2.1.0'
