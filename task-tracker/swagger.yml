@@ -10,6 +10,7 @@ consumes:
   - application/vnd.goswagger.examples.task-tracker.v1+json
 
 securityDefinitions:
+  # snippet:security
   api_key:
     type: apiKey
     name: token
@@ -18,6 +19,7 @@ securityDefinitions:
     type: apiKey
     name: X-Token
     in: header
+  # endsnippet:security
 
 info:
   version: "1.0.0"

@@ -175,6 +175,7 @@ definitions:
         x-go-type:
           type: MyInteger
 
+      # snippet:x-go-type
       gamma:
         description: |
           Property defined as an external type from package "fred"
@@ -183,6 +184,7 @@ definitions:
           type: MyAlternateInteger
           import:
             package: "github.com/go-swagger/examples/external-types/fred"
+      # endsnippet:x-go-type
 
       epsilon:
         type: array

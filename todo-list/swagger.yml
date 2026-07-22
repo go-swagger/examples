@@ -122,6 +122,7 @@ paths:
           schema:
             $ref: "#/definitions/error"
 definitions:
+  # snippet:definitions
   item:
     type: object
     required:
@@ -146,3 +147,4 @@ definitions:
         format: int64
       message:
         type: string
+  # endsnippet:definitions

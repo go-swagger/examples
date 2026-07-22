@@ -39,6 +39,7 @@ func main() {
 }
 
 func ask(n int64) error {
+	// snippet:consumer
 	customized := httptransport.New("localhost:8000", "/", []string{"http"})
 	customized.Consumers[runtime.JSONMime] = runtime.ByteStreamConsumer()
 
@@ -47,12 +48,14 @@ func ask(n int64) error {
 	reader, writer := io.Pipe()
 
 	scanner := bufio.NewScanner(reader)
+	// endsnippet:consumer
 
 	ctx, cancel := context.WithCancel(context.Background())
 
 	// consumes asynchronously the response buffer
 	var wg sync.WaitGroup
 
+	// snippet:scan
 	wg.Add(1)
 	go func(wg *sync.WaitGroup) {
 		defer wg.Done()
@@ -81,13 +84,16 @@ func ask(n int64) error {
 
 		log.Println("EOF")
 	}(&wg)
+	// endsnippet:scan
 
 	queryCtx, timedOut := context.WithTimeout(ctx, 7*time.Second)
 	defer timedOut()
 
+	// snippet:request
 	elapsed := operations.NewElapseParamsWithContext(queryCtx).WithLength(n)
 
 	_, err := countdowns.Operations.Elapse(elapsed, writer)
+	// endsnippet:request
 
 	if err == nil {
 		log.Printf("response complete")

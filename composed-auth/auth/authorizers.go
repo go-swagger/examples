@@ -53,6 +53,8 @@ func init() {
 
 // Customized authorizer methods for our sample API
 
+// snippet:is-registered
+
 // IsRegistered determines if the user is properly registered,
 // i.e if a valid username:password pair has been provided.
 func IsRegistered(user, pass string) (*models.Principal, error) {
@@ -65,6 +67,8 @@ func IsRegistered(user, pass string) (*models.Principal, error) {
 		Name: user,
 	}, nil
 }
+
+// endsnippet:is-registered
 
 // IsReseller tells if the API key is a JWT signed by us with a claim to be a reseller.
 func IsReseller(token string) (*models.Principal, error) {

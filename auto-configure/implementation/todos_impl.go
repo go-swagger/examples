@@ -20,6 +20,8 @@ type TodosHandlerImpl struct {
 	idx int64
 }
 
+// snippet:add-one
+
 func (i *TodosHandlerImpl) AddOne(params todos.AddOneParams, principal any) middleware.Responder {
 	_ = principal
 
@@ -40,6 +42,8 @@ func (i *TodosHandlerImpl) AddOne(params todos.AddOneParams, principal any) midd
 	i.items[newItem.ID] = newItem
 	return todos.NewAddOneCreated().WithPayload(newItem)
 }
+
+// endsnippet:add-one
 
 func (i *TodosHandlerImpl) DestroyOne(params todos.DestroyOneParams, principal any) middleware.Responder {
 	_ = principal

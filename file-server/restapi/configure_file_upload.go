@@ -55,6 +55,7 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 	}
 	uploadCounter := 0
 
+	// snippet:upload-handler
 	api.UploadsUploadFileHandler = uploads.UploadFileHandlerFunc(func(params uploads.UploadFileParams) middleware.Responder {
 		if params.File == nil {
 			return middleware.Error(http.StatusNotFound, stderrors.New("no file provided"))
@@ -87,6 +88,7 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 
 		return uploads.NewUploadFileOK()
 	})
+	// endsnippet:upload-handler
 
 	api.PreServerShutdown = func() {}
 

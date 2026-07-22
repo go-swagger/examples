@@ -18,6 +18,7 @@ info:
     name: go-openapi maintainers
     email: nowhere@example.com
     url: https://github.com/go-openapi
+# snippet:security
 securityDefinitions:
   key:
     type: apiKey
@@ -25,6 +26,7 @@ securityDefinitions:
     name: x-todolist-token
 security:
   - key: []
+# endsnippet:security
 consumes:
   - application/io.swagger.examples.todo-list.v1+json
 produces:

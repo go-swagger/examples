@@ -44,6 +44,7 @@ func configureAPI(api *operations.PetstoreAPI) http.Handler {
 	api.JSONProducer = runtime.JSONProducer()
 	api.XMLProducer = runtime.XMLProducer()
 
+	// snippet:auth
 	// Applies when the "api_key" header is set
 	if api.APIKeyAuth == nil {
 		api.APIKeyAuth = func(token string) (any, error) {
@@ -60,6 +61,7 @@ func configureAPI(api *operations.PetstoreAPI) http.Handler {
 			return nil, errors.NotImplemented("oauth2 bearer auth (petstore_auth) has not yet been implemented")
 		}
 	}
+	// endsnippet:auth
 
 	// Set your custom authorizer if needed. Default one is security.Authorized()
 	// Expected interface runtime.Authorizer

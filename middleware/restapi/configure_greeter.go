@@ -65,6 +65,8 @@ func configureServer(server *http.Server, scheme, addr string) {
 	_ = addr
 }
 
+// snippet:setup-middlewares
+
 // setupMiddlewares wraps the swagger handler after routing.
 //
 // At this point, [middleware.MatchedRouteFrom] returns the matched route, so
@@ -74,6 +76,10 @@ func configureServer(server *http.Server, scheme, addr string) {
 func setupMiddlewares(handler http.Handler) http.Handler {
 	return metrics.Instrument(handler)
 }
+
+// endsnippet:setup-middlewares
+
+// snippet:setup-global
 
 // setupGlobalMiddleware wraps everything the server serves, including the
 // swagger spec document and the embedded UI.
@@ -108,3 +114,5 @@ func setupGlobalMiddleware(handler http.Handler) http.Handler {
 
 	return metrics.Mount(sec.Handler(handler))
 }
+
+// endsnippet:setup-global

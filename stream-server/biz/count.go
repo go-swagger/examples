@@ -13,6 +13,8 @@ import (
 // MyCounter is the concrete implementation.
 type MyCounter struct{}
 
+// snippet:producer
+
 // Down is the concrete implementation that spits out the JSON bodies.
 func (mc *MyCounter) Down(maximum int64, w io.Writer) error {
 	if maximum == 11 {
@@ -33,3 +35,5 @@ func (mc *MyCounter) Down(maximum int64, w io.Writer) error {
 
 	return nil
 }
+
+// endsnippet:producer
