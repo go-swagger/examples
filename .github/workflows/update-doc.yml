@@ -40,9 +40,11 @@ jobs:
         with:
           fetch-depth: '1'
           submodules: recursive
-          sparse-checkout: |
-            hack/
-            docs/
+          # No sparse-checkout: the `code` shortcode mounts the repo root
+          # (assets/examples ← ../../..) to embed the real example sources,
+          # which live in top-level dirs (cli/, task-tracker/, …), not under
+          # docs/. A sparse checkout of hack/+docs/ would leave those files
+          # absent and every `code` shortcode would fail to resolve its asset.
       -
         name: Get all tags [go-swagger repo]
         if: ${{ github.repository == 'go-swagger/examples' }}
@@ -102,16 +104,7 @@ jobs:
         with:
           version: v0.153.3  # <- pin the HUGO version, as they often break things
           extended: true
-          args: >
-            --config hugo.yaml,examples.yaml
-            --buildDrafts
-            --cleanDestinationDir
-            --minify
-            --printPathWarnings
-            --ignoreCache
-            --noBuildLock
-            --logLevel info
-            --source ${{ github.workspace }}/hack/doc-site/hugo
+          args: --config hugo.yaml,examples.yaml --buildDrafts --cleanDestinationDir --minify --printPathWarnings --ignoreCache --noBuildLock --logLevel info --source ${{ github.workspace }}/hack/doc-site/hugo
       -
         name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
