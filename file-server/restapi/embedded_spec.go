@@ -47,7 +47,8 @@ func init() {
             "type": "file",
             "name": "file",
             "in": "formData",
-            "required": true
+            "required": true,
+            "x-go-server-streaming": true
           }
         ],
         "responses": {
@@ -92,7 +93,8 @@ func init() {
             "type": "file",
             "name": "file",
             "in": "formData",
-            "required": true
+            "required": true,
+            "x-go-server-streaming": true
           }
         ],
         "responses": {
