@@ -26,6 +26,7 @@ paths:
         in: formData
         type: file
         required: true
+        x-go-server-streaming: true
   # endsnippet:upload-path
       responses:
         "200":

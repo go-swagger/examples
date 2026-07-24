@@ -50,6 +50,10 @@ linters:
     goconst:
       min-len: 2
       min-occurrences: 3
+    gomoddirectives:
+      # Allow the experimental runtime fork used by the multipart streaming playground.
+      replace-allow-list:
+        - github.com/go-openapi/runtime
     gosec:
       excludes:
         - G706 # logs in examples are deliberately verbose and revealing of the internals
