@@ -54,9 +54,6 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 
 	// snippet:upload-handler
 	api.UploadsUploadFileHandler = uploads.UploadFileHandlerFunc(func(params uploads.UploadFileParams) middleware.Responder {
-		if params.File == nil {
-			return middleware.Error(http.StatusNotFound, stderrors.New("no file provided"))
-		}
 		if params.MultipartForm == nil {
 			return middleware.Error(http.StatusInternalServerError, stderrors.New("multipart stream is not initialized"))
 		}
@@ -64,31 +61,48 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 			_ = params.MultipartForm.Close()
 		}()
 
-		log.Printf("received file name: %s", params.File.Filename)
-		log.Printf("received content type: %s", params.File.Header.Get(runtime.HeaderContentType))
+		uploadedFiles := 0
+		for {
+			file, err := params.MultipartForm.NextFile()
+			if stderrors.Is(err, io.EOF) {
+				break
+			}
+			if err != nil {
+				return uploadError(err)
+			}
 
-		// uploads file and save it locally
-		filename := path.Join(uploadFolder, fmt.Sprintf("uploaded_file_%d.dat", uploadCounter))
-		uploadCounter++
-		f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0o600)
-		if err != nil {
-			return middleware.Error(http.StatusInternalServerError, stderrors.New("could not create file on server"))
+			if file.FieldName != "file" {
+				if err := file.Close(); err != nil {
+					return uploadError(err)
+				}
+
+				continue
+			}
+
+			log.Printf("received file name: %s", file.Filename)
+			log.Printf("received content type: %s", file.Header.Get(runtime.HeaderContentType))
+
+			filename := path.Join(uploadFolder, fmt.Sprintf("uploaded_file_%d.dat", uploadCounter))
+			uploadCounter++
+			n, err := saveStreamedFile(filename, file)
+			if err != nil {
+				return uploadError(err)
+			}
+			uploadedFiles++
+
+			log.Printf("copied bytes %d", n)
+			log.Printf("file uploaded copied as %s", filename)
 		}
 
-		defer func() {
-			_ = f.Close()
-		}()
-
-		n, err := io.Copy(f, params.File)
-		if err != nil {
-			return uploadError(err)
+		if uploadedFiles == 0 {
+			return middleware.Error(http.StatusBadRequest, stderrors.New("no file provided"))
 		}
 		if err := params.MultipartForm.Drain(); err != nil {
 			return uploadError(err)
 		}
 
-		log.Printf("copied bytes %d", n)
-		log.Printf("file uploaded copied as %s", filename)
+		log.Printf("discovered multipart fields: %v", params.MultipartForm.Fields())
+		log.Printf("discovered multipart files: %d", len(params.MultipartForm.Files()))
 
 		return uploads.NewUploadFileOK()
 	})
@@ -127,6 +141,18 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // So this is a good place to plug in a panic handling middleware, logging and metrics.
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
 	return http.MaxBytesHandler(handler, uploads.UploadFileMaxBodySize)
+}
+
+func saveStreamedFile(filename string, file io.Reader) (int64, error) {
+	f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0o600)
+	if err != nil {
+		return 0, fmt.Errorf("create upload file: %w", err)
+	}
+
+	n, copyErr := io.Copy(f, file)
+	closeErr := f.Close()
+
+	return n, stderrors.Join(copyErr, closeErr)
 }
 
 func uploadError(err error) middleware.Responder {

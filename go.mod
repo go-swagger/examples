@@ -72,4 +72,4 @@ require (
 	google.golang.org/protobuf v1.36.11 // indirect
 )
 
-replace github.com/go-openapi/runtime => github.com/fpawel/openapi-runtime v0.0.0-pr507.1
+replace github.com/go-openapi/runtime => github.com/fpawel/openapi-runtime v0.0.0-pr507.2

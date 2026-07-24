@@ -6,11 +6,8 @@
 package uploads
 
 import (
-	stderrors "errors"
-	"io"
 	"net/http"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 )
@@ -24,7 +21,6 @@ var UploadFileMaxBodySize int64 = 32 << 20
 //
 // There are no default values defined in the spec.
 func NewUploadFileParams() UploadFileParams {
-
 	return UploadFileParams{}
 }
 
@@ -36,20 +32,17 @@ type UploadFileParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	// MultipartForm owns the request-body stream. The handler must call Drain
-	// after successfully consuming File, or Close to abort processing.
+	// MultipartForm owns the request-body stream. Generated binding deliberately
+	// does not consume or validate file and field parts: the handler owns
+	// traversal, validation, draining and closing.
 	MultipartForm *runtime.MultipartFormStream `json:"-"`
-
-	// Required: true
-	// In: formData
-	File *runtime.StreamedFile
 }
 
-// BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
-// for simple values it will use straight method calls.
+// BindRequest binds the request-level multipart stream without consuming parts.
 //
-// To ensure default values, the struct must have been initialized with NewUploadFileParams() beforehand.
-func (o *UploadFileParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// Streaming operations intentionally leave file and field validation to the
+// handler because multipart parts are ordered and may be mixed or repeated.
+func (o *UploadFileParams) BindRequest(r *http.Request, _ *middleware.MatchedRoute) error {
 	o.HTTPRequest = r
 
 	stream, err := runtime.NewMultipartFormStream(
@@ -60,39 +53,8 @@ func (o *UploadFileParams) BindRequest(r *http.Request, route *middleware.Matche
 	if err != nil {
 		return err
 	}
+
 	o.MultipartForm = stream
 
-	file, err := nextStreamingFile(stream, "file")
-	if err != nil {
-		return closeMultipartStream(stream, err)
-	}
-	o.File = file
-
 	return nil
-}
-
-func nextStreamingFile(stream *runtime.MultipartFormStream, fieldName string) (*runtime.StreamedFile, error) {
-	for {
-		file, err := stream.NextFile()
-		if stderrors.Is(err, io.EOF) {
-			return nil, errors.Required(fieldName, "formData", nil)
-		}
-		if err != nil {
-			return nil, err
-		}
-		if file.FieldName == fieldName {
-			return file, nil
-		}
-		if err := file.Close(); err != nil {
-			return nil, err
-		}
-	}
-}
-
-func closeMultipartStream(stream *runtime.MultipartFormStream, err error) error {
-	if closeErr := stream.Close(); closeErr != nil {
-		return stderrors.Join(err, closeErr)
-	}
-
-	return err
 }

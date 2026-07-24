@@ -52,29 +52,44 @@ paths:
 
 ## Server side
 
-The handler receives a `*runtime.StreamedFile`, which reads the payload directly
-from the HTTP request body. The filename and MIME headers are available before
-the payload is consumed:
+For `x-go-server-streaming: true`, generated binding only constructs a
+`*runtime.MultipartFormStream` and passes ownership to the handler. It does not
+consume parts or try to populate generated file and form fields.
+
+The handler traverses the multipart body sequentially:
 
 ```go
-	log.Printf("received file name: %s", params.File.Filename)
-	log.Printf("received content type: %s", params.File.Header.Get(runtime.HeaderContentType))
+	for {
+		file, err := params.MultipartForm.NextFile()
+		if errors.Is(err, io.EOF) {
+			break
+		}
+		// Validate file.FieldName and consume file here.
+	}
 ```
 
-The complete file size is not known before the stream is consumed.
+Each `runtime.StreamedFile` reads directly from the HTTP request body. The
+filename and MIME headers are available before the payload is consumed, but the
+complete file size is not known in advance.
 
 ## Experimental server-side streaming
 
-This branch demonstrates the intended server binding for a file parameter with
+This branch demonstrates the intended server binding for an operation with
 `x-go-server-streaming: true`.
 
 The generated binder is adapted manually until go-swagger supports the
-extension. It uses `runtime.MultipartFormStream` from go-openapi/runtime#507 and
-exposes the file payload before the complete multipart request has arrived.
+extension. It deliberately leaves traversal, required-field checks,
+multiplicity and application-specific validation to the handler so mixed and
+repeated multipart parts remain usable.
+
+`MultipartFormStream.Fields()` and `MultipartFormStream.Files()` return
+snapshots of ordinary fields and file metadata discovered so far. They do not
+read ahead: trailing fields become visible only after the active file is
+consumed or closed and the stream advances.
+
 The handler owns the multipart stream and must either:
 
-- call `Drain` after consuming the file to process the remaining parts and close
-  the request body; or
+- call `Drain` to process all remaining parts and close the request body; or
 - call `Close` to abort multipart processing.
 
 The request size is limited outside the binder with `http.MaxBytesHandler`.
