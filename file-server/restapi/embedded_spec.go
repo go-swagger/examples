@@ -45,10 +45,10 @@ func init() {
         "parameters": [
           {
             "type": "file",
+            "x-go-server-streaming": true,
             "name": "file",
             "in": "formData",
-            "required": true,
-            "x-go-server-streaming": true
+            "required": true
           }
         ],
         "responses": {
@@ -91,10 +91,10 @@ func init() {
         "parameters": [
           {
             "type": "file",
+            "x-go-server-streaming": true,
             "name": "file",
             "in": "formData",
-            "required": true,
-            "x-go-server-streaming": true
+            "required": true
           }
         ],
         "responses": {

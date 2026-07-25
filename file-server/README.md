@@ -72,15 +72,13 @@ Each `runtime.StreamedFile` reads directly from the HTTP request body. The
 filename and MIME headers are available before the payload is consumed, but the
 complete file size is not known in advance.
 
-## Experimental server-side streaming
+## Server-side streaming
 
-This branch demonstrates the intended server binding for an operation with
-`x-go-server-streaming: true`.
-
-The generated binder is adapted manually until go-swagger supports the
-extension. It deliberately leaves traversal, required-field checks,
-multiplicity and application-specific validation to the handler so mixed and
-repeated multipart parts remain usable.
+The server binding is generated from `x-go-server-streaming: true`. The
+generated binder creates a `*runtime.MultipartFormStream` without reading
+multipart parts ahead of the handler. Required fields, accepted file field
+names, multiplicity and other application-specific rules are validated by the
+handler while traversing the stream.
 
 `MultipartFormStream.Fields()` and `MultipartFormStream.Files()` return
 snapshots of ordinary fields and file metadata discovered so far. They do not
@@ -89,12 +87,8 @@ consumed or closed and the stream advances.
 
 The handler owns the multipart stream and must either:
 
-- call `Drain` to process all remaining parts and close the request body; or
-- call `Close` to abort multipart processing.
-
-The request size is limited outside the binder with `http.MaxBytesHandler`.
-The runtime stream's own body limit is disabled so that `*http.MaxBytesError`
-from the outer middleware is propagated through file reads and draining.
+- call `Drain()` to process all remaining parts and close the request body; or
+- call `Close()` to abort multipart processing.
 
 ## Client side
 

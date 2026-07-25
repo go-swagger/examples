@@ -46,6 +46,9 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
+	// You may change here the maximum body size for this streaming multipart form. Below is the default (32 MB).
+	// uploads.UploadFileMaxBodySize = 32 << 20
+
 	uploadFolder, err := os.MkdirTemp(".", "upload")
 	if err != nil {
 		panic("could not create upload folder")
