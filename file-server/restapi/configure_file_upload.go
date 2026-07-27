@@ -46,8 +46,8 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	// You may change here the memory limit for this multipart form parser. Below is the default (32 MB).
-	// uploads.UploadFileMaxParseMemory = 32 << 20
+	// You may change here the maximum body size for this streaming multipart form. Below is the default (32 MB).
+	// uploads.UploadFileMaxBodySize = 32 << 20
 
 	uploadFolder, err := os.MkdirTemp(".", "upload")
 	if err != nil {
@@ -57,34 +57,55 @@ func configureAPI(api *operations.FileUploadAPI) http.Handler {
 
 	// snippet:upload-handler
 	api.UploadsUploadFileHandler = uploads.UploadFileHandlerFunc(func(params uploads.UploadFileParams) middleware.Responder {
-		if params.File == nil {
-			return middleware.Error(http.StatusNotFound, stderrors.New("no file provided"))
+		if params.MultipartForm == nil {
+			return middleware.Error(http.StatusInternalServerError, stderrors.New("multipart stream is not initialized"))
 		}
 		defer func() {
-			_ = params.File.Close()
+			_ = params.MultipartForm.Close()
 		}()
 
-		if namedFile, ok := params.File.(*runtime.File); ok {
-			log.Printf("received file name: %s", namedFile.Header.Filename)
-			log.Printf("received file size: %d", namedFile.Header.Size)
+		uploadedFiles := 0
+		for {
+			file, err := params.MultipartForm.NextFile()
+			if stderrors.Is(err, io.EOF) {
+				break
+			}
+			if err != nil {
+				return uploadError(err)
+			}
+
+			if file.FieldName != "file" {
+				if err := file.Close(); err != nil {
+					return uploadError(err)
+				}
+
+				continue
+			}
+
+			log.Printf("received file name: %s", file.Filename)
+			log.Printf("received content type: %s", file.Header.Get(runtime.HeaderContentType))
+
+			filename := path.Join(uploadFolder, fmt.Sprintf("uploaded_file_%d.dat", uploadCounter))
+			uploadCounter++
+			n, err := saveStreamedFile(filename, file)
+			if err != nil {
+				return uploadError(err)
+			}
+			uploadedFiles++
+
+			log.Printf("copied bytes %d", n)
+			log.Printf("file uploaded copied as %s", filename)
 		}
 
-		// uploads file and save it locally
-		filename := path.Join(uploadFolder, fmt.Sprintf("uploaded_file_%d.dat", uploadCounter))
-		uploadCounter++
-		f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0o600)
-		if err != nil {
-			return middleware.Error(http.StatusInternalServerError, stderrors.New("could not create file on server"))
+		if uploadedFiles == 0 {
+			return middleware.Error(http.StatusBadRequest, stderrors.New("no file provided"))
+		}
+		if err := params.MultipartForm.Drain(); err != nil {
+			return uploadError(err)
 		}
 
-		n, err := io.Copy(f, params.File)
-		if err != nil {
-			return middleware.Error(http.StatusInternalServerError, stderrors.New("could not upload file on server"))
-		}
-
-		log.Printf("copied bytes %d", n)
-
-		log.Printf("file uploaded copied as %s", filename)
+		log.Printf("discovered multipart fields: %v", params.MultipartForm.Fields())
+		log.Printf("discovered multipart files: %d", len(params.MultipartForm.Files()))
 
 		return uploads.NewUploadFileOK()
 	})
@@ -122,5 +143,26 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics.
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return handler
+	return http.MaxBytesHandler(handler, uploads.UploadFileMaxBodySize)
+}
+
+func saveStreamedFile(filename string, file io.Reader) (int64, error) {
+	f, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0o600)
+	if err != nil {
+		return 0, fmt.Errorf("create upload file: %w", err)
+	}
+
+	n, copyErr := io.Copy(f, file)
+	closeErr := f.Close()
+
+	return n, stderrors.Join(copyErr, closeErr)
+}
+
+func uploadError(err error) middleware.Responder {
+	var maxBytesErr *http.MaxBytesError
+	if stderrors.As(err, &maxBytesErr) {
+		return middleware.Error(http.StatusRequestEntityTooLarge, err)
+	}
+
+	return middleware.Error(http.StatusInternalServerError, stderrors.New("could not upload file on server"))
 }

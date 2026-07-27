@@ -52,16 +52,43 @@ paths:
 
 ## Server side
 
-The handler receives a `io.ReadCloser` as the file to consume.
+For `x-go-server-streaming: true`, generated binding only constructs a
+`*runtime.MultipartFormStream` and passes ownership to the handler. It does not
+consume parts or try to populate generated file and form fields.
 
-Under the hood, the runtime builds this with a `*runtime.File`, which provides access to some header information, such as:
+The handler traverses the multipart body sequentially:
 
 ```go
-		if namedFile, ok := params.File.(*runtime.File); ok {
-			log.Printf("received file name: %s", namedFile.Header.Filename)
-			log.Printf("received file size: %d", namedFile.Header.Size)
+	for {
+		file, err := params.MultipartForm.NextFile()
+		if errors.Is(err, io.EOF) {
+			break
 		}
+		// Validate file.FieldName and consume file here.
+	}
 ```
+
+Each `runtime.StreamedFile` reads directly from the HTTP request body. The
+filename and MIME headers are available before the payload is consumed, but the
+complete file size is not known in advance.
+
+## Server-side streaming
+
+The server binding is generated from `x-go-server-streaming: true`. The
+generated binder creates a `*runtime.MultipartFormStream` without reading
+multipart parts ahead of the handler. Required fields, accepted file field
+names, multiplicity and other application-specific rules are validated by the
+handler while traversing the stream.
+
+`MultipartFormStream.Fields()` and `MultipartFormStream.Files()` return
+snapshots of ordinary fields and file metadata discovered so far. They do not
+read ahead: trailing fields become visible only after the active file is
+consumed or closed and the stream advances.
+
+The handler owns the multipart stream and must either:
+
+- call `Drain()` to process all remaining parts and close the request body; or
+- call `Close()` to abort multipart processing.
 
 ## Client side
 

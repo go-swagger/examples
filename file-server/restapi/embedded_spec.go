@@ -45,6 +45,7 @@ func init() {
         "parameters": [
           {
             "type": "file",
+            "x-go-server-streaming": true,
             "name": "file",
             "in": "formData",
             "required": true
@@ -90,6 +91,7 @@ func init() {
         "parameters": [
           {
             "type": "file",
+            "x-go-server-streaming": true,
             "name": "file",
             "in": "formData",
             "required": true

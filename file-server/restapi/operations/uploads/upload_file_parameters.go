@@ -3,21 +3,12 @@
 package uploads
 
 import (
-	"io"
-	"mime/multipart"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 )
-
-// UploadFileMaxParseMemory sets the maximum size in bytes for
-// the multipart form parser for this operation.
-//
-// The default value is 32 MB.
-// The multipart parser stores up to this + 10MB.
-var UploadFileMaxParseMemory int64 = 32 << 20
 
 // UploadFileMaxBodySize caps the size of the form body.
 //
@@ -39,9 +30,11 @@ func NewUploadFileParams() UploadFileParams {
 type UploadFileParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
-	// Required: true
-	// In: formData
-	File io.ReadCloser
+
+	// MultipartForm is the lazily consumed multipart form stream.
+	//
+	// The handler owns traversal, validation and closing or draining this stream.
+	MultipartForm *runtime.MultipartFormStream `json:"-"`
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -52,30 +45,18 @@ func (o *UploadFileParams) BindRequest(r *http.Request, route *middleware.Matche
 	var res []error
 
 	o.HTTPRequest = r
-	isBlocking, err := runtime.BindForm(r,
-		runtime.BindFormMaxParseMemory(UploadFileMaxParseMemory),
-		runtime.BindFormMaxBody(UploadFileMaxBodySize),
-		runtime.BindFormFile("file", true, o.bindFile),
-	)
-	if err != nil {
-		if isBlocking {
-			return err
-		}
-
-		res = append(res, err)
-	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
 
-// bindFile validates file parameter File1 and assigns it as a *runtime.File on success.
-//
-// The only supported validations on files are MinLength and MaxLength
-func (o *UploadFileParams) bindFile(file multipart.File, header *multipart.FileHeader) error {
-
-	o.File = &runtime.File{Data: file, Header: header}
+	multipartForm, err := runtime.NewMultipartFormStream(
+		r,
+		runtime.MultipartFormStreamMaxBody(UploadFileMaxBodySize),
+	)
+	if err != nil {
+		return err
+	}
+	o.MultipartForm = multipartForm
 	return nil
 }
