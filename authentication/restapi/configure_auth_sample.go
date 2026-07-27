@@ -41,7 +41,6 @@ func configureAPI(api *operations.AuthSampleAPI) http.Handler {
 	api.JSONProducer = runtime.JSONProducer()
 
 	// Applies when the "x-token" header is set
-	// snippet:keyauth
 	if api.KeyAuth == nil {
 		api.KeyAuth = func(token string) (*models.Principal, error) {
 			_ = token
@@ -49,7 +48,6 @@ func configureAPI(api *operations.AuthSampleAPI) http.Handler {
 			return nil, errors.NotImplemented("api key auth (key) x-token from header param [x-token] has not yet been implemented")
 		}
 	}
-	// endsnippet:keyauth
 
 	// Set your custom authorizer if needed. Default one is security.Authorized()
 	// Expected interface runtime.Authorizer
