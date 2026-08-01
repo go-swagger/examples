@@ -4,17 +4,18 @@
 
 | Total Contributors | Total Contributions |
 | --- | --- |
-| 33  | 311  |
+| 34  | 313  |
 
 | Username | All Time Contribution Count | All Commits |
 | --- | --- | --- |
 | @casualjim | 203 | <https://github.com/go-swagger/examples/commits?author=casualjim> |
-| @fredbi | 54 | <https://github.com/go-swagger/examples/commits?author=fredbi> |
+| @fredbi | 55 | <https://github.com/go-swagger/examples/commits?author=fredbi> |
 | @youyuanwu | 17 | <https://github.com/go-swagger/examples/commits?author=youyuanwu> |
 | @kenjones-cisco | 4 | <https://github.com/go-swagger/examples/commits?author=kenjones-cisco> |
 | @GlenDC | 3 | <https://github.com/go-swagger/examples/commits?author=GlenDC> |
 | @knweiss | 2 | <https://github.com/go-swagger/examples/commits?author=knweiss> |
 | @sambhav | 2 | <https://github.com/go-swagger/examples/commits?author=sambhav> |
+| @thaJeztah | 1 | <https://github.com/go-swagger/examples/commits?author=thaJeztah> |
 | @slawekzachcial | 1 | <https://github.com/go-swagger/examples/commits?author=slawekzachcial> |
 | @svyotov | 1 | <https://github.com/go-swagger/examples/commits?author=svyotov> |
 | @pytlesk4 | 1 | <https://github.com/go-swagger/examples/commits?author=pytlesk4> |
@@ -28,8 +29,8 @@
 | @michaelf-stratoscale | 1 | <https://github.com/go-swagger/examples/commits?author=michaelf-stratoscale> |
 | @nishipy | 1 | <https://github.com/go-swagger/examples/commits?author=nishipy> |
 | @nrnrk | 1 | <https://github.com/go-swagger/examples/commits?author=nrnrk> |
-| @thaJeztah | 1 | <https://github.com/go-swagger/examples/commits?author=thaJeztah> |
 | @rcousineau-xandr | 1 | <https://github.com/go-swagger/examples/commits?author=rcousineau-xandr> |
+| @fpawel | 1 | <https://github.com/go-swagger/examples/commits?author=fpawel> |
 | @alexandear | 1 | <https://github.com/go-swagger/examples/commits?author=alexandear> |
 | @nelz9999 | 1 | <https://github.com/go-swagger/examples/commits?author=nelz9999> |
 | @katyanna | 1 | <https://github.com/go-swagger/examples/commits?author=katyanna> |
