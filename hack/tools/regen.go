@@ -152,7 +152,7 @@ var steps = []regenStep{
 	},
 	{
 		dir:      "file-server",
-		preserve: []string{"restapi/configure_file_upload.go", "server/restapi/streaming_upload_integration_test.go"},
+		preserve: []string{"restapi/configure_file_upload.go", "restapi/streaming_upload_integration_test.go"},
 		clean:    []string{"client", "cmd", "restapi"},
 		commands: [][]string{
 			{"swagger", "generate", "server"},
