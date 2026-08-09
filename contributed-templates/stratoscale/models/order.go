@@ -115,7 +115,7 @@ func (m *Order) validateStatus(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this order based on context it is used
-func (m *Order) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *Order) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

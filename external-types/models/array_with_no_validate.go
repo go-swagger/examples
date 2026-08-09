@@ -39,6 +39,6 @@ func (m ArrayWithNoValidate) Validate(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this array with no validate based on context it is used
-func (m ArrayWithNoValidate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m ArrayWithNoValidate) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }

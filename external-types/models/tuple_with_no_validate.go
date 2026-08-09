@@ -152,7 +152,7 @@ func (m *TupleWithNoValidate) validateTupleWithNoValidateItems(formats strfmt.Re
 }
 
 // ContextValidate validates this tuple with no validate based on context it is used
-func (m *TupleWithNoValidate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *TupleWithNoValidate) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 
