@@ -57,6 +57,6 @@ func (m MyCustomMapNullable) Validate(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this my custom map nullable based on context it is used
-func (m MyCustomMapNullable) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m MyCustomMapNullable) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }

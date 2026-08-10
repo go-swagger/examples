@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime/middleware"
-
 	"github.com/go-swagger/examples/oauth2/models"
 )
 

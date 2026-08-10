@@ -54,6 +54,6 @@ func (m MyCustomMap) Validate(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this my custom map based on context it is used
-func (m MyCustomMap) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m MyCustomMap) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }

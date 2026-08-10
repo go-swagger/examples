@@ -22,12 +22,12 @@ type Category struct {
 }
 
 // Validate validates this category
-func (m *Category) Validate(formats strfmt.Registry) error {
+func (m *Category) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this category based on context it is used
-func (m *Category) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *Category) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

@@ -122,7 +122,7 @@ type ClientService interface {
 // If you need to pass a specific context, use [Client.CreateContext] instead.
 func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateCreated, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -184,7 +184,7 @@ func (a *Client) CreateContext(ctx context.Context, params *CreateParams, authIn
 // If you need to pass a specific context, use [Client.GetIDContext] instead.
 func (a *Client) GetID(params *GetIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetIDOK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
