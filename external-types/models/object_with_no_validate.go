@@ -64,7 +64,7 @@ func (m *ObjectWithNoValidate) validateMyRequest(formats strfmt.Registry) error 
 }
 
 // ContextValidate validates this object with no validate based on context it is used
-func (m *ObjectWithNoValidate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *ObjectWithNoValidate) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

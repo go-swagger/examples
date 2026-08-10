@@ -125,7 +125,7 @@ type ClientService interface {
 // If you need to pass a specific context, use [Client.AddOneContext] instead.
 func (a *Client) AddOne(params *AddOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddOneCreated, *AddOneNoContent, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -188,7 +188,7 @@ func (a *Client) AddOneContext(ctx context.Context, params *AddOneParams, authIn
 // If you need to pass a specific context, use [Client.DestroyOneContext] instead.
 func (a *Client) DestroyOne(params *DestroyOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DestroyOneNoContent, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -250,7 +250,7 @@ func (a *Client) DestroyOneContext(ctx context.Context, params *DestroyOneParams
 // If you need to pass a specific context, use [Client.FindContext] instead.
 func (a *Client) Find(params *FindParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FindOK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -312,7 +312,7 @@ func (a *Client) FindContext(ctx context.Context, params *FindParams, authInfo r
 // If you need to pass a specific context, use [Client.UpdateOneContext] instead.
 func (a *Client) UpdateOne(params *UpdateOneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOneOK, *UpdateOneNoContent, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()

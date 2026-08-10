@@ -114,7 +114,7 @@ type ClientService interface {
 // If you need to pass a specific context, use [Client.PutTest2766Context] instead.
 func (a *Client) PutTest2766(params *PutTest2766Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutTest2766OK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()

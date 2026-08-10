@@ -22,12 +22,12 @@ type Tag struct {
 }
 
 // Validate validates this tag
-func (m *Tag) Validate(formats strfmt.Registry) error {
+func (m *Tag) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this tag based on context it is used
-func (m *Tag) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *Tag) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

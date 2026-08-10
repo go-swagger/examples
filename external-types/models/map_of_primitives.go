@@ -28,6 +28,6 @@ func (m MapOfPrimitives) Validate(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this map of primitives based on context it is used
-func (m MapOfPrimitives) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m MapOfPrimitives) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
