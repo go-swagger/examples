@@ -201,12 +201,12 @@ type MilestoneStats struct {
 }
 
 // Validate validates this milestone stats
-func (m *MilestoneStats) Validate(formats strfmt.Registry) error {
+func (m *MilestoneStats) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this milestone stats based on context it is used
-func (m *MilestoneStats) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *MilestoneStats) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

@@ -40,12 +40,12 @@ type MyReaderObject struct {
 }
 
 // Validate validates this my reader object
-func (m *MyReaderObject) Validate(formats strfmt.Registry) error {
+func (m *MyReaderObject) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this my reader object based on context it is used
-func (m *MyReaderObject) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *MyReaderObject) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

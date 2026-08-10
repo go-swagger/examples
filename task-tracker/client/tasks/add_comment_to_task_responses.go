@@ -230,7 +230,7 @@ func (o *AddCommentToTaskBody) validateUserID(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this add comment to task body based on context it is used
-func (o *AddCommentToTaskBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (o *AddCommentToTaskBody) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 
