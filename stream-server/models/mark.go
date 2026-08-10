@@ -45,7 +45,7 @@ func (m *Mark) validateRemains(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this mark based on context it is used
-func (m *Mark) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *Mark) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

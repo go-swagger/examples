@@ -50,7 +50,7 @@ func (m *SocialID) validateSsn(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this social id based on context it is used
-func (m *SocialID) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *SocialID) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

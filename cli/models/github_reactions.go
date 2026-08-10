@@ -25,12 +25,12 @@ type GithubReactions struct {
 }
 
 // Validate validates this github reactions
-func (m *GithubReactions) Validate(formats strfmt.Registry) error {
+func (m *GithubReactions) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this github reactions based on context it is used
-func (m *GithubReactions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *GithubReactions) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

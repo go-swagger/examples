@@ -6,11 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/spf13/cobra"
+
 	"github.com/go-openapi/swag/typeutils"
 	"github.com/go-swagger/examples/cli/client/operations"
 	"github.com/go-swagger/examples/cli/models"
-
-	"github.com/spf13/cobra"
 )
 
 // makeOperationOperationsPutTest2766Cmd returns a command to handle operation putTest2766

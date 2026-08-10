@@ -167,7 +167,7 @@ type ClientService interface {
 // If you need to pass a specific context, use [Client.AddCommentToTaskContext] instead.
 func (a *Client) AddCommentToTask(params *AddCommentToTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddCommentToTaskCreated, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -238,7 +238,7 @@ func (a *Client) AddCommentToTaskContext(ctx context.Context, params *AddComment
 // If you need to pass a specific context, use [Client.CreateTaskContext] instead.
 func (a *Client) CreateTask(params *CreateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTaskCreated, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -308,7 +308,7 @@ func (a *Client) CreateTaskContext(ctx context.Context, params *CreateTaskParams
 // If you need to pass a specific context, use [Client.DeleteTaskContext] instead.
 func (a *Client) DeleteTask(params *DeleteTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTaskNoContent, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -376,7 +376,7 @@ func (a *Client) DeleteTaskContext(ctx context.Context, params *DeleteTaskParams
 // If you need to pass a specific context, use [Client.GetTaskCommentsContext] instead.
 func (a *Client) GetTaskComments(params *GetTaskCommentsParams, opts ...ClientOption) (*GetTaskCommentsOK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -446,7 +446,7 @@ func (a *Client) GetTaskCommentsContext(ctx context.Context, params *GetTaskComm
 // If you need to pass a specific context, use [Client.GetTaskDetailsContext] instead.
 func (a *Client) GetTaskDetails(params *GetTaskDetailsParams, opts ...ClientOption) (*GetTaskDetailsOK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -519,7 +519,7 @@ func (a *Client) GetTaskDetailsContext(ctx context.Context, params *GetTaskDetai
 // If you need to pass a specific context, use [Client.ListTasksContext] instead.
 func (a *Client) ListTasks(params *ListTasksParams, opts ...ClientOption) (*ListTasksOK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -591,7 +591,7 @@ func (a *Client) ListTasksContext(ctx context.Context, params *ListTasksParams, 
 // If you need to pass a specific context, use [Client.UpdateTaskContext] instead.
 func (a *Client) UpdateTask(params *UpdateTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTaskOK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -660,7 +660,7 @@ func (a *Client) UpdateTaskContext(ctx context.Context, params *UpdateTaskParams
 // If you need to pass a specific context, use [Client.UploadTaskFileContext] instead.
 func (a *Client) UploadTaskFile(params *UploadTaskFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTaskFileCreated, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
