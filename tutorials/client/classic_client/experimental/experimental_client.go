@@ -118,7 +118,7 @@ type ClientService interface {
 // If you need to pass a specific context, use [Client.GetExperimentalContext] instead.
 func (a *Client) GetExperimental(params *GetExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExperimentalOK, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()
@@ -181,7 +181,7 @@ func (a *Client) GetExperimentalContext(ctx context.Context, params *GetExperime
 // If you need to pass a specific context, use [Client.PutExperimentalContext] instead.
 func (a *Client) PutExperimental(params *PutExperimentalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutExperimentalOK, *PutExperimentalNoContent, error) {
 	var ctx context.Context
-	if params.inner.ctx != nil {
+	if params != nil && params.inner.ctx != nil {
 		ctx = params.inner.ctx
 	} else {
 		ctx = context.Background()

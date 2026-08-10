@@ -54,6 +54,6 @@ func (m MyCustomArrayNullable) Validate(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this my custom array nullable based on context it is used
-func (m MyCustomArrayNullable) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m MyCustomArrayNullable) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }

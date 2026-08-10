@@ -64,12 +64,12 @@ type GetAuthCallbackOKBody struct {
 }
 
 // Validate validates this get auth callback o k body
-func (o *GetAuthCallbackOKBody) Validate(formats strfmt.Registry) error {
+func (o *GetAuthCallbackOKBody) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this get auth callback o k body based on context it is used
-func (o *GetAuthCallbackOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (o *GetAuthCallbackOKBody) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

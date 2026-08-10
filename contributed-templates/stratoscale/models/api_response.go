@@ -25,12 +25,12 @@ type APIResponse struct {
 }
 
 // Validate validates this Api response
-func (m *APIResponse) Validate(formats strfmt.Registry) error {
+func (m *APIResponse) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this Api response based on context it is used
-func (m *APIResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *APIResponse) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

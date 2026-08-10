@@ -28,6 +28,6 @@ func (m MapWithNoValidate) Validate(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this map with no validate based on context it is used
-func (m MapWithNoValidate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m MapWithNoValidate) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }

@@ -22,12 +22,12 @@ type Principal struct {
 }
 
 // Validate validates this principal
-func (m *Principal) Validate(formats strfmt.Registry) error {
+func (m *Principal) Validate(_ strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this principal based on context it is used
-func (m *Principal) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *Principal) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
 

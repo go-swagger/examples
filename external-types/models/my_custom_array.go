@@ -49,6 +49,6 @@ func (m MyCustomArray) Validate(formats strfmt.Registry) error {
 }
 
 // ContextValidate validates this my custom array based on context it is used
-func (m MyCustomArray) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m MyCustomArray) ContextValidate(_ context.Context, _ strfmt.Registry) error {
 	return nil
 }
