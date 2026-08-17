@@ -21,6 +21,12 @@ type Category struct {
 	Name string `json:"name,omitempty"`
 }
 
+// GetID gets the id of this category
+func (m *Category) GetID() int64 { return m.ID }
+
+// GetName gets the name of this category
+func (m *Category) GetName() string { return m.Name }
+
 // Validate validates this category
 func (m *Category) Validate(_ strfmt.Registry) error {
 	return nil

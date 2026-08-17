@@ -21,6 +21,12 @@ type Tag struct {
 	Name string `json:"name,omitempty"`
 }
 
+// GetID gets the id of this tag
+func (m *Tag) GetID() int64 { return m.ID }
+
+// GetName gets the name of this tag
+func (m *Tag) GetName() string { return m.Name }
+
 // Validate validates this tag
 func (m *Tag) Validate(_ strfmt.Registry) error {
 	return nil

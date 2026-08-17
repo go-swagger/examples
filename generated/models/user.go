@@ -39,6 +39,30 @@ type User struct {
 	Username string `json:"username,omitempty"`
 }
 
+// GetEmail gets the email of this user
+func (m *User) GetEmail() string { return m.Email }
+
+// GetFirstName gets the first name of this user
+func (m *User) GetFirstName() string { return m.FirstName }
+
+// GetID gets the id of this user
+func (m *User) GetID() int64 { return m.ID }
+
+// GetLastName gets the last name of this user
+func (m *User) GetLastName() string { return m.LastName }
+
+// GetPassword gets the password of this user
+func (m *User) GetPassword() string { return m.Password }
+
+// GetPhone gets the phone of this user
+func (m *User) GetPhone() string { return m.Phone }
+
+// GetUserStatus gets the User Status of this user
+func (m *User) GetUserStatus() int32 { return m.UserStatus }
+
+// GetUsername gets the username of this user
+func (m *User) GetUsername() string { return m.Username }
+
 // Validate validates this user
 func (m *User) Validate(_ strfmt.Registry) error {
 	return nil

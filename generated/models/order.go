@@ -37,6 +37,24 @@ type Order struct {
 	Status string `json:"status,omitempty"`
 }
 
+// GetComplete gets the complete of this order
+func (m *Order) GetComplete() bool { return m.Complete }
+
+// GetID gets the id of this order
+func (m *Order) GetID() int64 { return m.ID }
+
+// GetPetID gets the pet Id of this order
+func (m *Order) GetPetID() int64 { return m.PetID }
+
+// GetQuantity gets the quantity of this order
+func (m *Order) GetQuantity() int32 { return m.Quantity }
+
+// GetShipDate gets the ship date of this order
+func (m *Order) GetShipDate() strfmt.DateTime { return m.ShipDate }
+
+// GetStatus gets the Order Status of this order
+func (m *Order) GetStatus() string { return m.Status }
+
 // Validate validates this order
 func (m *Order) Validate(formats strfmt.Registry) error {
 	var res []error

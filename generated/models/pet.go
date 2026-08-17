@@ -41,6 +41,24 @@ type Pet struct {
 	Tags []*Tag `json:"tags"`
 }
 
+// GetCategory gets the category of this pet
+func (m *Pet) GetCategory() *Category { return m.Category }
+
+// GetID gets the id of this pet
+func (m *Pet) GetID() int64 { return m.ID }
+
+// GetName gets the name of this pet
+func (m *Pet) GetName() *string { return m.Name }
+
+// GetPhotoUrls gets the photo urls of this pet
+func (m *Pet) GetPhotoUrls() []string { return m.PhotoUrls }
+
+// GetStatus gets the pet status in the store of this pet
+func (m *Pet) GetStatus() string { return m.Status }
+
+// GetTags gets the tags of this pet
+func (m *Pet) GetTags() []*Tag { return m.Tags }
+
 // Validate validates this pet
 func (m *Pet) Validate(formats strfmt.Registry) error {
 	var res []error
