@@ -23,7 +23,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: go-openapi/ci-workflows/.github/workflows/auto-merge.yml@befbc52f24215555cb601b0d824b2987c1d49d0b # v0.4.3
+    uses: go-openapi/ci-workflows/.github/workflows/auto-merge.yml@81c95ab8bb6a3e0aeccc90a7c9e5fc5b398b1244 # v0.6.0
     with:
       enable-organization-bot: "false"
 
@@ -54,7 +54,7 @@ jobs:
         run: gh pr review --approve "$PR_URL"
       -
         name: Wait for all workflow runs to complete
-        uses: go-openapi/gh-actions/ci-jobs/wait-pending-jobs@8dac43b693193389fbdb110e0c39aa013ae089ef # v1.4.16
+        uses: go-openapi/gh-actions/ci-jobs/wait-pending-jobs@768e1ac7e37ab6586242b03a8023615dfc8da6a2 # v1.4.17
         with:
           pr-url: ${{ env.PR_URL }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
