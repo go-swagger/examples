@@ -67,8 +67,8 @@ type Config struct {
 	// and the principal was stored in the context in the "AuthKey" context value.
 	Authorizer func(*http.Request) error
 
-	// AuthRoles Applies when the "X-Auth-Roles" header is set
-	AuthRoles func(token string) (any, error)
+	// AuthRoles for OAuth2 authentication
+	AuthRoles func(token string, scopes []string) (any, error)
 
 	// Authenticator to use for all APIKey authentication
 	APIKeyAuthenticator func(string, string, security.TokenAuthentication) runtime.Authenticator
@@ -117,12 +117,12 @@ func HandlerAPI(c Config) (http.Handler, *operations.PetstoreAPI, error) {
 	}
 	api.JSONProducer = runtime.JSONProducer()
 
-	api.RolesAuth = func(token string) (any, error) {
+	api.RolesAuth = func(token string, scopes []string) (any, error) {
 		if c.AuthRoles == nil {
 			return token, nil
 		}
 
-		return c.AuthRoles(token)
+		return c.AuthRoles(token, scopes)
 	}
 
 	api.APIAuthorizer = authorizer(c.Authorizer)
