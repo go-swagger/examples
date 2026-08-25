@@ -501,10 +501,20 @@ func init() {
     }
   },
   "securityDefinitions": {
-    "roles": {
+    "keys": {
       "type": "apiKey",
       "name": "X-Auth-Roles",
       "in": "header"
+    },
+    "roles": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
+      "scopes": {
+        "admin": "Platform admin",
+        "member": "Platform member"
+      }
     }
   },
   "security": [
@@ -1041,10 +1051,20 @@ func init() {
     }
   },
   "securityDefinitions": {
-    "roles": {
+    "keys": {
       "type": "apiKey",
       "name": "X-Auth-Roles",
       "in": "header"
+    },
+    "roles": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
+      "scopes": {
+        "admin": "Platform admin",
+        "member": "Platform member"
+      }
     }
   },
   "security": [

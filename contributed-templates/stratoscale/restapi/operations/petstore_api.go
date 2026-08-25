@@ -111,11 +111,11 @@ func NewPetstoreAPI(spec *loads.Document) *PetstoreAPI {
 			return middleware.NotImplemented("operation pet.PetUploadImage has not yet been implemented")
 		}),
 
-		// Applies when the "X-Auth-Roles" header is set
-		RolesAuth: func(token string) (any, error) {
+		RolesAuth: func(token string, scopes []string) (any, error) {
 			_ = token
+			_ = scopes
 
-			return nil, errors.NotImplemented("api key auth (roles) X-Auth-Roles from header param [X-Auth-Roles] has not yet been implemented")
+			return nil, errors.NotImplemented("oauth2 bearer auth (roles) has not yet been implemented")
 		},
 		// default authorizer is authorized meaning no requests are blocked
 		APIAuthorizer: security.Authorized(),
@@ -155,9 +155,9 @@ type PetstoreAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
-	// RolesAuth registers a function that takes a token and returns a principal
-	// it performs authentication based on an api key X-Auth-Roles provided in the header
-	RolesAuth func(string) (any, error)
+	// RolesAuth registers a function that takes an access token and a collection of required scopes and returns a principal
+	// it performs authentication based on an oauth2 bearer token provided in the request
+	RolesAuth func(string, []string) (any, error)
 
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
@@ -260,7 +260,7 @@ func (o *PetstoreAPI) Validate() error {
 	}
 
 	if o.RolesAuth == nil {
-		unregistered = append(unregistered, "XAuthRolesAuth")
+		unregistered = append(unregistered, "RolesAuth")
 	}
 
 	if o.StoreInventoryGetHandler == nil {
@@ -311,8 +311,7 @@ func (o *PetstoreAPI) AuthenticatorsFor(schemes map[string]spec.SecurityScheme) 
 	result := make(map[string]runtime.Authenticator)
 	for name := range schemes {
 		if name == "roles" {
-			scheme := schemes[name]
-			result[name] = o.APIKeyAuthenticator(scheme.Name, scheme.In, o.RolesAuth)
+			result[name] = o.BearerAuthenticator(name, o.RolesAuth)
 		}
 	}
 
