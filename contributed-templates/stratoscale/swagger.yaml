@@ -22,6 +22,14 @@ produces:
 
 securityDefinitions:
   roles:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth'
+    tokenUrl: 'https://www.googleapis.com/oauth2/v4/token'
+    scopes:
+      admin: Platform admin
+      member: Platform member
+  keys:
     type: apiKey
     in: header
     name: X-Auth-Roles
