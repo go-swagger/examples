@@ -624,6 +624,7 @@ func init() {
           "type": "number",
           "format": "float32",
           "title": "the karma donated to this item.",
+          "minimum": 0,
           "exclusiveMinimum": true,
           "multipleOf": 0.5
         },
