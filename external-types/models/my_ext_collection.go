@@ -52,7 +52,7 @@ func (m MyExtCollection) ContextValidate(ctx context.Context, formats strfmt.Reg
 	for i := 0; i < len(m); i++ {
 
 		if typeutils.IsZero(m[i]) { // not required
-			return nil
+			continue
 		}
 
 		if err := m[i].ContextValidate(ctx, formats); err != nil {

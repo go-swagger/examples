@@ -348,7 +348,7 @@ func (m *Task) contextValidateComments(ctx context.Context, formats strfmt.Regis
 		if m.Comments[i] != nil {
 
 			if typeutils.IsZero(m.Comments[i]) { // not required
-				return nil
+				continue
 			}
 
 			if err := m.Comments[i].ContextValidate(ctx, formats); err != nil {
