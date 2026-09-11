@@ -105,7 +105,7 @@ func (m *Order) contextValidateOrderLines(ctx context.Context, formats strfmt.Re
 		if m.OrderLines[i] != nil {
 
 			if typeutils.IsZero(m.OrderLines[i]) { // not required
-				return nil
+				continue
 			}
 
 			if err := m.OrderLines[i].ContextValidate(ctx, formats); err != nil {
