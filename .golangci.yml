@@ -10,6 +10,7 @@ linters:
     - dupl             # generated code has a lot of duplication
     - err113           # generated code does not wrap errors
     - exhaustruct      # generated code does not initialize all fields
+    - exhaustruct_v5
     - forbidigo        # in examples, we have a lot of printing and logging on purpose
     - funlen           # generated code produces long functions
     - gochecknoglobals # generated code uses globals
