@@ -114,8 +114,8 @@ func (m *Pet) validateTags(formats strfmt.Registry) error {
 	}
 
 	for i := 0; i < len(m.Tags); i++ {
-		if typeutils.IsZero(m.Tags[i]) { // not required
-			continue
+		if m.Tags[i] == nil {
+			return validate.Required("tags"+"."+strconv.Itoa(i), "body", m.Tags[i])
 		}
 
 		if m.Tags[i] != nil {
