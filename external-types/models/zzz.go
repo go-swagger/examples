@@ -330,8 +330,8 @@ func (m *Zzz) validateNullableBeta(formats strfmt.Registry) error {
 	}
 
 	for i := 0; i < len(m.NullableBeta); i++ {
-		if typeutils.IsZero(m.NullableBeta[i]) { // not required
-			continue
+		if m.NullableBeta[i] == nil {
+			return validate.Required("nullableBeta"+"."+strconv.Itoa(i), "body", m.NullableBeta[i])
 		}
 
 		if m.NullableBeta[i] != nil {

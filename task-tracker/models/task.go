@@ -202,8 +202,8 @@ func (m *Task) validateComments(formats strfmt.Registry) error {
 	}
 
 	for i := 0; i < len(m.Comments); i++ {
-		if typeutils.IsZero(m.Comments[i]) { // not required
-			continue
+		if m.Comments[i] == nil {
+			return validate.Required("comments"+"."+strconv.Itoa(i), "body", m.Comments[i])
 		}
 
 		if m.Comments[i] != nil {

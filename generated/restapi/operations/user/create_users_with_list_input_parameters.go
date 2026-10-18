@@ -3,6 +3,7 @@
 package user
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -52,7 +53,8 @@ func (o *CreateUsersWithListInputParams) BindRequest(r *http.Request, route *mid
 			// validate array of body objects
 			for i := range body {
 				if body[i] == nil {
-					continue
+					res = append(res, errors.Required(fmt.Sprintf("%s.%v", "body", i), "body", body[i]))
+					break
 				}
 				if err := body[i].Validate(route.Formats); err != nil {
 					res = append(res, err)
