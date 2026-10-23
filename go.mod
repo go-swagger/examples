@@ -8,7 +8,7 @@ require (
 	github.com/go-openapi/loads v0.25.3
 	github.com/go-openapi/runtime v0.33.3
 	github.com/go-openapi/spec v1.0.1
-	github.com/go-openapi/strfmt v0.27.3
+	github.com/go-openapi/strfmt v0.27.4
 	github.com/go-openapi/swag/cmdutils v0.29.2
 	github.com/go-openapi/swag/conv v0.29.2
 	github.com/go-openapi/swag/jsonutils v0.29.2
@@ -16,7 +16,7 @@ require (
 	github.com/go-openapi/swag/stringutils v0.29.2
 	github.com/go-openapi/swag/typeutils v0.29.2
 	github.com/go-openapi/testify/v2 v2.8.0
-	github.com/go-openapi/validate v1.0.0
+	github.com/go-openapi/validate v1.0.1
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/prometheus/client_golang v1.25.0
