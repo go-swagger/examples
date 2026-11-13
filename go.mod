@@ -15,7 +15,7 @@ require (
 	github.com/go-openapi/swag/netutils v0.29.2
 	github.com/go-openapi/swag/stringutils v0.29.2
 	github.com/go-openapi/swag/typeutils v0.29.2
-	github.com/go-openapi/testify/v2 v2.8.0
+	github.com/go-openapi/testify/v2 v2.8.1
 	github.com/go-openapi/validate v1.0.1
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/jessevdk/go-flags v1.6.1
