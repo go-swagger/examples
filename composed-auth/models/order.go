@@ -60,8 +60,8 @@ func (m *Order) validateOrderLines(formats strfmt.Registry) error {
 	}
 
 	for i := 0; i < len(m.OrderLines); i++ {
-		if typeutils.IsZero(m.OrderLines[i]) { // not required
-			continue
+		if m.OrderLines[i] == nil {
+			return validate.Required("orderLines"+"."+strconv.Itoa(i), "body", m.OrderLines[i])
 		}
 
 		if m.OrderLines[i] != nil {
