@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag/typeutils"
+	"github.com/go-openapi/validate"
 	alternate "github.com/go-swagger/examples/external-types/fred"
 )
 
@@ -26,8 +26,8 @@ func (m MyCustomArrayNullable) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	for i := 0; i < len(m); i++ {
-		if typeutils.IsZero(m[i]) { // not required
-			continue
+		if m[i] == nil {
+			return validate.Required(strconv.Itoa(i), "body", m[i])
 		}
 
 		if m[i] != nil {
